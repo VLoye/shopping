@@ -46,4 +46,9 @@ public class User {
   public void setRole(Long role) {
     this.role = role;
   }
+
+  @Override
+  public String toString() {
+    return "User{" + "id=" + id + ", name='" + name + '\'' + ", password='" + password + '\'' + ", salt='" + salt + '\'' + ", role=" + role + '}';
+  }
 }
