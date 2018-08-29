@@ -1,5 +1,7 @@
 package com.team6.entity;
 
+import org.apache.ibatis.annotations.Param;
+
 public class User {
   private Long id;
   private String name;
