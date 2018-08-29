@@ -1,6 +1,10 @@
 package com.team6.dao;
 
 import com.team6.entity.User;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+import springfox.documentation.service.ApiListing;
 
 import java.util.List;
 
@@ -26,4 +30,27 @@ public interface UserDao {
      * @return
      */
     public List<User> queryAll();
+
+    /**
+     * 插入用户信息
+     * @param user
+     */
+    public int insert( User user);
+
+    /**
+     * 修改密码
+     * @param name
+     * @param password
+     * @return
+     */
+    public int updatePassword(@Param("name") String name,@Param("password") String password,@Param("salt")String salt);
+
+    /**
+     * 修改用户权限
+     * @return
+     */
+   public int updateRole(@Param("name") String name,@Param("role") long role);
+
+
+
 }

@@ -22,4 +22,19 @@
         select * from user;
     </select>
 
+    <!--插入用户信息-->
+    <insert id="insert" parameterType="User" >
+            INSERT ignore INTO user(name,password,salt,role)
+                 values
+                    (#{name},#{password},#{salt},#{role});
+    </insert>
+
+    <update id="updatePassword" >
+        update user set password=#{password},salt=#{salt} where name=#{name};
+    </update>
+
+    <update id="updateRole">
+       update user set role=#{role} where name=#{name};
+    </update>
+
 </mapper>
