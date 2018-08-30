@@ -29,7 +29,6 @@ public class LoginController {
     }
     @RequestMapping(value = "/regiest",method = RequestMethod.POST)
     public String regiest(User user,HttpServletResponse response){
-        System.out.println("user:"+user.toString());
 
       LoginEnum anEnum = loginService.regiest(user);
 
