@@ -1,7 +1,7 @@
 package com.team6.service.login;
 
-import com.team6.dto.login.UserInfo;
 import com.team6.entity.User;
+import com.team6.util.enums.LoginEnum;
 
 /**
  * 登陆逻辑
@@ -34,9 +34,9 @@ public interface LoginService {
      * @param user
      * @return
      */
-    public String regiest(User user);
+    public LoginEnum regiest(User user);
 
-    public String updatePassword(String name,String prePassword,String newPassword);
+    public LoginEnum updatePassword(String name, String prePassword, String newPassword);
 
 
 

@@ -2,6 +2,7 @@ package com.team6.controller;
 
 import com.team6.entity.User;
 import com.team6.service.login.LoginService;
+import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,18 @@ public class LoginController {
     }
     @RequestMapping(value = "/regiest",method = RequestMethod.POST)
     public String regiest(User user,HttpServletResponse response){
-        System.out.println("user:"+user.toString());
-      String state = loginService.regiest(user);
-      if(state.equals("SUCCESS")){
+
+      LoginEnum anEnum = loginService.regiest(user);
+
+      //注册成功
+      if(anEnum.equals(LoginEnum.REGIEST_SUCCESS)){
           String token = jwtUtil.createToken(user);
           Cookie cookie = new Cookie("token",token);
           cookie.setPath("/");
           response.addCookie(cookie);
           return "regiestSuccess";
-      }else
+      }
+      else
           return "regiestError";
     }
 }
