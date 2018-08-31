@@ -1,7 +1,7 @@
 package com.team6.service.login;
 
 
-import com.team6.dao.UserDao;
+import com.team6.dao.UserMapper;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
@@ -17,11 +17,11 @@ public class LoginServiceImp implements LoginService {
 
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Override
     public User queryByName(String name) {
-        User user = userDao.queryByName(name);
+        User user = userMapper.queryByName(name);
         return user;
     }
 
@@ -42,7 +42,7 @@ public class LoginServiceImp implements LoginService {
     @Override
     public User verifyLogin(String name,String password) {
 
-        User user = userDao.queryByName(name);
+        User user = userMapper.queryByName(name);
         //用户不存在
         if(user==null) return null;
         String slat =  user.getSalt();
@@ -62,7 +62,7 @@ public class LoginServiceImp implements LoginService {
         //生成盐
         user = this.setPasswordAndsalt(user);
 
-        int count = userDao.insert(user);
+        int count = userMapper.insert(user);
         if (count>0)
          return LoginEnum.REGIEST_SUCCESS;        //注册成功
         return LoginEnum.REGIEST_ERROR;            //注册失败
@@ -82,7 +82,7 @@ public class LoginServiceImp implements LoginService {
             user.setPassword(newPassword);
            user = this.setPasswordAndsalt(user);
 
-           int count = userDao.updatePassword(user.getName(),user.getPassword(),user.getSalt());
+           int count = userMapper.updatePassword(user.getName(),user.getPassword(),user.getSalt());
            if(count>0)
             return LoginEnum.UPDATE_PASSWORD_SUCCESS;
         }

@@ -1,7 +1,6 @@
 package com.team6.service.login;
 
-import com.team6.dao.UserDao;
-import com.team6.dto.login.UserInfo;
+import com.team6.dao.UserMapper;
 import com.team6.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,16 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.alibaba.druid.util.Utils.md5;
-import static org.junit.Assert.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/spring-dao.xml",
                         "classpath:spring/spring-service.xml"})
 
 public class LoginServiceTest {
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
     @Autowired
     private LoginService loginService;
     @Test
