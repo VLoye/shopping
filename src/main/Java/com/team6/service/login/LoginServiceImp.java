@@ -1,8 +1,9 @@
 package com.team6.service.login;
 
 
-import com.team6.dao.UserDao;
+import com.team6.dao.UserMapper;
 import com.team6.entity.User;
+import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,13 @@ import static com.alibaba.druid.util.Utils.md5;
 @Service
 public class LoginServiceImp implements LoginService {
 
+
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
     @Override
     public User queryByName(String name) {
-        User user = userDao.queryByName(name);
+        User user = userMapper.queryByName(name);
         return user;
     }
 
@@ -40,7 +42,7 @@ public class LoginServiceImp implements LoginService {
     @Override
     public User verifyLogin(String name,String password) {
 
-        User user = userDao.queryByName(name);
+        User user = userMapper.queryByName(name);
         //用户不存在
         if(user==null) return null;
         String slat =  user.getSalt();
@@ -55,21 +57,22 @@ public class LoginServiceImp implements LoginService {
     }
 
     @Override
-    public String regiest(User user)  {
-        if(queryByName(user.getName())!=null) return "用户名已存在";
+    public LoginEnum regiest(User user)  {
+        if(queryByName(user.getName())!=null) return LoginEnum.REGIEST_COUNT_EXIST;
         //生成盐
         user = this.setPasswordAndsalt(user);
 
-        int count = userDao.insert(user);
+        int count = userMapper.insert(user);
         if (count>0)
-         return "SUCCESS";
-        return "InsertERROR";
+         return LoginEnum.REGIEST_SUCCESS;        //注册成功
+        return LoginEnum.REGIEST_ERROR;            //注册失败
     }
 
     @Override
-    public String updatePassword(String name, String prePassword, String newPassword) {
+    public LoginEnum updatePassword(String name, String prePassword, String newPassword) {
         User user  = queryByName(name);
-        if(user==null) return "修改失败,用户不存再";
+
+        if(user==null) return LoginEnum.UPDATE_CONUT_EMPTY; //用户不存在
         //查看用户的原先的密码是否正确
         String prePasswordMd5 = md5(prePassword+ user.getSalt());
 
@@ -79,11 +82,11 @@ public class LoginServiceImp implements LoginService {
             user.setPassword(newPassword);
            user = this.setPasswordAndsalt(user);
 
-           int count = userDao.updatePassword(user.getName(),user.getPassword(),user.getSalt());
+           int count = userMapper.updatePassword(user.getName(),user.getPassword(),user.getSalt());
            if(count>0)
-            return "SUCCESS";
+            return LoginEnum.UPDATE_PASSWORD_SUCCESS;
         }
-        return "UpdateError";
+        return LoginEnum.UPDATE_PASSWORD_ERROR;
     }
 
     /**

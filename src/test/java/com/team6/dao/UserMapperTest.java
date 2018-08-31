@@ -9,30 +9,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
-public class UserDaoTest {
+public class UserMapperTest {
 
     @Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
     @Test
     public void queryById() {
         long id = 10001;
-        User user = userDao.queryById(id);
+        User user = userMapper.queryById(id);
         System.out.println(user);
     }
 
     @Test
     public void queryByName() {
         String name = "郑伟坑";
-        User user = userDao.queryByName(name);
+        User user = userMapper.queryByName(name);
         System.out.println(user);
     }
 
     @Test
     public void queryAll() {
-        List<User> list = userDao.queryAll();
+        List<User> list = userMapper.queryAll();
         for (User user:list){
             System.out.println(user);
         }
