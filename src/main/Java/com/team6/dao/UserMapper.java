@@ -9,13 +9,13 @@ import springfox.documentation.service.ApiListing;
 import java.util.List;
 
 //用户信息接口
-public interface UserDao {
+public interface UserMapper {
     /**
      * 根据id获取用户信息
      * @param id
      * @return
      */
-    public User queryById(long id);
+    public User queryById(int id);
 
     /**
      * 根据用户名获取用户信息
@@ -49,7 +49,7 @@ public interface UserDao {
      * 修改用户权限
      * @return
      */
-   public int updateRole(@Param("name") String name,@Param("role") long role);
+   public int updateRole(@Param("name") String name,@Param("role") int role);
 
 
 
