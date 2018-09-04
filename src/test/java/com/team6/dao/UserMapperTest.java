@@ -17,7 +17,7 @@ public class UserMapperTest {
     private UserMapper userMapper;
     @Test
     public void queryById() {
-        long id = 10001;
+        int id = 10001;
         User user = userMapper.queryById(id);
         System.out.println(user);
     }

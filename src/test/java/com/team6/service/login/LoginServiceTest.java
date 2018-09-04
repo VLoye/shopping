@@ -36,7 +36,7 @@ public class LoginServiceTest {
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setRole(123L);
+        user.setRole(123);
         System.out.println("regiest:"+loginService.regiest(user));
     }
 
