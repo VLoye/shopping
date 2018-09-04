@@ -1,0 +1,35 @@
+.icon-add {
+	background: url(../images/add.png) no-repeat;
+}
+
+.icon-delete {
+	background: url(../images/delete.png) no-repeat;
+}
+
+.icon-refresh {
+	background: url(../images/refresh.png) no-repeat;
+}
+
+.icon-search {
+	background: url(../images/search.png) no-repeat;
+}
+
+.icon-choose {
+	background: url(../images/image.png) no-repeat;
+}
+
+.icon-image {
+	background: url(../images/picture.png) no-repeat;
+}
+
+.icon-ok {
+	background: url(../images/ok.png) no-repeat;
+}
+
+.icon-back {
+	background: url(../images/back.png) no-repeat;
+}
+
+.icon-access {
+	background: url(../images/access.png) no-repeat;
+}

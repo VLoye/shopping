@@ -1,0 +1,42 @@
+/*op icon*/
+.op-icon{display:inline-block; position:relative; background:url('../Images/op-icon.png') no-repeat; vertical-align:middle;}
+.opi-50-1{width:50px; height:50px; background-position:0 0;}
+.opi-50-2{width:50px; height:50px; background-position:-59px 0;}
+.opi-50-3{width:50px; height:50px; background-position:-118px 0;}
+.opi-50-4{width:50px; height:50px; background-position:-177px 0;}
+
+/* width 1200 */
+.h-w1200{width:1200px; margin:0 auto;}
+/*bottom*/
+.h-bottom{/* overflow:hidden; */}
+/*main foot*/
+.ms-foot{position:relative; top:95px;min-width:1200px; margin-bottom:95px; background:#f5f5f5;}
+/*foot service*/
+.ms-foot .msf-service{position:relative; top:-55px; min-height:110px; border:1px solid #E4E4E4; background:#fff;}
+.msf-service dl{display:inline; float:left; margin-top:25px; overflow:hidden; zoom:1;}
+.msf-service dl dt{float:left; width:60px; height:60px;}
+.msf-service dl dt img{width:60px;}
+.msf-service dl dd{float:left; margin:5px 0 0 10px;}
+.msf-service dl dd h4{font-size:18px; font-weight:700; color:#444;}
+.msf-service dl dd p{color:#666;}
+.msf-service .msfs-1{margin-left:55px;}
+.msf-service .msfs-2{margin-left:65px;}
+.msf-service .msfs-3{margin-left:65px;}
+.msf-service .msfs-4{margin-left:65px;}
+/*foot info*/
+.ms-foot .msf-info{margin-top:-30px; padding-bottom:30px; overflow:hidden; zoom:1;}
+.ms-foot .msf-info dl{display:inline; float:left;}
+.ms-foot .msf-info dl dt{line-height:30px; font-size:14px; font-weight:700; color:#444;}
+.ms-foot .msf-info dl dd{line-height:26px; padding-left:2px; color:#666;}
+.ms-foot .msf-info dl dd a{color:#666;}
+.ms-foot .msf-info dl dd a:hover{color:#B61D1D;}
+.ms-foot .msf-info dl dd i{margin:0 5px; font-family:'Microsoft YaHei';}
+.ms-foot .msf-info .msfi-1{margin-left:0;}
+.ms-foot .msf-info .msfi-2{margin-left:120px;}
+.ms-foot .msf-info .msfi-3{margin-left:120px;}
+.ms-foot .msf-info .msfi-4{margin-left:120px;}
+.ms-foot .msf-info .msfi-5{margin-left:120px;}
+.ms-foot .msf-info .msfi-6{margin-left:160px;}
+.ms-foot .msf-info .msfi-6 dt img{width:113px; height:114px;}
+.ms-foot .msf-info .msfi-6 dd{line-height:20px; text-align:right;}
+.ms-foot .msf-info .msfi-6 dd span{font-weight:700;}
