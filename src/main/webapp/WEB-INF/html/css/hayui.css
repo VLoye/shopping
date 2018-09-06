@@ -1,0 +1,1347 @@
+/**
+ @Name: hayui
+ @Author:hallelujah
+ */
+/** reset **/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, input, button, textarea, p, blockquote, th, td, form, pre{margin:0; padding:0; -webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+a:active, a:hover{outline:none;}
+img{display:inline-block; border:none; vertical-align:middle;}
+li{list-style:none;}
+table{border-spacing:0; border-collapse:collapse;}
+h1, h2, h3{font-size:14px; font-weight:400;}
+h4, h5, h6{font-size:100%; font-weight:400;}
+button, input, select, textarea{font-size:100%;}
+input, button, textarea, select, optgroup, option{font-size:inherit; font-weight:inherit; font-family:inherit; font-style:inherit; outline:0;}
+pre{white-space:pre-wrap; white-space:-moz-pre-wrap; white-space:-pre-wrap; white-space:-o-pre-wrap; word-wrap:break-word;}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{margin:0; -webkit-appearance:none;}
+input[type="number"]{-moz-appearance:textfield;}
+
+/** 鍒濆鍖栧叏灞€鏍囩 **/
+body{line-height:20px; font:12px/1.5 'Hiragino Sans GB','microsoft yahei',Arial, sans-serif;}
+hr{height:1px; margin:10px 0; border:0; font-size:0; line-height:0; background-color:#e2e2e2; clear:both;}
+a{text-decoration:none;}
+a cite{font-style:normal; *cursor:pointer;}
+
+html{height:100%; overflow-y:auto; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
+body{position:relative;min-height:100%; overflow:hidden;}
+
+/** 鍩虹閫氱敤 **/
+.hayui-box, .hayui-box *{box-sizing:content-box;}
+.hayui-border-box, .hayui-border-box *{box-sizing:border-box;}
+
+/* 娑堥櫎绗笁鏂箄i鍙兘閫犳垚鐨勫啿绐� */
+.hayui-clearfix{*zoom:1;}
+.hayui-clearfix:after{clear:both;}
+.hayui-clearfix:after, .hayui-clearfix:before{display:table; content:'';}
+.hayui-inline{display:inline-block !important; position:relative; vertical-align:middle; *display:inline; *zoom:1;}
+
+/* vertical align */
+.hayui-valian-top{vertical-align:top !important;}
+.hayui-valian-middle{vertical-align:middle !important;}
+.hayui-valian-bottom{vertical-align:bottom !important;}
+/* float */
+.hayui-fl{float:left !important;}
+.hayui-fr{float:right !important;}
+
+/* text align */
+.hayui-text-align-l{text-align:left !important;}
+.hayui-text-align-c{text-align:center !important;}
+.hayui-text-align-r{text-align:right !important;}
+
+.hayui-pos-rel{position:relative;}
+.hayui-pos-abs{position:absolute;}
+.hayui-pos-fix{position:fixed;}
+
+.hayui-ofh{overflow:hidden;}
+.hayui-ofs{overflow:hidden; overflow-y:scroll;}
+.hayui-ofa{overflow:hidden; overflow-y:auto;}
+
+/* 涓夎褰� */
+.hayui-edge{position:absolute; width:0; height:0; border-style:dashed; border-color:transparent; overflow:hidden;}
+
+/* 鍗曡婧㈠嚭鐪佺暐 */
+.hayui-elip{overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+
+/* 灞忚斀閫変腑 */
+.hayui-unselect, .hayui-icon, .hayui-disabled{-webkit-user-select:none; -moz-user-select:none; -ms-user-select:none;}
+
+/* 绂佺敤 */
+.hayui-disabled, .hayui-disabled:hover{color:#d2d2d2 !important; cursor:not-allowed !important;}
+
+/* 绾渾瑙� */
+.hayui-circle{border-radius:100%;}
+
+/* show or hide */
+.hayui-show{display:block !important;}
+.hayui-hide{display:none !important;}
+.hayui-shide{display:none;}
+
+/* width */
+.hayui-w50{width:50px !important;}
+.hayui-w55{width:55px !important;}
+.hayui-w60{width:60px !important;}
+.hayui-w65{width:65px !important;}
+.hayui-w70{width:70px !important;}
+.hayui-w75{width:75px !important;}
+.hayui-w90{width:90px !important;}
+.hayui-w100{width:100px !important;}
+.hayui-w120{width:120px !important;}
+.hayui-w150{width:150px !important;}
+.hayui-w180{width:180px !important;}
+.hayui-w200{width:200px !important;}
+.hayui-w250{width:250px !important;}
+.hayui-w300{width:300px !important;}
+.hayui-w350{width:350px !important;}
+.hayui-w400{width:400px !important;}
+.hayui-w450{width:450px !important;}
+.hayui-w500{width:500px !important;}
+.hayui-w550{width:550px !important;}
+.hayui-w748{width:748px !important;}
+.hayui-w800{width:800px !important;}
+.hayui-w820{width:820px !important;}
+.hayui-w1200{width:1200px !important; min-width:1200px; margin:0 auto;}
+.hayui-wpercent{width:100% !important;}
+.hayui-wpercent-half{width:50% !important;}
+
+/* height */
+.hayui-h50{height:50px !important;}
+.hayui-h100{height:100px !important;}
+.hayui-h150{height:150px !important;}
+.hayui-h180{height:180px !important;}
+.hayui-h200{height:200px !important;}
+.hayui-h250{height:250px !important;}
+.hayui-h300{height:300px !important;}
+.hayui-h350{height:350px !important;}
+.hayui-h400{height:400px !important;}
+.hayui-h450{height:450px !important;}
+.hayui-h500{height:500px !important;}
+.hayui-h550{height:550px !important;}
+.hayui-hpercent{height:100% !important;}
+.hayui-hpercent-half{width:50% !important;}
+
+/* margin */
+.hayui-m0{margin:0px !important;}
+.hayui-m2{margin:2px !important;}
+.hayui-m5{margin:5px !important;}
+.hayui-m10{margin:10px !important;}
+.hayui-m15{margin:15px !important;}
+.hayui-m20{margin:20px !important;}
+.hayui-m25{margin:25px !important;}
+.hayui-m30{margin:30px !important;}
+.hayui-m40{margin:40px !important;}
+.hayui-m50{margin:50px !important;}
+.hayui-m60{margin:60px !important;}
+.hayui-m70{margin:70px !important;}
+.hayui-m80{margin:80px !important;}
+.hayui-m90{margin:90px !important;}
+.hayui-m100{margin:100px !important;}
+
+.hayui-mt0{margin-top:0px !important;}
+.hayui-mt2{margin-top:2px !important;}
+.hayui-mt5{margin-top:5px !important;}
+.hayui-mt10{margin-top:10px !important;}
+.hayui-mt15{margin-top:15px !important;}
+.hayui-mt20{margin-top:20px !important;}
+.hayui-mt25{margin-top:25px !important;}
+.hayui-mt30{margin-top:30px !important;}
+.hayui-mt40{margin-top:40px !important;}
+.hayui-mt50{margin-top:50px !important;}
+.hayui-mt60{margin-top:60px !important;}
+.hayui-mt70{margin-top:70px !important;}
+.hayui-mt80{margin-top:80px !important;}
+.hayui-mt90{margin-top:90px !important;}
+.hayui-mt100{margin-top:100px !important;}
+
+.hayui-mr0{margin-right:0px !important;}
+.hayui-mr2{margin-right:2px !important;}
+.hayui-mr5{margin-right:5px !important;}
+.hayui-mr10{margin-right:10px !important;}
+.hayui-mr15{margin-right:15px !important;}
+.hayui-mr20{margin-right:20px !important;}
+.hayui-mr25{margin-right:25px !important;}
+.hayui-mr30{margin-right:30px !important;}
+.hayui-mr40{margin-right:40px !important;}
+.hayui-mr50{margin-right:50px !important;}
+.hayui-mr60{margin-right:60px !important;}
+.hayui-mr70{margin-right:70px !important;}
+.hayui-mr80{margin-right:80px !important;}
+.hayui-mr90{margin-right:90px !important;}
+.hayui-mr100{margin-right:100px !important;}
+
+.hayui-mb0{margin-bottom:0px !important;}
+.hayui-mb2{margin-bottom:2px !important;}
+.hayui-mb5{margin-bottom:5px !important;}
+.hayui-mb10{margin-bottom:10px !important;}
+.hayui-mb15{margin-bottom:15px !important;}
+.hayui-mb20{margin-bottom:20px !important;}
+.hayui-mb25{margin-bottom:25px !important;}
+.hayui-mb30{margin-bottom:30px !important;}
+.hayui-mb40{margin-bottom:40px !important;}
+.hayui-mb50{margin-bottom:50px !important;}
+.hayui-mb60{margin-bottom:60px !important;}
+.hayui-mb70{margin-bottom:70px !important;}
+.hayui-mb80{margin-bottom:80px !important;}
+.hayui-mb90{margin-bottom:90px !important;}
+.hayui-mb100{margin-bottom:100px !important;}
+
+.hayui-ml0{margin-left:0px !important;}
+.hayui-ml2{margin-left:2px !important;}
+.hayui-ml5{margin-left:5px !important;}
+.hayui-ml10{margin-left:10px !important;}
+.hayui-ml15{margin-left:15px !important;}
+.hayui-ml20{margin-left:20px !important;}
+.hayui-ml25{margin-left:25px !important;}
+.hayui-ml30{margin-left:30px !important;}
+.hayui-ml40{margin-left:40px !important;}
+.hayui-ml50{margin-left:50px !important;}
+.hayui-ml60{margin-left:60px !important;}
+.hayui-ml70{margin-left:70px !important;}
+.hayui-ml80{margin-left:80px !important;}
+.hayui-ml90{margin-left:90px !important;}
+.hayui-ml100{margin-left:100px !important;}
+
+
+
+/* padding */
+.hayui-p0{padding:0px !important;}
+.hayui-p5{padding:5px !important;}
+.hayui-p10{padding:10px !important;}
+.hayui-p15{padding:15px !important;}
+.hayui-p20{padding:20px !important;}
+.hayui-p25{padding:25px !important;}
+.hayui-p30{padding:30px !important;}
+.hayui-p40{padding:40px !important;}
+.hayui-p50{padding:50px !important;}
+.hayui-p60{padding:60px !important;}
+.hayui-p70{padding:70px !important;}
+.hayui-p80{padding:80px !important;}
+.hayui-p90{padding:90px !important;}
+.hayui-p100{padding:100px !important;}
+
+.hayui-pt0{padding-top:0px !important;}
+.hayui-pt5{padding-top:5px !important;}
+.hayui-pt10{padding-top:10px !important;}
+.hayui-pt15{padding-top:15px !important;}
+.hayui-pt20{padding-top:20px !important;}
+.hayui-pt25{padding-top:25px !important;}
+.hayui-pt30{padding-top:30px !important;}
+.hayui-pt40{padding-top:40px !important;}
+.hayui-pt50{padding-top:50px !important;}
+.hayui-pt60{padding-top:60px !important;}
+.hayui-pt70{padding-top:70px !important;}
+.hayui-pt80{padding-top:80px !important;}
+.hayui-pt90{padding-top:90px !important;}
+.hayui-pt100{padding-top:100px !important;}
+
+.hayui-pr0{padding-right:0px !important;}
+.hayui-pr5{padding-right:5px !important;}
+.hayui-pr10{padding-right:10px !important;}
+.hayui-pr15{padding-right:15px !important;}
+.hayui-pr20{padding-right:20px !important;}
+.hayui-pr25{padding-right:25px !important;}
+.hayui-pr30{padding-right:30px !important;}
+.hayui-pr40{padding-right:40px !important;}
+.hayui-pr50{padding-right:50px !important;}
+.hayui-pr60{padding-right:60px !important;}
+.hayui-pr70{padding-right:70px !important;}
+.hayui-pr80{padding-right:80px !important;}
+.hayui-pr90{padding-right:90px !important;}
+.hayui-pr100{padding-right:100px !important;}
+
+.hayui-pb0{padding-bottom:0px !important;}
+.hayui-pb5{padding-bottom:5px !important;}
+.hayui-pb10{padding-bottom:10px !important;}
+.hayui-pb15{padding-bottom:15px !important;}
+.hayui-pb20{padding-bottom:20px !important;}
+.hayui-pb25{padding-bottom:25px !important;}
+.hayui-pb30{padding-bottom:30px !important;}
+.hayui-pb40{padding-bottom:40px !important;}
+.hayui-pb50{padding-bottom:50px !important;}
+.hayui-pb60{padding-bottom:60px !important;}
+.hayui-pb70{padding-bottom:70px !important;}
+.hayui-pb80{padding-bottom:80px !important;}
+.hayui-pb90{padding-bottom:90px !important;}
+.hayui-pb100{padding-bottom:100px !important;}
+
+.hayui-pl0{padding-left:0px !important;}
+.hayui-pl5{padding-left:5px !important;}
+.hayui-pl10{padding-left:10px !important;}
+.hayui-pl15{padding-left:15px !important;}
+.hayui-pl20{padding-left:20px !important;}
+.hayui-pl25{padding-left:25px !important;}
+.hayui-pl30{padding-left:30px !important;}
+.hayui-pl40{padding-left:40px !important;}
+.hayui-pl50{padding-left:50px !important;}
+.hayui-pl60{padding-left:60px !important;}
+.hayui-pl70{padding-left:70px !important;}
+.hayui-pl80{padding-left:80px !important;}
+.hayui-pl90{padding-left:90px !important;}
+.hayui-pl100{padding-left:100px !important;}
+
+
+
+
+
+/* 鏍呮牸甯冨眬 */
+.hayui-container{position:relative; margin:0 auto; box-sizing:border-box;}
+.hayui-fluid{position:relative; margin:0 auto;}
+
+.hayui-row:before, .hayui-row:after{display:block; clear:both; content:'';}
+
+.hayui-col-lg1, .hayui-col-lg10, .hayui-col-lg11, .hayui-col-lg12, .hayui-col-lg2, .hayui-col-lg3, .hayui-col-lg4, .hayui-col-lg5, .hayui-col-lg6, .hayui-col-lg7, .hayui-col-lg8, .hayui-col-lg9, .hayui-col-md1, .hayui-col-md10, .hayui-col-md11, .hayui-col-md12, .hayui-col-md2, .hayui-col-md3, .hayui-col-md4, .hayui-col-md5, .hayui-col-md6, .hayui-col-md7, .hayui-col-md8, .hayui-col-md9, .hayui-col-sm1, .hayui-col-sm10, .hayui-col-sm11, .hayui-col-sm12, .hayui-col-sm2, .hayui-col-sm3, .hayui-col-sm4, .hayui-col-sm5, .hayui-col-sm6, .hayui-col-sm7, .hayui-col-sm8, .hayui-col-sm9, .hayui-col-xs1, .hayui-col-xs10, .hayui-col-xs11, .hayui-col-xs12, .hayui-col-xs2, .hayui-col-xs3, .hayui-col-xs4, .hayui-col-xs5, .hayui-col-xs6, .hayui-col-xs7, .hayui-col-xs8, .hayui-col-xs9{display:block; position:relative; box-sizing:border-box}
+.hayui-col-xs1, .hayui-col-xs10, .hayui-col-xs11, .hayui-col-xs12, .hayui-col-xs2, .hayui-col-xs3, .hayui-col-xs4, .hayui-col-xs5, .hayui-col-xs6, .hayui-col-xs7, .hayui-col-xs8, .hayui-col-xs9{float:left}
+.hayui-col-xs1{width:8.33333333%}
+.hayui-col-xs2{width:16.66666667%}
+.hayui-col-xs3{width:25%}
+.hayui-col-xs4{width:33.33333333%}
+.hayui-col-xs5{width:41.66666667%}
+.hayui-col-xs6{width:50%}
+.hayui-col-xs7{width:58.33333333%}
+.hayui-col-xs8{width:66.66666667%}
+.hayui-col-xs9{width:75%}
+.hayui-col-xs10{width:83.33333333%}
+.hayui-col-xs11{width:91.66666667%}
+.hayui-col-xs12{width:100%}
+.hayui-col-xs-offset1{margin-left:8.33333333%}
+.hayui-col-xs-offset2{margin-left:16.66666667%}
+.hayui-col-xs-offset3{margin-left:25%}
+.hayui-col-xs-offset4{margin-left:33.33333333%}
+.hayui-col-xs-offset5{margin-left:41.66666667%}
+.hayui-col-xs-offset6{margin-left:50%}
+.hayui-col-xs-offset7{margin-left:58.33333333%}
+.hayui-col-xs-offset8{margin-left:66.66666667%}
+.hayui-col-xs-offset9{margin-left:75%}
+.hayui-col-xs-offset10{margin-left:83.33333333%}
+.hayui-col-xs-offset11{margin-left:91.66666667%}
+.hayui-col-xs-offset12{margin-left:100%}
+@media screen and (max-width:768px){.hayui-hide-xs{display:none!important}
+  .hayui-show-xs-block{display:block!important}
+  .hayui-show-xs-inline{display:inline!important}
+  .hayui-show-xs-inline-block{display:inline-block!important}}
+@media screen and (min-width:768px){.hayui-container{width:750px}
+  .hayui-hide-sm{display:none!important}
+  .hayui-show-sm-block{display:block!important}
+  .hayui-show-sm-inline{display:inline!important}
+  .hayui-show-sm-inline-block{display:inline-block!important}
+  .hayui-col-sm1, .hayui-col-sm10, .hayui-col-sm11, .hayui-col-sm12, .hayui-col-sm2, .hayui-col-sm3, .hayui-col-sm4, .hayui-col-sm5, .hayui-col-sm6, .hayui-col-sm7, .hayui-col-sm8, .hayui-col-sm9{float:left}
+  .hayui-col-sm1{width:8.33333333%}
+  .hayui-col-sm2{width:16.66666667%}
+  .hayui-col-sm3{width:25%}
+  .hayui-col-sm4{width:33.33333333%}
+  .hayui-col-sm5{width:41.66666667%}
+  .hayui-col-sm6{width:50%}
+  .hayui-col-sm7{width:58.33333333%}
+  .hayui-col-sm8{width:66.66666667%}
+  .hayui-col-sm9{width:75%}
+  .hayui-col-sm10{width:83.33333333%}
+  .hayui-col-sm11{width:91.66666667%}
+  .hayui-col-sm12{width:100%}
+  .hayui-col-sm-offset1{margin-left:8.33333333%}
+  .hayui-col-sm-offset2{margin-left:16.66666667%}
+  .hayui-col-sm-offset3{margin-left:25%}
+  .hayui-col-sm-offset4{margin-left:33.33333333%}
+  .hayui-col-sm-offset5{margin-left:41.66666667%}
+  .hayui-col-sm-offset6{margin-left:50%}
+  .hayui-col-sm-offset7{margin-left:58.33333333%}
+  .hayui-col-sm-offset8{margin-left:66.66666667%}
+  .hayui-col-sm-offset9{margin-left:75%}
+  .hayui-col-sm-offset10{margin-left:83.33333333%}
+  .hayui-col-sm-offset11{margin-left:91.66666667%}
+  .hayui-col-sm-offset12{margin-left:100%}}
+@media screen and (min-width:992px){.hayui-container{width:970px}
+  .hayui-hide-md{display:none!important}
+  .hayui-show-md-block{display:block!important}
+  .hayui-show-md-inline{display:inline!important}
+  .hayui-show-md-inline-block{display:inline-block!important}
+  .hayui-col-md1, .hayui-col-md10, .hayui-col-md11, .hayui-col-md12, .hayui-col-md2, .hayui-col-md3, .hayui-col-md4, .hayui-col-md5, .hayui-col-md6, .hayui-col-md7, .hayui-col-md8, .hayui-col-md9{float:left}
+  .hayui-col-md1{width:8.33333333%}
+  .hayui-col-md2{width:16.66666667%}
+  .hayui-col-md3{width:25%}
+  .hayui-col-md4{width:33.33333333%}
+  .hayui-col-md5{width:41.66666667%}
+  .hayui-col-md6{width:50%}
+  .hayui-col-md7{width:58.33333333%}
+  .hayui-col-md8{width:66.66666667%}
+  .hayui-col-md9{width:75%}
+  .hayui-col-md10{width:83.33333333%}
+  .hayui-col-md11{width:91.66666667%}
+  .hayui-col-md12{width:100%}
+  .hayui-col-md-offset1{margin-left:8.33333333%}
+  .hayui-col-md-offset2{margin-left:16.66666667%}
+  .hayui-col-md-offset3{margin-left:25%}
+  .hayui-col-md-offset4{margin-left:33.33333333%}
+  .hayui-col-md-offset5{margin-left:41.66666667%}
+  .hayui-col-md-offset6{margin-left:50%}
+  .hayui-col-md-offset7{margin-left:58.33333333%}
+  .hayui-col-md-offset8{margin-left:66.66666667%}
+  .hayui-col-md-offset9{margin-left:75%}
+  .hayui-col-md-offset10{margin-left:83.33333333%}
+  .hayui-col-md-offset11{margin-left:91.66666667%}
+  .hayui-col-md-offset12{margin-left:100%}}
+@media screen and (min-width:1200px){.hayui-container{width:1170px}
+  .hayui-hide-lg{display:none!important}
+  .hayui-show-lg-block{display:block!important}
+  .hayui-show-lg-inline{display:inline!important}
+  .hayui-show-lg-inline-block{display:inline-block!important}
+  .hayui-col-lg1, .hayui-col-lg10, .hayui-col-lg11, .hayui-col-lg12, .hayui-col-lg2, .hayui-col-lg3, .hayui-col-lg4, .hayui-col-lg5, .hayui-col-lg6, .hayui-col-lg7, .hayui-col-lg8, .hayui-col-lg9{float:left}
+  .hayui-col-lg1{width:8.33333333%}
+  .hayui-col-lg2{width:16.66666667%}
+  .hayui-col-lg3{width:25%}
+  .hayui-col-lg4{width:33.33333333%}
+  .hayui-col-lg5{width:41.66666667%}
+  .hayui-col-lg6{width:50%}
+  .hayui-col-lg7{width:58.33333333%}
+  .hayui-col-lg8{width:66.66666667%}
+  .hayui-col-lg9{width:75%}
+  .hayui-col-lg10{width:83.33333333%}
+  .hayui-col-lg11{width:91.66666667%}
+  .hayui-col-lg12{width:100%}
+/* 鍒楀亸绉� */
+  .hayui-col-lg-offset1{margin-left:8.33333333%}
+  .hayui-col-lg-offset2{margin-left:16.66666667%}
+  .hayui-col-lg-offset3{margin-left:25%}
+  .hayui-col-lg-offset4{margin-left:33.33333333%}
+  .hayui-col-lg-offset5{margin-left:41.66666667%}
+  .hayui-col-lg-offset6{margin-left:50%}
+  .hayui-col-lg-offset7{margin-left:58.33333333%}
+  .hayui-col-lg-offset8{margin-left:66.66666667%}
+  .hayui-col-lg-offset9{margin-left:75%}
+  .hayui-col-lg-offset10{margin-left:83.33333333%}
+  .hayui-col-lg-offset11{margin-left:91.66666667%}
+  .hayui-col-lg-offset12{margin-left:100%}}
+/* 鍒楅棿闅� */
+.hayui-col-space1{margin:-.5px}
+.hayui-col-space1 >*{padding:.5px}
+.hayui-col-space3{margin:-1.5px}
+.hayui-col-space3 >*{padding:1.5px}
+.hayui-col-space5{margin:-2.5px}
+.hayui-col-space5 >*{padding:2.5px}
+.hayui-col-space8{margin:-3.5px}
+.hayui-col-space8 >*{padding:3.5px}
+.hayui-col-space10{margin:-5px}
+.hayui-col-space10 >*{padding:5px}
+.hayui-col-space12{margin:-6px}
+.hayui-col-space12 >*{padding:6px}
+.hayui-col-space15{margin:-7.5px}
+.hayui-col-space15 >*{padding:7.5px}
+.hayui-col-space18{margin:-9px}
+.hayui-col-space18 >*{padding:9px}
+.hayui-col-space20{margin:-10px}
+.hayui-col-space20 >*{padding:10px}
+.hayui-col-space22{margin:-11px}
+.hayui-col-space22 >*{padding:11px}
+.hayui-col-space25{margin:-12.5px}
+.hayui-col-space25 >*{padding:12.5px}
+.hayui-col-space30{margin:-15px}
+.hayui-col-space30 >*{padding:15px}
+
+
+/** 椤甸潰鍏冪礌 **/
+.hayui-btn, .hayui-input, .hayui-textarea, .hayui-upload-button, .hayui-select{box-sizing:border-box; outline:none; -webkit-transition:all .3s; transition:all .3s; -webkit-appearance:none;}
+
+
+/** 寮规€у竷灞€ **/
+.hayui-flexbox{display:-webkit-box; display:-webkit-flex; display:-ms-flexbox; display:flex; -webkit-box-align:center; -webkit-align-items:center; -ms-flex-align:center; align-items:center;}
+.hayui-flexbox-vertical{height:100%; flex-direction:column; -webkit-box-orient:vertical; -webkit-box-direction:normal; -webkit-flex-direction:column; -ms-flex-direction:column;}
+.hayui-flexbox-vertical .hayui-flexbox-item{width:100%;}
+.hayui-flexbox-item{-webkit-box-flex:1; -webkit-flex:1; -ms-flex:1; flex:1;}
+.hayui-flexbox-item-start{-webkit-align-self:flex-start; -ms-flex-item-align:start; align-self:flex-start; justify-self:flex-end;}
+.hayui-flexbox-item-center{-webkit-align-self:center; -ms-flex-item-align:center; -ms-grid-row-align:center; align-self:center;}
+.hayui-flexbox-item-end{-webkit-align-self:flex-end; -ms-flex-item-align:end; align-self:flex-end;}
+
+/*鑷姩闅愯棌鏂囧瓧*/
+.hayui-ellipsis-1{overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-ellipsis{display:-webkit-box; display:box; overflow:hidden; white-space:normal !important; text-overflow:ellipsis; word-wrap:break-word; word-break:break-all; -webkit-line-clamp:1; -webkit-box-orient:vertical;}
+.hayui-ellipsis-2{display:-webkit-box; display:box; overflow:hidden; white-space:normal !important; text-overflow:ellipsis; word-wrap:break-word; word-break:break-all; -webkit-line-clamp:2; -webkit-box-orient:vertical;}
+
+
+
+/* 寮曠敤 */
+.hayui-elem-spot{line-height:20px; padding:15px 20px; background-color:#FFF;}
+.hayui-elem-quote{line-height:20px; padding:20px; border-left:5px solid #0070EA; border-radius:0 2px 2px 0; background-color:#f2f2f2;}
+.hayui-quote-nm{border-width:1px; border-style:solid; border-color:#e2e2e2; border-left-width:5px; background:none;}
+.hayui-elem-block{line-height:20px; background-color:#FFF; border-bottom:1px solid #E4E4E4;}
+.hayui-elem-block .hayui-title-underline{border-bottom:2px solid #0070EA; color:#0070EA; cursor:default;}
+
+.hayui-elem-spot-big{padding:30px 0;}
+.hayui-elem-spot-normal{padding:15px 0; }
+.hayui-elem-spot-small{padding:10px 0;}
+.hayui-elem-spot-mini{padding:5px 0;}
+
+/* 鏍囬澶у皬 */
+.hayui-title-big{height:44px; line-height:44px; padding:5px 25px; font-size:16px;}
+.hayui-title-small{height:30px; line-height:30px; padding:5px 10px; font-size:14px;}
+.hayui-title-mini{height:24px; line-height:24px; padding:5px 10px; font-size:12px;}
+
+
+/* 瀛楁闆嗗悎 */
+.hayui-elem-field{margin-bottom:10px; padding:0; border:1px solid #e2e2e2;}
+.hayui-elem-field legend{margin-left:20px; padding:0 10px; font-size:20px; font-weight:500;}
+.hayui-field-title{margin:10px 0 20px; border:none; border-top:1px dotted #e2e2e2;}
+.hayui-field-box{padding:10px 15px;}
+.hayui-field-title .hayui-field-box{padding:10px 0;}
+
+
+
+/* 杩涘害鏉� */
+.hayui-progress{position:relative; height:6px; border-radius:20px; background-color:#e2e2e2;}
+.hayui-progress-bar{position:absolute; width:0; max-width:100%; height:6px; border-radius:20px; background-color:#0070EA; -webkit-transition:all .3s; transition:all .3s; text-align:right;}
+.hayui-progress-big, .hayui-progress-big .hayui-progress-bar{height:18px; line-height:18px;}
+.hayui-progress-text{position:relative; top:-18px; line-height:18px; font-size:12px; color:#666;}
+.hayui-progress-big .hayui-progress-text{position:static; padding:0 10px; color:#fff;}
+
+
+
+/* 鎶樺彔闈㈡澘 */
+.hayui-collapse{border:1px solid #e2e2e2; border-radius:2px;}
+.hayui-colla-item{border-top:1px solid #e2e2e2;}
+.hayui-colla-item:first-child{border-top:none;}
+.hayui-colla-title{position:relative; height:42px; line-height:42px; padding:0 15px 0 35px; color:#333; background-color:#f2f2f2; cursor:pointer;}
+.hayui-colla-content{display:none; line-height:22px; padding:10px 15px; color:#666; border-top:1px solid #e2e2e2;}
+.hayui-colla-icon{position:absolute; top:0; left:15px; font-size:14px;}
+
+/* 甯歌闈㈡澘 */
+.hayui-panel{border:solid 1px transparent; width:inherit; background-color:#fff;}
+.hayui-panel  .hayui-panel-header{padding:8px 10px; font-size:14px; font-weight:700; border-bottom:solid 1px transparent;}/*闈㈡澘鏍囬*/
+.hayui-panel  .hayui-panel-body{padding:10px; position:relative;}/*闈㈡澘鍐呭*/
+.hayui-panel  .hayui-panel-body .hayui-panel-body-sign{position:absolute; bottom:0; right:0;}
+.hayui-panel  .hayui-panel-footer{padding:5px 10px; border-top:1px solid #ddd; background-color:#f5f5f5;}/*闈㈡澘椤佃剼*/
+/*榛樿闈㈡澘*/
+.hayui-panel-default{border-color:#ddd;}
+.hayui-panel-default .hayui-panel-header{color:#444; border-color:#ddd; background-color:#f5f5f5;}
+/*涓昏闈㈡澘*/
+.hayui-panel-primary{border-color:#5a98de;}
+.hayui-panel-primary .hayui-panel-header{color:#fff; border-color:#5a98de; background-color:#5a98de;}
+/*娆¤闈㈡澘*/
+.hayui-panel-secondary{border-color:#3bb4f2;}
+.hayui-panel-secondary .hayui-panel-header{color:#fff; border-color:#3bb4f2; background-color:#3bb4f2;}
+/*鎴愬姛闈㈡澘*/
+.hayui-panel-success{border-color:#5eb95e;}
+.hayui-panel-success .hayui-panel-header{color:#fff; border-color:#5eb95e; background-color:#5eb95e;}
+/*璀﹀憡闈㈡澘*/
+.hayui-panel-warning{border-color:#f37b1d;}
+.hayui-panel-warning .hayui-panel-header{color:#fff; border-color:#f37b1d; background-color:#f37b1d;}
+/*鍗遍櫓闈㈡澘*/
+.hayui-panel-danger{border-color:#dd514c;}
+.hayui-panel-danger .hayui-panel-header{color:#fff; border-color:#dd514c; background-color:#dd514c;}
+
+
+
+
+/* 鑳屾櫙棰滆壊 */
+/*璧�*/
+.hayui-bg-red{color:#fff !important; background-color:#FF5722 !important;}
+/*姗�*/
+.hayui-bg-orange{color:#fff !important; background-color:#FFB800 !important;}
+.hayui-bg-orange-light{color:#444 !important; background-color:#FFF4CC !important;}
+/*缁�*/
+.hayui-bg-green{color:#fff !important; background-color:#0070EA !important;}
+/*闈�*/
+.hayui-bg-cyan{color:#fff !important; background-color:#2F4056 !important;}
+/*钃�*/
+.hayui-bg-blue{color:#fff !important; background-color:#0070EA !important;}
+.hayui-bg-blue-light{color:#444 !important; background-color:#E1F3FC !important;}
+.hayui-bg-blue-sky{color:#444 !important; background-color:#F6F9FF !important;}
+/*榛�*/
+.hayui-bg-black{color:#fff !important; background-color:#393D49 !important;}
+/*鐏�*/
+.hayui-bg-gray{color:#666 !important; background-color:#E4E4E4 !important;}
+.hayui-bg-gray-light{color:#444 !important; background-color:#F5F5F5 !important;}
+/* none */
+.hayui-bg-none{color:#444 !important; background-color:inherit !important;}
+/* 鐧� */
+.hayui-bg-white{color:#444 !important; background-color:#FFF !important;}
+
+
+/* 杈规棰滆壊 */
+.hayui-br-red{border:1px solid #F60 !important;}
+.hayui-br-orange{border:1px solid #FFB800 !important;}
+.hayui-br-green{border:1px solid #0070EA !important;}
+.hayui-br-cyan{border:1px solid #2F4056 !important;}
+.hayui-br-blue{border:1px solid #0070EA !important;}
+.hayui-br-black{border:1px solid #393D49 !important;}
+.hayui-br-gray{border:1px solid #E4E4E4 !important;}
+.hayui-br-none{border:none !important;}
+
+/* 铏氱嚎杈呭姪绾� */
+.hayui-hr-dotted{height:0; margin:10px 0; border-width:1px !important; border-top-color:#e2e2e2;  border-style:dotted !important; border-left:none !important; border-right:none !important;border-bottom:none !important; background:none; font-size:0; line-height:0; clear:both;}
+
+
+ /* 閾炬帴椋庢牸 */
+/* 榛樿 */
+.hayui-link{font-size:12px; color:#0070EA; cursor:pointer;}
+.hayui-link:hover{color:#F60 !important;}
+/* 鍘熷 */
+.hayui-link-primary{color:#555;}
+.hayui-link-primary:hover{color:#000;}
+/* 鐧炬惌 */
+.hayui-link-normal{color:#0070EA;}
+.hayui-link-normal:hover{color:#F60;}
+/* 鏆栬壊 */
+.hayui-link-warm{color:#FFB800;}
+.hayui-link-warm:hover{color:#027CFF;}
+/* 璀﹀憡 */
+.hayui-link-danger{color:#F60;}
+.hayui-link-danger:hover{color:#FF0000;}
+/* 绂佺敤 */
+.hayui-link-disabled, .hayui-link-disabled:hover, .hayui-link-disabled:active{color:#C9C9C9;cursor:not-allowed;}
+
+/* 鎸夐挳椋庢牸 */
+/* 榛樿 */
+.hayui-btn{display:inline-block; height:38px; line-height:38px; padding:0 18px; font-size:14px; color:#fff; border:none; border-radius:2px; background-color:#0070EA; cursor:pointer; -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; text-align:center; vertical-align:middle; white-space:nowrap;}
+.hayui-btn:hover{color:#fff; opacity:0.8; filter:alpha(opacity=80);}
+.hayui-btn:active{opacity:1; filter:alpha(opacity=100);}
+.hayui-btn +.hayui-btn{margin-left:10px;}
+/* 鍦嗚 */
+.hayui-btn-radius{border-radius:100px;}
+.hayui-btn .hayui-icon{margin-right:3px; font-size:18px; vertical-align:bottom; vertical-align:middle\0;}
+/* 鍘熷 */
+.hayui-btn-primary{color:#0070EA; border:1px solid #0070EA; background-color:#FFF;}
+.hayui-btn-primary:hover{color:#FFF; background-color:#0070EA; border-color:#0070EA;opacity:1; filter:alpha(opacity=100);}
+/* 鐧炬惌 */
+.hayui-btn-normal{background-color:#0070EA;}
+/* 鏆栬壊 */
+.hayui-btn-warm{background-color:#FFB800;}
+/* 璀﹀憡 */
+.hayui-btn-danger{background-color:#F60;}
+/* 澶╄摑鑹� */
+.hayui-btn-nattierblue{border:1px solid #A6D0FF; background-color:#DDEDFF; color:#0070EA;}
+.hayui-btn-nattierblue:hover{background:#0070EA; color:#FFF; border-color:#0070EA;}
+/* 绂佺敤 */
+.hayui-btn-disabled, .hayui-btn-disabled:hover, .hayui-btn-disabled:active{color:#C9C9C9; border:1px solid #e6e6e6; background-color:#FBFBFB; opacity:1; cursor:not-allowed;}
+/* 澶у瀷 */
+.hayui-btn-big{height:45px; line-height:44px; padding:0 25px; font-size:16px;}
+/* 灏忓瀷 */
+.hayui-btn-small{height:30px; line-height:30px; padding:0 10px; font-size:12px;}
+.hayui-btn-small i{font-size:16px !important;}
+/* 杩蜂綘 */
+.hayui-btn-mini{height:28px; line-height:28px; padding:0 5px; font-size:12px;}
+.hayui-btn-mini i{font-size:14px !important;}
+.hayui-btn-active{color:#FF7200 !important;}
+
+/* 鏂囧瓧棰滆壊 */
+.hayui-color-smokygray{color:#777 !important;}
+.hayui-color-gray{color:#999 !important;}
+.hayui-color-primary{color:#444 !important;}
+.hayui-color-normal{color:#0070EA !important;}
+.hayui-color-blue{color:#1E9FFF !important;}
+.hayui-color-warm{color:#FFB800 !important;}
+.hayui-color-success{color:#5EB95E !important;}
+.hayui-color-danger{color:#F60 !important;}
+.hayui-color-disabled{color:#C9C9C9 !important;}
+
+/* move btn */
+.hayui-move{color:#1E9FFF;}
+.hayui-move:hover{color:#F60 !important;}
+.hayui-move.hayui-color-disabled:hover{color:#C9C9C9 !important;}
+
+/* 鏂囧瓧澶у皬 */
+.hayui-fs-12{font-size:12px !important;}
+.hayui-fs-14{font-size:14px !important;}
+.hayui-fs-16{font-size:16px !important;}
+.hayui-fs-18{font-size:18px !important;}
+.hayui-fs-20{font-size:20px !important;}
+.hayui-fs-24{font-size:24px !important;}
+.hayui-fs-28{font-size:28px !important;}
+.hayui-fs-32{font-size:32px !important;}
+.hayui-fs-36{font-size:36px !important;}
+.hayui-fs-40{font-size:40px !important;}
+.hayui-fs-48{font-size:48px !important;}
+.hayui-fs-50{font-size:50px !important;}
+.hayui-fs-60{font-size:60px !important;}
+
+
+/* 鏂囧瓧鍔犵矖 */
+.hayui-fw-thin{font-weight:500 !important;}
+.hayui-fw-blod{font-weight:700 !important;}
+
+/* 鎸夐挳缁� */
+.hayui-btn-group{display:inline-block; font-size:0; vertical-align:middle;}
+.hayui-btn-group .hayui-btn{margin-right:0!important; margin-left:0!important; border-left:1px solid rgba(255, 255, 255, .5); border-radius:0;}
+.hayui-btn-group .hayui-btn-primary{border-left:none;}
+.hayui-btn-group .hayui-btn-primary:hover{color:#0070EA; border-color:#C9C9C9;}
+.hayui-btn-group .hayui-btn:first-child{border-left:none; border-radius:2px 0 0 2px;}
+.hayui-btn-group .hayui-btn-primary:first-child{border-left:1px solid #c9c9c9;}
+.hayui-btn-group .hayui-btn:last-child{border-radius:0 2px 2px 0;}
+.hayui-btn-group .hayui-btn +.hayui-btn{margin-left:0;}
+.hayui-btn-group +.hayui-btn-group{margin-left:10px;}
+
+
+/* 鏂囨湰鍖哄煙 */
+.hayui-text{line-height:22px; font-size:14px; color:#666;}
+.hayui-text h1, .hayui-text h2, .hayui-text h3{font-weight:500; color:#333;}
+.hayui-text h1{font-size:30px;}
+.hayui-text h2{font-size:24px;}
+.hayui-text h3{font-size:18px;}
+.hayui-text a{color:#01AAED;}
+.hayui-text a:hover{text-decoration:underline;}
+.hayui-text ul{padding:5px 0 5px 15px;}
+.hayui-text ul li{margin-top:5px; list-style-type:disc;}
+.hayui-text em, .hayui-word-aux{padding:0 5px !important; color:#999 !important;}
+
+
+.hayui-text-big{height:38px !important; line-height:38px  !important; font-size:14px;}
+.hayui-text-normal{height:32px  !important; line-height:32px  !important; font-size:14px;}
+.hayui-text-small{height:24px  !important; line-height:24px  !important; font-size:12px;}
+.hayui-text-mini{height:20px  !important; line-height:20px  !important; font-size:12px;}
+
+
+.hayui-elemtips{height:12px !important; line-height:12px !important;}
+
+/** 琛ㄥ崟 **/
+.hayui-input, .hayui-textarea, .hayui-select{height:28px; line-height:26px\9; border:1px solid #e6e6e6; border-radius:2px; background-color:#fff;}
+.hayui-input::-webkit-input-placeholder, .hayui-textarea::-webkit-input-placeholder, .hayui-select::-webkit-input-placeholder{line-height:1.3;}
+.hayui-input, .hayui-textarea{display:block; width:100%; padding-left:10px;}
+.hayui-input:hover, .hayui-textarea:hover{border-color:#D2D2D2 !important;}
+.hayui-input:focus, .hayui-textarea:focus{border-color:#C9C9C9 !important;}
+.hayui-textarea{height:auto; min-height:100px; line-height:20px; padding:6px 10px; resize:vertical;}
+.hayui-select{padding:0 10px;}
+.hayui-form select, .hayui-form input[type=checkbox], .hayui-form input[type=radio]{display:none;
+  /* position:absolute; left:-9999; visibility:hidden; */}
+.hayui-form select{height:28px;}
+.hayui-form [hay-filter="chosen-select"]{display:none !important;}
+
+.hayui-form-item{clear:both; *zoom:1;}
+.hayui-form-item:after{display:block; height:0; clear:both; content:'\20'; *zoom:1;}
+.hayui-form-label{display:block; float:left; position:relative; width:100px; line-height:20px; padding:4px 15px; font-weight:normal; text-align:right;}
+.hayui-form-item .hayui-inline{margin-right:10px; margin-bottom:5px;}
+.hayui-input-block, .hayui-input-inline{position:relative;}
+.hayui-input-block{min-height:26px; margin-left:130px;}
+.hayui-input-inline{display:inline-block; vertical-align:middle;}
+.hayui-form-item .hayui-input-inline{float:left;}
+.hayui-form-text .hayui-input-inline{width:auto;}
+.hayui-form-item .hayui-form-range{}
+.hayui-form-item .hayui-form-range input{width:112px;}
+.hayui-form-item .hayui-form-range:after{display:block; height:0; clear:both; content:'\20'; *zoom:1;}
+
+.hayui-form-fold{height:30px; overflow:hidden;}
+
+/* view table */
+.hayui-view-table{width:100%; table-layout:fixed; border-collapse:collapse; border:0; overflow:hidden;}
+.hayui-view-table td{line-height:20px; padding:2px 5px;}
+.hayui-view-table td.field{text-align:right; white-space:nowrap; vertical-align:top; overflow:hidden;}
+.hayui-view-table tr.legend td{line-height:1; padding:0; border:none; background-color:#fff; text-align:left;}
+.hayui-cell-table{border-collapse:collapse; border:0;}
+.hayui-cell-table td{padding:0; border:0; text-align:center; white-space:nowrap;}
+
+
+.hayui-required-star{color:#F00; font-size:18px; overflow:hidden;}
+
+
+/* help tip*/
+.hayui-helptip{position:relative; overflow:hidden;background-color:#FFF4CC; color:#444;}
+.hayui-helptip .hayui-helptip-cont{position:relative; line-height:24px; padding:15px 20px; color:inherit;  font-size:12px;}
+.hayui-helptip .hayui-helptip-cont .helptip-tipicon{display:inline-block; margin:0; font-weight:500; color:inherit; vertical-align:middle;}
+.hayui-helptip .hayui-helptip-cont .helptip-title{display:inline-block; margin:0; font-weight:700; color:inherit; vertical-align:middle;}
+.hayui-helptip .hayui-helptip-cont .helptip-link{display:inline-block; margin:0 20px 0 5px; vertical-align:middle;}
+.hayui-helptip .hayui-helptip-cont .helptip-desc{display:inline-block; color:inherit; margin:0; vertical-align:middle;}
+.hayui-helptip .hayui-helptip-cont .helptip-indent{padding-left:28px;}
+.hayui-helptip .hayui-helptip-btn{position:absolute; top:10px; right:10px; width:18px; height:18px; line-height:20px; font-size:12px; text-align:center; cursor:pointer;}
+.hayui-helptip .hayui-helptip-btn:hover{color:#F00;}
+
+/* 鍒嗗壊鍧� */
+.hayui-form-mid{display:block; float:left; position:relative; line-height:20px; margin:0 10px; padding:4px 0 !important;}
+
+/* 璀﹀憡鍩� */
+.hayui-form-danger, .hayui-form-danger:hover, .hayui-form-danger:focus, .hayui-form-danger +.hayui-form-select .hayui-input{border:1px solid #FF5722 !important;}
+
+
+/* 涓嬫媺閫夋嫨 */
+.hayui-form-select{position:relative;}
+.hayui-form-select .hayui-input{padding-right:30px; cursor:pointer;}
+.hayui-form-select .hayui-edge{position:absolute; top:50%; right:10px; margin-top:-3px; border-width:6px; border-top-style:solid; border-top-color:#c2c2c2; cursor:pointer; -webkit-transition:all .3s; transition:all .3s;}
+.hayui-form-select dl{display:none; position:absolute; top:30px; left:0; z-index:999; min-width:100%; max-height:300px; padding:5px 0; box-sizing:border-box; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); overflow-y:auto;}
+.hayui-form-select dl dt, .hayui-form-select dl dd{line-height:28px; padding:0 10px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-form-select dl dt{font-size:12px; color:#999;}
+.hayui-form-select dl dd{cursor:pointer;}
+.hayui-form-select dl dd:hover{background-color:#f2f2f2;}
+.hayui-form-select .hayui-select-group dd{padding-left:20px;}
+.hayui-form-select dl dd.hayui-select-tips{padding-left:10px !important; color:#999;}
+.hayui-form-select dl dd.hayui-this{color:#fff; background-color:#0070EA;}
+.hayui-form-select dl dd.hayui-disabled{background-color:#fff;}
+.hayui-form-selected dl{display:block;}
+.hayui-form-selected .hayui-edge{margin-top:-9px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+.hayui-form-selected .hayui-edge{margin-top:-3px\0;}
+:root .hayui-form-selected .hayui-edge{margin-top:-9px\0/IE9;}
+.hayui-form-selectup dl{top:auto; bottom:32px;}
+.hayui-select-none{margin:5px 0; color:#999; text-align:center;}
+.hayui-select-disabled .hayui-disabled{border-color:#eee !important;}
+.hayui-select-disabled .hayui-edge{border-top-color:#d2d2d2;}
+
+
+/* 涓嬫媺澶嶉€夋 */
+.hayui-div-text{position:relative;}
+.hayui-div-text .hayui-input{padding-right:30px; cursor:pointer;}
+.hayui-div-text  .hayui-edge{position:absolute; top:50%; right:10px; margin-top:-3px; border-width:6px; border-top-style:solid; border-top-color:#c2c2c2; cursor:pointer; -webkit-transition:all .3s; transition:all .3s;}
+.hayui-ddcheckbox{position:relative;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box{display:none; position:absolute; top:30px; left:0; z-index:999; min-width:100%; box-sizing:border-box; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); overflow:hidden;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options{position:relative; height:120px; padding:5px 0; background:#FFF; overflow-x:hidden; overflow-y:auto;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options ul{position:absolute; top:0; left:0; width:100%; height:100%;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options ul li{height:24px; line-height:24px; color:#000; overflow:hidden; zoom:1;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options ul li:hover, .hayui-ddcheckbox .hayui-ddcheckbox-box .options ul li.hover{color:#fff; background-color:#4c64a6;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options ul li .hayui-unselect{float:left; width:15px; height:15px; margin:4px 5px 0px 4px; padding:0; -margin-bottom:-19px;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .options ul li label{display:block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; -margin-left:24px;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .buttons{padding:5px 4px; border-top:1px solid #ccc; background:#FFF; overflow:hidden;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .buttons div{width:200px; text-align:left !important;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .buttons div .button{height:22px; line-height:20px; margin-right:5px; padding:0 5px; font-size:12px; border:1px solid #b1b1b1; background:#FFF; cursor:pointer;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .buttons div .counter{margin-right:0px;}
+.hayui-ddcheckbox .hayui-ddcheckbox-box .failed{line-height:24px; padding:20px 10px; color:#f00; overflow:hidden; text-align:center;}
+.hayui-ddcheckboxed .hayui-ddcheckbox-box{display:block;}
+.hayui-ddcheckboxed .hayui-edge{margin-top:-9px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+/* 涓嬫媺鏍戝舰閫夋嫨妗� */
+.hayui-ddtreeselectbox { /**/ }
+.hayui-ddtreeselectbox .hayui-ddtreeselectbox-box {display:none; position:absolute; top:30px; left:0; z-index:999; min-width:100%; box-sizing:border-box; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); overflow:hidden;}
+.hayui-ddtreeselectbox .hayui-ddtreeselectbox-box .options { width:100%; height:200px;padding:10px; overflow:auto; }
+.hayui-ddtreeselectbox .hayui-ddtreeselectbox-box .load { background:url(../imgs/icon/load1.gif) no-repeat center center; overflow:hidden; line-height:188px; }
+.hayui-ddtreeselectbox .hayui-ddtreeselectbox-box .failed { padding:20px 10px; overflow:hidden; line-height:24px; text-align:center; color:#f00; }
+.hayui-ddtreeselectboxed .hayui-ddtreeselectbox-box{display:block;}
+.hayui-ddtreeselectboxed .hayui-edge{margin-top:-9px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+
+
+/* 涓嬫媺閫夋嫨妗嗛€氱敤 */
+.hayui-dropdown { /**/ }
+.hayui-dropdown .hayui-dropdown-box {display:none; position:absolute; top:30px; left:0; z-index:999; min-width:100%; box-sizing:border-box; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); overflow:hidden;}
+.hayui-dropdown .hayui-dropdown-box .options { width:100%; height:auto;overflow:auto; }
+.hayui-dropdown .hayui-dropdown-box .load { background:url(../imgs/icon/load1.gif) no-repeat center center; overflow:hidden; line-height:188px; }
+.hayui-dropdown .hayui-dropdown-box .failed { padding:20px 10px; overflow:hidden; line-height:24px; text-align:center; color:#f00; }
+.hayui-dropdowned .hayui-dropdown-box{display:block;}
+.hayui-dropdowned .hayui-edge{margin-top:-9px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+
+
+/* 涓嬫媺閫夋嫨妗嗛€氱敤 */
+.hayui-ddmultipleselectbox { /**/ }
+.hayui-ddmultipleselectbox .hayui-ddmultipleselectbox-box {display:none; position:absolute; top:30px; left:0; z-index:999; min-width:100%; box-sizing:border-box; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); overflow:hidden;}
+.hayui-ddmultipleselectbox .hayui-ddmultipleselectbox-box .options { width:100%; height:auto;overflow:auto; }
+.hayui-ddmultipleselectbox .hayui-ddmultipleselectbox-box .load { background:url(../imgs/icon/load1.gif) no-repeat center center; overflow:hidden; line-height:188px; }
+.hayui-ddmultipleselectbox .hayui-ddmultipleselectbox-box .failed { padding:20px 10px; overflow:hidden; line-height:24px; text-align:center; color:#f00; }
+.hayui-ddmultipleselectboxed .hayui-ddmultipleselectbox-box{display:block;}
+.hayui-ddmultipleselectboxed .hayui-edge{margin-top:-9px; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+
+
+
+/* 澶嶉€夋 */
+.hayui-form-checkbox{display:inline-block; position:relative; height:30px; line-height:28px; margin-right:10px; padding-right:30px; box-sizing:border-box; font-size:0; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; cursor:pointer; -webkit-transition:.1s linear; transition:.1s linear; vertical-align:middle;}
+.hayui-form-checkbox:hover{border:1px solid #c2c2c2;}
+.hayui-form-checkbox *{display:inline-block; vertical-align:middle;}
+.hayui-form-checkbox span{height:100%; padding:0 10px; font-size:12px; color:#fff; background-color:#d2d2d2; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-form-checkbox:hover span{background-color:#c2c2c2;}
+.hayui-form-checkbox i{position:absolute; right:0; width:30px; font-size:20px; color:#fff; text-align:center;}
+.hayui-form-checkbox:hover i{color:#c2c2c2;}
+.hayui-form-checked, .hayui-form-checked:hover{border-color:#0070EA;}
+.hayui-form-checked span, .hayui-form-checked:hover span{background-color:#0070EA;}
+.hayui-form-checked i, .hayui-form-checked:hover i{color:#0070EA;}
+.hayui-form-item .hayui-form-checkbox{margin:4px 0;}
+
+
+
+/* 澶嶉€夋-鍘熷椋庢牸 */
+.hayui-form-checkbox[hay-skin="primary"]{height:auto!important; line-height:normal!important; margin-right:0; padding-right:0; border:none!important; background:none;}
+.hayui-form-checkbox[hay-skin="primary"] span{float:right; line-height:18px; padding-right:15px; color:#666; background:none;}
+.hayui-form-checkbox[hay-skin="primary"] i{position:relative; top:0; width:16px; height:16px; line-height:16px; font-size:12px; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; -webkit-transition:.1s linear; transition:.1s linear;}
+.hayui-form-checkbox[hay-skin="primary"]:hover i{color:#fff; border-color:#0070EA;}
+.hayui-form-checked[hay-skin="primary"] i{color:#fff; border-color:#0070EA; background-color:#0070EA;}
+.hayui-checkbox-disbaled[hay-skin="primary"] span{background:none!important;}
+.hayui-checkbox-disbaled[hay-skin="primary"]:hover i{border-color:#d2d2d2;}
+.hayui-form-item .hayui-form-checkbox[hay-skin="primary"]{margin:4px 0;}
+
+
+
+/* 澶嶉€夋-寮€鍏抽鏍� */
+.hayui-form-switch{display:inline-block; position:relative; width:42px; height:22px; line-height:22px; margin-top:2px; padding:0 5px; border:1px solid #d2d2d2; border-radius:20px; background-color:#fff; cursor:pointer; -webkit-transition:.1s linear; transition:.1s linear; vertical-align:middle;}
+.hayui-form-switch i{position:absolute; top:3px; left:5px; width:16px; height:16px; border-radius:20px; background-color:#d2d2d2; -webkit-transition:.1s linear; transition:.1s linear;}
+.hayui-form-switch em{position:absolute; top:0; right:5px; width:25px; padding:0!important; font-size:12px; font-style:normal!important; color:#999!important; text-align:center!important;}
+.hayui-form-onswitch{border-color:#0070EA; background-color:#0070EA;}
+.hayui-form-onswitch i{left:32px; background-color:#fff;}
+.hayui-form-onswitch em{right:auto; left:5px; color:#fff!important;}
+
+.hayui-checkbox-disbaled{border-color:#e2e2e2 !important;}
+.hayui-checkbox-disbaled span{background-color:#e2e2e2 !important;}
+.hayui-checkbox-disbaled:hover i{color:#fff !important;}
+
+
+
+/* 鍗曢€夋 */
+.hayui-form-radio{display:inline-block; line-height:20px; margin:0px 10px 0 0; padding:4px 10px 4px 0; font-size:0; cursor:pointer; vertical-align:middle;}
+.hayui-form-radio *{display:inline-block; vertical-align:middle;}
+.hayui-form-radio i{margin-right:8px; font-size:16px; color:#c2c2c2;}
+.hayui-form-radio span{font-size:12px;}
+.hayui-form-radioed i, .hayui-form-radio i:hover{color:#0070EA;}
+.hayui-radio-disbaled i{color:#e2e2e2 !important;}
+
+
+/* 鍥剧墖椋庢牸 */
+.hayui-images{display:inline-block; position:relative; overflow:hidden;}
+.hayui-images img{display:block;}
+.hayui-images-radius, .hayui-images-radius img{border-radius:5px;}
+.hayui-images-round, .hayui-images-round img{border-radius:50%;}
+.hayui-images-border, .hayui-images-border img{display:inline-block; max-width:100%; height:auto; line-height:1.42857143; padding:2px; -webkit-box-sizing:border-box; box-sizing:border-box; border:1px solid #ddd; background-color:#fff; -webkit-transition:all .2s ease-in-out; -o-transition:all .2s ease-in-out; transition:all .2s ease-in-out;}
+.hayui-images-normal, .hayui-images-normal img{width:100px; height:100px;}
+.hayui-images-big, .hayui-images-big img{width:240px; height:240px;}
+.hayui-images-small, .hayui-images-small img{width:64px; height:64px;}
+.hayui-images-mini, .hayui-images-mini img{width:16px; height:16px;}
+.hayui-images-responsive{display:inline-block;max-width:100%;height:auto;}
+
+
+/* 鍥剧墖閫夋嫨 */
+.hayui-images-upload{clear:both;  zoom:1;}
+.hayui-images-upload:after{display:block; height:0; clear:both; content:'\20'; *zoom:1;}
+.hayui-images-upload .img-item{float:left; width:100px; height:100px; margin-right:20px; padding:2px; border:1px solid #E4E4E4; overflow:hidden;}
+.hayui-images-upload .item-btn{width:100%; height:100%; background:#F5F5F5; overflow:hidden; cursor:pointer; text-align:center;}
+.hayui-images-upload .item-btn dt{margin-top:20px; overflow:hidden;}
+.hayui-images-upload .item-btn dt i{font-size:24px; color:#999;}
+.hayui-images-upload .item-btn dd{color:#999;}
+.hayui-images-upload .item-btn:hover{background:#EFEFEF;}
+.hayui-images-upload .item-img{display:none; display:table; position:relative; width:100px; height:100px; overflow:hidden; text-align:center;}
+.hayui-images-upload .item-img p{display:table-cell; width:100px; height:100px; text-align:center; vertical-align:middle;}
+.hayui-images-upload .item-img img{display:inline-block; max-width:100px; max-height:100px; vertical-align:middle;}
+.hayui-images-upload .item-img .del-span{position:absolute; right:0; bottom:0; width:16px; height:16px; line-height:16px; background:#999; cursor:pointer; text-align:center;}
+.hayui-images-upload .item-img .del-span i{color:#fff; font-size:12px;}
+.hayui-images-upload .item-img .del-span:hover{background:#F60;}
+
+
+/* 琛ㄥ崟鏂规椋庢牸 */
+.hayui-form-pane .hayui-form-label{width:110px; height:28px; line-height:20px; padding:4px 15px; box-sizing:border-box; border:1px solid #e6e6e6; border-radius:2px 0 0 2px; background-color:#FBFBFB; overflow:hidden; text-align:center; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-form-pane .hayui-input-inline{margin-left:-1px;}
+.hayui-form-pane .hayui-input-block{left:-1px; margin-left:110px;}
+.hayui-form-pane .hayui-input{border-radius:0 2px 2px 0;}
+.hayui-form-pane .hayui-form-text .hayui-form-label{float:none; width:100%; box-sizing:border-box; border-right:1px solid #e6e6e6; border-radius:2px; text-align:left;}
+.hayui-form-pane .hayui-form-text .hayui-input-inline{display:block; top:-1px; margin:0; clear:both;}
+.hayui-form-pane .hayui-form-text .hayui-input-block{top:-1px; left:0; margin:0;}
+.hayui-form-pane .hayui-form-text .hayui-textarea{min-height:100px; border-radius:0 0 2px 2px;}
+.hayui-form-pane .hayui-form-checkbox{margin:4px 0 4px 10px;}
+.hayui-form-pane .hayui-form-switch, .hayui-form-pane .hayui-form-radio{margin:2px 0 2px 10px; }
+.hayui-form-pane .hayui-form-item[pane]{position:relative; margin-bottom:5px; border:1px solid #e6e6e6;}
+.hayui-form-pane .hayui-form-item[pane] .hayui-form-label{position:absolute; top:0; left:0; height:100%; border-width:0px; border-right-width:1px;}
+.hayui-form-pane .hayui-form-item[pane] .hayui-input-inline{margin-left:110px;}
+.hayui-form-pane .hayui-form-item[pane] .hayui-inline{margin-bottom:0;}
+
+
+/** 鍒嗛〉 **/
+.hayui-haypage{display:inline-block; margin:10px 0; font-size:0; vertical-align:middle; *display:inline; *zoom:1;}
+.hayui-haypage >a:first-child, .hayui-haypage >a:first-child em{border-radius:2px 0 0 2px;}
+.hayui-haypage >a:last-child, .hayui-haypage >a:last-child em{border-radius:0 2px 2px 0;}
+.hayui-haypage >*:first-child{margin-left:0!important;}
+.hayui-haypage >*:last-child{margin-right:0!important;}
+.hayui-haypage a, .hayui-haypage span, .hayui-haypage input, .hayui-haypage button, .hayui-haypage select{border:1px solid #e2e2e2;}
+.hayui-haypage a, .hayui-haypage span{display:inline-block; height:28px; line-height:28px; margin:0 -1px 5px 0; padding:0 15px; font-size:12px; color:#333; background-color:#fff; vertical-align:middle; *display:inline; *zoom:1;}
+.hayui-haypage a:hover{color:#0070EA;}
+.hayui-haypage em{font-style:normal;}
+.hayui-haypage .hayui-haypage-spr{font-weight:700; color:#999;}
+.hayui-haypage a{text-decoration:none;}
+.hayui-haypage .hayui-haypage-curr{position:relative;}
+.hayui-haypage .hayui-haypage-curr em{position:relative; color:#fff;}
+.hayui-haypage .hayui-haypage-curr .hayui-haypage-em{position:absolute; top:-1px; left:-1px; width:100%; height:100%; padding:1px; background-color:#0070EA;}
+.hayui-haypage-em{border-radius:2px;}
+.hayui-haypage-prev em, .hayui-haypage-next em{font-size:16px; font-family:Sim sun;}
+
+.hayui-haypage .hayui-haypage-count, .hayui-haypage .hayui-haypage-limits, .hayui-haypage .hayui-haypage-skip{margin-right:10px; margin-left:10px; padding:0; border:none;}
+.hayui-haypage .hayui-haypage-limits{vertical-align:top;}
+.hayui-haypage select{height:22px; padding:3px; border-radius:2px; cursor:pointer;}
+.hayui-haypage .hayui-haypage-skip{height:30px; line-height:30px; color:#999;}
+.hayui-haypage input, .hayui-haypage button{height:30px; line-height:30px; box-sizing:border-box; border:1px solid #e2e2e2; border-radius:2px; background-color:#fff; vertical-align:top;}
+.hayui-haypage input{display:inline-block; width:40px; margin:0 10px; padding:0 3px; text-align:center;}
+.hayui-haypage input:focus, .hayui-haypage select:focus{border-color:#0070EA!important;}
+.hayui-haypage button{margin-left:10px; padding:0 10px; cursor:pointer;}
+
+/* spinner */
+.hayui-spinner{display:inline-block; width:100px; height:28px;border:1px solid #eae8e8; border-radius:1px; box-sizing:border-box; overflow:hidden;}
+.hayui-spinner a{float:left; position:relative; width:25%; box-sizing:border-box;  height:inherit; font-weight:700; color:#666; background-color:#f8f8f8; overflow:hidden; text-align:center; letter-spacing:0;}
+.hayui-spinner a:active{background-color:#ececec;}
+.hayui-spinner a:after{position:absolute; top:50%; left:50%; font-size:12px; font-family:'hayui-icon'; color:#777; -webkit-transform:translate(-50%, -50%); transform:translate(-50%, -50%);}
+.hayui-spinner a:first-child{border-right:1px solid #eae8e8;}
+.hayui-spinner a:last-child{border-left:1px solid #eae8e8;}
+.hayui-spinner a:first-child:after{content:"\e618";}
+.hayui-spinner a:last-child:after{content:"\e619";}
+.hayui-spinner input{float:left; width:50%; height:inherit; font-size:12px; color:#666; border:none; background-color:#fff; text-align:center; letter-spacing:0;}
+.hayui-spinner a.disabled{background-color:#F0F0F0;}
+.hayui-spinner a.disabled:after{color:#ddd;}
+
+
+/** 娴佸姞杞� **/
+.hayui-flow-more{margin:10px 0; font-size:14px; color:#999; text-align:center;}
+.hayui-flow-more a{height:32px; line-height:32px;}
+.hayui-flow-more a *{display:inline-block; vertical-align:top;}
+.hayui-flow-more a cite{padding:0 20px; font-style:normal; color:#333; border-radius:3px; background-color:#eee;}
+.hayui-flow-more a cite:hover{opacity:0.8;}
+.hayui-flow-more a i{font-size:30px; color:#737383;}
+
+
+
+/** 琛ㄦ牸 **/
+.hayui-table{width:100%; margin:0; background-color:#fff;}
+.hayui-table tr{-webkit-transition:all .3s; transition:all .3s;}
+.hayui-table thead tr, .hayui-table-header, .hayui-table-patch, .hayui-table-mend{background-color:#F2F2F2;}
+.hayui-table th{font-weight:400; text-align:left;}
+
+.hayui-table th, .hayui-table td, .hayui-table[hay-skin="line"], .hayui-table[hay-skin="row"], .hayui-table-header{border:1px solid #e2e2e2;}
+
+.hayui-table th, .hayui-table td{position:relative; min-height:20px; line-height:20px; padding:9px 15px; font-size:12px;}
+.hayui-table[hay-even] tr:nth-child(even){background-color:#f8f8f8;}
+.hayui-table-view .hayui-table tr{border-bottom:1px dotted #E4E4E4;}
+.hayui-table tbody tr:hover, .hayui-table-hover{background-color:#F9F9F9!important;}
+.hayui-table-click{background-color:#FFEEE8!important;}
+
+.hayui-table[hay-skin="line"] th, .hayui-table[hay-skin="line"] td{border-width:0; border-bottom-width:1px;}
+.hayui-table[hay-skin="row"] th, .hayui-table[hay-skin="row"] td{border-width:0; border-right-width:1px;}
+.hayui-table[hay-skin="nob"], .hayui-table[hay-skin="nob"] th, .hayui-table[hay-skin="nob"] td{border:none;}
+
+
+.hayui-table img{max-width:100%;}
+
+
+.hayui-table-noheader{/**/}
+.hayui-table-noheader .hayui-table-header{display:none !important;}
+
+
+/* 澶ц〃鏍� */
+.hayui-table[hay-size="lg"] th, .hayui-table[hay-size="lg"] td{padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;}
+.hayui-table-view .hayui-table[hay-size="lg"] .hayui-table-cell{height:40px; line-height:40px;}
+
+
+/* 灏忚〃鏍� */
+.hayui-table[hay-size="sm"] th, .hayui-table[hay-size="sm"] td{padding:2px 5px; font-size:12px;}
+.hayui-table-view .hayui-table[hay-size="sm"] .hayui-table-cell{height:18px; line-height:18px;}
+
+
+/* 鏁版嵁琛ㄦ牸 */
+.hayui-table[hay-data]{display:none;}
+.hayui-table-view{position:relative; margin:10px 0; overflow:hidden;}
+.hayui-table-view .hayui-table{position:relative; width:auto; margin:0;}
+.hayui-table-view .hayui-table[hay-skin="line"]{border-width:0; border-right-width:1px;}
+.hayui-table-view .hayui-table[hay-skin="row"]{border-width:0; border-bottom-width:1px;}
+.hayui-table-view .hayui-table th, .hayui-table-view .hayui-table td{padding:8px 0; border-top:none; border-left:none;}
+.hayui-table-view .hayui-table td{cursor:default;}
+.hayui-table-view .hayui-form-checkbox[hay-skin="primary"] i{width:14px; height:14px; line-height:14px; border-radius:0;}
+.hayui-table-view .hayui-form-checkboxed[hay-skin="primary"] i{width:14px; height:14px; line-height:14px; border-radius:0;}
+.hayui-table-header{border-width:0; /* border-bottom-width:1px; */ overflow:hidden;}
+.hayui-table-header .hayui-table{margin-bottom:-1px;}
+.hayui-table-sort{width:20px; height:20px; margin-left:5px; cursor:pointer!important;}
+.hayui-table-sort .hayui-edge{left:5px; border-width:5px;}
+.hayui-table-sort .hayui-table-sort-asc{top:4px; border-top:none; border-bottom-style:solid; border-bottom-color:#b2b2b2;}
+.hayui-table-sort .hayui-table-sort-asc:hover{border-bottom-color:#666;}
+.hayui-table-sort .hayui-table-sort-desc{bottom:4px; border-top-style:solid; border-top-color:#b2b2b2; border-bottom:none;}
+.hayui-table-sort .hayui-table-sort-desc:hover{border-top-color:#666;}
+.hayui-table-sort[hay-sort="asc"] .hayui-table-sort-asc{border-bottom-color:#000;}
+.hayui-table-sort[hay-sort="desc"] .hayui-table-sort-desc{border-top-color:#000;}
+.hayui-table-cell{position:relative; height:auto; line-height:20px; padding:0 15px; box-sizing:border-box; overflow:hidden;/*  white-space:nowrap; text-overflow:ellipsis; */}
+.hayui-table-cell .hayui-form-checkbox{top:-1px;}
+.hayui-table-cell .hayui-table-link{color:#01AAED;}
+.laytable-cell-space{width:15px; padding:0; text-align:center;}
+
+.hayui-table-body{position:relative; margin-right:-1px; margin-bottom:-1px; overflow:hidden;}
+.hayui-table-body .hayui-none{line-height:40px; color:#999; text-align:center;}
+.hayui-table-fixed{position:absolute; top:0; left:0;}
+.hayui-table-fixed .hayui-table-body{overflow:hidden;}
+.hayui-table-fixed-r{right:-1px; left:auto; border-left:1px solid #e2e2e2; box-shadow:-1px 0 8px rgba(0, 0, 0, .1);}
+.hayui-table-fixed-r .hayui-table-header{position:relative; overflow:visible;}
+.hayui-table-mend{position:absolute; top:0; right:-49px; width:50px; height:100%;}
+
+
+.hayui-table-tool{position: relative; width: 100%; height: 50px; line-height: 30px; padding: 10px 15px; border-width: 0; border-bottom-width: 1px; }
+.hayui-table-page{position: relative; width: 100%; height:auto; border-width: 0; border-top-width: 1px; font-size: 12px; white-space:nowrap; text-align:right;}
+.hayui-table-page>div{height: auto;}
+.hayui-table-page .hayui-haypage{margin:20px 0 0 0;}
+.hayui-table-page .hayui-haypage span, .hayui-table-page .hayui-haypage a{height:26px; line-height:26px; padding:0 12px; border:none; background:none;}
+.hayui-table-page .hayui-haypage .hayui-haypage-count, .hayui-table-page .hayui-haypage .hayui-haypage-limits, .hayui-table-page .hayui-haypage .hayui-haypage-skip{margin-left:0; padding:0;}
+.hayui-table-page .hayui-haypage .hayui-haypage-total{padding:0 10px;}
+.hayui-table-page .hayui-haypage .hayui-haypage-spr{padding:0;}
+.hayui-table-page .hayui-haypage input, .hayui-table-page .hayui-haypage button{height:26px; line-height:26px;}
+.hayui-table-page .hayui-haypage input{width:40px;}
+.hayui-table-page .hayui-haypage button{padding:0 10px;}
+.hayui-table-view select[hay-ignore]{display:inline-block;}
+.hayui-table-page select{height:18px;}
+.hayui-table-patch .hayui-table-cell{width:30px; padding:0;}
+.hayui-table-edit{position:absolute; top:0; left:0; width:100%; height:100%; padding:0 15px 1px; border:none;}
+.hayui-table-edit:focus{background-color:#F0F9F2;}
+
+body .hayui-table-tips .hayui-layer-content{padding:0; background:none; box-shadow:0 1px 6px rgba(0, 0, 0, .1);}
+.hayui-table-tips-main{max-height:150px; margin:-44px 0 0 -1px; padding:8px 15px; font-size:14px; color:#333; border:1px solid #e2e2e2; background-color:#fff; overflow-y:scroll;}
+.hayui-table-tips-c{position:absolute; top:-12px; right:-3px; width:18px; height:18px; line-height:18px; padding:3px; font-size:14px; font-weight:700; border-radius:100%; background-color:#666; cursor:pointer; text-align:center;}
+.hayui-table-tips-c:hover{background-color:#999;}
+
+
+/** 鏍戠粍浠� **/
+.hayui-tree{line-height:22px;}
+.hayui-tree li{overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-tree li a, .hayui-tree li .hayui-tree-spread{display:inline-block; height:22px; line-height:22px; cursor:pointer; vertical-align:top; *display:inline; *zoom:1;}
+.hayui-tree li a{font-size:0; color:#333; }
+.hayui-tree li a i{font-size:12px;}
+.hayui-tree li a cite{padding:0 6px; font-size:12px; font-style:normal;}
+.hayui-tree li i{padding-left:6px; font-size:12px; color:#333; -moz-user-select:none;}
+.hayui-tree li .hayui-tree-check{font-size:12px;}
+.hayui-tree li .hayui-tree-check:hover{color:#009E94;}
+.hayui-tree li ul{display:none; margin-left:20px;}
+.hayui-tree li .hayui-tree-enter{line-height:22px; border:1px dotted #000;}
+.hayui-tree-disabled{cursor:not-allowed !important; color:#999 !important;}
+.hayui-tree  li a.hayui-this{color:#fff; background-color:#0070EA;}
+
+/** 瀵艰埅鑿滃崟 **/
+.hayui-nav{position:relative; padding:0 20px; box-sizing:border-box; font-size:0; color:#fff; border-radius:2px; background-color:#393D49;}
+.hayui-nav *{font-size:14px;}
+.hayui-nav .hayui-nav-item{display:inline-block; position:relative; line-height:60px; vertical-align:middle; *display:inline; *zoom:1;}
+.hayui-nav .hayui-nav-item a{display:block; padding:0 20px; color:#fff; color:rgba(255, 255, 255, .7); -webkit-transition:all .3s; transition:all .3s;}
+.hayui-nav-bar, .hayui-nav .hayui-this:after, .hayui-nav-tree .hayui-nav-itemed:after{position:absolute; top:0; left:0; width:0; height:5px; background-color:#0070EA; -webkit-transition:all .2s; transition:all .2s;}
+.hayui-nav-bar{z-index:1000;}
+.hayui-nav .hayui-this a, .hayui-nav .hayui-nav-item a:hover{color:#fff;}
+.hayui-nav .hayui-this:after{top:auto; bottom:0; width:100%; content:'';}
+.hayui-nav-img{width:30px; height:30px; margin-right:10px; border-radius:50%;}
+
+.hayui-nav .hayui-nav-more{width:0; height:0; border-style:dashed; border-color:transparent; overflow:hidden; content:''; cursor:pointer; -webkit-transition:all .2s; transition:all .2s;}
+.hayui-nav .hayui-nav-more{position:absolute; top:28px; right:3px; border-width:6px; border-top-style:solid; border-top-color:#fff; border-top-color:rgba(255, 255, 255, .7);}
+.hayui-nav .hayui-nav-mored, .hayui-nav-itemed .hayui-nav-more{top:22px; border-style:dashed; border-color:transparent; border-bottom-style:solid; border-bottom-color:#fff;}
+
+.hayui-nav-child{display:none; position:absolute; top:65px; left:0; z-index:100; min-width:100%; line-height:36px; padding:5px 0; border:1px solid #d2d2d2; border-radius:2px; background-color:#fff; box-shadow:0 2px 4px rgba(0, 0, 0, .12); white-space:nowrap;}
+.hayui-nav .hayui-nav-child a{color:#333;}
+.hayui-nav .hayui-nav-child a:hover{color:#000; background-color:#f2f2f2;}
+.hayui-nav-child dd{position:relative;}
+.hayui-nav-child dd.hayui-this{color:#fff; background-color:#0070EA;}
+.hayui-nav .hayui-nav-child dd.hayui-this a{color:#fff; background-color:#0070EA;}
+.hayui-nav-child dd.hayui-this:after{display:none;}
+
+/* 鍨傜洿瀵艰埅鑿滃崟 */
+.hayui-nav-tree{width:200px; padding:0;}
+.hayui-nav-tree .hayui-nav-item{display:block; width:100%; line-height:45px;}
+.hayui-nav-tree .hayui-nav-item a{height:45px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.hayui-nav-tree .hayui-nav-item a:hover{background-color:#4E5465;}
+.hayui-nav-tree .hayui-nav-bar{width:5px; height:0;}
+.hayui-nav-tree .hayui-this, .hayui-nav-tree .hayui-this >a, .hayui-nav-tree .hayui-this >a:hover, .hayui-nav-tree .hayui-nav-child dd.hayui-this, .hayui-nav-tree .hayui-nav-child dd.hayui-this a{color:#fff; background-color:#0070EA;}
+.hayui-nav-tree .hayui-this:after{display:none;}
+.hayui-nav-tree .hayui-nav-title a, .hayui-nav-tree .hayui-nav-title a:hover, .hayui-nav-itemed >a{color:#fff !important;}
+.hayui-nav-tree .hayui-nav-bar{background-color:#0070EA;}
+
+.hayui-nav-tree .hayui-nav-child{position:relative; top:0; z-index:0; border:none; box-shadow:none;}
+.hayui-nav-tree .hayui-nav-child a{height:40px; line-height:40px;}
+.hayui-nav-tree .hayui-nav-child a{color:#fff; color:rgba(255, 255, 255, .7);}
+.hayui-nav-tree .hayui-nav-child a:hover, .hayui-nav-tree .hayui-nav-child{color:#fff; background:none;}
+.hayui-nav-tree .hayui-nav-more{top:20px; right:10px;}
+.hayui-nav-itemed .hayui-nav-more{top:14px;}
+.hayui-nav-itemed .hayui-nav-child{display:block; padding:0; background-color:rgba(0, 0, 0, .3) !important;}
+
+/* 渚ц竟 */
+.hayui-nav-side{position:fixed; top:0; bottom:0; left:0; z-index:999; overflow-x:hidden;}
+
+
+/* 瀵艰埅涓婚鑹� */
+.hayui-bg-blue .hayui-nav-bar, .hayui-bg-blue .hayui-this:after, .hayui-bg-blue .hayui-nav-itemed:after{background-color:#93D1FF;}
+.hayui-bg-blue .hayui-nav-child dd.hayui-this{background-color:#0070EA;}
+.hayui-nav-tree.hayui-bg-blue .hayui-nav-title a, .hayui-nav-tree.hayui-bg-blue .hayui-nav-title a:hover, .hayui-bg-blue .hayui-nav-itemed >a{background-color:#007DDB !important;}
+
+
+/** 闈㈠寘灞� **/
+.hayui-breadcrumb{font-size:0; visibility:hidden;}
+.hayui-breadcrumb a{line-height:22px; padding-right:8px; font-size:14px; color:#333 !important;}
+.hayui-breadcrumb a:hover{color:#01AAED !important;}
+.hayui-breadcrumb a span, .hayui-breadcrumb a cite{font-style:normal; color:#666; cursor:text;}
+.hayui-breadcrumb a span{padding-left:8px; font-family:Sim sun;}
+
+
+/** Tab閫夐」鍗� **/
+.hayui-tab{text-align:left !important;}
+.hayui-tab[overflow] >.hayui-tab-title{overflow:hidden;}
+.hayui-tab-title{position:relative; left:0; /* height:40px;  */font-size:0; border-bottom:1px solid #e2e2e2; -webkit-transition:all .2s; transition:all .2s; white-space:nowrap;}
+.hayui-tab-title li{display:inline-block; font-size:12px; -webkit-transition:all .2s; transition:all .2s; vertical-align:middle;  border-bottom:2px solid  transparent; *display:inline; *zoom:1;}
+.hayui-tab-title li{position:relative; min-width:65px; line-height:24px; padding:5px 10px; margin-right:20px; cursor:pointer; text-align:center;}
+.hayui-tab-title li a{display:block; color:inherit;}
+.hayui-tab-title .hayui-this{color:#000; border-bottom:2px solid #0070EA;}
+
+/* .hayui-tab-title .hayui-this:after{position:absolute; top:0; left:0; width:100%; height:41px; box-sizing:border-box; border:1px solid #e2e2e2; border-bottom-color:#fff; border-radius:2px 2px 0 0; content:''; pointer-events:none;}
+ */.hayui-tab-bar{position:absolute; top:0; right:0; z-index:10; width:30px; height:39px; line-height:39px; border:1px solid #e2e2e2; border-radius:2px; background-color:#fff; cursor:pointer; text-align:center;}
+.hayui-tab-bar .hayui-icon{display:inline-block; position:relative; top:3px; -webkit-transition:all .3s; transition:all .3s;}
+.hayui-tab-item{display:none;}
+.hayui-tab-more{height:auto !important; padding-right:30px; white-space:normal !important;}
+.hayui-tab-more li.hayui-this:after{border-bottom-color:#e2e2e2; border-radius:2px;}
+.hayui-tab-more .hayui-tab-bar .hayui-icon{top:-2px; top:3px\0; -webkit-transform:rotate(180deg); transform:rotate(180deg);}
+:root .hayui-tab-more .hayui-tab-bar .hayui-icon{top:-2px\0/IE9;}
+
+.hayui-tab-content{padding:10px; background:#FFF;}
+
+
+/* Tab鍏抽棴 */
+.hayui-tab-title li .hayui-tab-close{display:inline-block; position:relative; top:1px; width:18px; height:18px; line-height:20px; margin-left:8px; font-size:14px; color:#c2c2c2; -webkit-transition:all .2s; transition:all .2s; text-align:center;}
+.hayui-tab-title li .hayui-tab-close:hover{color:#fff; border-radius:2px; background-color:#FF5722;}
+
+/* Tab绠€娲侀鏍� */
+.hayui-tab-brief >.hayui-tab-title .hayui-this{color:#0070EA;}
+.hayui-tab-brief >.hayui-tab-title .hayui-this:after, .hayui-tab-brief >.hayui-tab-more li.hayui-this:after{border:none; border-bottom:2px solid #0070EA; border-radius:0;}
+.hayui-tab-brief[overflow] >.hayui-tab-title .hayui-this:after{top:-1px;}
+
+/* Tab鍗＄墖椋庢牸 */
+.hayui-tab-card{border:1px solid #e2e2e2; border-radius:2px; box-shadow:0 2px 5px 0 rgba(0, 0, 0, .1);}
+.hayui-tab-card >.hayui-tab-title{background-color:#f2f2f2;}
+.hayui-tab-card >.hayui-tab-title li{margin-right:-1px; margin-left:-1px;}
+.hayui-tab-card >.hayui-tab-title .hayui-this{background-color:#fff;}
+.hayui-tab-card >.hayui-tab-title .hayui-this:after{border-width:1px; border-top:none; border-bottom-color:#fff;}
+.hayui-tab-card >.hayui-tab-title .hayui-tab-bar{height:40px; line-height:40px; border-top:none; border-right:none; border-radius:0;}
+.hayui-tab-card >.hayui-tab-more .hayui-this{color:#0070EA; background:none;}
+.hayui-tab-card >.hayui-tab-more .hayui-this:after{border:none;}
+
+/* 鏃堕棿绾� */
+.hayui-timeline{padding-left:5px;}
+.hayui-timeline-item{position:relative; padding-bottom:20px;}
+.hayui-timeline-axis{position:absolute; top:0; left:-5px; z-index:10; width:20px; height:20px; line-height:20px; color:#0070EA; border-radius:50%; background-color:#fff; cursor:pointer; text-align:center;}
+.hayui-timeline-axis:hover{color:#FF5722;}
+.hayui-timeline-item:before{position:absolute; top:0; left:5px; z-index:0; width:1px; height:100%; background-color:#e2e2e2; content:'';}
+.hayui-timeline-item:last-child:before{display:none;}
+.hayui-timeline-item:first-child:before{display:block;}
+.hayui-timeline-content{padding-left:25px;;}
+.hayui-timeline-title{position:relative; margin-bottom:10px;}
+
+
+/* 灏忓窘绔� */
+.hayui-badge, .hayui-badge-dot, .hayui-badge-rim, .hayui-badge-spot, .hayui-badge-vspot{display:inline-block; position:relative; font-size:12px; color:#fff; background-color:#FF5722;}
+.hayui-badge{min-width:8px; height:18px; line-height:18px; padding:0 5px; border-radius:9px; text-align:center;}
+.hayui-badge-dot{width:8px; height:8px; border-radius:50%;}
+.hayui-badge-rim{height:18px; line-height:18px; padding:0 5px; color:#666; border:1px solid #e2e2e2; border-radius:3px; background-color:#fff;}
+.hayui-badge-spot{width:8px; height:8px;}
+.hayui-badge-vspot{width:4px; height:16px;}
+
+.hayui-btn .hayui-badge, .hayui-btn .hayui-badge-dot{margin-left:5px;}
+.hayui-nav .hayui-badge, .hayui-nav .hayui-badge-dot{position:absolute; top:50%; margin:-10px 6px 0;}
+.hayui-tab-title .hayui-badge, .hayui-tab-title .hayui-badge-dot{top:-2px; left:5px;}
+
+
+
+/* carousel 杞挱 */
+.hayui-carousel{position:relative; top:0; left:0; background-color:#f2f2f2; overflow:hidden;}
+.hayui-carousel >*[carousel-item]{position:relative; width:100%; height:100%; overflow:hidden;}
+.hayui-carousel >*[carousel-item]:before{position:absolute; top:50%; left:50%; width:100px; line-height:20px; margin:-10px 0 0 -50px; font-size:20px; font-family:"hayui-icon" !important; font-style:normal; color:#999; content:'\e63d'; text-align:center; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+.hayui-carousel >*[carousel-item] >*{display:none; position:absolute; top:0; left:0; width:100%; height:100%; background-color:#f2f2f2; -webkit-transition-duration:.3s; transition-duration:.3s;}
+.hayui-carousel-updown >*{-webkit-transition:.3s ease-in-out up; transition:.3s ease-in-out up;}
+.hayui-carousel-arrow{display:none\0; position:absolute; top:50%; left:10px; width:36px; height:36px; line-height:36px; margin-top:-18px; font-size:20px; color:#fff; border:none 0; border-radius:50%; background-color:rgba(0, 0, 0, .2); opacity:0; cursor:pointer; -webkit-transition-duration:.3s; transition-duration:.3s; text-align:center;}
+.hayui-carousel-arrow[hay-type="add"]{right:10px; left:auto!important;}
+.hayui-carousel[hay-arrow="always"] .hayui-carousel-arrow{left:20px; opacity:1;}
+.hayui-carousel[hay-arrow="always"] .hayui-carousel-arrow[hay-type="add"]{right:20px;}
+.hayui-carousel[hay-arrow="none"] .hayui-carousel-arrow{display:none;}
+.hayui-carousel-arrow:hover, .hayui-carousel-ind ul:hover{background-color:rgba(0, 0, 0, .35);}
+.hayui-carousel:hover .hayui-carousel-arrow{display:block\0; left:20px; opacity:1;}
+.hayui-carousel:hover .hayui-carousel-arrow[hay-type="add"]{right:20px;}
+.hayui-carousel-ind{position:relative; top:-35px; width:100%; line-height:0!important; font-size:0; text-align:center;}
+.hayui-carousel[hay-indicator="outside"]{margin-bottom:30px;}
+.hayui-carousel[hay-indicator="outside"] .hayui-carousel-ind{top:10px;}
+.hayui-carousel[hay-indicator="outside"] .hayui-carousel-ind ul{background-color:rgba(0, 0, 0, .5);}
+.hayui-carousel[hay-indicator="none"] .hayui-carousel-ind{display:none;}
+.hayui-carousel-ind ul{display:inline-block; padding:5px; border-radius:10px; background-color:rgba(0, 0, 0, .2); -webkit-transition-duration:.3s; transition-duration:.3s;}
+.hayui-carousel-ind li{display:inline-block; width:10px; height:10px; margin:0 3px; font-size:14px; border-radius:50%; background-color:#e2e2e2; background-color:rgba(255, 255, 255, .5); cursor:pointer; -webkit-transition-duration:.3s; transition-duration:.3s;}
+.hayui-carousel-ind li:hover{background-color:rgba(255, 255, 255, .7);}
+.hayui-carousel-ind li.hayui-this{background-color:#fff;}
+.hayui-carousel >*[carousel-item] >.hayui-this, .hayui-carousel >*[carousel-item] >.hayui-carousel-prev, .hayui-carousel >*[carousel-item] >.hayui-carousel-next{display:block;}
+.hayui-carousel >*[carousel-item] >.hayui-this{left:0;}
+.hayui-carousel >*[carousel-item] >.hayui-carousel-prev{left:-100%;}
+.hayui-carousel >*[carousel-item] >.hayui-carousel-next{left:100%;}
+.hayui-carousel >*[carousel-item] >.hayui-carousel-prev.hayui-carousel-right, .hayui-carousel >*[carousel-item] >.hayui-carousel-next.hayui-carousel-left{left:0;}
+.hayui-carousel >*[carousel-item] >.hayui-this.hayui-carousel-left{left:-100%;}
+.hayui-carousel >*[carousel-item] >.hayui-this.hayui-carousel-right{left:100%;}
+
+
+
+/* 涓婁笅鍒囨崲 */
+.hayui-carousel[hay-anim="updown"] .hayui-carousel-arrow{top:20px; left:50%!important; margin:0 0 0 -18px;}
+.hayui-carousel[hay-anim="updown"] .hayui-carousel-arrow[hay-type="add"]{top:auto!important; bottom:20px;}
+.hayui-carousel[hay-anim="updown"] .hayui-carousel-ind{position:absolute; top:50%; right:20px; width:auto; height:auto;}
+.hayui-carousel[hay-anim="updown"] .hayui-carousel-ind ul{padding:3px 5px;}
+.hayui-carousel[hay-anim="updown"] .hayui-carousel-ind li{display:block; margin:6px 0;}
+
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >*{left:0!important;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-this{top:0;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-carousel-prev{top:-100%;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-carousel-next{top:100%;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-carousel-prev.hayui-carousel-right, .hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-carousel-next.hayui-carousel-left{top:0;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-this.hayui-carousel-left{top:-100%;}
+.hayui-carousel[hay-anim="updown"] >*[carousel-item] >.hayui-this.hayui-carousel-right{top:100%;}
+
+/* 娓愭樉鍒囨崲 */
+.hayui-carousel[hay-anim="fade"] >*[carousel-item] >*{left:0!important;}
+.hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-carousel-prev, .hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-carousel-next{opacity:0;}
+.hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-carousel-prev.hayui-carousel-right, .hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-carousel-next.hayui-carousel-left{opacity:1;}
+.hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-this.hayui-carousel-left, .hayui-carousel[hay-anim="fade"] >*[carousel-item] >.hayui-this.hayui-carousel-right{opacity:0;}
+
+
+/** fixbar **/
+.hayui-fixbar{position:fixed; right:15px; bottom:15px; z-index:9999;}
+.hayui-fixbar li{width:50px; height:50px; line-height:50px; margin-bottom:1px; font-size:30px; color:#fff; border-radius:2px; background-color:#9F9F9F; opacity:0.95; cursor:pointer; text-align:center;}
+.hayui-fixbar li:hover{opacity:0.85;}
+.hayui-fixbar li:active{opacity:1;}
+.hayui-fixbar .hayui-fixbar-top{display:none; font-size:40px;}
+
+
+/** 鍔ㄧ敾 **/
+.hayui-anim{-webkit-animation-duration:0.3s; animation-duration:0.3s; -webkit-animation-fill-mode:both; animation-fill-mode:both;}
+.hayui-anim.hayui-icon{display:inline-block;}
+.hayui-anim-loop{-webkit-animation-iteration-count:infinite; animation-iteration-count:infinite;}
+
+@-webkit-keyframes hayui-rotate{/* 寰幆鏃嬭浆 */
+  from{-webkit-transform:rotate(0deg);}
+  to{-webkit-transform:rotate(360deg);}}
+@keyframes hayui-rotate{from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}}
+.hayui-anim-rotate{-webkit-animation-name:hayui-rotate; animation-name:hayui-rotate; -webkit-animation-duration:1s; animation-duration:1s; -webkit-animation-timing-function:linear; animation-timing-function:linear;}
+
+@-webkit-keyframes hayui-up{/* 浠庢渶搴曢儴寰€涓婃粦鍏� */
+  from{opacity:0.3; -webkit-transform:translate3d(0, 100%, 0);}
+  to{opacity:1; -webkit-transform:translate3d(0, 0, 0);}}
+@keyframes hayui-up{from{opacity:0.3; transform:translate3d(0, 100%, 0);}
+  to{opacity:1; transform:translate3d(0, 0, 0);}}
+.hayui-anim-up{-webkit-animation-name:hayui-up; animation-name:hayui-up;}
+
+@-webkit-keyframes hayui-upbit{/* 寰井寰€涓婃粦鍏� */
+  from{opacity:0.3; -webkit-transform:translate3d(0, 30px, 0);}
+  to{opacity:1; -webkit-transform:translate3d(0, 0, 0);}}
+@keyframes hayui-upbit{from{opacity:0.3; transform:translate3d(0, 30px, 0);}
+  to{opacity:1; transform:translate3d(0, 0, 0);}}
+.hayui-anim-upbit{-webkit-animation-name:hayui-upbit; animation-name:hayui-upbit;}
+
+@-webkit-keyframes hayui-scale{/* 鏀惧ぇ */
+  0%{opacity:0.3; -webkit-transform:scale(.5);}
+  100%{opacity:1; -webkit-transform:scale(1);}}
+@keyframes hayui-scale{0%{opacity:0.3; -ms-transform:scale(.5); transform:scale(.5);}
+  100%{opacity:1; -ms-transform:scale(1); transform:scale(1);}}
+.hayui-anim-scale{-webkit-animation-name:hayui-scale; animation-name:hayui-scale;}
+
+@-webkit-keyframes hayui-scale-spring{/* 寮圭哀寮忔斁澶� */
+  0%{opacity:0.5; -webkit-transform:scale(.5);}
+  80%{opacity:0.8; -webkit-transform:scale(1.1);}
+  100%{opacity:1; -webkit-transform:scale(1);}}
+@keyframes hayui-scale-spring{0%{opacity:0.5; transform:scale(.5);}
+  80%{opacity:0.8; transform:scale(1.1);}
+  100%{opacity:1; transform:scale(1);}}
+.hayui-anim-scaleSpring{-webkit-animation-name:hayui-scale-spring; animation-name:hayui-scale-spring;}
+
+@-webkit-keyframes hayui-fadein{/* 娓愮幇 */
+  0%{opacity:0;}
+  100%{opacity:1;}}
+@keyframes hayui-fadein{0%{opacity:0;}
+  100%{opacity:1;}}
+.hayui-anim-fadein{-webkit-animation-name:hayui-fadein; animation-name:hayui-fadein;}
+
+@-webkit-keyframes hayui-fadeout{/* 娓愰殣 */
+  0%{opacity:1;}
+  100%{opacity:0;}}
+@keyframes hayui-fadeout{0%{opacity:1;}
+  100%{opacity:0;}}
+.hayui-anim-fadeout{-webkit-animation-name:hayui-fadeout; animation-name:hayui-fadeout;}
+
+
+
+/* 鍩烘湰甯冨眬 */
+.hayui-main{position:relative; width:1200px; margin:0 auto;}
+.hayui-body{float:left; position:relative; left:195px; height:100%; width:1005px; min-height:500px; margin:15px 0 0 0;background-color:transparent;}
+
+
+.hayui-header{position:relative; z-index:1000; height:60px;}
+.hayui-header a:hover{-webkit-transition:all .5s; transition:all .5s;}
+.hayui-side{position:fixed; top:0; bottom:0; z-index:999; width:200px; overflow-x:hidden;}
+.hayui-side-scroll{width:220px; height:100%; overflow-x:hidden;}
+
+
+/* 鍚庡彴妗嗘灦澶у竷灞€ */
+.hayui-layout-body{overflow:hidden;}
+.hayui-layout-admin .hayui-header{background-color:#23262E;}
+.hayui-layout-admin .hayui-side{top:60px; width:200px; overflow-x:hidden;}
+.hayui-layout-admin .hayui-body{top:60px; bottom:44px;}
+.hayui-layout-admin .hayui-main{width:auto; margin:0 15px;}
+.hayui-layout-admin .hayui-footer{position:fixed; z-index:999; right:0; bottom:0; left:200px; padding:20px; background-color:#eee;}
+.hayui-layout-admin .hayui-logo{position:absolute; top:0; left:0; width:200px; height:100%; line-height:60px; font-size:16px; color:#0070EA; text-align:center;}
+.hayui-layout-admin .hayui-header .hayui-nav{background:none;}
+.hayui-layout-left{position:absolute !important; top:0; left:200px;}
+.hayui-layout-right{position:absolute !important; top:0; right:0;}

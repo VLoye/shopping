@@ -1,0 +1,12 @@
+*{margin:0; padding:0;}
+body, div, address, blockquote, iframe, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4, h5, h6, p, pre, table, caption, th, td, form, legend, fieldset, input, button, select, textarea, em, i, img, a{margin:0; padding:0; font-size:100%; font-weight:normal; font-family:inherit; font-style:normal; outline:0 none;}
+table{border-collapse:collapse; word-break:break-all;}
+input{font:12px/1.5 'SimSun', Arial;}
+ol, ul, li, dl, dt, dd{list-style:none;}
+img{display:inline-block; font-size:0; border:none; outline:none; vertical-align:top;}
+body{font:12px/1.5 tahoma,'SimSun', Arial,\5b8b\4f53,sans-serif; color:#444; background:#fff;}
+a{color:inherit; outline:none; cursor:pointer;}
+a:link, a:visited{text-decoration:none;}
+a:hover, a:active{text-decoration:none;}
+a:focus{outline:0;}
+a:hover{color:#FF7200;}

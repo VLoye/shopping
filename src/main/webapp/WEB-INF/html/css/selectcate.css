@@ -1,0 +1,25 @@
+/* select cate style */
+.datauplink-panel{overflow:hidden;}
+.datauplink-panel .datauplink-cont{border-left:1px solid #E4E4E4; background:#EEF5FB;height:300px; overflow:hidden; zoom:1;}
+.datauplink-panel .uplink-box{float:left; position:relative; width:165px; height:288px; margin-left:-1px; padding:5px; border:1px solid #E4E4E4; background:#FFF; overflow:hidden; overflow-y:scroll;}
+.datauplink-panel .uplink-box .ub-ul{overflow:hidden;}
+.datauplink-panel .uplink-box .ub-ul li{position:relative; line-height:22px; padding:2px 0; cursor:pointer;}
+.datauplink-panel .uplink-box .ub-ul li a{margin-left:5px; color:#444;}
+.datauplink-panel .uplink-box .ub-ul li .icon-r{display:inline-block; position:absolute; top:8px; right:5px; width:0; height:0; border-width:4px; border-style:solid; border-color:transparent; border-right:0; border-left-color:#666; overflow:hidden; vertical-align:middle; _right:15px; *top:6px; _border-color:#FFF;}
+.datauplink-panel .uplink-box .ub-ul li:hover{background:#F5F5F5;}
+.datauplink-panel .uplink-box .ub-ul li:hover a{color:#F60;}
+.datauplink-panel .uplink-box .ub-ul li:hover .icon-r{border-left-color:#F60;}
+.datauplink-panel .uplink-box .ub-ul li.active{background:#FFDBAB;}
+.datauplink-panel .uplink-box .ub-ul li.active a{color:#F60;}
+.datauplink-panel .uplink-box .ub-ul li.active .icon-r{border-color:#FFDBAB; border-left-color:#F60;}
+.datauplink-panel .uplink-box .ub-ul li.disabled a{color:#999;}
+.datauplink-panel .datauplink-tips{height:35px; line-height:35px; margin:20px 0 0 0; padding:0 10px; font-weight:500; color:#F60; border:1px solid #FFDBAB; background:#FFFBF2;}
+.datauplink-panel .datauplink-tips span{font-weight:500; color:#444;}
+.datauplink-panel .datauplink-tips label{font-weight:500; color:#999;}
+.datauplink-panel .datauplink-tips i{margin:0 5px; font-size:14px;}
+.btn-disabled{color:#C8c8C8 !important; background:#f6f6f6 !important;}
+
+
+.select-commonuse{max-height:300px; overflow:hidden; overflow-y:auto;}
+.select-commonuse .commonuse-itemi{line-height:20px; padding:2px 0; overflow:hidden; cursor:pointer;}
+.select-commonuse .commonuse-item .hayui-form-radioed{font-weight:700; color:#0070EA;}
