@@ -3,6 +3,9 @@ package com.team6.service.login;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 登陆逻辑
  */
@@ -38,6 +41,12 @@ public interface LoginService {
 
     public LoginEnum updatePassword(String name, String prePassword, String newPassword);
 
+    /**
+     * 通过角色名获取权限
+     * @param role
+     * @return
+     */
+    public Set<String> getPermissionByRole(int role);
 
 
 
