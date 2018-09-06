@@ -21,6 +21,7 @@ public class LoginServiceTest {
     public void login() {
         String name = "郑伟坑";
         String password = "12345";
+        User user = loginService.queryByName("叶问");
         System.out.println("token:"+loginService.Login(name,password));
     }
 

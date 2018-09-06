@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: happynewyear
-  Date: 2018/8/29
-  Time: 11:33
+  Date: 2018/9/5
+  Time: 22:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,9 +10,12 @@
 <head>
     <title>Title</title>
 </head>
+
 <body>
-<h1>注册失败</h1>
-<h1>我之前浏览得页面</h1>
-<a href="http://localhost:8080/login.jsp">去登陆</a>
+
 </body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    
+</script>
 </html>

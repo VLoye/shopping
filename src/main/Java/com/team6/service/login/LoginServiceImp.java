@@ -1,6 +1,7 @@
 package com.team6.service.login;
 
 
+import com.team6.dao.PermissionMapper;
 import com.team6.dao.UserMapper;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
@@ -8,6 +9,9 @@ import com.team6.util.jwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.alibaba.druid.util.Utils.md5;
@@ -19,12 +23,16 @@ public class LoginServiceImp implements LoginService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PermissionMapper permissionMapper;
+
     @Override
     public User queryByName(String name) {
         User user = userMapper.queryByName(name);
         return user;
     }
 
+    /*TODO*/
     @Override
     public String Login(String name, String password) {
        User user = this.verifyLogin(name,password);
@@ -33,7 +41,7 @@ public class LoginServiceImp implements LoginService {
             return null;
         }else{
             //登陆验证成功 ，返回令牌和用户信息
-            String token = jwtUtil.createToken(user);
+            String token = jwtUtil.createToken(user,new HashSet<String>());
             return token;
         }
 
@@ -101,5 +109,14 @@ public class LoginServiceImp implements LoginService {
         return user;
     }
 
+    @Override
+    public Set<String> getPermissionByRole(int role) {
+        //取得权限list
+        List<String> list = userMapper.queryPermissionByRoleId(role);
+
+        Set<String> permission = new HashSet(list);
+
+        return permission;
+    }
 
 }

@@ -4,6 +4,12 @@ package com.team6.util.enums;
  * 登陆模块的一些信息
  */
 public enum LoginEnum {
+   //登陆信息
+    LOGIN_SUCCESS("success"),
+    Login_ERROR("登陆失败"),
+    LOGIN_VCODE_ERROR("验证码错误"),
+    LOGIN_COOKIE_TOKEN_NAME("token"),  //cookie的名字
+
     //注册信息
     REGIEST_SUCCESS("注册成功"),
     REGIEST_COUNT_EXIST("用户已存在"),
