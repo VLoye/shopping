@@ -4,14 +4,14 @@ package com.team6.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.team6.dao.PermissionMapper;
 import com.team6.entity.User;
 import com.team6.exception.ErrorTokenException;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public  class jwtUtil {
     private static final String SecretKey ="createBySix";
@@ -19,9 +19,9 @@ public  class jwtUtil {
             return false;
     }
 
-    public static Map<String,String> verifyToken(String token) throws Exception   {
+    public static Map<String,Claim> verifyToken(String token) throws Exception   {
 
-        Map map=null;
+        Map<String, Claim> map=null;
 
         try{
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SecretKey)).build();
@@ -36,7 +36,7 @@ public  class jwtUtil {
 
     }
 
-    public static String createToken(User user) {
+    public static String createToken(User user,Set<String> permission) {
         Map head =new HashMap();
         //签发时间
         Date issTime = new Date();
@@ -58,8 +58,10 @@ public  class jwtUtil {
                 .withClaim("name",user.getName())
                 .withClaim("id",user.getId())
                 .withClaim("role",user.getRole())
+                .withArrayClaim("permissions",permission.toArray(new String[permission.size()]))
                 .sign(Algorithm.HMAC256(SecretKey));
-
         return token;
     }
+
+
 }

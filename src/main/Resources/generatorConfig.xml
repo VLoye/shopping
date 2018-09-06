@@ -40,107 +40,102 @@
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="user"
-               domainObjectName="User"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-<!--
-        <table tableName="address"
-               domainObjectName="Address"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="brand"
-               domainObjectName="Brand"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
-
-        <table tableName="comment"
-               domainObjectName="Comment"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <!--<table tableName="user"
+                       domainObjectName="User"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                   enableUpdateByExample="false"/>-->
 
 
-        <table tableName="goods"
-               domainObjectName="Goods"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="address"
+                       domainObjectName="Address"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="goods_type"
-               domainObjectName="GoodsType"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="brand"
+                       domainObjectName="Brand"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="order_details"
-               domainObjectName="OrderDetails"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="comment"
+                       domainObjectName="Comment"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="order_info"
-               domainObjectName="OrderInfo"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
 
-        <table tableName="permission"
-               domainObjectName="Permission"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="goods"
+                       domainObjectName="Goods"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="role"
-               domainObjectName="Role"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="goods_type"
+                       domainObjectName="GoodsType"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="role_permission"
-               domainObjectName="RolePermission"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="order_details"
+                       domainObjectName="OrderDetails"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="shop"
-               domainObjectName="Shop"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="order_info"
+                       domainObjectName="OrderInfo"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="shopping_car"
-               domainObjectName="ShoppingCar"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="permission"
+                       domainObjectName="Permission"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
-        <table tableName="role"
-               domainObjectName="Role"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                <table tableName="role"
+                       domainObjectName="Role"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
 
--->
+                <table tableName="role_permission"
+                       domainObjectName="RolePermission"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
+
+                <table tableName="shop"
+                       domainObjectName="Shop"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
+
+                <table tableName="shopping_car"
+                       domainObjectName="ShoppingCar"
+                       enableCountByExample="false"
+                       enableDeleteByExample="false"
+                       enableSelectByExample="false"
+                       enableUpdateByExample="false"/>
+
+
+
+
 
     </context>
 </generatorConfiguration>

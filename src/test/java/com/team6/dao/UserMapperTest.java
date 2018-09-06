@@ -23,6 +23,7 @@ public class UserMapperTest {
     }
 
     @Test
+
     public void queryByName() {
         String name = "郑伟坑";
         User user = userMapper.queryByName(name);

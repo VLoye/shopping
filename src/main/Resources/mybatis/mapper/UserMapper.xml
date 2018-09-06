@@ -37,4 +37,12 @@
        update user set role=#{role} where name=#{name};
     </update>
 
+    <select id="queryPermissionByRoleId" resultType="java.lang.String">
+        select distinct p.method
+        from  (((permission p inner join role_permission rp on p.id=rp.permisstion_id)
+                inner join role r on r.id=rp.role_id
+        )
+              inner join user u on u.role = r.id
+        ) where u.role=#{role};
+    </select>
 </mapper>
