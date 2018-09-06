@@ -18,4 +18,23 @@ public interface GoodsMapper {
      * @mbggenerated
      */
     int insertSelective(Goods record);
+
+    /**
+     * 根据id 删除商品信息
+     */
+    public int deleteGoodsById(int id);
+
+    /**
+     * 根据id查询商品信息
+     */
+    public Goods queryGoodsById(int id);
+
+    /**
+     * 根据id更新商品信息
+     */
+    public int updateGoods(Goods goods);
+
+    /**
+     * 分页查询
+     */
 }

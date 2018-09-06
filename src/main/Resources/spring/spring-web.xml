@@ -41,4 +41,11 @@
     </bean>
 
 
+ <!--   配置单文件上传 id必须固定为multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 配置属性  默认编码、文件最大限制为10M、内存中最大的尺寸4k-->
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="10485760000"></property>
+        <property name="maxInMemorySize" value="4096"></property>
+    </bean>
 </beans>
