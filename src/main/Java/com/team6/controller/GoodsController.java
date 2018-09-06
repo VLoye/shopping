@@ -108,7 +108,6 @@ public class GoodsController {
      */
     private void delImageFile(HttpServletRequest request,String img_url){
         String imageFileUrl=getRealPath(request)+img_url;
-        System.out.println(imageFileUrl);
         File target=new File(imageFileUrl);
         if(target.exists()){
             target.delete();
