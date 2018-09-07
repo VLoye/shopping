@@ -281,7 +281,7 @@ dl.h-down:hover dd{display:inline-block; border-top:0;}
 .h-nav .hn-menu .hnm-class{background:#B1191A;}
 .h-nav .hn-menu .hnm-list li a:hover{color:#B61D1D;}
 .h-nav .hn-menu-mall{/**/}
-.h-nav .hn-menu-mall .hnm-class .hnmc-left{width:199px; height:341px; border-color:#C81623; border-right:0; background:#C81623;}
+.h-nav .hn-menu-mall .hnm-class .hnmc-left{width:199px; height:480px; border-color:#C81623; border-right:0; background:#C81623;}
 .h-nav .hn-menu-mall .hnm-class .hnmc-left li{margin:0 0 0 2px; padding:14px 10px; border:0;}
 .h-nav .hn-menu-mall .hnm-class .hnmc-left li h3{font-size:14px;}
 .h-nav .hn-menu-mall .hnm-class .hnmc-left li h3 a{color:#FFF;}
