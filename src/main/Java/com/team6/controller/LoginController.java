@@ -72,19 +72,25 @@ public class LoginController {
         map.put("status",LoginEnum.LOGIN_SUCCESS.getInfo());
         return map;
     }
-    @RequiresPermissions(value={"fun2","fun3"},logical= Logical.OR)
-    @RequestMapping(value = "/regiest",method = RequestMethod.POST)
-    public String regiest(User user,HttpServletResponse response ){
-      LoginEnum anEnum = loginService.regiest(user);
 
+    @ResponseBody
+    @RequestMapping(value = "/regiest",method = RequestMethod.POST)
+    public Map<String,String> regiest(User user,HttpServletResponse response ){
+        System.out.println(user.toString());
+      LoginEnum anEnum = loginService.regiest(user);
+      System.out.println(anEnum);
+        Map<String,String> map = new HashMap<>();
       //注册成功
       if(anEnum.equals(LoginEnum.REGIEST_SUCCESS)){
           Subject subject = SecurityUtils.getSubject();
           subject.login(new UsernamePasswordToken(user.getName(),user.getPassword()));
-          return "regiestSuccess";
+          map.put("status",LoginEnum.REGIEST_SUCCESS.getInfo());
+          return map;
       }
-      else
-          return "regiestError";
+      else {
+          map.put("status",LoginEnum.REGIEST_COUNT_EXIST.getInfo());
+          return map;
+      }
     }
 
     /**
