@@ -32,7 +32,7 @@ public class LoginServiceTest {
 
     @Test
     public void regiest(){
-        String name="郭晓锋";
+        String name="郭晓锋11";
         String password="guoxiaofeng";
         User user = new User();
         user.setName(name);
