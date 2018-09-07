@@ -11,7 +11,7 @@ public enum LoginEnum {
     LOGIN_COOKIE_TOKEN_NAME("token"),  //cookie的名字
 
     //注册信息
-    REGIEST_SUCCESS("success"),
+    REGIEST_SUCCESS("注册成功"),
     REGIEST_COUNT_EXIST("用户已存在"),
     REGIEST_ERROR("数据异常,注册失败"),
 
