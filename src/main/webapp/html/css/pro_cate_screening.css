@@ -1,0 +1,114 @@
+.spu-box{color:#444; background:#FFF; border:1px solid #e4e4e4; margin:20px 0px; padding:0; zoom:1; zoom:1;}
+.spu-box dl{width:1198px; _width:1174px; margin:0 0 -1px 0 !important; overflow:hidden; zoom:1; clear:both;}
+.spu-box dl:after{display:block; height:0; clear:both; content:"\0020";}
+.spu-box a{color:#444;}
+.spu-box a:hover{color:#FF6600;}
+.spu-box-bg{height:10px; overflow:hidden;}
+
+.spu-box dl dt, .spu-box dl dd, .spu-box dl dd ul, .spu-box dl dd li, .spu-box dl dd p.spu-item-all, .spu-box dl dd p.spu-item-more{display:inline; float:left;}
+.spu-box_line{display:block; height:0px !important; line-height:0px; padding:0px; border-bottom:1px solid #e4e4e4;}
+
+.spu-box dl dt{width:60px; line-height:30px; padding-right:10px; font-size:12px; font-weight:500; color:#888; text-align:left; _width:65px; _padding-right:5px;}
+.spu-box dl dd{ width:1101px; zoom:1;}
+.spu-box ul.spu-items{width:1052px; overflow:hidden; zoom:1;}
+.spu-box ul.spu-items li{height:30px;}
+.spu-box dl.spu_sn ul.spu-items{width:280px;}
+.spu-box a.spu-item-title{padding:0 10px; white-space:nowrap; _float:left;}
+.spu-box a.spu-item-title-cur{margin:0 10px; color:#fff; background-color:#36c; white-space:nowrap; text-decoration:none; _float:left;}
+.spu-box a.spu-item-cur{padding:2px; color:#fff; background-color:#36c; white-space:nowrap; _padding:0 2px;}
+.spu-box a.spu-item-cur:hover{text-decoration:none;}
+.spu-box .spu-li-more{display:none;}
+
+.spu-item-all{width:48px; color:#ccc;}
+.spu-item-all a{margin-right:10px;}
+.spu-item-all span{margin-right:10px; padding:2px; color:#fff; background-color:#0070EA; _padding:0 2px;}
+.spu-item-more{width:44px;}
+.spu-item-more a:hover{text-decoration:none;}
+.spu-item-more a:hover span{text-decoration:underline;}
+.spu-items li span{margin-left:10px; color:#fff; background-color:#36c;}
+
+
+/* under items cate and screening start*/
+.spu-box ul.spu-items{width:970px !important; height:30px; line-height:30px; overflow:hidden; zoom:1;}
+.atb-f60-icon{display:inline-block; position:relative; background:url('../../Images/atb-icon-F60.png') no-repeat; overflow:hidden; vertical-align:middle;}
+.afi-t{width:9px; height:6px; background-position:-20px 0;}
+.afi-t-active{width:9px; height:6px; background-position:0 0;}
+.afi-b{width:9px; height:6px; background-position:-20px -10px;}
+.afi-b-active{width:9px; height:6px; background-position:0 -10px;}
+.icon-plus-minus{display:inline-block; position:relative; background:url('../../Images/icon-plus-minus.png') no-repeat; overflow:hidden; vertical-align:middle;}
+.ipm-plus{width:11px; height:11px; background-position:0 0;}
+.ipm-plus-active{width:11px; height:11px; background-position:-20px 0;}
+.ipm-minus{width:11px; height:1px; background-position:0 -20px;}
+.ipm-minus-active{width:11px; height:1px; background-position:-20px -20px;}
+.icon-cir-updown{display:inline-block; position:relative; background:url('../../Images/icon-cir-updown.png') no-repeat; overflow:hidden; cursor:pointer; vertical-align:middle;}
+.icud-down{width:24px; height:24px; background-position:0 0;}
+.icud-down-active{width:24px; height:24px; background-position:-50px 0;}
+.icud-up{width:24px; height:24px; background-position:0 -50px;}
+.icud-up-active{width:24px; height:24px; background-position:-50px -50px;}
+/* sup items */
+.sup-under-items{overflow:hidden;}
+.sup-under-items li{padding:0 20px 0 15px;}
+.sup-under-items li .afi-b{background-position:-20px -10px; _top:5px;}
+.sup-under-items li.active{background:#F5F5F5;}
+/* .sup-under-items li.active a{color:#F60;} */
+.sup-under-items li.active .afi-b{background-position:0 0;}
+.sup-under-items li.under-item{width:auto !important;}
+.sup-under-items li.under-item .spu-item-title{width:auto !important;}
+.sup-under-items li.under-item:hover{background:#F5F5F5;}
+.sup-under-items li.under-item:hover a{color:#F60;}
+.sup-under-items li.under-item:hover .afi-b{background-position:0 0;}
+.sup-under-items-nochk{width:auto !important;}
+.sup-under-items-nochk li.under-item .spu-item-title{margin:0 0 0 5px;}
+.sup-under-items-nochk li.under-item .sw-dpl-chk-stub{display:none !important;}
+.spu-childs{width:970px; overflow:hidden;}
+.spu-childs .child-ul{display:block; float:none; padding:5px 0; background:#F5F5F5; overflow:hidden; zoom:1; white-space:normal;}
+.spu-childs .child-ul li{float:left; width:120px; height:24px; line-height:24px; overflow:hidden; zoom:1;}
+.spu-childs .child-ul li a{padding:0 10px 0 17px; color:#666; overflow:hidden; white-space:nowrap;}
+.spu-childs .child-ul li a:hover{color:#F60;}
+.spu-childs .child-ul li.active a{color:#F60;}
+.hide{display:none !important;}
+/* spu box and btns */
+.spu-box{position:relative; z-index:1; overflow:hidden;}
+.spu-box .spu-box-dl{margin-bottom:-1px;padding:10px 12px 5px 12px; border-bottom:1px solid #E4E4E4;}
+.spu-box .spu-box-dl dd{position:relative;}
+.spu-box .spu-box-dl dd .spu-items li{width:120px; overflow:hidden; zoom:1;}
+.spu-box .spu-box-dl dd .spu-items li .item-a{overflow:hidden; zoom:1;}
+.spu-btns-box{position:absolute; top:2px; right:0; width:120px; overflow:hidden; cursor:pointer;}
+.spu-btns-box .spu-btns-control{overflow:hidden; zoom:1;}
+.spu-btns-box .spu-btns-control .sbc-btn{float:right; width:48px; height:22px; line-height:22px; margin:0 0 0 10px; font-size:12px; color:#888; border:1px solid #E4E4E4; text-align:center;}
+.spu-btns-box .spu-btns-control .sbc-btn:hover{color:#F60; border-color:#F60;}
+.spu-btns-box .spu-btns-control .sbc-btn-active{color:#F60; border-color:#F60;}
+.spu-btns-box .spu-btns-control .sbc-btn .sbb-txt{display:inline-block;}
+.spu-btns-box .spu-btns-control .sb-cancel{background:#F5F5F5;}
+.spu-btns-box .spu-btns-control .sb-define:hover{color:#FFf; background:#F60;}
+.spu-btns-box *{cursor:pointer;}
+
+/*mod related*/
+.spu-box-related{position:relative; line-height:30px; margin-top:10px; border:1px solid #E4E4E4; overflow:hidden;}
+.spu-box-related .sbr-cont{padding:5px 12px; overflow:hidden; zoom:1;}
+.spu-box-related span{float:left; color:#666;}
+.spu-box-related a{float:left; margin-right:30px; color:#666;}
+.spu-box-related a:hover{color:#FF7200;}
+.spu-box-related .spu-btns-box{right:15px; top:8px;}
+
+/* key word selected */
+.kw-box{display:inline-block; height:18px; line-height:17px; padding:3px 7px 3px 10px; color:#ff7300; border:solid 1px #e8e8e8; vertical-align:middle;}
+.kw-box .kwb-txt{display:inline-block; max-width:100px; height:18px; line-height:17px; color:#ff7300; overflow:hidden; cursor:pointer; vertical-align:middle; white-space:nowrap; text-overflow:ellipsis; word-wrap:break-word; word-break:break-all; _width:80px;}
+.kw-box .kwb-del{display:inline-block; position:relative; width:12px; height:12px; margin-left:5px; background:url('../../Images/icon-close.png') no-repeat 0 0; vertical-align:middle;}
+.kw-box:hover{color:#F60; border-color:#F60;}
+.kw-box:hover .kwb-txt{color:#F60;}
+.kw-box:hover .kwb-del{background-position:-30px 0;}
+
+/* check box */
+.item-a{display:inline; float:left; overflow:hidden; zoom:1; white-space:nowrap;}
+.sw-dpl-chk-stub{display:inline-block; float:left; width:12px; height:12px; margin:9px 5px 0 0;}
+.sw-dpl-checkbox{display:none; float:left; width:12px; height:11px; border:1px solid #E4E4E4; background:#fff; overflow:hidden; -webkit-transition:all .3s ease 0s; -moz-transition:all .3s ease 0s; -o-transition:all .3s ease 0s; transition:all .3s ease 0s; vertical-align:middle;}
+.sw-dpl-tick{display:inline-block; float:left; width:8px; height:7px; margin:3px 0 1px 2px; overflow:hidden; cursor:pointer; vertical-align:middle; _margin:3px 0 1px 1px;}
+.sw-dpl-tick i{display:inline-block; float:left; width:0; height:0; margin-left:-3px; border:6px solid transparent; border-top-color:#fff; overflow:hidden; cursor:pointer; cursor:pointer; vertical-align:middle; _border-color:red; _border-top-color:#FFF; _filter:chroma(color=red);}
+.sw-dpl-tick em{display:inline-block; float:left; width:0; height:0; margin-top:-14px; margin-left:-3px; border:6px solid transparent; border-top-color:#fff; overflow:hidden; cursor:pointer; cursor:pointer; -webkit-transition:all .3s ease 0s; -moz-transition:all .3s ease 0s; -o-transition:all .3s ease 0s; transition:all .3s ease 0s; vertical-align:middle; _border-color:red; _border-top-color:#FFF; _filter:chroma(color=red);}
+.sw-dpl-checked{border-color:#F60; background:#F60;}
+.sw-dpl-checked .sw-dpl-tick em{border-top-color:#F60;}
+.spu-box .spu-item-title{display:inline; float:left; width:100px; overflow:hidden; cursor:pointer; vertical-align:middle; white-space:normal;}
+
+.spu-childs .child-ul li .sw-dpl-chk-stub{margin:7px 5px 0 0;}
+/* under items cate and screening end*/
