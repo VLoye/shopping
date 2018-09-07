@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
+    <title>汽配超人-卖方个人中心</title>
+
+    <link href="../../css/css_base.css" rel="stylesheet" />
+    <link href="../../css/css_top.css" rel="stylesheet" />
+    <link href="../../css/hayui.css" rel="stylesheet" />
+    <link href="../../css/leagueradmin-nav-sidemenu.css" rel="stylesheet" />
+    
+    <script src="../../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../js/hayui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var globals = { sys_applicationname: '/work' };
+        function qpr_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '1', options);
+            location.href = globals.sys_applicationname;
+        }
+        function mall_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '2', options);
+            location.href = "http://mall.qipeiren.com/selleradmin/home";
+        }
+        $(function () {$("#headTopNav").load("http://www.qipeiren.com/c/TShare/HeadTopLink?headcrror=true");});
+    </script>
+    
+</head>
+<body class="hayui-bg-gray-light">
+    <div class="pw-top">
+        <div class="pw-w1200 pwt-link" id="headTopNav">
+
+		<div class="pw-w1200 pwt-link">
+		    <span class="pw-fl mr10" islogin="true" style="display: none;">
+		        您好，
+		        <a href="../../LoginAndResigter/Login.html" target="_blank" style="color:#F60" rel="nofollow"></a>
+		        ，已登录 <a href="http://www.qipeiren.com/User/" target="_blank">会员中心</a> [<a href="http://www.qipeiren.com/User/UserLoginOut.asp">退出</a>]
+		    </span>
+		    <span class="pw-fl mr10" islogin="false">您好，欢迎光临汽配人网！</span>
+		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Login.html" target="_blank">请登录</a>
+		    <i class="pw-fl pw-vline" islogin="false">|</i>
+		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Register.html" target="_blank">免费注册</a>
+		    <a class="pw-fr" href="http://www.auto333.com" target="_blank">国际站</a>
+		    <dl class="pw-fr pw-down ml0 ltb1">
+		        <dt>
+		            <a href="#none">网站服务</a>
+		            <i class="pw-icon"></i>
+		        </dt>
+		        <dd>
+		            <a href="../../LoginAndResigter/Login.html" target="_blank">汽配旺铺</a>
+		            <a href="http://www.qipeiren.com/cms/yxb/" target="_blank">营销宝</a>
+		            <a href="http://www.qipeiren.com/helper/" target="_blank">汽配助手</a>
+		            <a href="http://mall.qipeiren.com/complaint/center" target="_blank">规则中心</a>
+		        </dd>
+		    </dl>
+		    <dl class="pw-fr pw-down pw-down-unique mr0">
+		        <dt>
+		            <a href="#none">特色市场</a>
+		            <i class="pw-icon"></i>
+		        </dt>
+		        <dd>
+		            <a href="http://cyc.qipeiren.com/" target="_blank">乘用车市场</a>
+		            <a href="http://dongfeng.qipeiren.com/" target="_blank">东风市场</a>
+		            <a href="http://zhongqi.qipeiren.com/" target="_blank">重汽市场</a>
+		            <a href="http://shanqi.qipeiren.com/" target="_blank">陕汽市场</a>
+		            <a href="http://yiqi.qipeiren.com/" target="_blank">一汽市场</a>
+		            <a href="http://beiqi.qipeiren.com/" target="_blank">北汽市场</a>
+		            <a href="http://jianghuai.qipeiren.com/" target="_blank">江淮市场</a>
+		            <a href="http://jiangsu.qipeiren.com/" target="_blank">江苏分站</a>
+		            <a href="http://guangdong.qipeiren.com/" target="_blank">广东分站</a>
+		            <a href="http://zq.qipeiren.com/" target="_blank">山东分站</a>
+		            <a href="http://henan.qipeiren.com/" target="_blank">河南分站</a>
+		            <a href="http://cydsy.qipeiren.com" target="_blank">十堰产业带</a>
+		        </dd>
+		    </dl>
+		    <a class="pw-fr" href="http://www.qipeiren.com/User/Index.asp" target="_blank">会员中心</a>
+		    <i class="pw-fr pw-vline">|</i>
+		    <a class="pw-fr" href="http://mall.qipeiren.com/cart/cart" target="_blank">购物车<b style="color:#F60" class="cookie_cart_count"></b></a>
+		    <dl class="pw-fr pw-down">
+		        <dt>
+		            <a href="http://mall.qipeiren.com/" target="_blank">汽配商城</a>
+		            <i class="pw-icon"></i>
+		        </dt>
+		        <dd>
+		            <a href="http://mall.qipeiren.com/Article/mallintr" target="_blank">商城介绍</a>
+		            <a href="http://mall.qipeiren.com/scrz/" target="_blank">商城入驻</a>
+		            
+		        </dd>
+		    </dl>
+		    <a class="pw-fr" href="http://www.qipeiren.com/" target="_blank">汽配人首页</a>
+		</div>
+		</div>
+    </div>
+    
+    <div class="hayui-main">
+        <div class="hayui-clearfix">
+            
+<div class="leaguer-sidemenu">
+    <ul class="hayui-nav hayui-nav-tree hayui-inline" hay-filter="side">
+        <li class="hayui-nav-item hayui-nav-itemed">
+            <a href="javascript:void(0);">商品管理<span class="hayui-nav-more"></span></a>
+            <dl class="hayui-nav-child">
+                <dd ><a href="SellerSendMessage.html" target="myFrame">发布信息</a></dd>
+                <dd ><a href="SellerGoodManage.html" target="myFrame">商品管理</a></dd>
+                <dd ><a href="SellerGoodFormatManage.html" target="myFrame">商品首尾版式</a></dd>
+                <dd ><a href="SellerGoodTypeManage.html" target="myFrame">产品品类管理</a></dd>
+                <dd><a href="SellerCustomClassification.html" target="myFrame">自定义分类</a></dd>
+            </dl>
+        </li>
+        <li class="hayui-nav-item hayui-nav-itemed">
+            <a href="javascript:void(0);">交易管理<span class="hayui-nav-more"></span></a>
+            <dl class="hayui-nav-child">
+                <dd ><a href="SellerSelledGoods.html" target="myFrame">已卖出的货品</a></dd>
+                <dd ><a href="SellerCommentManage.html" target="myFrame">评价管理</a></dd>
+                <dd ><a href="SellerLeavedMessage.html" target="myFrame">留言管理</a></dd>
+            </dl>
+        </li>
+        <li class="hayui-nav-item ">
+            <a href="javascript:void(0);">店铺管理<span class="hayui-nav-more"></span></a>
+            <dl class="hayui-nav-child">
+                <dd ><a href="#" target="myFrame">汽配旺铺设置</a></dd>
+                <dd ><a href="#" target="myFrame">品牌授权管理</a></dd>
+                <dd ><a href="SellerCominfo.html" target="myFrame">企业简介</a></dd>
+                <dd ><a href="#" target="myFrame">企业栏目设置</a></dd>
+                <dd ><a href="#" target="myFrame">资质荣誉管理</a></dd>
+                <dd ><a href="#" target="myFrame">企业动态</a></dd>
+                <dd ><a href="SellerFavlist.html" target="myFrame">收藏夹</a></dd>
+            </dl>
+        </li>
+        <li class="hayui-nav-item ">
+            <a href="javascript:void(0);">用户管理<span class="hayui-nav-more"></span></a>
+            <dl class="hayui-nav-child">
+                <dd ><a href="SellerChangePassword.html" target="myFrame">修改密码</a></dd>
+             
+            </dl>
+        </li>
+    </ul>
+</div>
+
+            <div class="hayui-body">
+            	<div class="content_right">
+        			<div class="order-sys-right-content">
+        				
+            	<iframe src = "SellerSendMessage.html" id = "iframeID" name="myFrame" style = "width: 1300px;height: 900px" frameborder="no">
+            	</iframe>
+            	
+            		</div>
+            	</div>
+			</div>
+        </div>
+    </div>
+    <script type="text/javascript"> hayui.use(['element', 'topservice'], function (element, topservice) { });</script>
+</body>
+</html>

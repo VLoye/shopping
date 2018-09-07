@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* samll icon */
+.norm-small-icon{display:inline-block; position:relative; background:url(../../images/qpr_norm_small_icon.png) no-repeat; vertical-align:middle;}
+/* mobile background image*/
+@media only screen and (min-width: 320px) and (max-width:1080px){
+	.norm-small-icon{background:url(../../images/qpr_norm_small_icon_m.png) no-repeat; background-size:52px;}
+}
+
+/* vip type会员类型: 旺铺基础版 旺铺标准版 旺铺旗舰版 商城会员*/
+.nsi-vip-basic{width:48px; height:16px; background-position:0 0;}
+.nsi-vip-standard{width:48px; height:16px; background-position:0 -28px;}
+.nsi-vip-flagship{}
+.nsi-vip-mall{width:48px; height:16px; background-position:0 -57px;}
+
+/*no real name实名认证: 个人实名认证 公司实名认证 实地认证 */
+.nsi-real-personal{width:16px; height:16px; background-position:0 -86px;}
+.nsi-real-company{width:16px; height:16px; background-position:0 -115px;}
+.nsi-real-area{width:16px; height:16px; background-position:0 -144px;}
+
+/*real name未进行实名认证: 个人实名认证 公司实名认证 实地认证 */
+.nsi-real-personal-no{width:16px; height:16px; background-position:-25px -86px;}
+.nsi-real-company-no{width:16px; height:16px; background-position:-25px -115px;}
+.nsi-real-area-no{width:16px; height:16px; background-position:-25px -144px;}
+
+/* product source产品来源: 品牌授权 商城自营 厂家直销*/
+.nsi-source-brand{width:18px; height:16px; background-position:0 -172px;}
+.nsi-source-selfemployed{width:30px; height:16px; background-position:0 -201px;}
+.nsi-source-factory{width:19px; height:16px; background-position:0 -230px;}
+
+/* promise承诺: 支持在线支付 保证金 */
+.nsi-promise-onlinepay{width:18px; height:16px; background-position:0 -259px;}
+.nsi-promise-guarantee{width:18px; height:16px; background-position:0 -289px;}
+
+/* promotion促销：限时促销*/
+.nsi-promotion-limited{width:55px; height:16px; background-position:0 -318px;}
+
+
+
+/* mobile head back */
+.head-back{width:100%; height:5.0rem; margin-bottom:0.5rem; overflow:hidden;}
+.head-back .hb-in{position:fixed; top:0; z-index:9999; width:100%; height:5.0rem; line-height:5.0rem; border-bottom:1px solid #E7E7E7; background:#FFF;}
+.head-back .hb-in a{display:block; width:80%; margin-left:1.0rem; font-size:1.4rem; color:#666; text-decoration:none;}
+.head-back .hb-in a .mlr-back{display:inline-block; width:18px; height:32px; background:url(../../images/icon-back.png) no-repeat center center; background-size:50% auto; vertical-align:middle;}
+.head-back .hb-in a span{display:inline-block; vertical-align:middle;}

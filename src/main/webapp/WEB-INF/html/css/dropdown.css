@@ -1,0 +1,16 @@
+/* select cate style */
+.dropdown-panel{overflow:hidden;}
+.dropdown-panel .dropdown-cont{height:auto; overflow:hidden; zoom:1;}
+.dropdown-panel .dd-box{float:left; position:relative; width:165px; height:208px; padding:5px; background:#FFF; overflow:hidden; overflow-y:scroll;}
+.dropdown-panel .dd-box .db-ul{overflow:hidden;}
+.dropdown-panel .dd-box .db-ul li{position:relative; line-height:22px; padding:2px 0; cursor:pointer;}
+.dropdown-panel .dd-box .db-ul li a{margin-left:5px; color:#444;}
+.dropdown-panel .dd-box .db-ul li .icon-r{display:inline-block; position:absolute; top:8px; right:5px; width:0; height:0; border-width:4px; border-style:solid; border-color:transparent; border-right:0; border-left-color:#666; overflow:hidden; vertical-align:middle; _right:15px; *top:6px; _border-color:#FFF;}
+.dropdown-panel .dd-box .db-ul li:hover{background:#F5F5F5;}
+.dropdown-panel .dd-box .db-ul li:hover a{color:#0070EA;}
+.dropdown-panel .dd-box .db-ul li:hover .icon-r{border-left-color:#0070EA;}
+.dropdown-panel .dd-box .db-ul li.checked{background:#ECF5FF;}
+.dropdown-panel .dd-box .db-ul li.checked a{color:#0070EA;}
+.dropdown-panel .dd-box .db-ul li.checked .icon-r{border-color:#ECF5FF; border-left-color:#0070EA;}
+.dropdown-panel .dd-box .db-ul li.disabled a{color:#999;}
+
