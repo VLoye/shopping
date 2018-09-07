@@ -29,7 +29,6 @@
     <link href="../css/WebLoginPlug.css" rel="stylesheet" type="text/css">
     <link href="../css/WebAlertPlug.css" rel="stylesheet" type="text/css">
     <script src="../js/jQuery.Web.Alert.js"></script>
-    <script src="../js/jQuery.Web.Login.js"></script>
 	<script src="../js/jQuery.mouseDelay.min.js"></script>
 	<script src="../js/jquery.scrollLoading.min.js"></script>
 	<script src="../js/jquery.nicescroll.min.js"></script>
@@ -660,491 +659,14 @@
 </div>
 
 
-<script type="text/javascript">
-    $(function(){
-        var rightSide=$('.right-side');
-        var rightContent=$('.side-content');
-        $('.right-side .menu-top li[arrow]').click(function() {
-
-            if (!isloginbool ){
-                $.fn.login({}, function () {
-                    location.href = "/";
-                }, '', '', '/Login/Login');
-            }else{
-
-                var tag=$(this).data('tag');
-                switch(tag){
-                    case 'cart':
-                        loadCartInfo();
-                        rightContent.find('.side-cart-c').show().siblings().hide();
-                        break;
-                    case 'asset':
-                        rightContent.find('.side-asset-c').show().siblings().hide();
-                        break;
-                    case 'at-goods':
-                        rightContent.find('.side-atgoods-c').show().siblings().hide();
-                        break;
-                    case 'history':
-                        rightContent.find('.side-history-c').show().siblings().hide();
-                        break;
-                }
-                if (rightContent.is(':hidden')) {
-                    rightContent.show();
-                    rightSide.css('right','-220px').animate({right:'0'},300);
-                }
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-
-        $('.right-side-menu li').hover(function(){
-            $(this).find('span').show().stop(false,true).animate({'right':40,'opacity':1},300);
-        },function(){
-            $(this).find('span').stop(false,true).animate({'right':60,'opacity':0},300,function(){$(this).hide()});
-        });
-        /*IE6 右侧固定 modify right-side*/
-        if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
-            $(window).scroll(function(){
-                if($('.right-side')){
-                    $('.right-side').css({'top':document.documentElement.scrollTop +'px'});
-                }
-            });
-        }
-        $(document).on('click', function(e){
-            var  event = e ? e : window.event;
-            var obj = event.srcElement ? event.srcElement : event.target;
-            if (! $.contains(rightSide.get(0), obj)) {
-                sideRightClose();
-            }
-        });
-
-        function sideRightClose(){
-            if (rightContent.is(':visible')) {
-                if(!rightSide.is(':animated')){
-                    rightSide.animate({right:'-220px'},200,function(){
-                        rightContent.hide();
-                        rightSide.css('right',0);
-                        $('.right-side .menu-top li[arrow]').removeClass('active')
-                    });
-                }
-            }
-        }
-
-        $('.side-close').click(function() {
-            sideRightClose();
-        });
-
-        $('#right_advise').click(function(){
-            window.open("/advise","_blank");
-        });
-
-        $('.go-top').click(function() {
-            $('body,html').animate({'scrollTop':0},300);
-        });
-
-        $('.side-cart-c .cart-list').height($(window).height()-120);
-        $(window).resize(function() {
-            $('.side-cart-c .cart-list').height($(window).height()-120);
-        });
-
-        $(".side-asset-c .side-bd,.side-atgoods-c .side-bd,.side-history-c .side-bd,.side-cart-c .cart-list").niceScroll({
-            cursorwidth:5,
-            cursorcolor:"#616161",
-            cursorborder :0,
-            cursorborderradius:0
-        });
-
-        $('#toSubmitOrder').click(function() {
-            location.href = '/cart/cart';
-        });
-
-    });
-
-    //todo 可以提取JS文件
-    var data = {};
-    function loadCartInfo() {
-        $.post('/cart/GetCartProducts', {}, function (cart) {
-            data = {};
-            $.each(cart.products, function (i, e) {
-                if (data[e.shopId]) {
-                    if (!data[e.shopId]['name']) {
-                        data[e.shopId]['name'] = e.shopName;
-                    }
-                    data[e.shopId]['shop'].push(e);
-                } else {
-                    data[e.shopId] = {};
-                    data[e.shopId]['shop'] = [];
-                    data[e.shopId]['name'] = e.shopName;
-                    data[e.shopId]['status'] = e.productstatus;
-                    data[e.shopId]['shop'].push(e);
-                }
-            });
-
-            var B2BData = {};
-            $.each(cart.B2BProductInfo, function (index, currItem) {
-                if (B2BData[currItem.shopId]) {
-                    if (!B2BData[currItem.shopId]['name']) {
-                        B2BData[currItem.shopId]['name'] = currItem.shopName;
-                    }
-                    B2BData[currItem.shopId]['shop'].push(currItem);
-                } else {
-                    B2BData[currItem.shopId] = {};
-                    B2BData[currItem.shopId]['shop'] = [];
-                    B2BData[currItem.shopId]['name'] = currItem.shopName;
-                    B2BData[currItem.shopId]['shopUrl'] = 'http://' + currItem.ShopComLoginName + '.cn.qipeiren.com';
-                    B2BData[currItem.shopId]['ComIsVip'] = currItem.ComIsVip;
-                    B2BData[currItem.shopId]['comVipType'] = currItem.ComVipType;
-                    B2BData[currItem.shopId]['status'] = currItem.status;
-                    B2BData[currItem.shopId]['shop'].push(currItem);
-                }
-            });
-
-            var strproductstatus = $("#hidSaleStatus").val();
-            var strproductauditstatus = $("#hidAuditStatus").val();
-            var list='';
-            if (cart.products.length > 0) {
-                $.each(data, function (i, e){
-                    var shopPrice=0;
-                    var str = '';
-                    $.each(e.shop, function (j, product){
-
-                        if (product.productstatus == strproductstatus) {
-                            if (product.productauditstatus == strproductauditstatus) {
-                                str += '\
-					<div class="cart-list-goods cl">';
-
-                                str += '\
-						<a href="/product/detail/' + product.id + '" title="' + product.name + '" target="_blank"><img src="' + product.imgUrl + '" alt="" /></a>\
-						<div class="s-num"><span>' + product.count + '</span></div>\
-						<div class="s-g-price">'+ (product.price*product.count).toFixed(2) + '</div><div class="s-g-remove"><a href="javascript:removeFromCartSelf(\'' + product.skuId + '\',' + product.id + ')">删除</a>' + '</div>\
-					</div>';
-
-                                shopPrice=shopPrice+product.price*product.count;
-                            }
-                        }
-
-
-                            });
-
-                            list+='<li><div class="cart-list-shop cl">\
-						<p><i class="norm-small-icon nsi-vip-mall"></i><a href="/shop/home/'+ i + '" target="_blank">' + e.name + '</a></p>\
-						<span class="cart-shop-price" data-shoprice="'+shopPrice.toFixed(2)+'">'+shopPrice.toFixed(2)+'</span>\
-						</div>'+str+'</li>';
-
-                        });
-
-                    }
-                    $('#side-cart-list').html(list);
-
-            var listB2B = "";
-            if (cart.B2BProductInfo.length > 0) {
-                $.each(B2BData, function (index, Item){
-                    var shopPrice=0;
-                    var str = '';
-                    $.each(Item.shop, function (j, product){
-
-                                str += '\
-					<div class="cart-list-goods cl">';
-
-                                str += '\
-						<a href="http://www.qipeiren.com/Supply/supply-' + product.id + '.htm" title="' + product.name + '" target="_blank"><img src="' + product.imgUrlFull + '" alt="" /></a>\
-						<div class="s-num"><span>' + product.count + '</span></div>\
-						<div class="s-g-price">'+ (product.price*product.count).toFixed(2) + '</div><div class="s-g-remove"><a href="javascript:removeFromCartSelf(\'' + product.skuId + '\',' + product.id + ')">删除</a>' + '</div>\
-					</div>';
-
-                                shopPrice=shopPrice+product.price*product.count;
-                    });
-
-                    listB2B+='<li><div class="cart-list-shop cl">\
-				<p><i class="' + ((Item.ComIsVip == 1 && Item.comVipType == 1) ? "norm-small-icon nsi-vip-basic" : ((Item.ComIsVip == 1 && Item.comVipType == 2) ? "norm-small-icon nsi-vip-standard" : "")) + '"></i><a href="' + Item.shopUrl + '" target="_blank">' + Item.name + '</a></p>\
-				<span class="cart-shop-price" data-shoprice="'+shopPrice.toFixed(2)+'">'+shopPrice.toFixed(2)+'</span>\
-				</div>'+str+'</li>';
-
-                });
-            }
-            $('#side-B2Bcart-list').html(listB2B);
-        });
-    }
-    function bindSelectAll() {
-        $('input[name="s-checkAll"]').change(function () {
-            var checked = this.checked;
-            $('#side-cart-list input[type=checkbox]').prop('checked',this.checked);
-            if (checked) {
-                $('#s-total-money').html(getCheckProductPrice());
-                $('#side-cart-list li').each(function() {
-                    var shopP=$(this).find('.cart-shop-price');
-                    shopP.html(shopP.data('shoprice').toFixed(2));
-                });
-            }
-            else {
-                $('#s-total-money').html("0.00");
-                $('#side-cart-list .cart-shop-price').html("0.00");
-
-            }
-            $('#s-total-num').html(getCheckProductCount());
-        });
-
-        $('input[name="checkShop"]').change(function () {
-            var checked = this.checked;
-            var total = $(this).siblings('.cart-shop-price').html();
-            $(this).parent().siblings().find('input[type="checkbox"]').prop('checked', checked);
-
-            var allShopChecked = true;
-            $('#side-cart-list input[type="checkbox"]').each(function () {
-                if (!$(this).prop('checked')) {
-                    allShopChecked = false;
-                }
-            });
-            if (allShopChecked)
-                $('input[name="s-checkAll"]').prop('checked', true);
-            else
-                $('input[name="s-checkAll"]').prop('checked',false);
-
-            var t = 0;
-            $.each($(this).parent().siblings(), function () {
-                var a = $(this).find('input[name="checkItem"]:checked').siblings('.s-g-price').html();
-                t += (+a);
-            })
-            $(this).siblings('.cart-shop-price').html(t.toFixed(2));
-            $('#s-total-money').html(getCheckProductPrice());
-            $('#s-total-num').html(getCheckProductCount());
-        });
-
-        $('input[name="checkItem"]').change(function () {
-            var checked = this.checked;
-            if (checked)
-                $(this).prop('checked', checked);
-            else
-                $(this).removeAttr('checked');
-
-            //判断店铺下的所有商品是否全选中
-            var allProductChecked = true;
-            $(this).parent().siblings('.cart-list-goods').each(function() {
-                if (!$(this).find('input').prop('checked'))
-                    allProductChecked = false;
-            });
-            if (allProductChecked)
-                $(this).parent().siblings().find('input[name="checkShop"]').prop('checked', checked);
-            else
-                $(this).parent().siblings().find('input[name="checkShop"]').removeAttr('checked');;
-
-            //判断所有店铺是否都选中了
-            var allShopChecked = true;
-            $('#side-cart-list input[type="checkbox"]').each(function (i, e) {
-                if (!$(this).prop('checked')) {
-                    allShopChecked = false;
-                }
-            });
-            if (allShopChecked)
-                $('input[name="s-checkAll"]').prop('checked', true);
-            else
-                $('input[name="s-checkAll"]').removeAttr('checked');
-
-            var t = 0;
-            $.each($(this).parents('li').find('input[name="checkItem"]:checked'), function () {
-                var a = $(this).siblings('.s-g-price').html();
-                t += (+a);
-            })
-            $(this).parent().siblings('.cart-list-shop').find('.cart-shop-price').html(t.toFixed(2));
-
-            $('#s-total-money').html(getCheckProductPrice());
-            $('#s-total-num').html(getCheckProductCount());
-        });
-    }
-    function getCheckProductPrice() {
-        var t = 0;
-        $.each($('input[name="checkItem"]:checked'), function () {
-            var a = $(this).siblings('.s-g-price').html();
-            t += (+a);
-        })
-        return t.toFixed(2);
-    }
-    function getCheckProductCount() {
-        var t = 0;
-        $.each($('input[name="checkItem"]:checked'), function () {
-            var c = $(this).siblings('.s-num').children().html();
-            d = parseInt(c);
-            t += d;
-        })
-        return t;
-    }
-    function removeFromCartSelf(skuId, proId) {
-        var loading = showLoading();
-
-        if (skuId == "") {
-            $.post('/cart/UpdateB2BCartItem', { productId: proId, count: 0 }, function (result) {
-                loading.close();
-                if (result.success)
-                {
-                    loadCartInfo();
-                    var countCookie = $.cookie('qpr_mall_cart_count');
-                    $('#right_cart em').text(countCookie);
-                    $('#shopping-amount-self').html(countCookie)
-                    $('.side-content').find('.side-cart-c').show().siblings().hide();
-                }
-                else
-                {
-                    $.dialog.errorTips(result.msg);
-                }
-            });
-        }
-        else {
-            $.post('/cart/RemoveFromCart', { skuId: skuId }, function (result) {
-                loading.close();
-                if (result.success)
-                {
-                    loadCartInfo();
-                    var countCookie = $.cookie('qpr_mall_cart_count');
-                    $('#right_cart em').text(countCookie);
-                    $('#shopping-amount-self').html(countCookie)
-                    $('.side-content').find('.side-cart-c').show().siblings().hide();
-                }
-                else
-                {
-                    $.dialog.errorTips(result.msg);
-                }
-            });
-        }
-    }
-
-</script>
-<script>
-    var isloginbool = false;
-    $(function ()
-    {
-        // 右侧个人中心图标
-        $("#right_userCenter").click(function () {
-            if (isloginbool) {
-                window.open("/UserCenter");
-            }
-            else {
-                $.fn.login({}, function () {
-                    location.href = "/";
-                }, '', '', '/Login/Login');
-            }
-        });
-    });
-</script>
-
 
 </div>
 
-<script>
-    function getQueryString(name)
-    {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
-    function InitialBanner()
-    {
-        var isSelect = false;
-        $("._banner").each(function ()
-        {
-            $(this).removeClass("cur");
-            if ($(this).attr("index") === window.location.href)
-            {
-                $(this).addClass("cur");
-                isSelect = true;
-            }
-            if ($(this).attr("index").indexOf("/LimitTimeBuy/") >= 0
-                && window.location.href.indexOf("/LimitTimeBuy/") >= 0)
-            {
-                $(this).addClass("cur");
-                isSelect = true;
-            }
-            else{
-                if ($(this).attr("index").toLowerCase().indexOf("/topic/list") >= 0
-                && window.location.href.toLowerCase().indexOf("/topic/list") >= 0)
-                {
-                    $(this).addClass("cur");
-                    isSelect = true;
-                }
-            }
-        });
-
-        if (!isSelect)
-        {
-            $("#homePage").addClass("cur");
-        }
-    }
-    $(function ()
-    {
-        InitialBanner();
-        if ($('.category').css('display') == 'none')
-        {
-            $('.categorys').mouseDelay().hover(function ()
-            {
-                $('.category').show();
-            });
-            $('.categorys').mouseleave(function ()
-            {
-                $('.category').hide();
-            });
-        }
-
-        function queryForm(pageNo)
-        {
-            var keyWords = $('#searchBox').val();
-            var exp_keyWords = $("#text-stock-search").val();
-            var cid = getQueryString('cid');
-            var b_id = getQueryString('b_id');
-            var orderType = getQueryString('orderType');
-            var orderKey = getQueryString('orderKey');
-            location.href = "/search?pageNo=" + pageNo + "&keywords=" + encodeURIComponent(keyWords ? keyWords :"")// $('#searchBox').attr('placeholder')
-                                    + "&exp_keywords=" + exp_keyWords + "&cid=" + cid + "&b_id=" + b_id + "&orderType=" + orderType
-                                    + "&orderKey=" + orderKey;
-        }
-
-        $('#searchBtn').click(function ()
-        {
-            var keyWords = $('#searchBox').val();
-            location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords :"") //$('#searchBox').attr('placeholder')
-        });
-
-        $("#searchBox").keydown(function (e) {
-            if (e.keyCode == 13) {
-                var keyWords = $('#searchBox').val();
-                location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords :"" )//$('#searchBox').attr('placeholder')
-            }
-        });
-
-        $('#btn-re-search').click(function ()
-        {
-            var keyWords = $('#key-re-search').val();
-            location.href = "/search?keywords=" + encodeURIComponent(keyWords);
-        });
-
-        $('#btn-stock-search').click(function ()
-        {
-            queryForm(1);
-        });
-
-        $('#pageJump').click(function ()
-        {
-            var pageNo = parseInt($("#jumpInput").val());
-            var pagecount = parseInt($("#pageCount").html());
-            if (pageNo > pagecount || pageNo < 1)
-            {
-                alert("请您输入有效的页码!");
-                return;
-            }
-            if (isNaN(pageNo)) {
-                pageNo = 1;
-            }
-            queryForm(pageNo);
-        } );
-    });
-</script>
-
-    
-
-
-
-<script src="http://img.qipeiren.com/qipeiren/ShopDecoration/javascripts/ui/jQuery.picPlay.js?vid=0808" type="text/javascript"></script>
+<!--<script src="http://img.qipeiren.com/qipeiren/ShopDecoration/javascripts/ui/jQuery.picPlay.js?vid=0808" type="text/javascript"></script>
 <script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.slide-lor.js?vid=0808" type="text/javascript"></script>
 
 <script src="http://img.qipeiren.com/Site/Web/javascripts/jQuery.index-logic.js?vid=0808"></script>
-<script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.loading.spin.js?vid=0808" type="text/javascript"></script>
+<script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.loading.spin.js?vid=0808" type="text/javascript"></script>-->
 
 <!--content start-->
 <div class="h-panel">
@@ -1732,7 +1254,26 @@
                     <div class="pro-170-box">
                         <div class="pro-170-list">
                             <div class="pro-list-cont">
-                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ" href="http://mall.qipeiren.com/home/HomeFloor?productId=4248,3971,3336,3188,2343,2331,3829,3873"></div>
+                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ">
+                                	<div class="a-item" isitem="true">
+									    <div class="ai-dl">
+									        <div class="aid-imgbox">
+									            <div class="aid-img">
+									                <a href="/Product/Detail/1559" target="_blank">
+									                    <img src="/Storage/Shop/4/Products/1559/1_220.png" alt="空气滤清器A660-SET2A660-SET2">
+									                </a>
+									            </div>
+									        </div>
+									        <div class="aid-titbox">
+									            <div class="aid-tit"><a href="/Product/Detail/1559" target="_blank">空气滤清器A660-SET2A660-SET2</a></div>
+									            <div class="aid-price"><span>￥150.00</span></div>
+									        </div>
+									    </div>
+									</div>
+                                	
+                                	
+                                	
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1778,7 +1319,7 @@
                     <div class="pro-170-box">
                         <div class="pro-170-list">
                             <div class="pro-list-cont">
-                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ" href="http://mall.qipeiren.com/home/HomeFloor?productId=3064,3057,3055,3047,615,2825,2542,623"></div>
+                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ"></div>
                             </div>
                         </div>
                     </div>
@@ -1824,7 +1365,7 @@
                     <div class="pro-170-box">
                         <div class="pro-170-list">
                             <div class="pro-list-cont">
-                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ" href="http://mall.qipeiren.com/home/HomeFloor?productId=4357,4069,3465,3463,3175,4002,3458,3443"></div>
+                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ"></div>
                             </div>
                         </div>
                     </div>
@@ -1868,7 +1409,7 @@
                     <div class="pro-170-box">
                         <div class="pro-170-list">
                             <div class="pro-list-cont">
-                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ" href="http://mall.qipeiren.com/home/HomeFloor?productId=3770,3741,3715,266,80,3977,4278,4035"></div>
+                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ"></div>
                             </div>
                         </div>
                     </div>
@@ -1908,7 +1449,7 @@
                     <div class="pro-170-box">
                         <div class="pro-170-list">
                             <div class="pro-list-cont">
-                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ" href="http://mall.qipeiren.com/home/HomeFloor?productId=4013,3322,1401,1398,1613,1614,4015,1400"></div>
+                                <div class="product-w180x180" isadminedit="XYZ" isloadedit="XYZ"></div>
                             </div>
                         </div>
                     </div>
@@ -2048,96 +1589,8 @@
 </div>
 
 
-<link href="http://img.qipeiren.com/Site/Web/css/css_foot.css?vid=0808" rel="stylesheet" />
-<div class="h-bottom ms-foot">
-    <div class="h-w1200 msf-service">
-        <a href="/Article/mallintr" target="_blank">
-            <dl class="msfs-1">
-                <dt><i class="op-icon opi-50-1"></i></dt>
-                <dd>
-                    <h4>质量保障</h4>
-                    <p>正规渠道，质量保障</p>
-                </dd>
-            </dl>
-        </a>  
-        <a href="/Article/mallintr" target="_blank">
-            <dl class="msfs-2">
-                <dt><i class="op-icon opi-50-2"></i></dt>
-                <dd>
-                    <h4>品类齐全</h4>
-                    <p>各大车系千万配件，一站购齐</p>
-                </dd>
-            </dl>
-        </a>  
-        <a href="/Article/mallintr" target="_blank">
-            <dl class="msfs-3">
-                <dt><i class="op-icon opi-50-3"></i></dt>
-                <dd>
-                    <h4>全网低价</h4>
-                    <p>源头直达，价格大幅优于传统渠道</p>
-                </dd>
-            </dl>
-        </a>  
-        <a href="/Article/mallintr" target="_blank">
-            <dl class="msfs-4">
-                <dt><i class="op-icon opi-50-4"></i></dt>
-                <dd>
-                    <h4>售后无忧</h4>
-                    <p>安心选购，品牌保障，售后无忧</p>
-                </dd>
-            </dl>
-        </a>  
-    </div>
-    <div class="h-w1200 msf-info">
-            <dl class="msfi-1">
-            <dt><strong>新手入门</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/62 " target="_blank" rel="nofollow">会员注册</a> 
-                    </dd>
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/63 " target="_blank" rel="nofollow">购物流程</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-2">
-            <dt><strong>常见问题</strong></dt>
-
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/65 " target="_blank" rel="nofollow">退换货政策</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-3">
-            <dt><strong>支付方式</strong></dt>
-
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/66 " target="_blank" rel="nofollow">支付方式</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-4">
-            <dt><strong>配送说明</strong></dt>
-
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/64 " target="_blank" rel="nofollow">关于配送</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-5">
-            <dt><strong>关于我们</strong></dt>
-
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/67 " target="_blank" rel="nofollow">商城介绍</a> 
-                    </dd>
-            </dl>
-        <dl class="msfi-6">
-            <dt>
-                <img src="http://img.qipeiren.com/Public/images/b_ewm.png" />
-            </dt>
-            <dd><span>扫码关注</span></dd>
-            <dd>汽配人网官方微信</dd>
-        </dl>
-    </div>
-</div> 
-
-<link href="http://img.qipeiren.com/qipeiren/Content/Home/css_sitefoot.css?vid=0808" rel="stylesheet" />
+<link href="../css/css_sitefoot.css" rel="stylesheet" />
 <div class="pw-panel pw-foot">
     <div class="pw-w1200">
         <div class="foot-box clearfix">
