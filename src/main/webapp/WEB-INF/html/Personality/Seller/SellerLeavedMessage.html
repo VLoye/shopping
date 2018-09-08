@@ -1,0 +1,192 @@
+<!--留言管理-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
+    <title>汽配人-我的旺铺</title>
+
+    <link href="../../css/css_base.css" rel="stylesheet" />
+    <link href="../../css/css_top.css" rel="stylesheet" />
+    <link href="../../css/hayui.css" rel="stylesheet" />
+    <link href="../../css/leagueradmin-nav-sidemenu.css" rel="stylesheet" />
+    
+    <script src="../../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../js/hayui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var globals = { sys_applicationname: '/work' };
+        function qpr_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '1', options);
+            location.href = globals.sys_applicationname;
+        }
+        function mall_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '2', options);
+            location.href = "http://mall.qipeiren.com/selleradmin/home";
+        }
+        $(function () {$("#headTopNav").load("http://www.qipeiren.com/c/TShare/HeadTopLink?headcrror=true");});
+    </script>
+    
+</head>
+<body class="hayui-bg-gray-light">
+   
+<div class="hayui-helptip hayui-bg-normal hayui-mb10">
+    <div class="hayui-helptip-cont">
+        <i class="helptip-tipicon hayui-icon hayui-icon-tip3 hayui-color-danger hayui-fs-18"></i>
+        <label class="helptip-title">【温馨提示】</label>
+        <div class="helptip-indent">
+            <span class="helptip-desc">1、此处是收到、发出的留言进行管理，可对留言进行查看、回复、删除等操作！</span><br />
+            <span class="helptip-desc">2、建议大家尽量采用直接电话、QQ、邮件、短信等直接回复！</span>
+        </div>
+    </div>
+    <div onclick="this.parentNode.style.display='none';" class="hayui-helptip-btn hayui-colse">
+        <i class="hayui-icon hayui-icon-close2"></i>
+    </div>
+</div>
+<div class="hayui-bg-white hayui-p10">
+    <div class="hayui-tab hayui-tab-brief" hay-filter="tab">
+        <ul class="hayui-tab-title">
+            <li class="hayui-this"><a href="/work/message">收到的留言(<span id="shoudao">0</span>)</a></li>
+            <li ><a href="/work/message?flag=0">未查看的留言(<span id="meikan">0</span>)</a></li>
+            <li ><a href="/work/message?flag=2">未回复的留言(<span id="meihui">0</span>)</a></li>
+            <li ><a href="/work/message?flag=3">发出的留言(<span id="fachu">0</span>)</a></li>
+        </ul>
+        <div class="hayui-tab-content">
+            <div class="hayui-tab-item hayui-show">
+                <!--操作按钮-->
+                <div class="hayui-row hayui-pb10">
+                    <button class="hayui-btn hayui-btn-primary hayui-btn-small" data-type="batchdel" hay-batch="btn">批量删除</button>
+                </div>
+                <!--数据表格-->
+                <table class="hayui-hide" id="HAY_table" hay-filter="message"></table>
+                <!--底部提示-->
+                <div class="hayui-helptip hayui-bg-none">
+                    <div class="hayui-helptip-cont">
+                        <i class="helptip-tipicon hayui-icon hayui-icon-tip3 hayui-color-danger hayui-fs-18"></i>
+                        <label class="helptip-title">【温馨提示】</label>
+                        <div class="helptip-indent">
+                            <span class="helptip-desc">1、收到留言说明客户对您的产品很感兴趣，请及时回复您收到的留言，把握商机！</span><br />
+                            <span class="helptip-desc">2、建议大家尽量采用直接电话、QQ、邮件、短信等直接回复！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript"> hayui.use(['element', 'topservice'], function (element, topservice) { });</script>
+    
+<script>
+    hayui.use(['element', 'table'], function (element, table) {
+        element.render();
+        table.render({
+            method: 'post',
+            id: 'message',
+            page: true,
+            skin: 'nob',
+            elem: '#HAY_table',
+            url: ,
+            where: { flag: '-1' },
+            pagesize: 15,
+            cols: [
+                [{  checkbox: true, fixed: true },
+                {   field: 'Content', title: '留言内容', width: 400, align: 'left',
+                    format: function (row, value) {
+                        return (row.Title === "" ? (row.Content.length > 150 ? row.Content.substr(0, 80) + "..." : row.Content) : row.Title) + "<br />" + '<label class="hayui-color-gray">' + row.InputDate_Str + '</label>';
+                    }
+                },
+                {
+                    field: 'FromComId', title: '-1' != '3' ? '来自' : "发给", width: 200, align: 'left',
+                    format: function (row, value) {
+                        var html = [];
+                        if ('-1' != '3') {
+                            if (row.FromComId == 0) {
+                                html.push(row.Person);
+                                html.push("<br />");
+                                html.push(row.Tel);
+                            }
+                            else {
+                                html.push(row.FromComPerson);
+                                html.push("<br />");
+                                html.push(row.FromComTel);
+                                html.push("<br />");
+                                html.push("<a href=\"http://" + row.FromComLoginName + ".cn.qipeiren.com\" class=\"hayui-link hayui-link-primary\" target=\"_blank\">" + row.FromComName + "</a>");
+                            }
+                        }
+                        else {
+                            html.push(row.ToComPerson);
+                            html.push("<br />");
+                            html.push(row.ToComTel);
+                            html.push("<br />");
+                            html.push("<a href=\"http://" + row.ToComLoginName + ".cn.qipeiren.com\" class=\"hayui-link hayui-link-primary\" target=\"_blank\">" + row.ToComName + "</a>");
+                        }
+                        return html.join("");
+                    }
+                },
+                {
+                    field: 'IsRe', title: '状态', width: 200, align: 'center',
+                    format: function (row, value) {
+                        var html = [""];
+                        if (row.IsRe == 0)
+                        {
+                            html.push("<label class='hayui-color-danger'>未查看</label>");
+                        } else if (row.IsRe == 1)
+                        {
+                            html.push("<label class='hayui-color-gray'>已回复</label>");
+                        } else if (row.IsRe == 2)
+                        {
+                            html.push("<label class='hayui-color-black'>未回复</label>");
+                        }
+
+                        return html.join("");
+                    }
+                },
+                {
+                    field: 'Id', title: '查看', width: 121, align: 'center',
+                    format: function (row, value) {
+                        return "<a href=\"" + globals.sys_applicationname + "/remessage?id=" + row.Id + "\" class='hayui-btn hayui-btn-normal hayui-btn-mini'>查看</a>";
+                    }
+                }]
+            ]
+        });
+
+        active = {
+            batchdel: function () {
+                var checkDatas = table.checkDatas('message', ['Id'], 'colstr');
+                var strid = checkDatas.coldata;
+                if (checkDatas.nums) {
+                    layer.confirm('确定要删除所选中的' + checkDatas.nums + '项吗?', {
+                        icon: 3,
+                        title: '提示'
+                    }, function (index) {
+                        $.ajax({
+                            type: "post",
+                            data: { idstr: strid },
+                            url: globals.sys_applicationname + '/message/delete',
+                            dataType: "json",
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    layer.close(index);
+                                    table.reload('message');
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    layer.msg('请先选择要删除的数据');
+                }
+            }
+        };
+        $('[hay-batch="btn"]').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+
+</body>
+</html>

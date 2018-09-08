@@ -1,0 +1,169 @@
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>汽配人——用户注册</title>
+    <link href="../css/css_base.css" rel="stylesheet" type="text/css">
+    <link href="../css/css_top_mall.css" rel="stylesheet" type="text/css">
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!--<script src="../js/jquery.cookie.js"></script>
+    <script src="../js/jquery.form.js"></script>
+    <script src="../js/CommonJS.js"></script>
+    <script src="../js/v.js"></script>-->
+</head>
+<body>
+    <div class="h-top" id="headTopNav">
+
+<div class="h-w1200 ht-link">
+    <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+    <a class="h-fl" href="/Login">登录</a>
+    <i class="h-fl h-vline">|</i>
+    <a class="h-fl" href="/Register">注册</a>
+    <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+    <dl class="h-fr h-down ml0 ltb1">
+        <dt>
+            <a href="/scrz/" target="_blank">商城入驻</a>
+            <i class="h-icon"></i>
+        </dt>
+        <dd>
+            <a href="/Article/mallintr" target="_blank">商城介绍</a>
+            <a href="/scrz/" target="_blank">商城入驻</a>
+        </dd>
+    </dl>
+    <dl class="h-fr h-down h-sd mr0">
+        <dt>
+            <a href="#2">收藏夹</a>
+            <i class="h-icon"></i>
+        </dt>
+        <dd>
+            <a href="/ProductConcern/Index">关注的商品</a>
+            <a href="/ShopConcern/Index">关注的店铺</a>
+        </dd>
+    </dl>
+    <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+    <i class="h-fr h-vline">|</i>
+    <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+</div>
+    </div>
+    
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../css/css_base.css"><link rel="stylesheet" type="text/css" href="../css/css_top.css">
+    <link rel="stylesheet" type="text/css" href="../css/css_top_mall.css">
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../css/pc-loginregister.css">
+    
+</head>
+<body>
+    <div class="usersimple-head user-head">
+        <div class="head-in pw-w1200">
+            <a href="http://mall.qipeiren.com/">
+                <img src="../img/logo1.jpg" alt="qipeiren" height="52">
+            </a>
+            <b>欢迎注册</b>
+            <div class="head-right">
+                已有账号？
+                <a href="">请登录></a>
+            </div>
+        </div>
+    </div>
+    <div class="user-body">
+        <div class="body-content pw-w1200">
+
+
+
+                <div id="steptwobox" class="register-in" style = "text-align:center; vertical-align:middle;">
+                	
+                	<div class="hint-box">
+                    </div>
+                    <div class="hint-box">
+                    </div>
+                    <div class="hint-box">
+                    </div>
+                    <form id="register" action="" method="">
+                    <div class="form-input">
+                        <label class="form-label">用户名</label>
+                        <input id="username" type="text" name="name" placeholder="请输入用户名">
+                    </div>
+                    <div class="form-input">
+                        <label class="form-label">设置密码</label>
+                        <input id="pwd" type="password" name="password" placeholder="请输入您的密码">
+                    </div>
+                    <div class="form-input">
+                        <label class="form-label">确认密码</label>
+                        <input id="pwdRepeat" type="password" placeholder="请再次输入密码">
+                    </div>
+
+                    <div id="RegisterBtn" class="form-button mt5">注册</div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<div class="qpr-footer">
+    <div class="qf-copyright">
+        <p>Copyright © 2005-2018  十堰亿脉科技有限公司 版权所有 经营许可证编号：鄂B2-20140114</p>
+    </div>
+</div>
+<span style="display:none"></span>
+    <script type="text/javascript">
+       $("#RegisterBtn").click(function(){
+            alert();
+           $.ajax({
+               //提交数据的类型 POST GET
+               type:"POST",
+               //提交的网址
+               url:"/shopping/regiest",
+               async:false,
+               //提交的数据
+               data:$("#register").serialize(),
+               //返回数据的格式
+               datatype: "json",
+               //成功返回之后调用的函数
+               success:function (data){
+                   //注册失败返回原页面
+                   if (data.status!="success"){
+                       location.href = 'http://localhost:8080/shopping/html/LoginAndRegister/Register.html';
+                   }
+                   else{
+                       var prevLink = document.referrer;
+                       alert(prevLink.trim());
+                       if($.trim(prevLink)==''){
+
+                           location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                       }else{
+                           if(prevLink.indexOf('http://localhost:8080/shopping')==-1){	//来自其它站点
+                               location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                           }
+                           if(prevLink.indexOf('http://localhost:8080/shopping/html/LoginAndRegister/Login.html')!=-1){		//来自注册页面
+                               location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                           }
+                           location.href = prevLink;
+                       }
+
+                   }
+                   alert(data.status);
+               },
+               //调用出错执行的函数
+               error: function(error){
+                   alert("ajax error : "+error);
+               }
+           });
+
+       });
+
+    </script>
+
+</body>
+</html>
