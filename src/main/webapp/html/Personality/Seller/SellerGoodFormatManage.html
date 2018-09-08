@@ -1,0 +1,184 @@
+<!--商品首尾版式-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
+    <title>汽配人-我的旺铺</title>
+
+    <link href="../../css/css_base.css" rel="stylesheet" />
+    <link href="../../css/css_top.css" rel="stylesheet" />
+    <link href="../../css/hayui.css" rel="stylesheet" />
+    <link href="../../css/leagueradmin-nav-sidemenu.css" rel="stylesheet" />
+    
+    <script src="../../js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../js/hayui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var globals = { sys_applicationname: '/work' };
+        function qpr_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '1', options);
+            location.href = globals.sys_applicationname;
+        }
+        function mall_skip() {
+            var options = { path: "/" };
+            $.cookie('qpr_h_flag', '2', options);
+            location.href = "http://mall.qipeiren.com/selleradmin/home";
+        }
+        $(function () {$("#headTopNav").load("http://www.qipeiren.com/c/TShare/HeadTopLink?headcrror=true");});
+    </script>
+    
+</head>
+<body class="hayui-bg-gray-light">
+
+<div class="hayui-helptip hayui-bg-normal  hayui-mb10">
+    <div class="hayui-helptip-cont">
+        <i class="helptip-tipicon hayui-icon hayui-icon-tip3 hayui-color-danger hayui-fs-20"></i>
+        <label class="helptip-title">【温馨提示】</label>
+        <div class="helptip-indent">
+            <span class="helptip-desc">版式即商品通用描述模板，分为顶部模板和底部模板两种，关联后可显示在商品详细描述的顶部或底部</span>
+        </div>
+    </div>
+    <div onclick="this.parentNode.style.display='none';" class="hayui-helptip-btn hayui-colse">
+        <i class="hayui-icon hayui-icon-close2"></i>
+    </div>
+</div>
+<div class="hayui-bg-white hayui-p10">
+    <div class="hayui-tab hayui-tab-brief" hay-filter="tabbrand">
+        <ul class="hayui-tab-title">
+            <li class="hayui-this" hay-id="template">
+                <a>管理</a>
+            </li>
+            <li hay-id="submitbrand">
+                <a href="SellerGoodFormatAdd.html">新增</a>
+            </li>
+        </ul>
+        <div class="hayui-tab-content">
+            <div class="hayui-tab-item hayui-show">
+                <form class="hayui-form hayui-mt10" hay-filter="form-search" id="form-search">
+                    <div class="hayui-form-item">
+                        <div class="hayui-inline">
+                            <label class="hayui-form-label hayui-w50">版式位置</label>
+                            <div class="hayui-input-inline hayui-w100">
+                                <select id="position" name="position" hay-search="search">
+                                    <option value="0">全部</option>
+                                    <option value="1">顶部</option>
+                                    <option value="2">底部</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hayui-inline">
+                            <div class="hayui-row hayui-text-align-r">
+                                <span class="hayui-btn  hayui-btn-small" hay-batch="btn" data-type="dosearch">搜索</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table class="hayui-table" id="productSupply" hay-filter="productSupply"></table>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript"> hayui.use(['element', 'topservice'], function (element, topservice) { });</script>
+    
+    <script>
+    var globals = { sys_applicationname: '/work' };
+
+    hayui.use(['layer', 'table', 'form'], function (layer, table, form) {
+        var $ = hayui.$;
+        form.render();
+        console.log($("#position").val());
+        table.render({
+            method: 'post',
+            skin:'nob',
+            elem: '[hay-filter="productSupply"]',
+            url: ,
+            where: { position: $("#position").val() },
+            id: 'productSupply',
+            page: {
+                pagesize:10
+            },
+            cols: [
+                [{
+                    field: 'Name',
+                    title: '版式名称',
+                    width: 400,
+                    align: 'left'
+
+                },
+                {
+                    field: 'PositionText',
+                    title: '版式位置',
+                    width: 385,
+                    align: 'left'
+                },
+                {
+                    field: 'classify',
+                    title: '操作',
+                    width: 200,
+                    align: 'center',
+                    format: function (row, value) {
+                        return '<a class="hayui-link hayui-link-normal" hay-event="edit">修改</a><a class="hayui-link hayui-link-primary hayui-ml10" hay-event="del">删除</a>';
+                    }
+                }]
+            ]
+        });
+            table.on('tool(productSupply)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'edit') {
+                    parent.location.href = globals.sys_applicationname + "/infotemplate/edit/" + data.Id;
+                }
+                if (obj.event === 'del') {
+                    $.ajax({
+                        type: 'post',
+                        url: globals.sys_applicationname + '/infotemplate/checkcandelete',
+                        data: { ids: data.Id },
+                        dataType: "json",
+                        success: function (result) {
+                            layer.confirm(result.msg, {
+                                icon: 3,
+                                title: '提示'
+                            }, function (index) {
+                                $.ajax({
+                                    type: 'post',
+                                    url: globals.sys_applicationname + '/infotemplate/delete',
+                                    data: { ids: data.Id },
+                                    dataType: "json",
+                                    success: function (result) {
+                                        if (result.success) {
+                                            layer.msg(result.msg);
+                                            table.reload('productSupply');
+                                        }
+                                        else {
+                                            layer.msg(result.msg);
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }
+
+            });
+            active = {
+                dosearch: function () {
+                    var field = form.getAllFiles('form-search');
+                    console.log(field);
+                    table.reload('productSupply', {
+                        where: field
+                    });
+                    form.render();
+                }
+            };
+
+        $('[hay-batch="btn"]').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+    </script>
+
+</body>
+</html>
