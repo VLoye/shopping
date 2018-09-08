@@ -48,7 +48,7 @@
 
                         <div class="form-input mt15">
                             <i class="pc-iconfont"></i>
-                            <input type="text" name="vcode" placeholder="请输入验证码" style="width: 180px" >  <img id="vcode"  src="/shopping/vcode" onclick="changecode()">
+                            <input type="text" name="vcode" placeholder="请输入验证码" style="width: 180px" >  <img id="vcode"  src="/vcode" onclick="changecode()">
                         </div>
 
 
@@ -81,7 +81,7 @@
     <script type="text/javascript">
         //更新验证码
         function changecode(){
-            document.getElementById('vcode').src="/shopping/vcode?c="+Math.random();
+            document.getElementById('vcode').src="vcode?c="+Math.random();
         }
         
         $("#account-submit").click(function(){
@@ -91,7 +91,7 @@
                 //提交数据的类型 POST GET
                 type:"POST",
                 //提交的网址
-                url:"/shopping/login",
+                url:"/login",
                 async:true,
                 //提交的数据
                 data:$("#loginform").serialize(),
@@ -108,13 +108,13 @@
                         alert(prevLink.trim());
                         if($.trim(prevLink)==''){
 
-                            location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                            location.href = 'http://localhost:8080/html/Main/Index.html';
                         }else{
-                            if(prevLink.indexOf('http://localhost:8080/shopping')==-1){	//来自其它站点
-                                location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                            if(prevLink.indexOf('http://localhost:8080')==-1){	//来自其它站点
+                                location.href = 'http://localhost:8080/html/Main/Index.html';
                             }
-                            if(prevLink.indexOf('http://localhost:8080/shopping/html/LoginAndRegister/Register.html')!=-1){		//来自注册页面
-                                location.href = 'http://localhost:8080/shopping/html/Main/Index.html';
+                            if(prevLink.indexOf('http://localhost:8080/html/LoginAndRegister/Register.html')!=-1){		//来自注册页面
+                                location.href = 'http://localhost:8080/html/Main/Index.html';
                             }
                             location.href = prevLink;
                         }
