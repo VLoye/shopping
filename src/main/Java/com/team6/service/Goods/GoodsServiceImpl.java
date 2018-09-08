@@ -6,11 +6,26 @@ import com.team6.util.enums.GoodsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * 商品
  */
 @Service
 public class GoodsServiceImpl implements GoodsService {
+    private final int LIMIT = 8;
+    private final int[] floors ={
+            GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
+            GoodsEnum.TYPE_TRADITION_SYSTEM.getType(),
+            GoodsEnum.TYPE_WALK_SYSTEM.getType(),
+            GoodsEnum.TYPE_ELECTRICAL_SYSTEM.getType(),
+            GoodsEnum.TYPE_BODYD_RIVER.getType(),
+            GoodsEnum.TYPE_CARFACIAL.getType(),
+    };
+
     @Autowired
     private GoodsMapper goodsMapper;
     public GoodsEnum insertGoods(Goods goods) {
@@ -43,5 +58,17 @@ public class GoodsServiceImpl implements GoodsService {
             return GoodsEnum.UPDATE_GOODS_ERROR;
     }
 
+    @Override
+    public List<Object> querySaleByGoodType() {
+
+        List<Object> floorsList = new ArrayList<Object>();
+        for(int floor:floors) {
+            //每层展示的商品
+            List<String> floorList = goodsMapper.querySaleByGoodType(floor, LIMIT);
+
+            floorsList.add(floorList);
+        }
+        return floorsList;
+    }
 
 }
