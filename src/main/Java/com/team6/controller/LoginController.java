@@ -72,19 +72,30 @@ public class LoginController {
         map.put("status",LoginEnum.LOGIN_SUCCESS.getInfo());
         return map;
     }
-    @RequiresPermissions(value={"fun2","fun3"},logical= Logical.OR)
-    @RequestMapping(value = "/regiest",method = RequestMethod.POST)
-    public String regiest(User user,HttpServletResponse response ){
-      LoginEnum anEnum = loginService.regiest(user);
 
-      //注册成功
+
+    @ResponseBody
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public Map<String,String> regiest(User user,HttpServletResponse response ){
+
+        //角色默认为普通用户
+        user.setRole(LoginEnum.USER_ROLE_USER.getRole());
+      LoginEnum anEnum = loginService.regiest(user);
+        Map<String,String> map = new HashMap<>();
+        //注册成功
       if(anEnum.equals(LoginEnum.REGIEST_SUCCESS)){
-          Subject subject = SecurityUtils.getSubject();
-          subject.login(new UsernamePasswordToken(user.getName(),user.getPassword()));
-          return "regiestSuccess";
+          //暂时不实现这个注册后自动登陆的的功能
+          /*Subject subject = SecurityUtils.getSubject();
+          subject.login(new UsernamePasswordToken(user.getName(),user.getPassword()));*/
+
+          map.put("status",LoginEnum.REGIEST_SUCCESS.getInfo());
+          return map;
       }
-      else
-          return "regiestError";
+      else{
+          map.put("status",LoginEnum.REGIEST_ERROR.getInfo());
+          return map;
+      }
+
     }
 
     /**
