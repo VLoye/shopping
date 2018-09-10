@@ -21,6 +21,7 @@ public class LoginServiceTest {
     public void login() {
         String name = "郑伟坑";
         String password = "12345";
+        User user = loginService.queryByName("叶问");
         System.out.println("token:"+loginService.Login(name,password));
     }
 
@@ -31,12 +32,12 @@ public class LoginServiceTest {
 
     @Test
     public void regiest(){
-        String name="郭晓锋";
+        String name="郭晓锋11";
         String password="guoxiaofeng";
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setRole(123L);
+        user.setRole(123);
         System.out.println("regiest:"+loginService.regiest(user));
     }
 

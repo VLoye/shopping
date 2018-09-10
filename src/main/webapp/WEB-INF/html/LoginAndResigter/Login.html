@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/css_base.css" />
+    <link rel="stylesheet" type="text/css" href="../css/css_top.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/pc-loginregister.css" />
+</head>
+<body>
+    <div class="usersimple-head">
+        <div class="head-in pw-w1200">
+            <a href="http://127.0.0.1:8020/shopping/html/index.html">
+                <img src="../img/logo1.jpg" alt="qipeiren" height="52" />
+            </a>
+            <b>欢迎登录</b>
+        </div>
+    </div>
+    <div class="usersimple-body" style="background:url(../img/5.jpg);background-size: cover;">
+        <div class="body-content pw-w1200">
+            <div class="login-box">
+                    <div class="login-left"></div>
+                <div class="login-right">
+                    <div class="right-tab">
+                        <div id="account" class="tab-item cursor">账户密码登录</div>
+                        
+                    </div>
+                    
+                    <!-- 账号密码登录 -->
+                    <form action="" method="" id = "loginform">
+                    <div id="account-login" class="tab-box">
+                        <div id="account-error" class="hint dno">
+                            <i class="pc-iconfont icon-remind"></i>
+                            <span></span>
+                        </div>
+                        <div class="form-input">
+                            <i class="pc-iconfont icon-usersimple"></i>
+                            <input type="text" id="accountname" name="name" placeholder="请输入账户名/已绑定的手机号" maxlength="20" />
+                        </div>
+
+                        <div class="form-input mt15">
+                            <i class="pc-iconfont icon-locked"></i>
+                            <input type="password" id="accountpwd" name="password" placeholder="请输入密码" maxlength="20" />
+                        </div>
+
+                        <div class="form-input mt15">
+                            <i class="pc-iconfont"></i>
+                            <input type="text" name="vcode" placeholder="请输入验证码" style="width: 180px" >  <img id="vcode"  src="/vcode" onclick="changecode()">
+                        </div>
+
+
+                        <div id="account-submit" class="login-submit mt20">登 录</div>
+                        <div class="form-item">
+                            <input type="checkbox" id="autoLogin" class="checkbox" name="checkbox" checked="checked" />
+                            <label class="remember">记住我</label>
+                            <a class="forget" href="http://mall.qipeiren.com/findpassword" target="_top">忘记密码?</a>
+                        </div>
+                    </div>
+                    </form>
+                    
+                    <div class="foot-box">
+                        <div class="foot-in" style="text-align:center;margin-left: 45px;">
+                            
+                            <a class="register" target="_self" href="http://mall.qipeiren.com/Register">立即注册</a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="usersimple-foot pw-w1200">
+            Copyright &copy; 2005-2018 十堰亿脉科技有限公司 版权所有 经营许可证编号：鄂B2-20140114
+        </div>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/CommonJS.js"></script>
+    <script type="text/javascript">
+        //更新验证码
+        function changecode(){
+            document.getElementById('vcode').src="vcode?c="+Math.random();
+        }
+        
+        $("#account-submit").click(function(){
+
+            var name=$("#name").val();
+            $.ajax({
+                //提交数据的类型 POST GET
+                type:"POST",
+                //提交的网址
+                url:"/login",
+                async:true,
+                //提交的数据
+                data:$("#loginform").serialize(),
+                //返回数据的格式
+                datatype: "json",
+                //成功返回之后调用的函数
+                success:function (data){
+                    //登陆失败更换验证码
+                    if (data.status!="success"){
+                        changecode();
+                    }
+                    else{
+                        var prevLink = document.referrer;
+                        alert(prevLink.trim());
+                        if($.trim(prevLink)==''){
+
+                            location.href = 'http://localhost:8080/html/Main/Index.html';
+                        }else{
+                            if(prevLink.indexOf('http://localhost:8080')==-1){	//来自其它站点
+                                location.href = 'http://localhost:8080/html/Main/Index.html';
+                            }
+                            if(prevLink.indexOf('http://localhost:8080/html/LoginAndRegister/Register.html')!=-1){		//来自注册页面
+                                location.href = 'http://localhost:8080/html/Main/Index.html';
+                            }
+                            location.href = prevLink;
+                        }
+
+                    }
+                    alert(data.status);
+                },
+                //调用出错执行的函数
+                error: function(error){
+                    alert("ajax error : "+error);
+                }
+            });
+
+        });
+        
+    </script>
+    <script type="text/javascript" src="../js/jquery.sendcode.js"></script>
+    <script type="text/javascript" src="../js/pc-login.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/nc.js"></script>
+</body>
+</html>

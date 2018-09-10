@@ -51,6 +51,11 @@ public interface UserMapper {
      */
    public int updateRole(@Param("name") String name,@Param("role") int role);
 
-
+    /**
+     * 查询用户权限
+     * @param role
+     * @return
+     */
+   public List<String> queryPermissionByRoleId(@Param("role") int role);
 
 }

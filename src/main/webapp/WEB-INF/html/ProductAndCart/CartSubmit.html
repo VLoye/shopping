@@ -1,0 +1,838 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
+    <title>核对并提交订单</title>
+    <link href="../css/css_base.css" rel="stylesheet" type="text/css" />
+    <link href="../css/css_top_mall.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" rel="stylesheet" />
+    <link href="../css/inner.css" rel="stylesheet" />
+    <link href="../css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
+    <link href="../css/artdilog.css" rel="stylesheet" />
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/userInfo.js"></script>
+    <script src="../js/jQuery.mouseDelay.min.js"></script>
+    <script src="../js/jquery.scrollLoading.min.js"></script>
+    <script src="../js/web.js"></script>
+    <script src="../js/CommonJS.js"></script>
+    <script src="../js/jquery.artDialog.js"></script>
+    <script src="../js/artDialog.iframeTools.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#searchBtn').click(function () {
+                var keyWords = $('#searchBox').val();
+                location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")// $('#searchBox').attr('placeholder')
+            });
+            $("#searchBox").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    var keyWords = $('#searchBox').val();
+                    location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")//$('#searchBox').attr('placeholder')
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="h-top" id="headTopNav">
+
+<script>
+    $(function () {
+        refreshCartProducts();
+    });
+    function refreshCartProducts() {
+        var countCookie = $.cookie('qpr_mall_cart_count');
+        $('#right_cart em').text(countCookie);
+        $('#shopping-amount-self').html(countCookie)
+    }
+</script>
+<div class="h-w1200 ht-link">
+    <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+    <a class="h-fl" href="/UserCenter" target="_blank">tvbatvtt</a>
+    <i class="h-fl h-vline">|</i>
+    <a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/order/submit?cartItemIds=993&amp;FromCart=1">[退出]</a>
+    <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+    <dl class="h-fr h-down ml0 ltb1">
+        <dt>
+            <a href="/scrz/" target="_blank">商城入驻</a>
+            <i class="h-icon"></i>
+        </dt>
+        <dd>
+            <a href="/Article/mallintr" target="_blank">商城介绍</a>
+            <a href="/scrz/" target="_blank">商城入驻</a>
+        </dd>
+    </dl>
+    <dl class="h-fr h-down h-sd mr0">
+        <dt>
+            <a href="#2">收藏夹</a>
+            <i class="h-icon"></i>
+        </dt>
+        <dd>
+            <a href="/ProductConcern/Index">关注的商品</a>
+            <a href="/ShopConcern/Index">关注的店铺</a>
+        </dd>
+    </dl>
+    <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
+    <i class="h-fr h-vline">|</i>
+    <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+</div>
+    </div>
+    <div class="w990 w1 cl">
+        <div id="logo"><a href="/"><img src="../img/logo1.jpg" title="返回商城首页" alt="返回商城首页" /></a></div>
+    </div>
+    
+<style>
+    s { text-decoration: none; }
+    .shopa { width: 364px; line-height: 28px; margin: 0; float: left; }
+    .shopb { height: 26px; margin: 2px 10px 0 0; border: 1px solid #ccc; line-height: 24px; }
+    .shopc { width: 124px; height:28px; line-height: 28px; margin: 0; float: right; text-align: left; color: #f60; }
+    .shopd { width: 118px; line-height: 22px; margin: 0; float: right; text-align: left; color: #f60; }
+    .shope { width: 180px; line-height: 22px; margin: 0; float: right; text-align: right; margin-right:128px; color: #444; }
+    .shopf { width: 118px; line-height: 22px; margin: 0; float: right; text-align: left; color: #444; }
+    .shopg { width: 180px; line-height: 22px; margin: 0; float: right; text-align: right; margin-right: 128px; color: #444; }
+    .p-quantity {width: 185px;text-align: center;}
+    .p-quantity {line-height: 52px;}
+    .p-quantity .quantity-form {width: 76px;height: 22px;margin: 0 auto;overflow: hidden;text-align: left;}
+    .p-quantity a {width: 13px;height: 13px;margin-top: 3px;float: left;display: block;overflow: hidden;line-height: 13px;background: #fff;border: 1px solid #ccc;text-align: center;}
+    .p-quantity a:hover {text-decoration: none;color: #333;border: 1px solid #999;}
+    .p-quantity a.decrement {margin-right: 5px;}
+    .p-quantity a.increment {float: right;}
+    .quantity-text {width: 34px;height: 18px;border: 1px solid #ddd;border-top-color: #aaa;border-left-color: #aaa;padding-top: 2px;overflow: hidden;text-align: center;background-color: #fff;
+    }
+</style>
+<link href="../css/base.css" rel="stylesheet">
+<link href="../css/myjd.easebuy.css" rel="stylesheet">
+
+    <div class="w990 m2">
+        <div id="checkout">
+            <div style="height: 35px;">
+                <h2>填写并核对订单信息</h2>
+            </div>
+            
+            <div id="wizard" class="checkout-steps">
+                <div id="step-1" class="step step-complete">
+                    <div class="step-title">
+                        <strong id="consigneeTitleDiv">收货人信息</strong>
+                        <span class="step-action"><a href="javascript:;" id="editReciever">[修改]</a></span>
+                    </div>
+                    <div class="step-content">
+                        <div id="consignee" class="sbox-wrap">
+                            <div class="sbox" style="width:100%;">
+                                <div class="s-content">
+                                        <p id="selectedAddress">李天 &nbsp; 13376255489 &nbsp; 北京 北京市 门头沟区 &nbsp;垃圾场&nbsp;</p>
+                                </div>
+                                <div class="form" id="addressListArea" style="display: none">
+                                    <div id="consignee-list">
+                                    </div>
+                                    <div class="item" id="use-new-address">
+                                        <input type="radio" onclick="showEditArea(0)" class="hookbox" name="address" id="consignee_radio_new" />
+                                        <label for="consignee_radio_new">使用新地址 </label>
+                                        <span class="status error" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当前地址数量已达上限，若要继续添加新地址，请先删除部分收货地址。</span>
+                                    </div>
+                                    <form style="display: none" id="addressEditArea">
+                                        <div class="consignee-form" id="consignee-form" name="consignee-form">
+                                            <div class="list message" id="name_div">
+                                                <span class="label"><em>*</em>收货人：</span>
+                                                <div class="field">
+                                                    <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20" onblur="check_Consignee('name_div')" />
+                                                </div>
+                                                <span class="status error" id="name_div_error"></span>
+                                            </div>
+                                            <div class="list select-address" id="area_div">
+                                                <span class="label"><em>*</em>所在地区：</span>
+                                                <div class="field">
+                                                    <span id="span_area">
+                                                        <span id="span_province">
+                                                            <select id="consignee_province">
+                                                                <option value="">请选择：</option>
+                                                            </select>
+                                                        </span>
+                                                        <span id="span_city">
+                                                            <select id="consignee_city">
+                                                                <option value="">请选择：</option>
+                                                            </select>
+                                                        </span>
+                                                        <span id="span_county">
+                                                            <select id="consignee_county">
+                                                                <option value="">请选择：</option>
+                                                            </select>
+                                                        </span>
+                                                        <span id="span_town" style="display: none">
+                                                            <select id="consignee_town">
+                                                                <option value="">请选择：</option>
+                                                            </select>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="list full-address" id="address_div">
+                                                <span class="label"><em>*</em>详细地址：</span>
+                                                <div class="field" id="areaName">
+                                                    <span class="fl selected-address" name="regionFullName"><i></i><em></em><s></s></span>
+                                                    <span class="fl selected-address"></span>
+                                                    <span class="fl selected-address"></span>
+                                                    <input type="text" class="textbox" maxlength="50" name="address" />
+                                                </div>
+                                                <span class="status error" id="address_div_error"></span>
+                                            </div>
+                                            <div class="list" id="call_div">
+                                                <span class="label"><em>*</em>电话：</span>
+                                                <div class="field">
+                                                    <div class="phone">
+                                                        <input type="text" class="textbox" name="phone" maxlength="18" />
+                                                    </div>
+                                                    <span class="status error" id="call_div_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="form-btn group">
+                                        <a href="javascript:;" class="btn-submit"><span id="saveConsigneeTitleDiv">保存收货人信息</span></a>
+                                        <div class="loading loading-1" style="display: none"><b></b>正在提交信息，请等待！</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step step-complete">
+                    <div class="step-title"><strong>支付及配送方式</strong></div>
+                    <div class="step-content">
+                        <div id="payment-ship" class="sbox-wrap">
+                            <div class="sbox">
+                                <div class="payment-selected">
+                                    <p>在线支付</p>
+                                    <p>快递运输  由商家选择合作快递为您配送</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="step step-complete" style="display:none;">
+                    <div class="step-title"><strong>发票信息</strong></div>
+                    <div class="step-content">
+                        <div class="sbox-wrap">
+                            <div class="sbox">
+                                <div>
+                                    <span>
+                                        <input type="radio" value="0" id="isInvoce1" name="isInvoce" checked="checked" />不需要发票
+                                    </span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+                                        <input type="radio" value="2" id="isInvoce2" name="isInvoce" />需要发票
+                                    </span>
+                                </div>
+                                <div class="payment-selected" id="invoceMsg">
+                                    <span id="" class="mr15">发票抬头：</span><span id="invoiceTitle" class="mr15"></span>
+                                    <span id="" class="mr15">发票内容：</span><span id="invoiceContext" class="mr15"></span>
+                                    <a href="#none" class="ftx-05" onclick="invoiceReceipt()">修改</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="step-4" class="step step-complete bt0">
+                    <input id="IsB2BHide" type="hidden" value="0"/>
+                    <div class="step-title"><strong>商品清单</strong></div>
+                    <div class="step-content">
+                        <div id="part-order" class="sbox-wrap">
+                            <span class="sbox">
+                                    <div id="order-cart">
+                                        <table class="review-thead">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="fore1">商品</td>
+                                                    <td class="fore2">单价</td>
+                                                    <td class="fore4">数量</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    <span class="order-review">
+                                        <div class="step-title" style="padding-left: 0;"><a target="_blank" href="/shop/home/8" class="return-edit" style="float:left;"><i class="qpr-edition-icon qei-mall"></i>新华强配件专营店</a></div>
+                                        <!--商品清单展示-->
+                                            <span id="span-skulist">
+                                                <!--**********商品清单内容列表开始************-->
+                                                <div class="review-body">
+                                                    <div class="review-tbody">
+                                                        <table class="order-table" shopid="8">
+                                                        <tbody>
+
+                                                                
+                                                                <tr skuid="1951_0_0_0" quntity="1" price="2170.0000">
+                                                                    <td class="fore1" style="padding: 10px;">
+                                                                        <div class="p-goods">
+                                                                            <div class="p-img">
+                                                                                <a href="/Product/Detail/1951" target="_blank">
+                                                                                    <img alt="" src="/Storage/Shop/8/Products/1951/1_50.png" />
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="p-detail">
+                                                                                <div class="p-name">
+                                                                                    <a href="/Product/Detail/1951" target="_blank">
+                                                                                        东风原厂  康明斯  6L四配套 配活塞4987914 &nbsp; <br />
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="p-more">
+                                                                                    商品图号：
+                                                                                    <a href="/Product/Detail/1951" target="_blank">DFL 14A 114</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="p-price"><strong>￥2170.00</strong></td>
+                                                                    <td class="fore2">
+                                                                           <label>x</label> 1                                                                    </td>
+                                                                </tr>
+                                                        </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--**********商品清单内容列表结束************-->
+                                            </span>
+                                            <div class="order-summary ordsumbox" data-shopid="8" id="orderdata_8" style="background:#F2F6FF">
+                                                <div class="statistic">
+                                                    <div class="disc">
+                                                        <textarea placeholder="订单备注" class="OrderRemark" rema="8"></textarea>
+                                                    </div>
+
+                                                    <div class="list">
+                                                        <div class="shopd" data="2170.00" data-v="2170.00">￥2170.00</div>
+                                                        <div class="shope">店铺合计（含运费）：</div>
+
+                                                        <div class="span clr"></div>
+                                                        <div class="shopf" data="0" data-profrei="0" data-free="0.00">￥0</div>
+                                                        <div class="shopg">运费：</div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="span clr"></div>
+                                            </div>
+
+                                    <div class="order-summary" style="margin-top: 30px; border-top: 1px solid #E6E6E6;">
+                                        <div class="statistic fr">
+                                            <div class="list">
+                                                <span><em id="span-skuNum">1</em> 件商品，总商品金额：</span>
+                                                <em class="price" id="warePriceId" v="2170.0000">￥2170.00</em>
+                                            </div>
+                                            <div class="list"><span>运费：</span>
+                                                <em class="price" id="totalFreight"> ￥0.00</em>
+                                            </div>
+                                            <div class="list" style="display:none;"><span style="margin-right:120px;">优惠券抵扣金额：</span>
+                                            <em class="price" id="id_c" style="width:122px;"></em>
+                                           </div>
+                                        </div>
+                                        <div class="span clr"></div>
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="clr"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-buttons group">
+                <div class="sticky-placeholder">
+                    <div class="sticky-wrap">
+                        <div class="inner">
+                            <span class="total" style="float: left;"><a href="/cart/cart" class="return-edit">返回修改购物车</a></span>
+                            <button type="button" id="submit" class="checkout-submit">提交订单</button>
+                            <span class="total">
+                                <label>应付总额：</label>
+                                <strong id="payPriceId" data-real="2170.00" data="2170.00">2170.00</strong>
+                                <label>元</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="thickdiv hide"></div>
+<div class="thickbox hide" id="invoiceDialog">
+    <div class="thickwrap">
+        <div class="thicktitle"><span>发票信息</span></div>
+        <div style="width: 450px; padding: 10px;" class="thickcon">
+            <div id="edit-cont" class="m">
+                <div class="mc">
+                    <div class="form" id="dvInvoice">
+                        <div class="item mt15">
+                            <span class="label fl">发票抬头：</span>
+                            <div class="fl invoice-tit-list">
+                                <div class="invoice-item invoice-item-selected">
+                                    <input type="text" value="个人" disabled>
+                                </div>
+                                <a id="btnAddInvoice" class="ftx-05 addInvoice" href="javascript:;">新增单位发票</a>
+                            </div>
+                        </div>
+                        <div class="item mt15">
+                            <span class="label fl">发票内容：</span>
+                            <div class="fl invoice-list">
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                        <div class="btns" style="padding-left: 60px">
+                            <a id="btnOk" class="e-btn btn-5 save-btn" href="javascript:;">确定</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a id="" class="thickclose" href="#">×</a>
+    </div>
+</div>
+
+
+<input type="hidden" id="shippingAddressId" value="6618" />
+<input type="hidden" id="cartItemIds" value="993" />
+
+<script src="../js/Region.js"></script>
+<script src="../js/regionBind.js"></script>
+<script src="../js/submitOrder.js"></script>
+<script src="../js/CommonJS.js"></script>
+<script src="../js/jquery.json.js"></script>
+
+<script>
+    var orderUrl = 'http://order.qipeiren.com';
+
+    function invoiceReceipt() {
+        var left, top, width, height;
+        left = $(window).width() / 2;
+        top = $(window).height() / 2;
+        width = $('.thickbox').width() / 2;
+        height = $('.thickbox').height() / 2;
+        $('.thickdiv').show();
+        $('#invoiceDialog').css({ top: '50%', left: '50%', marginLeft: '-' + width + 'px', marginTop: '-' + height + 'px', position: 'fixed' }).show();
+    }
+    //转换0
+    function parseFloatOrZero(n) {
+        result = 0;
+        try {
+            if (n.length < 1) n = 0;
+            if (isNaN(n)) n = 0;
+            result = parseFloat(n);
+        } catch (ex) {
+            result = 0;
+        }
+        return result;
+    }
+
+    //显示实付金额
+    //By DZY[150706]
+    function ShowPaidPrice() {
+        var d_mpi = $('#MoneyPerIntegral');
+        var d_integral = $("#integral");
+        //价格初始
+        var orderTotalPrice = parseFloatOrZero($("#warePriceId").attr("v"));  //订单总价
+        var orderPaidPrice = 0;
+        var orderTotalDisPrice = 0;       //订单优惠总价
+        var orderTotalFreight = 0;        //订单运费总价
+        var orderTotalIntegral = 0;       //订单积分抵扣
+        //运费总价
+        $(".shopf").each(function (l, k) {
+            var _t = $(k);
+            orderTotalFreight += parseFloatOrZero(_t.attr("data"));
+        });
+        //总优惠
+        $(".shopc").each(function (l, k) {
+            var _t = $(k);
+            orderTotalDisPrice += parseFloatOrZero(_t.attr("data"));
+        });
+        //积分抵扣
+        var intRule = parseFloatOrZero(d_integral.data('rule'));   //积分规则
+        if (intRule > 0) {
+            var useIntegral = parseFloatOrZero(d_integral.val());
+            if (useIntegral < 0) {
+                useIntegral = 0;
+                d_integral.val(useIntegral);
+            }
+            var canuseint = parseFloatOrZero(d_integral.data("userintegral"));
+            if (canuseint < useIntegral) useIntegral = canuseint;
+            orderTotalIntegral = (useIntegral / intRule).toFixed(2);
+            var _tmpnum = parseInt((orderTotalPrice - orderTotalDisPrice) * 100) / 100;
+            if (_tmpnum - orderTotalIntegral < 0) {
+                //为零修正
+                orderTotalIntegral = _tmpnum;
+                useIntegral = Math.floor(orderTotalIntegral * intRule);
+                //无法抵价
+                if (useIntegral > 0) {
+                    orderTotalIntegral = (useIntegral / intRule).toFixed(2);
+                } else {
+                    orderTotalIntegral = 0;
+                    d_integral.val(0);
+                }
+            }
+            //数据补充
+            if (useIntegral != 0) {
+                d_integral.val(useIntegral);
+            } else {
+                if (d_integral.val().length > 1) {
+                    d_integral.val(0);
+                }
+            }
+        } else {
+            d_integral.val(0);
+        }
+
+        //计算实付
+        orderPaidPrice = orderTotalPrice + orderTotalFreight - orderTotalDisPrice - orderTotalIntegral;
+
+        //显示
+        var d_ordprice = $("#payPriceId");
+        var d_ordFreight = $("#totalFreight");
+        var d_ordDisPrice = $("#id_c");
+        var d_ordMPI = $("#MoneyPerIntegral");
+        var d_orduseInt = $("#integralPrice");
+        d_ordprice.attr("v", orderPaidPrice.toFixed(2)).html("￥" + orderPaidPrice.toFixed(2));
+        d_ordFreight.html("￥" + orderTotalFreight.toFixed(2));
+        d_ordDisPrice.html("-￥" + orderTotalDisPrice.toFixed(2));
+        d_orduseInt.html("-￥" + orderTotalIntegral);
+        d_ordDisPrice.parent().hide();
+        if (orderTotalDisPrice > 0) {
+            d_ordDisPrice.parent().show();
+        }
+        //可获得积分
+        var mpirule = parseFloatOrZero(d_ordMPI.data("rule"));
+        if ((orderPaidPrice - orderTotalFreight > 0) && mpirule > 0) {
+            d_ordMPI.text(Math.floor((orderPaidPrice - orderTotalFreight) / mpirule));
+        }
+        else {
+            d_ordMPI.text(0);
+        }
+    }
+
+    //计算订单结果
+    //By DZY[150707]
+    function ComputeOrder(shopid) {
+        var d_box = $("#orderdata_" + shopid);
+        var d_dissel = d_box.find(".shopb");
+        var d_freight = d_box.find(".shopf");
+        var d_proPrice = d_box.find(".shopd");
+        var d_showdis = d_box.find(".shopc");
+        var ordSumProPrice = 0, ordSubDisPrice = 0; ordSubFreight = 0, shopFreeFrei = 0;
+        ordSumProPrice = parseFloatOrZero(d_proPrice.data("v"));
+        shopFreeFrei = parseFloatOrZero(d_freight.data("free"));
+        ordSubFreight = parseFloatOrZero(d_freight.data("profrei"));
+        if (d_dissel.length > 0) {
+            var d_selopt = d_dissel.find("option:selected");
+            ordSubDisPrice = parseFloatOrZero(d_selopt.data("p"));
+        }
+        //计算满额免
+        var isFullFreeFrei = false;
+        if (shopFreeFrei > 0) {
+            if (ordSumProPrice - ordSubDisPrice >= shopFreeFrei) {
+                ordSubFreight = 0;
+                isFullFreeFrei = true;
+            }
+        }
+
+        //计算实付
+        var ordPaidPrice = ordSumProPrice - ordSubDisPrice + ordSubFreight;
+
+        //显示单条
+        d_proPrice.html("￥" + ordPaidPrice);
+        d_freight.html("￥" + ordSubFreight).attr("data", ordSubFreight);
+        if (isFullFreeFrei) {
+            d_freight.html("免运费");
+        }
+        d_showdis.html("-￥" + ordSubDisPrice).attr("data", ordSubDisPrice);
+        //d_showdis.hide();
+        if (ordSubDisPrice == 0) {
+            d_showdis.html("");
+        }
+        //显示计算结果
+        ShowPaidPrice();
+    }
+
+    $(function () {
+
+        $(document).on('click', '.thickclose', function () {
+            $('.thickbox,.thickdiv').hide();
+        });
+
+
+        var freight = '0.00';
+        var intRule = $('#MoneyPerIntegral').data('rule');
+
+        $("#integral").bind("keyup", function () {
+            ShowPaidPrice();
+        });
+
+        $("#IsUsedIntegral").change(function () {
+            if (this.checked) {
+                $(this).siblings().show().end().parent().siblings().show();
+            } else {
+                $(this).siblings().hide().end().parent().siblings().hide();
+                $('#integral').val(0);
+                $("#integral").trigger("keyup");
+            }
+        });
+
+        $("#MoneyPerIntegral").html();
+
+        var price = function () {
+            var a = 0;
+            $('.shopb').each(function (i, e) {
+                $(e).children().each(function (l, k) {
+                    if ($(k).attr('selected')) {
+                        var b = $(k).attr('data-p');
+                        a += (b | 0);
+                    }
+                });
+            });
+            return a;
+        },
+        total = $('#payPriceId').attr('data');
+
+        //优惠切换绑定
+        $('.shopb').bind('change', function (t) {
+            var _t = $(this);
+            var shopid = _t.data("shopid");
+            ComputeOrder(shopid);
+        });
+
+        //下面两个调用需同步执行
+        //优惠初始
+        $('.shopb').each(function (i, e) {
+            var _t = $(e);
+            _t.find("option").eq(1).attr("selected", true);
+        });
+
+        //初始计算
+        $(".ordsumbox").each(function (i, e) {
+            var _t = $(e);
+            var shopid = _t.data("shopid")
+            ComputeOrder(shopid);
+        });
+
+    });
+</script>
+
+
+<link href="../css/css_foot.css" rel="stylesheet" />
+<div class="h-bottom ms-foot">
+    <div class="h-w1200 msf-service">
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-1">
+                <dt><i class="op-icon opi-50-1"></i></dt>
+                <dd>
+                    <h4>质量保障</h4>
+                    <p>正规渠道，质量保障</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-2">
+                <dt><i class="op-icon opi-50-2"></i></dt>
+                <dd>
+                    <h4>品类齐全</h4>
+                    <p>各大车系千万配件，一站购齐</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-3">
+                <dt><i class="op-icon opi-50-3"></i></dt>
+                <dd>
+                    <h4>全网低价</h4>
+                    <p>源头直达，价格大幅优于传统渠道</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-4">
+                <dt><i class="op-icon opi-50-4"></i></dt>
+                <dd>
+                    <h4>售后无忧</h4>
+                    <p>安心选购，品牌保障，售后无忧</p>
+                </dd>
+            </dl>
+        </a>  
+    </div>
+    <div class="h-w1200 msf-info">
+            <dl class="msfi-1">
+            <dt><strong>新手入门</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/62 " target="_blank" rel="nofollow">会员注册</a> 
+                    </dd>
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/63 " target="_blank" rel="nofollow">购物流程</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-2">
+            <dt><strong>常见问题</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/65 " target="_blank" rel="nofollow">退换货政策</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-3">
+            <dt><strong>支付方式</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/66 " target="_blank" rel="nofollow">支付方式</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-4">
+            <dt><strong>配送说明</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/64 " target="_blank" rel="nofollow">关于配送</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-5">
+            <dt><strong>关于我们</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/67 " target="_blank" rel="nofollow">商城介绍</a> 
+                    </dd>
+            </dl>
+        <dl class="msfi-6">
+            <dt>
+                <img src="http://img.qipeiren.com/Public/images/b_ewm.png" />
+            </dt>
+            <dd><span>扫码关注</span></dd>
+            <dd>汽配人网官方微信</dd>
+        </dl>
+    </div>
+</div>
+
+<link href="../css/css_sitefoot.css" rel="stylesheet" />
+<div class="pw-panel pw-foot">
+    <div class="pw-w1200">
+        <div class="foot-box clearfix">
+            <div class="fb-logo">
+                <a href="http://www.qipeiren.com" class="logo-img"></a>
+            </div>
+            <div class="fb-service">
+                <div class="group-spot clearfix">
+                    <dl class="spot-item">
+                        <dt class="item-tit">新手指南</dt>
+                        <dd class="item-list">
+                            <a href="http://mall.qipeiren.com/Register" target="_blank">注册新用户</a>
+                            <a href="http://mall.qipeiren.com/Article" target="_blank">帮助中心</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">网站服务</dt>
+                        <dd class="item-list">
+                            <a href="http://www.qipeiren.com/cms/wp" target="_blank">汽配旺铺</a>
+                            <a href="http://mall.qipeiren.com/Article/mallintr" target="_blank">汽配商城</a>
+                            <a href="http://www.qipeiren.com/helper" target="_blank">汽配助手</a>
+                            <a href="http://www.qipeiren.com/cms/yxb" target="_blank">营销宝</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item item-multiseriate">
+                        <dt class="item-tit">特色市场</dt>
+                        <dd class="item-list">
+                            <a href="http://syc.qipeiren.com" target="_blank">商用车市场</a>
+                            <a href="http://cyc.qipeiren.com" target="_blank">乘用车市场</a>
+                            <a href="http://dongfeng.qipeiren.com" target="_blank">东风市场</a>
+                            <a href="http://zhongqi.qipeiren.com" target="_blank">重汽市场</a>
+                            <a href="http://shanqi.qipeiren.com" target="_blank">陕汽市场</a>
+                            <a href="http://yiqi.qipeiren.com" target="_blank">一汽市场</a>
+                            <a href="http://beiqi.qipeiren.com" target="_blank">北汽市场</a>
+                            <a href="http://jianghuai.qipeiren.com" target="_blank">江淮市场</a>
+                            <a href="http://zyc.qipeiren.com" target="_blank">专用汽车</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">地方分站</dt>
+                        <dd class="item-list">
+                            <a href="http://jiangsu.qipeiren.com" target="_blank">江苏分站</a>
+                            <a href="http://guangdong.qipeiren.com" target="_blank">广东分站</a>
+                            <a href="http://zq.qipeiren.com" target="_blank">山东分站</a>
+                            <a href="http://henan.qipeiren.com" target="_blank">河南分站</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">移动端</dt>
+                        <dd class="item-list">
+                            <div class="m-siteurl"><a href="http://m.qipeiren.com" target="_blank">手机登录：m.qipeiren.com</a></div>
+                            <div class="qr-code">
+                                <div class="app-btn">
+                                    <i class="app-v-icon avi-i"></i>
+                                    <span class="di-vm ml5">iPhone</span>
+                                </div>
+                                <div class="app-code">
+                                    <div class="qpr-qrcode">
+                                        <i class="app-qpr-qrcode"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="qr-code">
+                                <div class="app-btn">
+                                    <i class="app-v-icon avi-a"></i>
+                                    <span class="di-vm ml5">Android</span>
+                                </div>
+                                <div class="app-code">
+                                    <div class="qpr-qrcode">
+                                        <i class="app-qpr-qrcode"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="fb-siteinfo">
+                    <div class="site-nav clearfix">
+                        <a href="http://www.qipeiren.com/About/About.asp" target="_blank" rel="nofollow">关于我们</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/About/Exempt.asp" target="_blank" rel="nofollow">法律声明</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/About/Link.asp" target="_blank">友情链接</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/sitemap.html" target="_blank">网站地图</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/chanpin/" target="_blank">汽车配件批发</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/pic/" target="_blank">汽车配件图片</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/peijian/" target="_blank">汽车配件大全</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/ask/" target="_blank">汽配问答</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/changjia/" target="_blank">汽配厂家</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/brand/" target="_blank">汽配品牌</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/topics/" target="_blank">汽配主题</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/qpc/" target="_blank">汽配城</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">鄂ICP备14009261号</a>
+                    </div>
+                    <div class="site-info">
+                        <a>经营许可证编号：鄂B2-20140114</a>
+                        <span class="ml20">服务热线：0719-8311727</span>
+                        <br />
+                        <span class="di-vm">Copyright &copy; 2005-2018 十堰亿脉科技有限公司 版权所有</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<span style="display:none">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F607271da1d927f7e761e62f3d232b15a' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</span>
+
+</body>
+</html>

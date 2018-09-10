@@ -12,5 +12,7 @@
 </head>
 <body>
 <h1>注册失败</h1>
+<h1>我之前浏览得页面</h1>
+<a href="http://localhost:8080/login.jsp">去登陆</a>
 </body>
 </html>

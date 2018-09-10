@@ -1,0 +1,58 @@
+/**{ margin:0; padding:0; }
+body, div, address, blockquote, iframe, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4, h5, h6, p, pre, table, caption, th, td, form, legend, fieldset, input, button, select, textarea, em, i, img, a{ margin:0; padding:0; outline:0 none; font-weight:normal; font-style:normal; font-size:100%; font-family:inherit; }
+table {border-collapse:collapse; word-break:break-all; }
+input {font: 12px/1.5 'SimSun', Arial; }
+ol, ul, li, dl, dt, dd{ list-style:none;}
+img {border:0 none; display:block; font-size:0; vertical-align:top; }
+body {color:#444; background:#fff; font:12px/1.5 'SimSun', Arial;}
+.main{width:970px; margin:20px auto;}*/
+
+
+
+
+.mdt-box{ border:1px solid #E4E4E4; width:100%;  background-color:#F5F5F5; vertical-align:top;}
+.mdt-box .mb-l{background:#fff; padding:0 28px; border-right:1px solid #E4E4E4; height:auto; vertical-align:top; overflow:hidden;}
+.mdt-box .mb-l *{max-width:750px !important; _width:expression(document.documentElement.clientWidth||document.body.clientWidth>750?'750px':'auto') !important; overflow:hidden;}
+.mdt-box .mb-r{ position:relative; width:162px; border-left:1px solid #E4E4E4; vertical-align:top;}
+.mdt-box .mb-r .mbr-cont{ position:relative; width:160px; text-align:left;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav{ margin-left:20px; color:#444; overflow:hidden;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav dd{height:40px; line-height:40px; font-size:14px; cursor:pointer;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav dd.active{color:#0065cd; background:#F5F5F5;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav dd i{display:inline-block; width:15px; height:100%; vertical-align:middle;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav dd span{margin-left:20px;}
+.mdt-box .mb-r .mbr-cont .mbrc-nav dd.active i{background:url('../images/tr_active.png') no-repeat center center;}
+.mdt-box .mb-r .mbr-cont .mbrc-top{ margin:25px 0 0 55px; overflow:hidden;}
+.mdt-box .mb-r .mbr-cont .mbrc-top i{ display:inline-block; width:55px; height:55px; background:#ccc url('../images/tr_top.png') no-repeat center center; cursor:pointer;}
+.mdt-box .mb-r .mbr-cont .mbrc-top i:hover{background-color:#aaa;}
+
+.mb-r .mbr-cont .mbr-onlinecus{margin:25px 0; padding:10px 0; background:#FFF;}
+.mb-r .mbr-cont .mbr-onlinecus .mbro-tit{margin:0 10px; font-size:14px; font-weight:700; color:#333;}
+.mb-r .mbr-cont .mbr-onlinecus .mbro-cus{margin:5px 10px 0 10px; overflow:hidden; zoom:1;}
+.mb-r .mbr-cont .mbr-onlinecus .mbro-cus a{float:left; width:26px; margin-left:2px; text-decoration:none;}
+.mb-r .mbr-cont .mbr-onlinecus .mbro-cus a img{display:inline-block; border:0;}
+
+
+.error-recovery-tit{height:24px; line-height:24px; margin:5px 0; color:#666; overflow:hidden;}
+.error-recovery-tit i{display:inline-block; width:16px; height:15px; margin-right:5px; background:url('../images/i-warring.png') no-repeat center center; vertical-align:middle;}
+.error-recovery-tit span{display:inline-block; vertical-align:middle;}
+.error-recovery-tit a{display:inline-block; color:#0066CD; vertical-align:middle;}
+
+
+
+
+
+
+
+
+
+
+/*åˆ†é¡µ*/
+.sp-page-footer{position:relative; height:46px; line-height:44px; color:#444; border:1px solid #E4E4E4; border:0; background:none; clear:both; text-align:center;}
+.sp-page-footer .sp-pages{float:right; position:relative; top:10px; right:0; margin:0; padding:0; list-style:none; font-size:12px; font-family:'SimSun', Arial; overflow:hidden;}
+.sp-page-footer .sp-pages li{float:left; margin:0 0 0 5px; padding:0; overflow-x:visible; text-align:center; white-space:nowrap; overflow:hidden;}
+.sp-page-footer .sp-pages li span{display:block; padding:2px; min-width:20px; _width:20px; height:20px; line-height:20px; font-size:12px; color:#444; border:1px solid #D2D2D2; background:#FFF; cursor:pointer; white-space:nowrap; overflow:hidden;}
+.sp-page-footer .sp-pages li span:hover{border:1px solid #0066CD; color:#0066CD;}
+.sp-page-footer .sp-pages li span.current{color:#0066CD; font-weight:700; border:0; padding:3px 2px;}
+.sp-page-footer .sp-pages li span.beginEnd{color:#DDD; border:1px solid #DDD; cursor:default;}
+.sp-page-footer .sp-pages li span.beginEnd:hover{border:1px solid #DDD;}
+.sp-page-footer .sp-pages li span.dotted{color:#1f3a87;}
