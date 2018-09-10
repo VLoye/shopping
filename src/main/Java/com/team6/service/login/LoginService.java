@@ -3,7 +3,9 @@ package com.team6.service.login;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,7 +50,12 @@ public interface LoginService {
      */
     public Set<String> getPermissionByRole(int role);
 
-
+    /**
+     * 取得用户信息 的username和userid
+     * @param request
+     * @return
+     */
+    public Map<String,Object> getIndexUserInfo(HttpServletRequest request);
 
 
 }

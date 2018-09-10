@@ -63,6 +63,11 @@ public class LoginController {
             //触发登陆操作
             token.setRememberMe(true);
             subject.login(token);
+
+            //将用户登陆的信息token存放到cookie
+            Cookie cookie = new Cookie(LoginEnum.USER_COOKIE_TOKEN.getInfo()
+                    ,(String)subject.getPrincipal());
+            response.addCookie(cookie);
         }catch (UnsupportedTokenException e){
             map.put("status",e.toString());
             subject.logout();

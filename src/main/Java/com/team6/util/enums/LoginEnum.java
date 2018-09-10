@@ -22,7 +22,10 @@ public enum LoginEnum {
    //用户角色角色信息
    USER_ROLE_USER(1,"普通用户"),
    USER_ROLE_SALER(2,"商家"),
-   USER_ROLE_ADMIN(3,"管理员");
+   USER_ROLE_ADMIN(3,"管理员"),
+
+    //token
+    USER_COOKIE_TOKEN("userToken");
 
     private String Info;
     private int role;
@@ -31,8 +34,8 @@ public enum LoginEnum {
     }
 
   LoginEnum(int role, String info) {
-   role=role;
-   info=info;
+   this.role=role;
+   this.Info=info;
   }
 
  public String getInfo() {

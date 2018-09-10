@@ -1,8 +1,10 @@
 package com.team6.dao;
 
 import com.team6.entity.Goods;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsMapper {
     /**
@@ -68,6 +70,6 @@ public interface GoodsMapper {
      */
     int updateByPrimaryKey(Goods record);
 
-    List<String> querySaleByGoodType(int floor,int limit);
+    List<Map<String,Object>> querySaleByGoodType(@Param("typeId")int floor,@Param("limit") int limit);
 
 }

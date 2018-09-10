@@ -179,8 +179,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="querySaleByGoodType" resultType="java.lang.String">
-    select id,name,img_url,price
+  <select id="querySaleByGoodType" resultType="java.util.Map">
+    select id as gid,name as gname,img_url as gimg,price as gprice
     from goods
     where type_id=${typeId}
     order by price desc limit ${limit};
