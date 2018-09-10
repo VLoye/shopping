@@ -45,8 +45,10 @@ public class IndexController {
         model.addAttribute("user",map);
         //展示的商品
         model.addAttribute("clist",clist);
+
         return model;
     }
+
 
     /**
      *
