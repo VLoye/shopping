@@ -99,7 +99,6 @@ public class LoginReaml extends AuthorizingRealm {
             token.setPassword(md5_password.toCharArray());
             //定义自定义的token jwt得来的
             String mytoken= jwtUtil.createToken(user,permission);
-
             return new SimpleAuthenticationInfo(mytoken,user.getPassword(),this.getName());
         }else {
             //登陆失败

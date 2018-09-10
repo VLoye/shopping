@@ -50,11 +50,6 @@ public interface LoginService {
      */
     public Set<String> getPermissionByRole(int role);
 
-    /**
-     * 取得用户信息 的username和userid
-     * @param request
-     * @return
-     */
     public Map<String,Object> getIndexUserInfo(HttpServletRequest request);
 
 

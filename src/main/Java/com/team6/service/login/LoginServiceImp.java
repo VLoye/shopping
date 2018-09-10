@@ -11,10 +11,8 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 import static com.alibaba.druid.util.Utils.md5;
@@ -130,7 +128,7 @@ public class LoginServiceImp implements LoginService {
     public Map<String,Object> getIndexUserInfo(HttpServletRequest request){
         Cookie cookies[] = request.getCookies();
         //如果用户登陆了 token就存在
-        String token =(String)SecurityUtils.getSubject().getPrincipal();
+        String token =(String) SecurityUtils.getSubject().getPrincipal();
 
         //如果用户没有实现登陆 就从它的cookie仲得到token
         if(token==null||token.equals("")) {

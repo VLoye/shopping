@@ -4,7 +4,6 @@ import com.team6.util.enums.GoodsEnum;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商品逻辑
@@ -34,6 +33,4 @@ public interface GoodsService {
      *
      */
     public List<Object> querySaleByGoodType();
-
-
 }

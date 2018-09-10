@@ -70,6 +70,6 @@ public interface GoodsMapper {
      */
     int updateByPrimaryKey(Goods record);
 
-    List<Map<String,Object>> querySaleByGoodType(@Param("typeId")int floor,@Param("limit") int limit);
+    List<Map<String,Object>> querySaleByGoodType(@Param("typeId") int typeId,@Param("limit") int limit);
 
 }

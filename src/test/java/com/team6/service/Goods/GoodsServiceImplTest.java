@@ -1,6 +1,5 @@
 package com.team6.service.Goods;
 
-import com.team6.dao.GoodsMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,8 @@ public class GoodsServiceImplTest {
 
     @Autowired
     GoodsService service;
-    @Autowired
-    GoodsMapper goodsMapper;
     @Test
     public void querySaleByGoodType() {
-        List list1 =goodsMapper.querySaleByGoodType(10018,8);
-        System.out.println(list1);
         List list = service.querySaleByGoodType();
         System.out.println(list);
     }

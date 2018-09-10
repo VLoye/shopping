@@ -1,13 +1,15 @@
 package com.team6.service.Goods;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.team6.dao.GoodsMapper;
 import com.team6.entity.Goods;
 import com.team6.util.enums.GoodsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 商品
@@ -17,10 +19,6 @@ public class GoodsServiceImpl implements GoodsService {
     private final int LIMIT = 8;
     private final int[] floors ={
             10018,
-            10118,
-            10104,
-            10111,
-            10198,
             GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
             GoodsEnum.TYPE_TRADITION_SYSTEM.getType(),
             GoodsEnum.TYPE_WALK_SYSTEM.getType(),
@@ -61,9 +59,6 @@ public class GoodsServiceImpl implements GoodsService {
             return GoodsEnum.UPDATE_GOODS_ERROR;
     }
 
-    /**
-     * 取得楼层商品展示 取得价格高的前8位
-     */
     @Override
     public List<Object> querySaleByGoodType() {
 

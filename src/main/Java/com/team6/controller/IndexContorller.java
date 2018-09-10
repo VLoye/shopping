@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class IndexController {
+public class IndexContorller {
 
     @Autowired
     LoginService loginService;
@@ -48,7 +48,6 @@ public class IndexController {
 
         return model;
     }
-
 
     /**
      *
