@@ -5,7 +5,7 @@
 <generatorConfiguration>
 
     <!-- 本地数据库驱动程序jar包的全路径 -->
-    <classPathEntry location="C:\Users\V\.m2\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>
+    <classPathEntry location="D:\maven\maven-repository\mysql\mysql-connector-java\5.1.35\mysql-connector-java-5.1.35.jar"/>
 
     <context id="context" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -48,7 +48,7 @@
                    enableUpdateByExample="false"/>-->
 
 
-                <table tableName="address"
+            <!--    <table tableName="address"
                        domainObjectName="Address"
                        enableCountByExample="false"
                        enableDeleteByExample="false"
@@ -131,7 +131,14 @@
                        enableCountByExample="false"
                        enableDeleteByExample="false"
                        enableSelectByExample="false"
-                       enableUpdateByExample="false"/>
+                       enableUpdateByExample="false"/>-->
+
+        <table tableName="lb"
+               domainObjectName="Lb"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>
 
 
 
