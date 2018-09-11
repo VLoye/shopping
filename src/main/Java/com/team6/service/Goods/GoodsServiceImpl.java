@@ -18,6 +18,7 @@ import java.util.Set;
 public class GoodsServiceImpl implements GoodsService {
     private final int LIMIT = 8;
     private final int[] floors ={
+            10018,
             GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
             GoodsEnum.TYPE_TRADITION_SYSTEM.getType(),
             GoodsEnum.TYPE_WALK_SYSTEM.getType(),
@@ -64,8 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
         List<Object> floorsList = new ArrayList<Object>();
         for(int floor:floors) {
             //每层展示的商品
-            List<String> floorList = goodsMapper.querySaleByGoodType(floor, LIMIT);
-
+            List<Map<String,Object>> floorList = goodsMapper.querySaleByGoodType(floor, LIMIT);
             floorsList.add(floorList);
         }
         return floorsList;
