@@ -25,4 +25,13 @@
 
     <!-- 配置基于注解的声明式事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean id="redisConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" >
+            <list>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
 </beans>
