@@ -5,6 +5,7 @@ package com.team6.service;/**
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -18,21 +19,22 @@ import redis.clients.jedis.JedisPoolConfig;
  * @Version 1.0
  **/
 @Service
+@ComponentScan("com.team6.config")
 public class JedisAdapter implements InitializingBean {
 
-    @Value("#{redisConfig[jedis.host]}")
+    @Value("#{redisConfig['jedis.host']}")
     private String host;
 
-    @Value("#{redisConfig[jedis.port]}")
+    @Value("#{redisConfig['jedis.port']}")
     private int port;
 
-    @Value("#{redisConfig[jedis.timeout]}")
+    @Value("#{redisConfig['jedis.timeout']}")
     private int timeout;
 
-    @Value("#{redisConfig[jedis.password]}")
+    @Value("#{redisConfig['jedis.password']}")
     private String password;
 
-    @Value("#{redisConfig[jedis.database]}")
+    @Value("#{redisConfig['jedis.database']}")
     private int database;
 
 
