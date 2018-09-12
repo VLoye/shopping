@@ -5,7 +5,6 @@ package com.team6.config;/**
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,20 +23,12 @@ import redis.clients.jedis.JedisPoolConfig;
 public class JedisConfig{
     private static final Logger logger = LoggerFactory.getLogger(JedisConfig.class);
 
-    /*@Bean(name = "jedis.pool")
-    public JedisPool jedisPool(@Qualifier("jedis.pool.config")JedisPoolConfig jedisPoolConfig,
-                               @Value("${jedis.host}") String host,
-                               @Value("${jedis.port}")int port,
-                               @Value("${jedis.password}")String password){
-
-        return new JedisPool(jedisPoolConfig,host,port,30000,password);
-    }*/
 
     @Bean
-    public JedisPoolConfig jedisPoolConfig(@Value("#{redisConfig['jedis.pool.max-active']}")int maxTotal,
-                                           @Value("#{redisConfig['jedis.pool.max-idle']}")int maxIdle,
-                                           @Value("#{redisConfig['jedis.pool.max-wait']}")int maxWaitMills,
-                                           @Value("#{redisConfig['jedis.pool.min-idle']}")int minIdle){
+    public JedisPoolConfig jedisPoolConfig(@Value("${jedis.pool.max-active}")int maxTotal,
+                                           @Value("${jedis.pool.max-idle}")int maxIdle,
+                                           @Value("${jedis.pool.max-wait}")int maxWaitMills,
+                                           @Value("${jedis.pool.min-idle}")int minIdle){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
@@ -47,9 +38,15 @@ public class JedisConfig{
         return jedisPoolConfig;
     }
 
-/*    public JedisPool jedisPool(@Autowired){
-        return new JedisPool()
-    }*/
+    @Bean
+    public JedisPool jedisPool(@Autowired JedisPoolConfig jedisPoolConfig,
+                               @Value("${jedis.host}") String host,
+                               @Value("${jedis.port}") int port,
+                               @Value("${jedis.password}") String password,
+                               @Value("${jedis.timeout}")int timeout,
+                               @Value("${jedis.database}") int database){
+        return new JedisPool(jedisPoolConfig,host,port,timeout,password,database);
+    }
 
 
 }
