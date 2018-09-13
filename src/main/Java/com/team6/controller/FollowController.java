@@ -3,6 +3,7 @@ package com.team6.controller;/**
  */
 
 import com.team6.service.JedisAdapter;
+import com.team6.service.login.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class FollowController {
 
     @Autowired
     JedisAdapter jedisAdapter;
+    @Autowired
+    LoginService loginService;
 
     @RequestMapping("follow/{id}/{type}")
     @ResponseBody
