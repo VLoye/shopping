@@ -34,7 +34,8 @@
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
     <!-- 静态资源 -->
-    <mvc:resources mapping="html/**" location="WEB-INF/html/"/>
+<!--    <mvc:resources mapping="html/**" location="/WEB-INF/html/"/>-->
+    <mvc:resources mapping="static/**" location="/static/"/>
 
     <!-- 拦截器 -->
     <mvc:interceptors>
@@ -47,8 +48,8 @@
     <!-- 3.配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/html/" />
+        <property name="suffix" value=".html" />
     </bean>
 
     <!--shiro权限注入支持-->
