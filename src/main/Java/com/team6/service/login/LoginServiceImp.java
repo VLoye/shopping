@@ -1,18 +1,19 @@
 package com.team6.service.login;
 
 
+import com.auth0.jwt.interfaces.Claim;
 import com.team6.dao.PermissionMapper;
 import com.team6.dao.UserMapper;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 import static com.alibaba.druid.util.Utils.md5;
 
@@ -117,6 +118,50 @@ public class LoginServiceImp implements LoginService {
         Set<String> permission = new HashSet(list);
 
         return permission;
+    }
+
+    /**
+     * 根据token取得用户信息
+     * @param request
+     * @return
+     */
+    public Map<String,Object> getCurrentUserInfo(HttpServletRequest request){
+        Cookie cookies[] = request.getCookies();
+        //如果用户登陆了 token就存在
+        String token =(String) SecurityUtils.getSubject().getPrincipal();
+
+        //如果用户没有实现登陆 就从它的cookie仲得到token
+        if(token==null||token.equals("")) {
+            //遍历得到保存用户信息的cookie token
+            for (Cookie cookie : cookies) {
+
+                if (cookie.getName().equals(LoginEnum.USER_COOKIE_TOKEN.getInfo())) {
+                    token = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+
+
+        //如果token不存在 返回null
+        if(token==null||token.equals("")) return null;
+
+        Map<String, Claim> map;
+        //首页用户信息
+        Map<String,Object> currentUserInfo=null;
+        try {
+            map = jwtUtil.verifyToken(token);
+            if(map.size()>0){
+                currentUserInfo = new HashMap<>();
+                currentUserInfo.put("username",map.get("name"));
+                currentUserInfo.put("userid",map.get("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return currentUserInfo;
     }
 
 }
