@@ -27,7 +27,7 @@ public class ShopCarController {
 
 
 
-    @RequestMapping(value = "/shopCar")
+    @RequestMapping(value = "/shopCarData")
     public ModelAndView shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
 
         //用户信息

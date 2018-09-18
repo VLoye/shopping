@@ -174,8 +174,8 @@ public class LoginController {
     @RequiresPermissions(value={"add","del"},logical= Logical.OR)
     @RequestMapping(value = "/testor")
     public String testURLOR(){
-        System.out.println("OR");
-        return "regiestError";
+        System.out.println("111");
+        return null;
     }
 
     @RequiresPermissions(value={"fun2","fun1"},logical= Logical.AND)
