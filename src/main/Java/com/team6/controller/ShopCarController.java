@@ -5,10 +5,7 @@ import com.team6.service.shopcar.ShopCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +22,15 @@ public class ShopCarController {
     LoginService loginService;
 
 
+    @RequestMapping(value = "/shopCar")
+    public ModelAndView shopCar(){
+        return new ModelAndView("");
+    }
 
 
+    @ResponseBody
     @RequestMapping(value = "/shopCarData")
-    public ModelAndView shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
+    public Model shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
 
         //用户信息
         Map<String,Object> map = loginService.getCurrentUserInfo(request);
@@ -37,9 +39,9 @@ public class ShopCarController {
         List list = (List) shopCarService.shopCar(userid);
          model.addAttribute("user",map);
         model.addAttribute("goods",list);
-        ModelAndView modelAndView = new ModelAndView("", "data",model);
+      /*  ModelAndView modelAndView = new ModelAndView("", "data",model);*/
 
-return modelAndView;
+        return model;
 
     }
 
@@ -57,8 +59,17 @@ return modelAndView;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shopCar/delSelect")
-    public Object ShopCarDelSelect(@RequestParam(value = "list[]") List<Integer> list,HttpServletRequest request){
+    @PostMapping("/shopCar/delSelect")
+    /*@RequestMapping(value = "/shopCar/delSelect",method = RequestMethod.POST)*/
+    public Object ShopCarDelSelect(@RequestParam("list") List<String> list, HttpServletRequest request){
+       System.out.println(" 进入：/shopCar/delSelect" );
+         
         return shopCarService.delUserGoodsByIdsSelect(list,request);
+
+    }
+
+    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST)
+    public ModelAndView shopDetailData(@RequestParam("list") List<String> list, HttpServletRequest request){
+    return null;
     }
 }
