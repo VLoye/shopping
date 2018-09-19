@@ -65,5 +65,5 @@ public interface CommentMapper {
 
    List<Map<String,Object>> queryCommentByGoodsId(@Param("goodsId") int id);
 
-   
+
 }

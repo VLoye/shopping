@@ -2,14 +2,19 @@ package com.team6.controller;
 
 import com.team6.service.login.LoginService;
 import com.team6.service.shopcar.ShopCarService;
+import org.apache.commons.math3.analysis.solvers.NewtonRaphsonSolver;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -61,15 +66,33 @@ public class ShopCarController {
     @ResponseBody
     @PostMapping("/shopCar/delSelect")
     /*@RequestMapping(value = "/shopCar/delSelect",method = RequestMethod.POST)*/
-    public Object ShopCarDelSelect(@RequestParam("list") List<String> list, HttpServletRequest request){
-       System.out.println(" 进入：/shopCar/delSelect" );
+    public Object ShopCarDelSelect(@RequestParam("list") List<String> idList, HttpServletRequest request){
+
          
-        return shopCarService.delUserGoodsByIdsSelect(list,request);
+        return shopCarService.delUserGoodsByIdsSelect(idList,request);
 
     }
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST)
-    public ModelAndView shopDetailData(@RequestParam("list") List<String> list, HttpServletRequest request){
-    return null;
+
+    @PostMapping(value = "/shopCar/detailData")
+    public ModelAndView shopDetailData(
+         @RequestParam("idList[]") int[] ids,
+            @RequestParam("countList[]") int[] counts,
+            Model model,
+            HttpServletRequest request){
+
+       Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
+
+
+        return new ModelAndView("detailData","good",good);
+
     }
+    @PostMapping(value = "/shujzu")
+    public Object shuzuTest( @RequestParam("idList") String[] idList,
+                             @RequestParam("countList") String countList){
+        return null;
+
+    }
+
+
 }

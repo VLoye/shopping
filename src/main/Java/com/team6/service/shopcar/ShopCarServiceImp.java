@@ -61,6 +61,8 @@ public class ShopCarServiceImp implements ShopCarService {
         return glist;
     }
 
+
+
     @Override
     public Object addShopCar(int goodsId, int count, HttpServletRequest request){
         Map<String,Object> returnMap = new HashMap<>();
@@ -125,7 +127,7 @@ public class ShopCarServiceImp implements ShopCarService {
     }
 
     @Override
-    public Object delUserGoodsByIdsSelect(List<Integer> list, HttpServletRequest request) {
+    public Object delUserGoodsByIdsSelect(List<String> list, HttpServletRequest request) {
         int result=-1;
         Map<String,Object> returnMap = new HashMap<>();
         //用户信息
@@ -139,14 +141,39 @@ public class ShopCarServiceImp implements ShopCarService {
 
         //成功删除的数量
         int count=0;
-        for(int i:list){
+        for(String i:list){
 
-            if(shoppingCarMapper.delUserGoodsById(i,userId)>0){
+            if(shoppingCarMapper.delUserGoodsById(Integer.valueOf(i),userId)>0){
               count++;
             }
         }
         returnMap.put("msg","成功删除"+count+"项");
 
         return returnMap;
+    }
+
+    @Override
+    public Object detailData(int[] ids, int[] counts, HttpServletRequest request) {
+        Map<String,Object> good = new HashMap<>();
+        long totalprice = 0;
+        long totalcount = 0;
+        Map<String,Object> usermap = loginService.getCurrentUserInfo(request);
+        Map<String,Object> total = new HashMap<>();
+        List<Object> gList = new ArrayList<>();
+        for(int i = 0;i<ids.length;i++){
+
+            Goods goods =goodsMapper.queryGoodsById(ids[i]);
+            //计算总数和价格
+            totalprice +=goods.getPrice()*counts[i];
+            totalcount +=counts[i];
+            Map<String,Object> gMap = TransformUtil.beanToMap(goods);
+            gList.add(gMap);
+        }
+        total.put("totalprice",totalprice);
+        total.put("totalcount",totalcount);
+        good.put("goods",gList);
+        good.put("total",total);
+        good.put("user",usermap);
+        return good;
     }
 }
