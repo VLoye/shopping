@@ -1,6 +1,10 @@
 package com.team6.dao;
 
 import com.team6.entity.Comment;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface CommentMapper {
     /**
@@ -58,4 +62,8 @@ public interface CommentMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Comment record);
+
+   List<Map<String,Object>> queryCommentByGoodsId(@Param("goodsId") int id);
+
+   
 }
