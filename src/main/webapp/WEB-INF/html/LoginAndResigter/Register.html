@@ -124,7 +124,7 @@
                //提交数据的类型 POST GET
                type:"POST",
                //提交的网址
-               url:"/register",
+               url:"/regiest",
                async:false,
                //提交的数据
                data:$("#register").serialize(),
@@ -134,7 +134,7 @@
                success:function (data){
                    //注册失败返回原页面
                    if (data.status!="success"){
-                       location.href = 'http://localhost:8080/html/LoginAndRegister/Register.html';
+                       location.href = 'http://localhost:8080/html/LoginAndResigter/Register.html';
                    }
                    else{
                        var prevLink = document.referrer;
@@ -143,10 +143,10 @@
 
                            location.href = 'http://localhost:8080/html/Main/Index.html';
                        }else{
-                           if(prevLink.indexOf('http://localhost:8080/')==-1){	//来自其它站点
+                           if(prevLink.indexOf('http://localhost:8080')==-1){	//来自其它站点
                                location.href = 'http://localhost:8080/html/Main/Index.html';
                            }
-                           if(prevLink.indexOf('http://localhost:8080/html/LoginAndRegister/Login.html')!=-1){		//来自注册页面
+                           if(prevLink.indexOf('http://localhost:8080/html/LoginAndResigter/Login.html')!=-1){		//来自注册页面
                                location.href = 'http://localhost:8080/html/Main/Index.html';
                            }
                            location.href = prevLink;
