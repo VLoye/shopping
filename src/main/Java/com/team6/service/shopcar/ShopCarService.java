@@ -26,7 +26,7 @@ public interface ShopCarService {
 
     public Object delUserGoodsById(int goodsId,HttpServletRequest request);
 
-    public Object delUserGoodsByIdsSelect(List<String> list,HttpServletRequest request);
+    public Object delUserGoodsByIdsSelect(int[] ids,HttpServletRequest request);
 
     public Object detailData(int[] ids,int[] counts,HttpServletRequest request);
 }

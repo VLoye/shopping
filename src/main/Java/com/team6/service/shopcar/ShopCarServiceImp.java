@@ -127,7 +127,7 @@ public class ShopCarServiceImp implements ShopCarService {
     }
 
     @Override
-    public Object delUserGoodsByIdsSelect(List<String> list, HttpServletRequest request) {
+    public Object delUserGoodsByIdsSelect(int[] ids, HttpServletRequest request) {
         int result=-1;
         Map<String,Object> returnMap = new HashMap<>();
         //用户信息
@@ -141,7 +141,7 @@ public class ShopCarServiceImp implements ShopCarService {
 
         //成功删除的数量
         int count=0;
-        for(String i:list){
+        for(int i:ids){
 
             if(shoppingCarMapper.delUserGoodsById(Integer.valueOf(i),userId)>0){
               count++;

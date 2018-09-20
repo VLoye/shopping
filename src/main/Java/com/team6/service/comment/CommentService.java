@@ -8,14 +8,17 @@ public interface CommentService {
      * 查询商品的评论
      * @return
      */
-    public List<Map<String,Object>> queryByGoodId(int id);
+    public List<Map<String,Object>> queryByGoodId(int id,int currNum);
+
+    //查询商品评论总数
+    public int queryPageNumByGoodId(int id);
 
     /**
      * 添加评论
      * @param map
      * @return
      */
-    public int addComment(Map map);
+    public boolean addComment(Map map);
 
     /**
      * 专家回复
