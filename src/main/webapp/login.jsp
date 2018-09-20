@@ -36,7 +36,9 @@ $(document).ready(function () {
        if(i%2==1) count.push(1) ;
        else count.push(2);
     }
-
+       var obj ={};
+        obj['goodsId']="1";
+        obj['content']="sdfasd"
 
     $("#login").click(function(){
 
@@ -45,11 +47,12 @@ $(document).ready(function () {
         $.ajax({
             //提交数据的类型 POST GET
             type:"POST",
+            contentType: 'application/json',
             //提交的网址
-            url:"/shopCar/detailData",
+            url:"/comment/add/1",
             async:true,
             //提交的数据
-            data:{"idList":list,"countList":count},
+            data:/*JSON.stringify(obj)*/{"listid":list},
             //返回数据的格式
             datatype: "json",
             //成功返回之后调用的函数

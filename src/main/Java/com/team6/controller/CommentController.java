@@ -1,16 +1,16 @@
 package com.team6.controller;
 
+import com.team6.entity.Comment;
 import com.team6.service.comment.CommentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CommentController {
@@ -25,6 +25,16 @@ public class CommentController {
 
         List list = commentService.queryByGoodId(goodsId);
         model.addAttribute("data",list);
+        return model;
+    }
+
+    @RequestMapping(value = "/comment/add/{goodsId}",method = RequestMethod.POST)
+    @ResponseBody
+    public Object addComment(HttpServletRequest request,
+                             @RequestBody Map<String,String> map,
+                             Model model){
+        boolean result = commentService.addComment(map);
+        model.addAttribute("msg",result);
         return model;
     }
 }

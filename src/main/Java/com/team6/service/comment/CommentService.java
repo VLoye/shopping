@@ -15,7 +15,7 @@ public interface CommentService {
      * @param map
      * @return
      */
-    public int addComment(Map map);
+    public boolean addComment(Map map);
 
     /**
      * 专家回复
