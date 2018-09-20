@@ -156,6 +156,7 @@ public class LoginServiceImp implements LoginService {
                 currentUserInfo = new HashMap<>();
                 currentUserInfo.put("username",map.get("name").asString());
                 currentUserInfo.put("userid",map.get("id").asInt());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
