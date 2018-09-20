@@ -45,7 +45,9 @@ public class IndexContorller {
 
         //商品信息
         List clist = goodsService.querySaleByGoodType();
+
         //用户信息
+
         Map<String,Object> map = loginService.getCurrentUserInfo(request);
         //用户userid和username
         model.addAttribute("user",map);

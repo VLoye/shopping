@@ -47,6 +47,7 @@
                        enableSelectByExample="false"
                    enableUpdateByExample="false"/>-->
 
+<!--
 
             <!--    <table tableName="address"
                        domainObjectName="Address"
@@ -141,7 +142,14 @@
                enableUpdateByExample="false"/>
 
 
+-->
 
+        <table tableName="address"
+               domainObjectName="Address"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>
 
 
     </context>
