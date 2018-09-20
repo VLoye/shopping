@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="max-age=300" />
-<title>123 - 商品搜索 - 京东</title>
-<meta name="Keywords" content="123,京东123" />
+<title>123 - 商品搜索 - 汽配超人</title>
 <link href="../css/css_base.css" rel="stylesheet" />
 <link href="../css/css_top.css" rel="stylesheet" />
 <link href="../css/reset-gird-min_11.css" rel="stylesheet" />
@@ -19,23 +18,54 @@
 <link type="text/css" rel="stylesheet" href="../css/search.css" />
 <link type="text/css" rel="stylesheet" href="../css/static.360.css" />
 <link rel="stylesheet" href="../css/tips.css" />
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script charset="utf-8" src="../template/admin/js/sysUtils.js"></script>
+<script charset="utf-8" src="../template/admin/js/template-web.js"></script>
+
+<!--<script type="text/javascript">
+        $(function () {
+            CartFormat();
+        });
+        var myurl = "";
+        var CartFormat = function(){
+		$.ajax({
+				url: myurl,
+				type: "post",
+				dataType: "json",
+				success: function(res){
+					$("#loginstatus").template("logstatus",{data:res.user});
+					
+				}
+		});
+	};
+</script>-->
 
 </head>
 <body>
 <!--shortcut start-->
+
+
 <div class="pw-top">
         <div class="pw-w1200 pwt-link" id="headTopNav">
 
 		<div class="pw-w1200 pwt-link">
-		    <span class="pw-fl mr10" islogin="true" style="display: none;">
-		        您好，
-		        <a href="../../LoginAndResigter/Login.html" target="_blank" style="color:#F60" rel="nofollow"></a>
-		        ，已登录 <a href="http://www.qipeiren.com/User/" target="_blank">会员中心</a> [<a href="http://www.qipeiren.com/User/UserLoginOut.asp">退出</a>]
-		    </span>
-		    <span class="pw-fl mr10" islogin="false">您好，欢迎光临汽配人网！</span>
-		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Login.html" target="_blank">请登录</a>
-		    <i class="pw-fl pw-vline" islogin="false">|</i>
-		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Register.html" target="_blank">免费注册</a>
+		   
+		    <div id = "loginstatus">
+		    	<#if user.username>
+		    		<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+				    <a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
+				    <i class="h-fl h-vline">|</i>
+				    <input type = "hidden" id = "userid" value = "${user.userid}"/>
+				    <a class="h-fl" href="">[退出]</a>
+		    	</#if>
+		    	<#else>
+		    		<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+				    <a class="h-fl" href="/Login">登录</a>
+				    <i class="h-fl h-vline">|</i>
+				    <a class="h-fl" href="/Register">注册</a>
+		    	</#else>	    	
+		    </div>
+		    
 		    <a class="pw-fr" href="http://www.auto333.com" target="_blank">国际站</a>
 		    <dl class="pw-fr pw-down ml0 ltb1">
 		        <dt>
@@ -255,6 +285,7 @@
 	
 </div>
 </div>
+
 <div id="J_main" class="g-main2">
 	<div class="m-list">
 		<div class="ml-wrap">
@@ -290,7 +321,35 @@
 					<span class="clr"></span>
 				</div>
 			</div>
-<div id="J_goodsList" class="goods-list-v2 gl-type-1 J-goods-list"><ul class="gl-warp clearfix" data-tpl="1">
+<div id="J_goodsList" class="goods-list-v2 gl-type-1 J-goods-list">
+<ul class="gl-warp clearfix" data-tpl="1">
+<#list glist as data>
+	<li data-sku="${data.gid}" class="gl-item">
+	
+		<div class="gl-i-wrap">
+						<div class="p-img">
+							<a target="_blank" title="${data.gbrand} ${data.gname}" href="" onclick="searchlog(1,1195464225,0,2,'','adwClk=1')">
+								<img width="220" height="220" class="err-product" data-img="1" source-data-lazy-img="${data.gimg}" />
+	</a>						<div data-lease="" data-catid="6294" data-venid="78166" data-presale=""></div>
+						</div>
+						<div class="p-price">
+	<strong class="J_1195464225" data-done="1"><em>￥</em><i>${data.gprice}</i></strong>					</div>
+						<div class="p-name p-name-type-2">
+							<a target="_blank" title="" href="" onclick="searchlog(1,1195464225,0,1,'','adwClk=1')">
+								<em>${data.gbrand} ${data.gname} <font class="skcolor_ljg">123</font>全国联保+15天退换货</em>
+								<i class="promo-words" id="J_AD_1195464225"></i>
+							</a>
+						</div>
+	                    <div class="p-operate">
+							<a class="p-o-btn contrast J_contrast" data-sku="1195464225" href="javascript:;" onclick="searchlog(1,1195464225,0,6,'','adwClk=1')"><i></i>对比</a>
+							<a class="p-o-btn focus J_focus" data-sku="1195464225" href="javascript:;" onclick="searchlog(1,1195464225,0,5,'','adwClk=1')"><i></i>关注</a>
+							<a class="p-o-btn addcart" href="//cart.jd.com/gate.action?pid=1195464225&pcount=1&ptype=1" target="_blank" onclick="searchlog(1,1195464225,0,4,'','adwClk=1')" data-limit="0"><i></i>加入购物车</a>
+						</div>
+						
+		</div>
+	
+	</li>
+</#list>
 <li data-sku="1195464225" class="gl-item">
 
 	<div class="gl-i-wrap">
@@ -317,7 +376,7 @@
 
 </li>
 
-</ul><span class="clr"></span></div><div id="J_scroll_loading"><span>加载中</span></div><div class="page clearfix"><div id="J_bottomPage" class="p-wrap"></div></div>		</div>
+</ul><span class="clr"></span></div><div class="page clearfix"><div id="J_bottomPage" class="p-wrap"></div></div>		</div>
 	</div>
 	<div class="m-aside">
 		<div class="aside-bar">
@@ -326,6 +385,26 @@
 				<div class="mt"><h3>商品精选</h3></div>
 				<div class="mc">
 				<ul class="clearfix" data-x="ab">
+					<#list jplist as data>
+						<li onclick="searchlog(1,1195464225,0,81)">
+							<div class="p-img">
+								<a target="_blank" href="">
+									<img width="160" height="160" data-img="1" src="${data.jpimg}" class="err-product">
+									<img src="" class="J_adv_tuiguang_exposal" style="display:none;">
+								</a>
+							</div>
+							<div class="p-price">
+								<strong><em>¥</em><i>${data.jpprice}</i></strong>
+							</div>
+							<div class="p-name">
+								<a target="_blank" href="">
+									<em>${data.jpprice} <font class="skcolor_ljg">123</font>全国联保+15天退换货</em>
+								</a>
+							</div>
+							<div class="p-comm" style="padding:8px 10px 0">已有<span style="color:#005aa0">2003</span>人评价</div>
+						</li>
+					</#list>
+					
 					<li onclick="searchlog(1,1195464225,0,81)">
 						<div class="p-img">
 							<a target="_blank" href="https://ccc-x.jd.com/dsp/nc?ext=aHR0cHM6Ly9pdGVtLmpkLmNvbS8xMTk1NDY0MjI1Lmh0bWw&log=Ase-xToJ8v9S0TDIByt3yQoJokUMvGyJ4eQPL2_F9K7K-WQ7-KqthPeWavxLEFT84WKtSlt73c55SUCQJLtIN1n69KNWTgnnL9MIrCxa_ZcoDm3tA_43eIy9tana3Ocbm0-FetcVpl-N47-UQSCCQKPWbW6jKPDGZdWZQBdNEuUgLi2EuR4iwZX_6xjIAfgnIBzL_lbbm9gCtC_fYiOjMnpywsbRR8pm_cJ8yN4bL39ye9_i_ZzyG9CDrPPbzjd2P9IsFwlTU76MFCt-uGmORw63fwjXWU5EeYwCStGbHuOy-yRzd7pPjUSNL0IOVN1bSngA0wTSHE45E8oq8bmRQufB9cAhF9e0nLy_AbTL8bNua2C44kakR7u_2a-m8PQb4K3PFB3Z-fYp9Abmc5REXcYDb_QwEv5AA6UHjGoQWHSA5hcirDbDu6cHf7a4bOHz&v=404">

@@ -1,220 +1,28 @@
 
 $(function () {
-    //loadCartInfo();
-    bindAddAndReduceBtn();
-    bindBatchRemove();
-    bindSelectAll();
+    loadCartInfo();
 
     $('#toSettlement').click(function () {
         bindToSettlement(false);
     });
 
-    $('#toSettlementB2B').click(function () {
-        bindToSettlement(true);
-    });
-
 });
-var data = {};
-
 
 ///购物车数据加载
 function loadCartInfo() {
-    
-
-        //#region 商城购物车
-        data = {};
-        $.each(cart.products, function (i, e) {
-            if (data[e.shopId]) {
-                if (!data[e.shopId]['name']) {
-                    data[e.shopId]['name'] = e.shopName;
-                }
-                data[e.shopId]['shop'].push(e);
-            } else {
-                data[e.shopId] = {};
-                data[e.shopId]['shop'] = [];
-                data[e.shopId]['name'] = e.shopName;
-                data[e.shopId]['status'] = e.productstatus;
-                data[e.shopId]['shop'].push(e);
-            }
-        });
-        var strproductstatus = $("#hidSaleStatus").val();
-        var strproductauditstatus = $("#hidAuditStatus").val();
-        //#endregion
-
-
-        //#region B2B购物车数据展示处理
-        var B2BData = {};
-        $.each(cart.B2BProductInfo, function (index, currItem) {
-            if (B2BData[currItem.shopId]) {
-                if (!B2BData[currItem.shopId]['name']) {
-                    B2BData[currItem.shopId]['name'] = currItem.shopName;
-                }
-                B2BData[currItem.shopId]['shop'].push(currItem);
-            } else {
-                B2BData[currItem.shopId] = {};
-                B2BData[currItem.shopId]['shop'] = [];
-                B2BData[currItem.shopId]['name'] = currItem.shopName;
-                B2BData[currItem.shopId]['shopUrl'] = 'http://' + currItem.ShopComLoginName + '.cn.qipeiren.com';
-                B2BData[currItem.shopId]['ComIsVip'] = currItem.ComIsVip;
-                B2BData[currItem.shopId]['comVipType'] = currItem.ComVipType;
-                B2BData[currItem.shopId]['status'] = currItem.status;
-                B2BData[currItem.shopId]['shop'].push(currItem);
-            }
-        });
-        //#endregion
-
-
-        // 检测是否登录
-        var memberId = $.cookie('qpr_mall_user');
-        if (memberId) {
-            $('.cart-inner .message').find('.unLogin').hide();
-        }
-
-        if (cart.products.length == 0)
-        {
-            $('#js_show_loading').remove();
-            $(".cart-list").hide();
-        }
-        if (cart.B2BProductInfo.length == 0)
-        {
-            $('#js_show_loading').remove();
-            $(".B2B-cart-list").hide();
-        }
-		
-		
-        if (cart.products.length == 0 && cart.B2BProductInfo.length == 0) {
-            $('.cart-inner').addClass('cart-empty');
-        } else {
-            // 商城购物车总算 + 事件绑定
-            if (cart.products.length != 0) {
-                $('#js_show_loading').remove();
-                $(".cart-list").show();
-
-                var str = '';
-                $.each(data, function (i, e) {
-                    str += '\
-                  <div class="cart-toolbar cl">\
-                    <span class="column t-checkbox form">\
-                      <input type="checkbox" class="shopSelect" value="' + i + '" name="checkShop" checked="">\
-                      <label for=""><i class="norm-small-icon nsi-vip-mall"></i><a target="_blank" href="/shop/home/' + i + '" >' + e.name + '</a></label>' + ((i == 1) ? '<label class="t-mark">汽配人自营</label>' : '') + '\
-                    </span>\
-                  </div><div class="n-item-list">';
-                    $.each(e.shop, function (j, product) {
-
-                        if (product.productstatus != strproductstatus) {
-                            str += '\
-                        <div class="item item_disabled ">\
-                          <div class="item_form cl">\
-                            <div class="cell p-checkbox">\
-                              <span status=' + product.productstatus + ' name="checkItem" class="checkbox">失效</span>\
-                            </div>'
-                        } else {
-                            if (product.productauditstatus != strproductauditstatus) {
-                                str += '\
-                            <div class="item item_disabled">\
-                              <div class="item_form cl">\
-                                <div class="cell p-checkbox">\
-                                  <span status=' + product.productauditstatus + ' name="checkItem" class="checkbox">失效</span>\
-                                </div>'
-                            } else {
-                                str += '\
-                            <div class="item item_selected ">\
-                              <div class="item_form cl">\
-                                <div class="cell p-checkbox">\
-                                  <input class="checkbox" type="checkbox" data-cartid="'+ product.cartItemId + '" name="checkItem" checked="" value="' + product.shopId + '" sku="' + product.skuId + '" />\
-                                </div>'
-                            }
-                        }
-                        var skuStr = product.Color == "" || product.Color == null ? "" : '[颜色:' + product.Color + ']';
-                        skuStr += product.Size == "" || product.Size == null ? "" : '&nbsp;&nbsp;[尺码:' + product.Size + ']';
-                        skuStr += product.Version == "" || product.Version == null ? "" : '&nbsp;&nbsp;[规格:' + product.Version + ']';
-
-                        str += '<div class="cell p-goods">\
-                  <div class="p-img"><a href="/product/detail/' + product.id + '" target="_blank"><img src="' + product.imgUrl + '" alt="" /></a></div>\
-                  <div class="p-name"><a href="/product/detail/' + product.id + '" target="_blank">' + product.name + '<br/>' + skuStr + '</a><br>' + (product.productstatus != 1 || product.productauditstatus == 4 ? "[已停售]" : "") + '</div>'
-                        if (product.productcode.length > 0) {
-                            str += '<div class="p-code">商品图号：' + product.productcode + '</div>'
-                        }
-                        str += '</div>\
-                <div class="cell p-price"><span class="price">¥'+ product.price.toFixed(2) + '</span></div>\
-                <div class="cell p-quantity">\
-                  <div class="quantity-form">\
-                    <a href="javascript:void(0);" class="decrement" sku="'+ product.skuId + '" >-</a>\
-                    <input type="text" class="quantity-text" value="' + product.count + '" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,\'\');}).call(this)" onblur="this.v()" name="count" sku="' + product.skuId + '" />\
-                    <a href="javascript:void(0);" class="increment" sku="' + product.skuId + '"  >+</a>\
-                  </div>\
-                </div>\
-                <div class="cell p-remove"><a class="cart-remove" href="javascript:removeFromCart(\''+ product.skuId + '\',0)">删除</a></div>\
-              </div>\
-            </div>';
-                    });
-                    str += '</div>';
-                });
-                $('#product-list').html(str);
-                $('#totalSkuPrice').html('¥' + cart.amount.toFixed(2));
-                $('#selectedCount').html(cart.totalCount);
-                $('#finalPrice').html('¥' + cart.amount.toFixed(2));
-            }
-
-
-            //B2B购车总算 + 事件绑定
-            if (cart.B2BProductInfo.length != 0)
-            {
-                $('#js_show_loading').remove();
-                $(".B2B-cart-list").show();
-                var str2 = "";
-                $.each(B2BData, function (index, Item) {
-                    str2 += '\
-                  <div class="cart-toolbar cl">\
-                    <span class="column t-checkbox form">\
-                      <input type="checkbox" class="shopSelect" value="' + index + '" name="checkShop" checked="">\
-                      <label for=""><i class="' + ((Item.ComIsVip == 1 && Item.comVipType == 1) ? "norm-small-icon nsi-vip-basic" : ((Item.ComIsVip == 1 && Item.comVipType == 2) ? "norm-small-icon nsi-vip-standard" : "")) + '"></i><a target="_blank" href="' + Item.shopUrl + '">' + Item.name + '</a></label>\
-                    </span>\
-                  </div><div class="n-item-list">';
-                    $.each(Item.shop, function (j, product) {
-                        str2 += '\
-                    <div class="item item_selected ">\
-                        <div class="item_form cl">\
-                        <div class="cell p-checkbox">\
-                            <input class="checkbox" type="checkbox" data-cartid="' + product.cartItemId + '" name="checkItem" checked="" value="' + product.shopId + '" sku="' + product.skuId + '" proId="' + product.id + '"/>\
-                        </div>'
-
-
-                        var skuStr = "";
-                        str2 += '<div class="cell p-goods">\
-                  <div class="p-img"><a href="' + currQprUrl + '/Supply/supply-' + product.id + '.htm" target="_blank"><img src="' + product.imgUrlFull + '" alt="" /></a></div>\
-                  <div class="p-name"><a href="' + currQprUrl + '/Supply/supply-' + product.id + '.htm" target="_blank">' + product.name + '<br/>' + skuStr + '</a><br>' + (product.status != 1 ? "[已停售]" : "") + '</div>'
-                        str2 += '</div>\
-                <div class="cell p-price"><span class="price">¥'+ product.price.toFixed(2) + '</span></div>\
-                <div class="cell p-quantity">\
-                  <div class="quantity-form">\
-                    <a href="javascript:void(0);" class="decrement" sku="' + product.skuId + '" proId="' + product.id + '">-</a>\
-                    <input type="text" class="quantity-text" value="' + product.count + '" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,\'\');}).call(this)" onblur="this.v()" name="count" proId="' + product.id + '" sku="' + product.skuId + '" />\
-                    <a href="javascript:void(0);" class="increment" sku="' + product.skuId + '"  proId="' + product.id + '">+</a>\
-                  </div>\
-                </div>\
-                <div class="cell p-remove"><a class="cart-remove" href="javascript:removeFromCart(\'' + product.skuId + '\',' + product.id + ')">删除</a></div>\
-              </div>\
-            </div>';
-                    });
-                    str2 += '</div>';
-                });
-                $('#B2B-product-list').html(str2);
-                $('#totalSkuPriceB2B').html('¥' + cart.B2Bamount.toFixed(2));
-                $('#selectedCountB2B').html(cart.B2BtotalCount);
-                $('#finalPriceB2B').html('¥' + cart.B2Bamount.toFixed(2));
-            }
-
-            bindAddAndReduceBtn();
-            bindBatchRemove();
-            bindSelectAll();
-        }
-    
+        bindAddAndReduceBtn();
+        bindBatchRemove();
+        bindSelectAll();
+        var total = getCheckProductPrice(false);
+        $('#finalPrice').html('¥' + total);
+        $('#selectedCount').html(getCheckProductCount(false));
 }
 
 
 ///店铺、商品、全选 checkBox
 function bindSelectAll() {
+	var ILength = $('.item').length;
+	
     $('input[name="checkAll"]').change(function () {
         var checked = $(this).attr('checked');
         checked = checked ? true : false;
@@ -236,119 +44,55 @@ function bindSelectAll() {
             $('#selectedCountB2B').html(getCheckProductCount(true));
         } else {
             if (checked) {
-                $("#product-list").find('input[type="checkbox"]').attr('checked', checked);
-                $("#product-list").find('.item').addClass('item_selected');
-                $(".cart-list").find('input[name="checkAll"]').attr('checked', checked);
-                var total = getCheckProductPrice(false);
-                $('#finalPrice').html('¥' + total);
-            }
-            else {
+
                 $("#product-list").find('input[type="checkbox"]').removeAttr('checked');
                 $("#product-list").find('.item').removeClass('item_selected');
                 $(".cart-list").find('input[name="checkAll"]').removeAttr('checked');
                 $('#finalPrice').html('¥' + "0.00");
+            }
+            else {
+                $("#product-list").find('input[type="checkbox"]').attr('checked', '');
+                $("#product-list").find('.item').addClass('item_selected');
+                $(".cart-list").find('input[name="checkAll"]').attr('checked', '');
+                var total = getCheckProductPrice(false);
+                $('#finalPrice').html('¥' + total);
 
             }
             $('#selectedCount').html(getCheckProductCount(false));
         }
     });
-
-    $('input[name="checkShop"]').change(function () {
-        var checked = $(this).attr('checked'),
-            v = $(this).val();
-        checked = checked ? true : false;
-        var sku = $(this).parent().parent().parent()[0].id;
-        if (sku == "B2B-product-list") {
-            if (checked) {
-                var total = priceAll(this, false, checked);
-                var t = $('#finalPriceB2B').html();
-                var s = t.replace('¥', '');
-                $('#finalPriceB2B').html('¥' + (+parseFloat(s) + parseFloat(total)).toFixed(2));
-            } else {
-                var total = priceAll(this, false, checked);
-                var t = $('#finalPriceB2B').html();
-                var s = t.replace('¥', '');
-                $('#finalPriceB2B').html('¥' + (+parseFloat(s) - parseFloat(total)).toFixed(2));
-            }
-
-            $('#B2B-product-list input[type="checkbox"]').each(function (i, e) {
-                var a = $(e).val();
-                if (a == v) {
-                    $(e).attr('checked', checked);
-                    if(checked){
-                        $(e).parents('.item').addClass('item_selected');
-                    }else{
-                        $(e).parents('.item').removeClass('item_selected');
-                    }
-                }
-            });
-            var allShopChecked = true;
-            $('#B2B-product-list input[type="checkbox"]').each(function (i, e) {
-                if (!$(this).attr('checked')) {
-                    allShopChecked = false;
-                }
-            });
-            if (allShopChecked)
-                $('.B2B-cart-list input[name="checkAll"]').attr('checked', checked);
-            else
-                $('.B2B-cart-list input[name="checkAll"]').removeAttr('checked');
-            $('#selectedCountB2B').html(getCheckProductCount(true));
-        }
-        else {
-            if (checked) {
-                var total = priceAll(this, false, checked);
-                var t = $('#finalPrice').html();
-                var s = t.replace('¥', '');
-                $('#finalPrice').html('¥' + (+parseFloat(s) + parseFloat(total)).toFixed(2));
-            } else {
-                var total = priceAll(this, false, checked);
-                var t = $('#finalPrice').html();
-                var s = t.replace('¥', '');
-                $('#finalPrice').html('¥' + (+parseFloat(s) - parseFloat(total)).toFixed(2));
-            }
-
-            $('#product-list input[type="checkbox"]').each(function (i, e) {
-                var a = $(e).val();
-                if (a == v) {
-                    $(e).attr('checked', checked);
-                    if(checked){
-                        $(e).parents('.item').addClass('item_selected');
-                    }else{
-                        $(e).parents('.item').removeClass('item_selected');
-                    }
-                }
-            });
-
-            var allShopChecked = true;
-            $('#product-list input[type="checkbox"]').each(function (i, e) {
-                if (!$(this).attr('checked')) {
-                    allShopChecked = false;
-                }
-            });
-            if (allShopChecked)
-                $('.cart-list input[name="checkAll"]').attr('checked', checked);
-            else
-                $('.cart-list input[name="checkAll"]').removeAttr('checked');
-            $('#selectedCount').html(getCheckProductCount(false));
-        }
-    });
-
+	
+	
+	
     $('input[name="checkItem"]').change(function () {
         var checked = $(this).attr('checked');
         var sku = $(this).attr('sku');
             v = $(this).val();
         checked = checked ? true : false;
         if (checked) {
-            $(this).attr('checked', checked);
-            $(this).parents('.item').addClass('item_selected')
+            $(this).attr('checked', false);
+            $(this).parents('.item').removeClass('item_selected'); 
+            
+            $(".cart-list").find('input[name="checkAll"]').removeAttr('checked');
+            
+            
         } else {
-            $(this).removeAttr('checked');
-            $(this).parents('.item').removeClass('item_selected')
+            $(this).attr('checked',true);
+            $(this).parents('.item').addClass('item_selected');  
+            
+            var ItemLength = $('.item_selected').length;
+            if(ItemLength == ILength){
+            $(".cart-list").find('input[type="checkbox"][name="checkAll"]').attr('checked','');
+            }
         }
-
+        
+		$('#finalPrice').html('¥' + getCheckProductPrice(false));
+       	$('#selectedCount').html(getCheckProductCount(false));
+       	
+       	
         //判断店铺下的所有商品是否全选中
 
-        if (sku == "" || sku == undefined) {
+        /*if (sku == "" || sku == undefined) {
             var allProductChecked = true;
             $(".B2B-cart-list").find('input[name="checkItem"]').each(function (i, e) {
                 if ($(e).val() == v) {
@@ -419,9 +163,10 @@ function bindSelectAll() {
                 $('.cart-list input[name="checkAll"]').removeAttr('checked');
 
 
-            $('#finalPrice').html('¥' + getCheckProductPrice(false));
-            $('#selectedCount').html(getCheckProductCount(false));
-        }
+             
+        }*/
+        
+       
     });
 
 }
@@ -673,57 +418,43 @@ function updateCartItem(skuId, count,proId) {
 
 
 ///购物车商品删除
-function removeFromCart(skuId, proId) {
+function removeFromCart(goodsId) {
     $.dialog.confirm('确定要删除该商品吗?', function () {
-        var loading = showLoading();
-
-        if (skuId == "") {
-            $.post('/cart/UpdateB2BCartItem', { productId: proId, count: 0 }, function (result) {
+        	var loading = showLoading();
+        	var url = '/shopCar/del/' + goodsId;
+            $.post(url, function (result) {
                 loading.close();
                 if (result.success) {
                     loadCartInfo();
-                    var countCookie = $.cookie('qpr_mall_cart_count');
-                    $('#shopping-amount-self').html(countCookie);
+                    /*var countCookie = $.cookie('qpr_mall_cart_count');
+                    $('#shopping-amount-self').html(countCookie);*/
                 }
                 else {
                     $.dialog.errorTips(result.msg);
                 }
             });
-        }
-        else {
-            $.post('/cart/RemoveFromCart', { skuId: skuId }, function (result) {
-                loading.close();
-                if (result.success) {
-                    loadCartInfo();
-                    var countCookie = $.cookie('qpr_mall_cart_count');
-                    $('#shopping-amount-self').html(countCookie);
-                }
-                else {
-                    $.dialog.errorTips(result.msg);
-                }
-            });
-        }
     });
 }
 ///购物车批量删除
 function bindBatchRemove() {
     $('#remove-batch').click(function () {
-        var skuIds = [];
+        var goodsIds = [];
         $.each($('#product-list input[type="checkbox"][name="checkItem"]:checked'), function (i, checkBox) {
-            skuIds.push($(checkBox).attr('sku'));
+            goodsIds.push($(checkBox).attr('sku'));
         });
-        if (skuIds.length < 1) {
+        if (goodsIds.length < 1) {
             $.dialog.errorTips("请选择要删除的商品！");
-            return;
+            return; 
         }
         $.dialog.confirm('确定要删除选中的商品吗?', function () {
             var loading = showLoading();
-            $.post('/cart/BatchRemoveFromCart', { skuIds: skuIds.toString() }, function (result) {
+            
+            $.post('/shopCar/delSelect', { goodsIds: goodsIds.toString() }, function (result) {
                 loading.close();
                 if (result.success) {
                     loadCartInfo();
-                    var countCookie = $.cookie('qpr_mall_cart_count');
-                    $('#shopping-amount-self').html(countCookie)
+                    /*var countCookie = $.cookie('qpr_mall_cart_count');
+                    $('#shopping-amount-self').html(countCookie)*/
                 }
                 else {
                     $.dialog.errorTips(result.msg);
@@ -806,53 +537,46 @@ function getCheckProductCount(isB2B) {
 
 ///去结算按钮
 function bindToSettlement(isB2B) {
-    var memberId = $.cookie('qpr_mall_user');
-    var arr = [], str = '';
-
+    var memberId = $.cookie('token');
+    var datas = [], str = '';
+	
     if (!isB2B) {
+    	var good = {};
+
+    	var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
+        	
             if ($(e).attr('checked')) {
-                arr.push($(e).attr('data-cartid'));
+            	var arr = {};
+            	arr[goodsId] = $(e).attr('sku');
+                arr[count] = document.getElementById('count'+i);
+                good[num++] = arr;
             }
         });
+		
 
-        str = (arr && arr.join(','));
-
+		
         if (memberId) {
             if (str != "")
-                location.href = '/order/submit?' + 'cartItemIds=' + str + '&FromCart=1';
+            {
+            	$.post('/shopCar/detail', good, function (result) {
+            		
+	                loading.close();
+	                if (result.success){
+	                	location.href = "/shopCar/detailData";
+	                }
+	                    
+	                else
+	                    $.dialog.errorTips(result.msg);
+                    
+            	});
+            }
             else
                 $.dialog.errorTips("没有可结算的商品！");
         }
         else {
-            $.fn.login({}, function () {
-                location.href = '/order/submit';
-            }, '', '', '/Login/Login');
+        	
+            location.href = "/login";
         }
     }
-    else {
-        $("#B2B-product-list").find('input[name="checkItem"]').each(function (i, e) {
-            if ($(e).attr('checked')) {
-                arr.push($(e).attr('proId'));
-            }
-        });
-
-        str = (arr && arr.join(','));
-
-        if (memberId) {
-            if (str != "")
-                location.href = '/order/submit?' + 'productIds=' + str + '&FromCart=1';
-            else
-                $.dialog.errorTips("没有可结算的商品！");
-        }
-        else {
-            $.fn.login({}, function () {
-                location.href = '/order/submit';
-            }, '', '', '/Login/Login');
-        }
-    }
-
-
-
-
 }

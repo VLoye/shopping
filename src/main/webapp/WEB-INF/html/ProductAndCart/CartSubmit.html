@@ -12,48 +12,78 @@
     <link href="../css/inner.css" rel="stylesheet" />
     <link href="../css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
     <link href="../css/artdilog.css" rel="stylesheet" />
-    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/jquery.cookie.js"></script>
-    <script src="../js/userInfo.js"></script>
     <script src="../js/jQuery.mouseDelay.min.js"></script>
     <script src="../js/jquery.scrollLoading.min.js"></script>
     <script src="../js/web.js"></script>
     <script src="../js/CommonJS.js"></script>
     <script src="../js/jquery.artDialog.js"></script>
     <script src="../js/artDialog.iframeTools.js"></script>
+    
+    <script charset="utf-8" src="../template/admin/js/sysUtils.js"></script>
+	<script charset="utf-8" src="../template/admin/js/template-web.js"></script>
+	
     <script type="text/javascript">
         $(function () {
-            $('#searchBtn').click(function () {
-                var keyWords = $('#searchBox').val();
-                location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")// $('#searchBox').attr('placeholder')
-            });
-            $("#searchBox").keydown(function (e) {
-                if (e.keyCode == 13) {
-                    var keyWords = $('#searchBox').val();
-                    location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")//$('#searchBox').attr('placeholder')
-                }
-            });
+            AddressFormat();
         });
+        
+        var myurl = "/order/useraddress";
+
+		var AddressFormat = function(){
+			$.ajax({
+				url: myurl,
+				type: "post",
+				dataType: "json",
+				success: function(res){
+					$("#consignee-list").template("dataAddress",{list:res});
+					$("#s-content").template("selectedc",{list:res});
+				},
+				error: function(res){
+					//alert("ajax error : "+res);
+				}
+			});
+			$('#editReciever').click(function(){
+				var isshow = $("#addressListArea").css("display"); 
+				if(isshow  == "none")
+				{
+					$('#addressListArea').show();
+					$('#use-new-address').show();
+				}else{
+					$('#addressListArea').hide();
+					$('#use-new-address').hide();
+				}
+			});
+			
+			$('#newaddress').click(function(){
+				$('#addressEditArea').show();
+			});
+		}
+
     </script>
 </head>
 <body>
+
+
     <div class="h-top" id="headTopNav">
 
-<script>
-    $(function () {
-        refreshCartProducts();
-    });
-    function refreshCartProducts() {
-        var countCookie = $.cookie('qpr_mall_cart_count');
-        $('#right_cart em').text(countCookie);
-        $('#shopping-amount-self').html(countCookie)
-    }
-</script>
 <div class="h-w1200 ht-link">
-    <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-    <a class="h-fl" href="/UserCenter" target="_blank">tvbatvtt</a>
-    <i class="h-fl h-vline">|</i>
-    <a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/order/submit?cartItemIds=993&amp;FromCart=1">[退出]</a>
+    <div id = "loginstatus">
+    	<#if user.username>
+    		<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+		    <a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
+		    <i class="h-fl h-vline">|</i>
+		    <input type = "hidden" id = "userid" value = "${user.userid}"/>
+		    <a class="h-fl" href="">[退出]</a>
+    	</#if>
+    	<#else>
+    		<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+		    <a class="h-fl" href="/Login">登录</a>
+		    <i class="h-fl h-vline">|</i>
+		    <a class="h-fl" href="/Register">注册</a>
+    	</#else>
+    </div>
     <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
     <dl class="h-fr h-down ml0 ltb1">
         <dt>
@@ -105,6 +135,7 @@
 </style>
 <link href="../css/base.css" rel="stylesheet">
 <link href="../css/myjd.easebuy.css" rel="stylesheet">
+ <script class="resources library" src="../js/area.js" type="text/javascript"></script>
 
     <div class="w990 m2">
         <div id="checkout">
@@ -112,6 +143,7 @@
                 <h2>填写并核对订单信息</h2>
             </div>
             
+           
             <div id="wizard" class="checkout-steps">
                 <div id="step-1" class="step step-complete">
                     <div class="step-title">
@@ -121,52 +153,95 @@
                     <div class="step-content">
                         <div id="consignee" class="sbox-wrap">
                             <div class="sbox" style="width:100%;">
-                                <div class="s-content">
+                            	<script type="text/html" id = "selectedc">
+                            		{{each list as data i}}
+                            			{{if i == 0}}
+                            				<p id="selectedAddress">{{data.linkman}} &nbsp; {{data.tel}} &nbsp; {{data.province}} {{data.city}} {{data.area}} &nbsp;{{data.detailaddress}}&nbsp;</p>
+                            			{{/if}}
+                            		{{/each}}
+                            	</script>
+                                <div class="s-content" id = "s-content">
                                         <p id="selectedAddress">李天 &nbsp; 13376255489 &nbsp; 北京 北京市 门头沟区 &nbsp;垃圾场&nbsp;</p>
                                 </div>
                                 <div class="form" id="addressListArea" style="display: none">
                                     <div id="consignee-list">
+                                    	
+                                    	<script type="text/html" id = "dataAddress">
+                                    		{{each list data}}
+                                    			<div class="item" name="li-{{addressid}}">                        
+		                                    		<label>
+		                                    		{{if $index == 0}}
+		                                    			<input type="radio" id = "{{data.addressid}}" class="hookbox" name="address" checked="" value="{{data.addressid}}">  
+		                                    		{{/if}}
+		                                    		{{else}}
+		                                    			<input type="radio" id = "{{data.addressid}}" class="hookbox" name="address" checked="checked" value="{{data.addressid}}">  
+		                                    		{{/else}}
+		                                    				<span id = "linkman-{{data.addressid}}">{{data.linkman}}</span id = "region-{{data.addressid}}">&nbsp;<span id = "region-{{data.addressid}}">{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailedaddress}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;                        
+		                                    		</label>                        
+		                                    		<span class="item-action">                            
+		                                    			<a href="javascript:;" onclick="showEditArea('{{data.addressid}}')">编辑</a> &nbsp;                            
+		                                    			<a href="javascript:;" onclick="deleteAddress('{{data.addressid}}')">删除</a>&nbsp;                        
+		                                    		</span>                    
+		                                    	</div>
+                                    		{{each}}
+                                    	</script>
+                                    	
+                                    	<div class="item" name="li-1">                        
+                                    		<label>                            
+                                    			<input type="radio" id = "1" class="hookbox" name="address" checked="" value="1">                            
+                                    				<span id = "linkman-1">李梅</span>&nbsp;<span id = "region-1">湖北省 宜昌市 远安县</span>&nbsp;<span id = "detailedaddress-1">垃圾场 </span>&nbsp;<span id = "tel-1">13376255489</span>&nbsp;                        
+                                    		</label>                        
+                                    		<span class="item-action">                            
+                                    			<a href="javascript:;" onclick="showEditArea('1')">编辑</a> &nbsp;                            
+                                    			<a href="javascript:;" onclick="deleteAddress('1')">删除</a>&nbsp;                        
+                                    		</span>                    
+                                    	</div>
+                                    	<div class="item" name="li-6671">                        
+                                    		<label>                            
+                                    			<input type="radio" id = "6671" class="hookbox" name="address" checked="checked" value="6670">                            
+                                    				<span id = "linkman-6671">张天</span>&nbsp;<span id = "region-6671">湖北省 宜昌市 远安县</span>&nbsp;<span id = "detailedaddress-6671">垃圾场 </span>&nbsp;<span id = "tel-6671">13376255489</span>&nbsp;                        
+                                    		</label>                        
+                                    		<span class="item-action">                            
+                                    			<a href="javascript:;" onclick="showEditArea('6671')">编辑</a> &nbsp;                            
+                                    			<a href="javascript:;" onclick="deleteAddress('6671')">删除</a>&nbsp;                        
+                                    		</span>                    
+                                    	</div>
                                     </div>
-                                    <div class="item" id="use-new-address">
+                                    <div style="display: none" class="item" id="use-new-address">
                                         <input type="radio" onclick="showEditArea(0)" class="hookbox" name="address" id="consignee_radio_new" />
-                                        <label for="consignee_radio_new">使用新地址 </label>
+                                        <label id = "newaddress" for="consignee_radio_new">使用新地址 </label>
                                         <span class="status error" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当前地址数量已达上限，若要继续添加新地址，请先删除部分收货地址。</span>
                                     </div>
                                     <form style="display: none" id="addressEditArea">
                                         <div class="consignee-form" id="consignee-form" name="consignee-form">
-                                            <div class="list message" id="name_div">
+                                        	<input type = "hidden" id = "adid"  value = ""/>
+                                            <div class="list select-address" id="name_div">
                                                 <span class="label"><em>*</em>收货人：</span>
                                                 <div class="field">
                                                     <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20" onblur="check_Consignee('name_div')" />
                                                 </div>
                                                 <span class="status error" id="name_div_error"></span>
                                             </div>
-                                            <div class="list select-address" id="area_div">
+                                            <div class="list" id="area_div">
+                                           
                                                 <span class="label"><em>*</em>所在地区：</span>
                                                 <div class="field">
-                                                    <span id="span_area">
+                                                    <span id="span_area" class = "info">
                                                         <span id="span_province">
-                                                            <select id="consignee_province">
-                                                                <option value="">请选择：</option>
-                                                            </select>
+                                                            <select id="s_province" name="s_province">	
+                                                            </select> 
                                                         </span>
                                                         <span id="span_city">
-                                                            <select id="consignee_city">
-                                                                <option value="">请选择：</option>
-                                                            </select>
+                                                            <select id="s_city" name="s_city">	
+                                                            </select> 
                                                         </span>
                                                         <span id="span_county">
-                                                            <select id="consignee_county">
-                                                                <option value="">请选择：</option>
-                                                            </select>
-                                                        </span>
-                                                        <span id="span_town" style="display: none">
-                                                            <select id="consignee_town">
-                                                                <option value="">请选择：</option>
+                                                            <select id="s_county" name="s_county">	
                                                             </select>
                                                         </span>
                                                     </span>
-                                                </div>
+                                                    <script type="text/javascript">_init_area();</script>
+                                            	</div>
                                             </div>
                                             <div class="list full-address" id="address_div">
                                                 <span class="label"><em>*</em>详细地址：</span>
@@ -187,12 +262,14 @@
                                                     <span class="status error" id="call_div_error"></span>
                                                 </div>
                                             </div>
+                                 			<div class="form-btn group">
+                                 				<button style="background: paleturquoise;width:100px;height: 40px;" class="checkout" href="javascript:void(0);" id="saveConsigneeTitleDiv">保存收货人信息</button>
+		                                        <div class="loading loading-1" style="display: none"><b></b>正在提交信息，请等待！</div>
+		                                    </div>
                                         </div>
+                                        
                                     </form>
-                                    <div class="form-btn group">
-                                        <a href="javascript:;" class="btn-submit"><span id="saveConsigneeTitleDiv">保存收货人信息</span></a>
-                                        <div class="loading loading-1" style="display: none"><b></b>正在提交信息，请等待！</div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -215,7 +292,7 @@
                     </div>
                 </div>
 
-                <div class="step step-complete" style="display:none;">
+                <!--<div class="step step-complete" style="display:none;">
                     <div class="step-title"><strong>发票信息</strong></div>
                     <div class="step-content">
                         <div class="sbox-wrap">
@@ -238,7 +315,8 @@
                         </div>
 
                     </div>
-                </div>
+                </div>-->
+
 
                 <div id="step-4" class="step step-complete bt0">
                     <input id="IsB2BHide" type="hidden" value="0"/>
@@ -259,7 +337,6 @@
 
 
                                     <span class="order-review">
-                                        <div class="step-title" style="padding-left: 0;"><a target="_blank" href="/shop/home/8" class="return-edit" style="float:left;"><i class="qpr-edition-icon qei-mall"></i>新华强配件专营店</a></div>
                                         <!--商品清单展示-->
                                             <span id="span-skulist">
                                                 <!--**********商品清单内容列表开始************-->
@@ -268,6 +345,30 @@
                                                         <table class="order-table" shopid="8">
                                                         <tbody>
 
+                                                                <#list goods as item>
+                                                                	<tr id="${item.goodsid}" skuid="${item.goodsid}" quntity="1" price="${item.goodsprice}">
+								                                        <td class="fore1" style="padding: 10px;">
+								                                            <div class="p-goods">
+								                                                <div class="p-img">
+								                                                    <a href="${item.goodsurl}" target="_blank">
+								                                                        <img alt="" src="${item.goodsimg}" />
+								                                                    </a>
+								                                                </div>
+								               
+								                                                <div class="p-detail">
+								                                                    <div class="p-name">
+								                                                        <a href="{{data.goodsurl}}" target="_blank">
+								                                                            ${item.brand} ${item.goodsname}<br />
+								                                                        </a>
+								                                                    </div>
+								                                                </div>
+								                                            </div>
+								                                        </td>
+								                                        <td class="p-price"><strong>￥${item.goodsprice}</strong></td>
+								                                        <td class="fore2">
+								                                               <label>x</label>  <span name = "ngoodscount"> ${item.count}  </span>                                                              </td>
+								                                    </tr>
+                                                                </#list>
                                                                 
                                                                 <tr skuid="1951_0_0_0" quntity="1" price="2170.0000">
                                                                     <td class="fore1" style="padding: 10px;">
@@ -283,16 +384,12 @@
                                                                                         东风原厂  康明斯  6L四配套 配活塞4987914 &nbsp; <br />
                                                                                     </a>
                                                                                 </div>
-                                                                                <div class="p-more">
-                                                                                    商品图号：
-                                                                                    <a href="/Product/Detail/1951" target="_blank">DFL 14A 114</a>
-                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td class="p-price"><strong>￥2170.00</strong></td>
                                                                     <td class="fore2">
-                                                                           <label>x</label> 1                                                                    </td>
+                                                                           <label>x</label> <span>1</span>                                                                    </td>
                                                                 </tr>
                                                         </tbody>
                                                         </table>
@@ -300,38 +397,22 @@
                                                 </div>
                                                 <!--**********商品清单内容列表结束************-->
                                             </span>
-                                            <div class="order-summary ordsumbox" data-shopid="8" id="orderdata_8" style="background:#F2F6FF">
-                                                <div class="statistic">
-                                                    <div class="disc">
-                                                        <textarea placeholder="订单备注" class="OrderRemark" rema="8"></textarea>
-                                                    </div>
-
-                                                    <div class="list">
-                                                        <div class="shopd" data="2170.00" data-v="2170.00">￥2170.00</div>
-                                                        <div class="shope">店铺合计（含运费）：</div>
-
-                                                        <div class="span clr"></div>
-                                                        <div class="shopf" data="0" data-profrei="0" data-free="0.00">￥0</div>
-                                                        <div class="shopg">运费：</div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="span clr"></div>
-                                            </div>
-
-                                    <div class="order-summary" style="margin-top: 30px; border-top: 1px solid #E6E6E6;">
+                                    
+                                    <div id = "totalA" class="order-summary" style="margin-top: 30px; border-top: 1px solid #E6E6E6;">
                                         <div class="statistic fr">
+                                        	<#if total>
                                             <div class="list">
-                                                <span><em id="span-skuNum">1</em> 件商品，总商品金额：</span>
-                                                <em class="price" id="warePriceId" v="2170.0000">￥2170.00</em>
+                                                <span><em id="span-skuNum">${total.totalcount}</em> 件商品，总商品金额：</span>
+                                                <em class="price" id="warePriceId" v="2170.0000">￥{total.totalprice}.00</em>
                                             </div>
                                             <div class="list"><span>运费：</span>
                                                 <em class="price" id="totalFreight"> ￥0.00</em>
                                             </div>
-                                            <div class="list" style="display:none;"><span style="margin-right:120px;">优惠券抵扣金额：</span>
                                             <em class="price" id="id_c" style="width:122px;"></em>
+                                            </#if>
                                            </div>
                                         </div>
+                                        
                                         <div class="span clr"></div>
                                     </div>
                                 </div>
@@ -341,18 +422,21 @@
                     </div>
                 </div>
             </div>
-            <div class="checkout-buttons group">
+
+            <div class="checkout-buttons group" id = "s-total">
                 <div class="sticky-placeholder">
                     <div class="sticky-wrap">
+                    <#if total>
                         <div class="inner">
                             <span class="total" style="float: left;"><a href="/cart/cart" class="return-edit">返回修改购物车</a></span>
                             <button type="button" id="submit" class="checkout-submit">提交订单</button>
                             <span class="total">
                                 <label>应付总额：</label>
-                                <strong id="payPriceId" data-real="2170.00" data="2170.00">2170.00</strong>
+                                <strong id="payPriceId" data-real="${total.totalprice}.00" data="${total.totalprice}.00">${total.totalprice}.00</strong>
                                 <label>元</label>
                             </span>
                         </div>
+                    </#if>
                     </div>
                 </div>
             </div>
@@ -395,8 +479,8 @@
 </div>
 
 
-<input type="hidden" id="shippingAddressId" value="6618" />
-<input type="hidden" id="cartItemIds" value="993" />
+<!--<input type="hidden" id="shippingAddressId" value="6618" />
+<input type="hidden" id="cartItemIds" value="993" />-->
 
 <script src="../js/Region.js"></script>
 <script src="../js/regionBind.js"></script>
@@ -404,7 +488,7 @@
 <script src="../js/CommonJS.js"></script>
 <script src="../js/jquery.json.js"></script>
 
-<script>
+<!--<script>
     var orderUrl = 'http://order.qipeiren.com';
 
     function invoiceReceipt() {
@@ -618,7 +702,7 @@
         });
 
     });
-</script>
+</script>-->
 
 
 <link href="../css/css_foot.css" rel="stylesheet" />
