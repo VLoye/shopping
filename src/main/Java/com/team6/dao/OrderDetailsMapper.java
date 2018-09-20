@@ -50,4 +50,6 @@ public interface OrderDetailsMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(OrderDetails record);
+
+    int deleterByOrderId(Integer order_id);
 }
