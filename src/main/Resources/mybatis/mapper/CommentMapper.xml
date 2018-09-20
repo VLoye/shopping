@@ -186,4 +186,11 @@
       logistics_score = #{logisticsScore,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="queryCommentByGoodsId" resultType="java.util.Map">
+    select c.content as content,c.entity_type as entype,g.name as enname,c.description_score as deecriptionscore
+     c.service_score as service_score,c.logistics_score as logistics_score
+     from comment c,goods g
+     where c.entity_id=#{goodsId} and g.id=#{goodsId};
+  </select>
 </mapper>

@@ -9,6 +9,7 @@ public enum LoginEnum {
     Login_ERROR("登陆失败"),
     LOGIN_VCODE_ERROR("验证码错误"),
     LOGIN_COOKIE_TOKEN_NAME("token"),  //cookie的名字
+    LOGIN_OFF("用户没登陆"),
 
     //注册信息
     REGIEST_SUCCESS("success"),

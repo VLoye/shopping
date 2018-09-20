@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +42,11 @@ public class IndexContorller {
         //获取轮播图
         List rblist = (List)rbService.queryAllInfo();
 
-
+        //商品信息
         List clist = goodsService.querySaleByGoodType();
+
+
+        //用户信息
         Map<String,Object> map = loginService.getCurrentUserInfo(request);
         //用户userid和username
         model.addAttribute("user",map);
