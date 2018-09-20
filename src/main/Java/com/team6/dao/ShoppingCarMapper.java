@@ -1,6 +1,9 @@
 package com.team6.dao;
 
 import com.team6.entity.ShoppingCar;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ShoppingCarMapper {
     /**
@@ -50,4 +53,10 @@ public interface ShoppingCarMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(ShoppingCar record);
+
+    public ShoppingCar queryByUserIdAndGoodsId(@Param("goodsId")int goodsId,@Param("userId")int userId);
+
+    public List queryGidCountByUserid(Integer userid);
+
+    public int delUserGoodsById(@Param("goodsId") int goodsId,@Param("userId") int userId);
 }

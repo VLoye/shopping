@@ -1,5 +1,7 @@
 package com.team6.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 public class OrderInfo {
