@@ -72,4 +72,6 @@ public interface GoodsMapper {
 
     List<Map<String,Object>> querySaleByGoodType(@Param("typeId") int typeId,@Param("limit") int limit);
 
+
+
 }

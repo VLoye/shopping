@@ -44,6 +44,19 @@
         <property name="suffix" value=".html" />
     </bean>
 
+    <bean  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">
+                    ../../login
+                </prop>
+                <prop key="org.apache.shiro.authz.UnauthenticatedException">
+                    ../../login
+                </prop>
+            </props>
+        </property>
+    </bean>
+
     <!--shiro权限注入支持-->
    <aop:config proxy-target-class="true"></aop:config>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
