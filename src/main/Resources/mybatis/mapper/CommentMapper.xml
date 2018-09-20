@@ -187,10 +187,22 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <!--查询商品的10条评论-->
   <select id="queryCommentByGoodsId" resultType="java.util.Map">
-    select c.content as content,c.entity_type as entype,g.name as enname,c.description_score as deecriptionscore
+    select c.id as id ,c.content as content,c.entity_type as entype,g.name as enname,c.description_score as decriptionscore,
      c.service_score as service_score,c.logistics_score as logistics_score
-     from comment c,goods g
-     where c.entity_id=#{goodsId} and g.id=#{goodsId};
+     from goods g , comment c
+     where c.entity_id=#{goodsId} and g.id=c.entity_id limit #{num},10;
+  </select>
+  
+  <!--根据回复id查询-->
+  <select id="quertReplyById" resultType="java.util.Map">
+    select id as id ,content as content ,entity_type as entype,description_score as decriptionscore,
+    service_score as service_score,logistics_score as logistics_score
+    from comment where entity_id = #{id};
+</select>
+
+  <select id="queryCommentCountByGoodsId" >
+    select count(*) from comment where entity_id=#{goodsId};
   </select>
 </mapper>
