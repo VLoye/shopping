@@ -125,7 +125,7 @@ public class LoginServiceImp implements LoginService {
      * @param request
      * @return
      */
-    public Map<String,Object> getCurrentUserInfo(HttpServletRequest request){
+    public Map<String,Object> getIndexUserInfo(HttpServletRequest request){
         Cookie cookies[] = request.getCookies();
         //如果用户登陆了 token就存在
         String token =(String) SecurityUtils.getSubject().getPrincipal();
@@ -149,19 +149,19 @@ public class LoginServiceImp implements LoginService {
 
         Map<String, Claim> map;
         //首页用户信息
-        Map<String,Object> currentUserInfo=null;
+        Map<String,Object> indexUserInfoMap=null;
         try {
             map = jwtUtil.verifyToken(token);
             if(map.size()>0){
-                currentUserInfo = new HashMap<>();
-                currentUserInfo.put("username",map.get("name"));
-                currentUserInfo.put("userid",map.get("id"));
+                indexUserInfoMap = new HashMap<>();
+                indexUserInfoMap.put("username",map.get("name"));
+                indexUserInfoMap.put("userid",map.get("id"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return currentUserInfo;
+        return indexUserInfoMap;
     }
 
 }
