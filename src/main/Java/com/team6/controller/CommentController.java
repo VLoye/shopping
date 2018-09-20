@@ -20,11 +20,14 @@ public class CommentController {
     @RequestMapping(value = "/commnets/{goodsId}",method = RequestMethod.POST)
     @ResponseBody
     public Model getCommentList(@PathVariable("goodsId" ) int goodsId,
+                                @RequestParam("currNum") int currNum,
                                 HttpServletRequest request,
                                 Model model){
 
-        List list = commentService.queryByGoodId(goodsId);
+        List list = commentService.queryByGoodId(goodsId,currNum);
+        int pageNum = commentService.queryPageNumByGoodId(goodsId);
         model.addAttribute("data",list);
+        model.addAttribute("pageNum",pageNum);
         return model;
     }
 

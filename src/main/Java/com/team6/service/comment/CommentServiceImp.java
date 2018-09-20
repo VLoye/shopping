@@ -2,6 +2,7 @@ package com.team6.service.comment;
 
 import com.team6.dao.CommentMapper;
 import com.team6.entity.Comment;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,27 @@ public class CommentServiceImp implements CommentService {
     @Autowired
     CommentMapper commentMapper;
     @Override
-    public List<Map<String,Object>> queryByGoodId(int id) {
-
-        List<Map<String,Object>> list = queryByGoodId(id);
+    public List<Map<String,Object>> queryByGoodId(int id,int currNum) {
+        //搜索到10条评论
+        int num = (currNum-1)*10;
+        List<Map<String,Object>> list = commentMapper.queryCommentByGoodsId(id,num);
+        for(Map map:list){
+            int commentId = (int)map.get("id");
+            Map commentMap = commentMapper.quertReplyById(commentId);
+            map.put("reply",commentMap);
+        }
         return list;
+    }
+
+
+
+    @Override
+    public int queryPageNumByGoodId(int id) {
+        int count = commentMapper.queryCommentCountByGoodsId(id);
+        int pageNum = 1;
+        if(count%10==0) pageNum=count/10;
+        else pageNum = count/10+1;
+        return pageNum;
     }
 
     @Override
