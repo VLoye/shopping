@@ -205,4 +205,31 @@
   <select id="queryCommentCountByGoodsId" >
     select count(*) from comment where entity_id=#{goodsId};
   </select>
+
+  <!--查询用户已经评论的所有商品-->
+  <select id="queryCommentByUserId" resultType="java.util.Map">
+
+    select c.entity_id as goodsId, c.content as content,c.description_score as descriptionScore,
+           c.service_score as serviceScore, c.logistics_score as logisticsScore,
+           b.name as brandName,b.img_url as brandImg,b.id as brandId,
+           g.id as goodsId,g.img_url as goodsImg, g.name as goodsName,
+           g.seller_id as sellerId,g.price as price, u.name as sellerName
+    from goods g , comment c ,brand b ,user u
+    where c.user_id = #{userId} and  c.entity_type=2 and
+     g.id = c.entity_id and u.id =g.seller_id  and b.id = g.brand_id
+    and c.content is not null ;
+
+  </select>
+
+  <select id="queryNoCommentByUserId" resultType="java.util.Map">
+  select c.entity_id as goodsId, c.content as content,c.description_score as descriptionScore,
+           c.service_score as serviceScore, c.logistics_score as logisticsScore,
+           b.name as brandName,b.img_url as brandImg,b.id as brandId,
+           g.id as goodsId,g.img_url as goodsImg, g.name as goodsName,
+           g.seller_id as sellerId,g.price as price, u.name as sellerName
+    from goods g , comment c ,brand b ,user u
+    where c.user_id = #{userId} and  c.entity_type=2 and
+    u.id =g.seller_id and g.id = c.entity_id and b.id = g.brand_id
+    and c.content is  null ;
+  </select>
 </mapper>

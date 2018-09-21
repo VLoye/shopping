@@ -70,4 +70,18 @@ public interface CommentMapper {
 
    Map<String ,Object> quertReplyById(@Param("id") int id);
 
+    /**
+     * 查询用户以评论的商品
+     * @param userId
+     * @return
+     */
+   List<Map> queryCommentByUserId(@Param("userId") int userId);
+
+    /**
+     * 查询用户没有评论的商品
+     * @param userId
+     * @return
+     */
+   List<Map> queryNoCommentByUserId(@Param("userId") int userId);
+
 }

@@ -32,13 +32,13 @@ public interface CommentService {
      * 已评价商品
      * @return
      */
-    public List<Map> okComment();
+    public List<Map> okComment(int userId);
 
     /**
      * 未评价的商品
      * @return
      */
-    public List<Map> noComment();
+    public List<Map> noComment(int userId);
 
 
 }
