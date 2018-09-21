@@ -32,8 +32,8 @@ public class ShopCarServiceImpTest {
 
     @Test
     public void test(){
-        List<Map<String,Object>> list = commentMapper.queryCommentByGoodsId(10,10);
-        Map map = commentMapper.quertReplyById(1);
-        System.out.println(map);
+        int userId = 10001;
+        List<Map> list = commentMapper.queryCommentByUserId(userId);
+        System.out.println(list);
     }
 }
