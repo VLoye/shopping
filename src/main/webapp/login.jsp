@@ -49,14 +49,20 @@ $(document).ready(function () {
             type:"POST",
             contentType: 'application/json',
             //提交的网址
-            url:"/comment/add/1",
+            url:"/indexData",
             async:true,
             //提交的数据
-            data:/*JSON.stringify(obj)*/{"listid":list},
+            /*data:JSON.stringify(obj),*/
             //返回数据的格式
             datatype: "json",
             //成功返回之后调用的函数
             success:function (data){
+
+                console.log(data);
+                console.log(data.clist);
+                var obj = data.clist[0];
+                console.log(obj);
+                console.log(obj[0].name);
                 //登陆失败更换验证码
                 if (data.status!="success"){
                     changecode();
