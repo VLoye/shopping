@@ -61,16 +61,22 @@ public class CommentServiceImp implements CommentService {
 
     @Override
     public int reply(Map map) {
+
+
         return 0;
     }
 
     @Override
-    public List<Map> okComment() {
-        return null;
+    public List<Map> okComment(int userId) {
+        List<Map> list = commentMapper.queryCommentByUserId(userId);
+
+        return list;
     }
 
     @Override
-    public List<Map> noComment() {
-        return null;
+    public List<Map> noComment(int userId) {
+        List<Map> list = commentMapper.queryNoCommentByUserId(userId);
+
+        return list;
     }
 }
