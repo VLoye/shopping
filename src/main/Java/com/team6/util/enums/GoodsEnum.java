@@ -34,7 +34,8 @@ public enum GoodsEnum {
         Info=info;
     }
     GoodsEnum(int type,String info){
-        type=type;
+        this.type=type;
+        this.Info=info;
     }
     public String getInfo() {
         return Info;

@@ -3,11 +3,14 @@ package com.team6.controller;
 import com.team6.service.Goods.GoodsService;
 import com.team6.service.login.LoginService;
 import com.team6.service.rb.RbService;
+import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +27,12 @@ public class IndexContorller {
     @Autowired
     RbService rbService;
 
+    @RequestMapping(value = "/index")
+    public String toIndex(){
+
+        return "/Main/Index";
+    }
+
     /**
      * 首页一些需要的信息的信息
      *
@@ -33,9 +42,10 @@ public class IndexContorller {
      * @return
      */
 
-    @RequestMapping("/index")
-    public ModelAndView getIndexPageInfo(Model model,
-                                  HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/indexData",method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+    @ResponseBody
+    public Object getIndexPageInfo(Model model,
+                                         HttpServletRequest request, HttpServletResponse response){
 
 
 
@@ -54,9 +64,12 @@ public class IndexContorller {
         model.addAttribute("clist",clist);
         //展示轮播图
         model.addAttribute("rblist",rblist);
-        ModelAndView modelAndView = new ModelAndView("/Main/Index", "data",model);
 
-        return modelAndView;
+
+
+        /*ModelAndView modelAndView = new ModelAndView("/Main/Index", "data",model);*/
+
+        return JSONUtil.toJSON(model);
     }
 
     /**

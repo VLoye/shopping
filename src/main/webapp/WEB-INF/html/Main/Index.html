@@ -16,7 +16,7 @@
     <link href="static/css/artdilog.css" rel="stylesheet" type="text/css">
 
     <script src="static/js/jquery-3.3.1.min.js"></script>
-    <script src="static/js/jquery-1.7.1.min.js"></script>
+    <!--<script src="static/js/jquery-1.7.1.min.js"></script>-->
     <script src="static/js/web.js"></script>
     <script src="static/js/jquery.artDialog.js"></script>
     <script src="static/js/artDialog.iframeTools.js"></script>
@@ -30,6 +30,7 @@
     <script src="static/js/jquery.scrollLoading.min.js"></script>
     <script src="static/js/jquery.nicescroll.min.js"></script>
     <script src="static/js/jQuery.menuShow-mall.js"></script>
+    <script src="static/js/jQuery.index-logic.js"></script>
 
     <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
     <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
@@ -51,30 +52,18 @@
 <div class="h-top" id="headTopNav">
 
     <script id = "logstatus" type = "text/html">
-        {{if data.username}}
+        {{if data}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
         <a class="h-fl" href="/UserCenter" target="_blank">{{data.username}}</a>
         <input type = "hidden" text = "{{data.userid}}" id = "userid"/>
         <i class="h-fl h-vline">|</i>
         <a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/cart/cart">[退出]</a>
-        {{/if}}
         {{else}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
         <a class="h-fl" href="/Login">登录</a>
         <i class="h-fl h-vline">|</i>
         <a class="h-fl" href="/Register">注册</a>
-        {{/else}}
-    </script>
-
-    <div class="h-w1200 ht-link">
-
-        <!--<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-        <a class="h-fl" href="/Login">登录</a>
-        <i class="h-fl h-vline">|</i>
-        <a class="h-fl" href="/Register">注册</a>-->
-
-        <div id = "loginstatus"></div>
-
+        {{/if}}
         <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
         <dl class="h-fr h-down ml0 ltb1">
             <dt>
@@ -99,6 +88,16 @@
         <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
         <i class="h-fr h-vline">|</i>
         <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+    </script>
+
+    <div class="h-w1200 ht-link" id="loginstatus">
+
+        <!--<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+        <a class="h-fl" href="/Login">登录</a>
+        <i class="h-fl h-vline">|</i>
+        <a class="h-fl" href="/Register">注册</a>-->
+
+
     </div>
 </div>
 
@@ -696,11 +695,17 @@
 
 <script id = "goodsAdvertisement" type="text/html">
     {{each list data}}
-    <input type="hidden" id="{{data.rbid}}" value="{{data.rbname}}"/>
-    <a href="{{data.rburl}}" target="_blank" style="display:block;">
+    <a id="{{data.rbid}}" href="" target="_blank" style="display:block;">
         <img src="{{data.rburl}}" height="276" />
     </a>
-    {{each}}
+    {{/each}}
+    <p class="hp1-ad-btn" id="js_hp1_ad_btn"></p>
+    <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn">
+        <div class="hp1-ad-lr-btn-in">
+            <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left"><i></i></span>
+            <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right"><i></i></span>
+        </div>
+    </div>
 </script>
 
 
@@ -712,16 +717,8 @@
             <!-- 自动轮播图片-->
             <div class="hp1-ad" id="js_hp1_ad">
 
-                <div id = "goodsBroadcast">
-                </div>
 
-                <p class="hp1-ad-btn" id="js_hp1_ad_btn"></p>
-                <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn">
-                    <div class="hp1-ad-lr-btn-in">
-                        <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left"><i></i></span>
-                        <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right"><i></i></span>
-                    </div>
-                </div>
+
             </div>
             <!--特惠产品-->
 
@@ -1189,18 +1186,18 @@
             <div class="aid-imgbox">
                 <div class="aid-img">
                     <a href="/goodspage?goodsid={{data.goodsid}}" target="_blank">
-                    <img src="{{data.gimg}}" alt="{{data.gname}}">
+                    <img src="{{data.img_url}}" alt="{{data.name}}">
                     </a>
                 </div>
             </div>
-            <input type = "hidden" id="{{data.gid}}" value="{{data.gid}}" />
+            <input type = "hidden" id="{{data.type_id}}" value="{{data.type_id}}" />
             <div class="aid-titbox">
-                <div class="aid-tit"><a href="/goodspage?goodsid={{data.goodsid}}" target="_blank">{{data.gname}}</a></div>
-                <div class="aid-price"><span>{{data.gprice}}</span></div>
+                <div class="aid-tit"><a href="/goodspage?goodsid={{data.id}}" target="_blank">{{data.name}}</a></div>
+                <!--<div class="aid-price"><span>{{data.gprice}}</span></div>-->
             </div>
         </div>
     </div>
-    {{each}}
+    {{/each}}
 </script>
 
 <!--橱窗-->
@@ -1515,7 +1512,7 @@
 
 <script type="text/javascript">
 
-    var myurl = "/index";
+    var myurl = "/indexData";
     var shopCarurl = "/shopCarData";
     var userprops = "";
     var isloginbool = false;
@@ -1530,32 +1527,35 @@
                 $("#side-cart-list").template("shopCarFormat",{list:data.goods});
 
             },
-            error: function(res){
+            error: function(data){
                 //parent.layer.msg(res.title);
                 //alert(res.title);
             }
         });
     }
 
-    var IndexFormat = function(){
+    var IndexFormat = function() {
+
         $.ajax({
             url: myurl,
             type: "post",
             dataType: "json",
-            success: function(data){
-                alert(data.user);
-                $("#goodsBroadcast").template("goodsAdvertisement",{list:data.rblist});
-                $("#loginstatus").template("logstatus",{data:data.user});
-
+            success: function (data) {
+                console.log(data);
+                //$("#goodsBroadcast").template("goodsAdvertisement", {list: data.rblist});
+                //$("#loginstatus").template("logstatus", {data: data.user});
+                $("#js_hp1_ad").append(template("goodsAdvertisement", {list: data.rblist}));
+                $("#loginstatus").append(template("logstatus", {data: data.user}));
+                alert(data);
                 isloginbool = true;
                 var goodslist = data.clist;
-                var list1 = [],
-                    list2 = [],
-                    list3 = [],
-                    list4 = [],
-                    list5 = [],
-                    list6 = [];
-                $.each(goodslist,function(i,d) {
+                var list1 = goodslist[0],
+                    list2 = goodslist[1],
+                    list3 = goodslist[2],
+                    list4 = goodslist[3],
+                    list5 = goodslist[4],
+                    list6 = goodslist[5];
+                /*$.each(goodslist,function(i,d) {
                     if(i>=0 && i<8)
                     {
                         list1.push(d);
@@ -1580,24 +1580,26 @@
                     {
                         list6.push(d);
                     }
+                });*/
+                $("#goodswindow1").append(template("goodsFormat", {list: list1}));
+                $("#goodswindow2").append(template("goodsFormat", {list: list2}));
+                $("#goodswindow3").append(template("goodsFormat", {list: list3}));
+                $("#goodswindow4").append(template("goodsFormat", {list: list4}));
+                $("#goodswindow5").append(template("goodsFormat", {list: list5}));
+                $("#goodswindow6").append(template("goodsFormat", {list: list6}));
 
-                    $("#goodswindow1").template("goodsFormat",{list:list1});
-                    $("#goodswindow2").template("goodsFormat",{list:list2});
-                    $("#goodswindow3").template("goodsFormat",{list:list3});
-                    $("#goodswindow4").template("goodsFormat",{list:list4});
-                    $("#goodswindow5").template("goodsFormat",{list:list5});
-                    $("#goodswindow6").template("goodsFormat",{list:list6});
 
-                });
+
+
 
             },
-            error: function(data){
+            error: function (data) {
+                alert("error")
                 //parent.layer.msg(res.title);
                 //alert(res.title);
             }
         });
-    };
-
+    }
     $(function(){
 
 
@@ -1632,6 +1634,7 @@
                     rightSide.css('right','-220px').animate({right:'0'},300);
                 }
                 $(this).addClass('active').siblings().removeClass('active');
+                isloginbool = true;
             }
         });
 

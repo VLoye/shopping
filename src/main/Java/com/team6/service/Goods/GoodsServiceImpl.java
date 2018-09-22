@@ -18,7 +18,6 @@ import java.util.Set;
 public class GoodsServiceImpl implements GoodsService {
     private final int LIMIT = 8;
     private final int[] floors ={
-            10018,
             GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
             GoodsEnum.TYPE_TRADITION_SYSTEM.getType(),
             GoodsEnum.TYPE_WALK_SYSTEM.getType(),
