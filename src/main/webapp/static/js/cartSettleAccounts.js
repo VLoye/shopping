@@ -449,7 +449,7 @@ function bindBatchRemove() {
         $.dialog.confirm('确定要删除选中的商品吗?', function () {
             var loading = showLoading();
             
-            $.post('/shopCar/delSelect', { goodsIds: goodsIds.toString() }, function (result) {
+            $.post('/shopCar/delSelect', { list: goodsIds.toString() }, function (result) {
                 loading.close();
                 if (result.success) {
                     loadCartInfo();
@@ -541,16 +541,17 @@ function bindToSettlement(isB2B) {
     var datas = [], str = '';
 	
     if (!isB2B) {
-    	var good = {};
+    	var ids = {};
+    	var counts = {};
 
     	var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
         	
             if ($(e).attr('checked')) {
-            	var arr = {};
-            	arr[goodsId] = $(e).attr('sku');
-                arr[count] = document.getElementById('count'+i);
-                good[num++] = arr;
+
+                ids[num] = $(e).attr('sku');
+                counts[num] = document.getElementById('count'+i);
+                num++;
             }
         });
 		
@@ -559,7 +560,7 @@ function bindToSettlement(isB2B) {
         if (memberId) {
             if (str != "")
             {
-            	$.post('/shopCar/detail', good, function (result) {
+            	$.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
             		
 	                loading.close();
 	                if (result.success){

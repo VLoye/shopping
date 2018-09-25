@@ -1,10 +1,9 @@
 $(function () {
-    var isEditFlag = ('undefined' == typeof shouye_edit) ? false : shouye_edit;
+    /*var isEditFlag = ('undefined' == typeof shouye_edit) ? false : shouye_edit;
     //load
     if (!isEditFlag) {
         $('[isLoadEdit="XYZ"]').each(function (index, el) {
             var url = $(el).attr('href');
-            //$(el).loadingSpin({ color: '#F60' });
             $.ajax({
                 type: "POST",
                 url: url,
@@ -20,7 +19,7 @@ $(function () {
         $('[isLoadEdit="XYZ"]').each(function (index, el) {
             $(el).html('点此修改');
         });
-    }
+    }*/
 
     //广告轮播
     $('#js_hp1_ad').length && $('#js_hp1_ad').picPlaySimple();

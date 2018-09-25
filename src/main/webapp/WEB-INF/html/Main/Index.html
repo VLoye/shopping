@@ -691,21 +691,57 @@
 
 <script src="http://img.qipeiren.com/Site/Web/javascripts/jQuery.index-logic.js?vid=0808"></script>
 <script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.loading.spin.js?vid=0808" type="text/javascript"></script>-->
-
-
 <script id = "goodsAdvertisement" type="text/html">
-    {{each list data}}
-    <a id="{{data.rbid}}" href="" target="_blank" style="display:block;">
-        <img src="{{data.rburl}}" height="276" />
-    </a>
-    {{/each}}
-    <p class="hp1-ad-btn" id="js_hp1_ad_btn"></p>
-    <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn">
-        <div class="hp1-ad-lr-btn-in">
-            <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left"><i></i></span>
-            <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right"><i></i></span>
+
+        <!-- 自动轮播图片-->
+
+        <div class="hp1-ad" id="js_hp1_ad">
+            {{each list data}}
+            <a href="{{data.rburl}}" id="{{data.rbid}}" target="_blank">
+                <img src="{{data.rburl}}" height="276">
+            </a>
+            {{/each}}
+
+            <p class="hp1-ad-btn" id="js_hp1_ad_btn"></p>
+            <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn">
+                <div class="hp1-ad-lr-btn-in">
+                    <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left"><i></i></span>
+                    <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right"><i></i></span>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <!-- 轮播（Carousel）指标 -->
+        <!--<ol class="carousel-indicators">
+            <li data-target="#rb" data-slide-to="0" class="active"></li>
+            <li data-target="#rb" data-slide-to="1"></li>
+            <li data-target="#rb" data-slide-to="2"></li>
+            <li data-target="#rb" data-slide-to="3"></li>
+        </ol>
+
+        <div class="carousel-inner hp1-ad">
+
+            {{each list data}}
+                {{if index == 0}}
+                <div class="item active">
+                    <img src="{{data.rburl}}" alt="">
+                </div>
+                {{else}}
+                <div class="item">
+                    <img src="{{data.rburl}}" alt="">
+                </div>
+                {{/if}}
+            {{/each}}
+        </div>
+        <a class="left carousel-control" href="#rb" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left ad-lr-btn ad-lr-btn-left" aria-hidden="true"></span>
+
+        </a>
+        <a class="right carousel-control" href="#rb" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right ad-lr-btn ad-lr-btn-right" aria-hidden="true"></span>
+
+        </a>-->
+
 </script>
 
 
@@ -713,16 +749,9 @@
 <!--content start-->
 <div class="h-panel">
     <div class="h-w1200 h-panel-1">
-        <div class="hp1-left">
-            <!-- 自动轮播图片-->
-            <div class="hp1-ad" id="js_hp1_ad">
 
 
-
-            </div>
-            <!--特惠产品-->
-
-
+        <div class="hp1-left carousel slide" id="rb">
 
         </div>
 
@@ -1514,10 +1543,7 @@
 
     var myurl = "/indexData";
     var shopCarurl = "/shopCarData";
-    var userprops = "";
     var isloginbool = false;
-
-
     var ShopCarFormat = function(){
         $.ajax({
             url: shopCarurl,
@@ -1542,9 +1568,7 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                //$("#goodsBroadcast").template("goodsAdvertisement", {list: data.rblist});
-                //$("#loginstatus").template("logstatus", {data: data.user});
-                $("#js_hp1_ad").append(template("goodsAdvertisement", {list: data.rblist}));
+                $("#rb").append(template("goodsAdvertisement", {list: data.rblist}));
                 $("#loginstatus").append(template("logstatus", {data: data.user}));
                 alert(data);
                 isloginbool = true;
@@ -1555,32 +1579,6 @@
                     list4 = goodslist[3],
                     list5 = goodslist[4],
                     list6 = goodslist[5];
-                /*$.each(goodslist,function(i,d) {
-                    if(i>=0 && i<8)
-                    {
-                        list1.push(d);
-                    }
-                    else if(i>=8 && i < 16)
-                    {
-                        list2.push(d);
-                    }
-                    else if(i>=16 && i < 24)
-                    {
-                        list3.push(d);
-                    }
-                    else if(i>=24 && i < 32)
-                    {
-                        list4.push(d);
-                    }
-                    else if(i>=32 && i < 40)
-                    {
-                        list5.push(d);
-                    }
-                    else if(i>=40 && i < 48)
-                    {
-                        list6.push(d);
-                    }
-                });*/
                 $("#goodswindow1").append(template("goodsFormat", {list: list1}));
                 $("#goodswindow2").append(template("goodsFormat", {list: list2}));
                 $("#goodswindow3").append(template("goodsFormat", {list: list3}));
@@ -1644,13 +1642,13 @@
             $(this).find('span').stop(false,true).animate({'right':60,'opacity':0},300,function(){$(this).hide()});
         });
         /*IE6 右侧固定 modify right-side*/
-        if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
+        /*if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
             $(window).scroll(function(){
                 if($('.right-side')){
                     $('.right-side').css({'top':document.documentElement.scrollTop +'px'});
                 }
             });
-        }
+        }*/
         $(document).on('click', function(e){
             var  event = e ? e : window.event;
             var obj = event.srcElement ? event.srcElement : event.target;
@@ -1903,13 +1901,13 @@
             $(this).find('span').stop(false,true).animate({'right':60,'opacity':0},300,function(){$(this).hide()});
         });
         /*IE6 右侧固定 modify right-side*/
-        if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
+        /*if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
             $(window).scroll(function(){
                 if($('.right-side')){
                     $('.right-side').css({'top':document.documentElement.scrollTop +'px'});
                 }
             });
-        }
+        }*/
         $(document).on('click', function(e){
             var  event = e ? e : window.event;
             var obj = event.srcElement ? event.srcElement : event.target;
@@ -2176,12 +2174,12 @@
     </div>
 </div>
 
-<span style="display:none">
+<!--<span style="display:none">
     <script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F607271da1d927f7e761e62f3d232b15a' type='text/javascript'%3E%3C/script%3E"));
     </script>
-</span>
+</span>-->
 
 </body>
 </html>
