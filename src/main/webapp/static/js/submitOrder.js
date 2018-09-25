@@ -15,23 +15,29 @@ function bindSubmit() {
 			$.dialog.tips('请选择或新建收货地址');
 		}
 		else{
-			var goodsids = {};
-			var goodscounts = {};
-			$.each($('input[type="radio"][name="ngoodsid"]'), function() {
+			var goodsids = new Array();
+			var goodscounts = new Array();
+			var sellerids = new Array();
+			$.each($('input[type="hidden"][name="goodsid"]'), function() {
 				goodsids.push($(this).val());
 			});
-			$.each($('input[type="radio"][name="ngoodscount"]'), function() {
-				gooodsconts.push($(this).val());
+			$.each($('input[type="hidden"][name="sellerid"]'), function() {
+				sellerids.push($(this).val());
 			});
+            $.each($('.ngoodscount'), function() {
+                goodscounts.push($(this).val());
+            });
 			$.ajax({
 	            type: "post",
-	            url: "/shopCar/submit",
+	            url: "/order/add",
 	            async: false,
 	            data: {
-	            	addressid:addressid,
-	                goodsid:JSON.stringify(goodsids),
-	                goodscount: JSON.stringify(goodscounts)
-	            },
+	            	"goodsID":goodsids,
+                    "count":goodscounts,
+                    "sellerid":sellerids,
+                    "addressid":addressid
+                },
+                dataType : "text",
 	            success: function (result) {
 	                if (result.success) {
 	                    window.location.href = "SubmitSuccess.html";

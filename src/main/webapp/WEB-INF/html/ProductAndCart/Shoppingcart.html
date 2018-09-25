@@ -24,23 +24,6 @@
 
     <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
     <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            CartFormat();
-        });
-        var myurl = "";
-        var CartFormat = function(){
-            $.ajax({
-                url: myurl,
-                type: "post",
-                dataType: "json",
-                success: function(res){
-                    $("#loginstatus").template("logstatus",{data:res.user});
-                    $("#content").template("goodsList",{list:res.goods});
-                }
-            });
-        };
-    </script>
 </head>
 <body>
 <div class="h-top" id="headTopNav">
@@ -108,99 +91,9 @@
 
 <div class="w990 cart">
     <div id="show">
-        <div class="cart-inner">
+            <div class="cart-inner" id="cartcontent">
 
-            <div class="cart-list">
-                <p class="cart-tit">
-                    <label>全部商品<span id="selectedCount">0</span></label>
-                </p>
-                <div class="cart-thead cl">
-                    <div class="column t-checkbox form"><input type="checkbox" name="checkAll" class="jdcheckbox" checked="" value="" sku="0"/><label for="">全选</label></div>
-                    <div class="column t-goods">商品</div>
-                    <div class="column t-price">单价</div>
-                    <div class="column t-quantity" style="width:285px;">数量</div>
-                    <div class="column t-action" style="width:120px;">操作</div>
-                </div>
 
-                <div id="product-list" class="cart-tbody">
-                    <div class="n-item-list">
-                        <div id = "content">
-
-                            <div class="item item_selected ">
-                                <div class="item_form cl">
-                                    <div class="cell p-checkbox">
-                                        <input class="checkbox" checked="" type="checkbox" data-cartid="993" name="checkItem"  value="8" sku="1951_0_0_0">
-                                    </div>
-                                    <div class="cell p-goods">
-                                        <div class="p-img"><a href="/product/detail/1951" target="_blank"><img src="/Storage/Shop/8/Products/1951/1_50.png" alt=""></a>
-
-                                        </div>
-                                        <div class="p-name"><a href="/product/detail/1951" target="_blank">东风原厂  康明斯  6L四配套 配活塞4987914<br></a><br></div>
-                                        <div class="p-code">商品图号：DFL 14A 114</div></div>
-                                    <div class="cell p-price"><span class="price">¥2170.00</span></div>
-                                    <div class="cell p-quantity">
-                                        <div class="quantity-form">
-                                            <a href="javascript:void(0);" class="decrement" sku="1951_0_0_0">-</a>
-                                            <input type="text" class="quantity-text" value="1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="1951_0_0_0">
-                                            <a href="javascript:void(0);" class="increment" sku="1951_0_0_0">+</a>
-                                        </div>
-                                    </div>
-                                    <div class="cell p-remove">
-                                        <a class="cart-remove" href="javascript:removeFromCart('1951_0_0_0',0)">删除</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item item_selected ">
-                                <div class="item_form cl">
-                                    <div class="cell p-checkbox">
-                                        <input class="checkbox" checked="" type="checkbox" data-cartid="992" name="checkItem"  value="8" sku="1951_0_0_2">
-                                    </div>
-                                    <div class="cell p-goods">
-                                        <div class="p-img"><a href="/product/detail/1952" target="_blank"><img src="/Storage/Shop/8/Products/1951/1_50.png" alt=""></a>
-
-                                        </div>
-                                        <div class="p-name"><a href="/product/detail/1952" target="_blank"><span>东风原厂  康明斯  6L四配套 配活塞4987914</span><br></a><br></div>
-                                        <div class="p-code">商品图号：DFL 14A 114</div></div>
-                                    <div class="cell p-price"><span class="price">¥2170.00</span></div>
-                                    <div class="cell p-quantity">
-                                        <div class="quantity-form">
-                                            <a href="javascript:void(0);" class="decrement" sku="1951_0_0_2">-</a>
-                                            <input type="text" class="quantity-text" value="1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="1951_0_0_1">
-                                            <a href="javascript:void(0);" class="increment" sku="1951_0_0_1">+</a>
-                                        </div>
-                                    </div>
-                                    <div class="cell p-remove">
-                                        <a class="cart-remove" href="javascript:removeFromCart('1951_0_0_1',0)">删除</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ui-ceilinglamp-1">
-                    <div class="cart-dibu">
-                        <div class="cart-total-2014">
-                        <span class="column t-checkbox form" style="float:left; margin-right:10px;">
-                            <input type="checkbox" name="checkAll" class="jdcheckbox" checked="" value="" sku="0" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;" />
-                            <label for="">全选</label>
-                        </span>
-                            <span class="delete" style="float: left; margin-right: 10px;">
-                            <a href="javascript:void(0);" id="remove-batch">删除选中的商品</a>
-                        </span>
-
-                            <!--<div class="cart-button">
-                                <a class="checkout" href="javascript:void(0);" id="toSettlement">去结算</a>
-                            </div>-->
-
-                            <div class="cart-button">
-                                <button class="checkout" id="toSettlement" style="background: red;height: 40px;width: 70px;">去结算</button>
-                            </div>
-                            <div class="total fr">总计（不含运费）：<span id="finalPrice">¥ 0</span></div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <script id = "goodsList" type="text/html">
                 {{if list}}
@@ -280,6 +173,7 @@
                 </div>
                 {{/if}}
             </script>
+
         </div>
     </div>
 </div>
@@ -287,7 +181,23 @@
 <input type="hidden" value="2" id="hidAuditStatus" />
 <input type="hidden" value="1" id="hidSaleStatus" />
 
-
+<script type="text/javascript">
+    $(function () {
+        CartFormat();
+    });
+    var myurl = "/shopCarData";
+    var CartFormat = function(){
+        $.ajax({
+            url: myurl,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                $("#loginstatus").template("logstatus",{data:data.user});
+                $("#cartcontent").template("goodsList",{list:data.goods});
+            }
+        });
+    };
+</script>
 
 <link href="static/css/css_foot.css" rel="stylesheet" />
 <div class="h-bottom ms-foot">

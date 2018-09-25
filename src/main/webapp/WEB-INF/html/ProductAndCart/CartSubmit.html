@@ -323,7 +323,7 @@
                                                         <table class="order-table" shopid="8">
                                                         <tbody>
 
-                                                                <#list goods as item>
+                                                                <#list goods as item i>
                                                                 	<tr id="${item.goodsid}" skuid="${item.goodsid}" quntity="1" price="${item.goodsprice}">
 								                                        <td class="fore1" style="padding: 10px;">
 								                                            <div class="p-goods">
@@ -335,16 +335,18 @@
 
 								                                                <div class="p-detail">
 								                                                    <div class="p-name">
-								                                                        <a href="{{data.goodsurl}}" target="_blank">
-								                                                            ${item.brand} ${item.goodsname}<br />
+								                                                        <a href="${item.goodsurl}" target="_blank">
+								                                                            ${item.goodsname}<br />
 								                                                        </a>
+                                                                                        <input type="hidden" value="${item.goodsid}" name = "goodsid"/>
+                                                                                        <input type="hidden" value="${item.sellerid}" name = "sellerid"/>
 								                                                    </div>
 								                                                </div>
 								                                            </div>
 								                                        </td>
 								                                        <td class="p-price"><strong>￥${item.goodsprice}</strong></td>
 								                                        <td class="fore2">
-								                                               <label>x</label>  <span name = "ngoodscount"> ${item.count}  </span>                                                              </td>
+								                                               <label>x</label>  <span class = "ngoodscount"> ${item.count}  </span>                                                              </td>
 								                                    </tr>
                                                                 </#list>
                                                             </tbody>
@@ -359,15 +361,15 @@
                                         	<#if total>
                                             <div class="list">
                                                 <span><em id="span-skuNum">${total.totalcount}</em> 件商品，总商品金额：</span>
-                                                <em class="price" id="warePriceId" v="2170.0000">￥{total.totalprice}.00</em>
+                                                <em class="price" id="warePriceId" v="2170.0000">￥${total.totalprice}.00</em>
                                             </div>
                                             <div class="list"><span>运费：</span>
                                                 <em class="price" id="totalFreight"> ￥0.00</em>
                                             </div>
                                             <em class="price" id="id_c" style="width:122px;"></em>
                                             </#if>
-                                           </div>
-                                        </div>
+                                       </div>
+                                    </div>
 
                                         <div class="span clr"></div>
                     </div>
