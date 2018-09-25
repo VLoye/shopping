@@ -199,5 +199,20 @@ public class JedisAdapter{
         return false;
     }
 
+    public Set smember(String key){
+        Jedis jedis = null;
+        try{
+            jedis = jedisPool.getResource();
+            return jedis.smembers(key);
+        }catch (Exception e){
+            logger.error(JedisAdapter.class.getName()+ " smember error");
+            e.printStackTrace();
+        }finally {
+            if(jedis != null){
+                jedis.close();
+            }
+        }
+        return null;
+    }
 
 }

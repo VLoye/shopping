@@ -28,4 +28,10 @@ public class HostHolder {
     public void clear(){
         userInfos.remove();
     }
+
+    public int getCurrentUserId(){
+        Map map = userInfos.get();
+        return (int)map.get("userId");
+    }
+
 }
