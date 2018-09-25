@@ -43,12 +43,11 @@ public class IndexContorller {
      * @param response
      * @return
      */
+
     @ResponseBody
     @RequestMapping(value = "/indexData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
     public Object getIndexPageInfo(Model model,
                                   HttpServletRequest request, HttpServletResponse response){
-
-
 
         //获取轮播图
         List rblist = (List)rbService.queryAllInfo();
@@ -65,6 +64,7 @@ public class IndexContorller {
         model.addAttribute("clist",clist);
         //展示轮播图
         model.addAttribute("rblist",rblist);
+
         /*ModelAndView modelAndView = new ModelAndView("/Main/Index", "data",model);*/
 
         return JSONUtil.toJSON(model);

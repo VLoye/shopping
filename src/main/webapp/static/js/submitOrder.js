@@ -1,5 +1,4 @@
 $(function () {
-    bindRecieverEdit();
     bindSubmit();
     initAddress();
     bindAddressRadioClick();
@@ -9,6 +8,56 @@ $(function () {
 })
 
 function bindSubmit() {
+	$('#submit').on('click',function (){
+		var addressid = $(':radio[name="address"]:checked').val();
+		if(!addressid)
+		{
+			$.dialog.tips('请选择或新建收货地址');
+		}
+		else{
+			var goodsids = new Array();
+			var goodscounts = new Array();
+			var sellerids = new Array();
+			$.each($('input[type="hidden"][name="goodsid"]'), function() {
+				goodsids.push($(this).val());
+			});
+			$.each($('input[type="hidden"][name="sellerid"]'), function() {
+				sellerids.push($(this).val());
+			});
+            $.each($('.ngoodscount'), function() {
+                goodscounts.push($(this).val());
+            });
+			$.ajax({
+	            type: "post",
+	            url: "/order/add",
+	            async: false,
+	            data: {
+	            	"goodsID":goodsids,
+                    "count":goodscounts,
+                    "sellerid":sellerids,
+                    "addressid":addressid
+                },
+                dataType : "text",
+	            success: function (result) {
+	                if (result.success) {
+	                    window.location.href = "SubmitSuccess.html";
+	                }
+	                else {
+	                    loading.close();
+	                    $.dialog.errorTips(result.msg);
+	                }
+	                isFirstSubmit = true;
+	                $(this).removeAttr('disabled');
+	            }
+	        });
+			
+		}
+		
+		
+	});
+}
+
+/*function bindSubmit() {
     var isFirstSubmit = true;
     $('#submit').on('click', function () {
         var remarkDataString = [];
@@ -177,7 +226,8 @@ function bindSubmit() {
             }
         }
     });
-}
+}*/
+
 
 
 /// 购物车商品数量操作
@@ -473,6 +523,7 @@ function bindRecieverEdit() {
         });
     });
 }
+
 function bindAddressRadioClick() {
     $('#consignee-list').on('click', 'input[type="radio"]', function () {
         $('#addressEditArea').hide();
@@ -481,7 +532,7 @@ function bindAddressRadioClick() {
 function deleteAddress(id) {
     $.dialog.confirm('您确定要删除该收货地址吗？', function () {
         var loading = showLoading();
-        $.post('/UserAddress/DeleteShippingAddress', { id: id }, function (result) {
+        $.post('/shopCar/del', { id: id }, function (result) {
             loading.close();
             if (result.success) {
                 var current = $('div[name="li-' + id + '"]');
@@ -497,23 +548,21 @@ function deleteAddress(id) {
         });
     });
 }
-function saveAddress(id, regionId, shipTo, address, phone, callBack) {
-    id = isNaN(parseInt(id)) ? '' : parseInt(id);
+function saveAddress(adid,linkman, tel, detailedaddress, province, city, area , userid , callBack) {
+    id = isNaN(parseInt(adid)) ? '' : parseInt(adid);
 
-    var url = '';
-    if (id)
-        url = '/UserAddress/EditShippingAddress';
-    else
-        url = '/UserAddress/AddShippingAddress';
+    var url = '/order/saveorupdateaddress';
 
     var data = {};
     if (id)
-        data.id = id;
-    data.regionId = regionId;
-    data.shipTo = shipTo;
-    data.address = address;
-    data.phone = phone;
-
+        data['addressid'] = id;
+    data['linkman'] = linkman;
+    data['detailedaddress'] = detailedaddress;
+    data['tel'] = tel;
+    data['province']=province;
+	data['city']=city;
+	data['area']=area;
+	data['userid']=userid;
 
     var loading = showLoading();
     $.post(url, data, function (result) {
@@ -525,39 +574,45 @@ function saveAddress(id, regionId, shipTo, address, phone, callBack) {
     });
 }
 function showEditArea(id) { 
-    $('input[name="address"][value="' + id + '"]').click();
-
-    var address = shippingAddress[id];
-    var shipTo = address == null ? '' : address.shipTo;
-    var addressName = address == null ? '' : address.address;
-    var phone = address == null ? '' : address.phone;
-    if (address) {
-        var arr = (address.fullRegionName).split(' ');
+	if(id != 0){
+	    var detailedaddress = document.getElementById("detailedaddress-"+id).innerText;
+	    var shipTo = document.getElementById("linkman-"+id).innerText;
+	    var fullregion = document.getElementById("region-"+id).innerText;
+	    var phone = document.getElementById("tel-"+id).innerText;
+	    var adid = id;
+	    if (fullregion) {
+	        var arr = fullregion.split(' ');
+	    }
+	
+	    var fullRegionName = fullregion == null ? '<i></i><em></em><s></s>' : '<i id = "editprovince">' + arr[0] + ' </i><em id = "editcity">' + arr[1] + ' </em><s id = "editarea">' + arr[2] + '</s>';
+	
+	    $('input[name="shipTo"]').val(shipTo);
+	    $('input[type="text"][name="address"]').val(detailedaddress);
+	    $('input[name="phone"]').val(phone);
+	    $('span[name="regionFullName"]').html('');
+	    $('span[name="regionFullName"]').html(fullRegionName);
+	    $('#adid').val(adid);
+	
+	    $('#addressEditArea').show();
+	    $('#s_province').val(arr[0]);
+	    $('#s_province').trigger('change');
+	    $('#s_city').val(arr[1]);
+	    $('#s_city').trigger('change');
+	    
+	    if (arr.length == 3) {
+	        $('#s_county').val(arr[2]);
+	        $('#s_county').trigger('change');
+	    }
     }
-    //arr[2] = arr[2] || '';
-    var fullRegionName = address == null ? '<i></i><em></em><s></s>' : '<i>' + arr[0] + ' </i><em>' + arr[1] + ' </em><s>' + arr[2] + '</s>';
-
-    $('input[name="shipTo"]').val(shipTo);
-    $('input[type="text"][name="address"]').val(addressName);
-    $('input[name="phone"]').val(phone);
-    $('span[name="regionFullName"]').html('');
-    $('span[name="regionFullName"]').html(fullRegionName);
-
-    $('#addressEditArea').show();
-    if (id === 0) {
-        $('#consignee_province').val(0);
-        $('#consignee_city').val(0);
-        $('#consignee_county').val(0);
-        return;
-    }
-    var regionPath = address.fullRegionIdPath.split(',');
-    $('#consignee_province').val(regionPath[0]);
-    $('#consignee_province').trigger('change');
-    $('#consignee_city').val(regionPath[1]);
-    $('#consignee_city').trigger('change');
-    if (regionPath.length == 3) {
-        $('#consignee_county').val(regionPath[2]);
-        $('#consignee_county').trigger('change');
+	else{
+    	$('#s_province').val("省份");
+        $('#s_city').val("地级市");
+        $('#s_county').val("市、县级市");
+        $('input[name="shipTo"]').val('');
+	    $('input[type="text"][name="address"]').val('');
+	    $('input[name="phone"]').val('');
+	    $('span[name="regionFullName"]').html('');
+    	$('#addressEditArea').show();
     }
 }
 ///#endregion
@@ -588,47 +643,28 @@ function showEditArea(id) {
     setProvince($('#consignee_province'), $('#consignee_city'), $('#consignee_county'));
   
     $('#saveConsigneeTitleDiv').bind('click', function () {
-        var a = getOption($('#consignee_province'), 0),
-            b = getOption($('#consignee_city'), 0),
-            c = getOption($('#consignee_county'), 0),
-            province = getOption($('#consignee_province'), 1),
-            city = getOption($('#consignee_city'), 1),
-            county = getOption($('#consignee_county'), 1)|| '',
+        var a = getOption($('#s_province'), 0),
+            b = getOption($('#s_city'), 0),
+            c = getOption($('#s_county'), 0),
             value = a + ',' + b + ',' + c,
             str = province + ' ' + city + ' ' + county,
             indexId = $('input[type="radio"][name="address"]:checked').val(); 
-
-
-
-        if ($('#addressEditArea').css('display') == 'none') {
-            var selectedAddress = shippingAddress[indexId]; 
-            var newSelectedText = selectedAddress.shipTo + ' &nbsp; ' + selectedAddress.phone + ' &nbsp;' + selectedAddress.fullRegionName + '&nbsp;' + selectedAddress.address + '&nbsp;';
-            $('#shippingAddressId').val(indexId);
-            $('#addressEditArea').hide();
-            $('#selectedAddress').html(newSelectedText);
-            $('#addressListArea').hide();
-            $('#consignee-list').hide();
-            $('#step-1').removeClass('step-current'); 
-            var regionId = $("#shippingAddressId").val();
-            var cartItemIds = $("#cartItemIds").val();
-            var cartItemIds = window.location.search.replace(/.*cartItemIds=([^&?]+).*/i, "$1");
-            if (/cartItemIds/i.test(window.location.search) == false) cartItemIds = undefined;
-            if (cartItemIds) {
-                window.location.href = "/order/submit?cartItemIds=" + cartItemIds + "&regionId=" + regionId;
-            } else {
-                window.location.reload();
-            } 
-            CalcFright();
-        }
-        else {
-
-            var tttt = "0";tttt= $('input[type="radio"][name="address"]').val();  
+            
+            
+            var adid = "0";
+            adid= $('#adid').val();
+            
             if ($("#consignee_radio_new").attr("checked") == "checked"||tttt!="0") {
-                var shipTo = $('input[name="shipTo"]').val();
+            
+                var linkman = $('input[name="shipTo"]').val();
                 var regTel = /([\d]{11}$)|(^0[\d]{2,3}-?[\d]{7,8}$)/;
-                var phone = $('input[name="phone"]').val();
-                var address = $('input[type="text"][name="address"]').val();
-                var regionId = $('#consignee_county').val();
+                var tel = $('input[name="phone"]').val();
+                var detailedaddress = $('input[type="text"][name="address"]').val();
+                var region = $('#s_province').val() +" "+ $('#s_city').val() +" "+ $('#s_county').val();
+                var province = $('#s_province').val();
+                var city = $('#s_city').val();
+                var area = $('#s_county').val(); 
+                var userid = document.getElementById("userid");
                  
                 if (!shipTo) {
                     $.dialog.tips('请填写收货人');
@@ -646,8 +682,11 @@ function showEditArea(id) {
                     $.dialog.tips('请填写正确的电话');
                     return false;
                 }
-                else //RegionBind.js
-                    if (!isSelectAddr($('#consignee_province'), $('#consignee_city'), $('#consignee_county'))) {
+                else{ //RegionBind.js
+                	var isprovince = ($('#s_province').val()=="省份")?false:true;
+                	var iscity = ($('#s_province').val()=="地级市")?false:true;
+                	var iscounty = ($('#s_province').val()=="市、县级市")?false:true;
+                    if (!isprovince || !iscity || !county) {
                         $.dialog.tips('请填选择所在地区');
                         return false;
                     }
@@ -672,7 +711,7 @@ function showEditArea(id) {
                                 shippingAddress[indexId] = {};
                             }
 
-                            $('#shippingAddressId').val(indexId);
+                            $('#selectedAddress').val(indexId);
                             $('#addressEditArea').hide();
                             $('#selectedAddress').html(newSelectedText);
                             $('#addressListArea').hide();
@@ -695,6 +734,7 @@ function showEditArea(id) {
 
                         });
                     }
+               	}
             }
             else { 
                 var selectedAddress = shippingAddress[indexId];
@@ -718,7 +758,6 @@ function showEditArea(id) {
                 }
                 CalcFright();
             }
-        }
     });
 }(jQuery, province));
 

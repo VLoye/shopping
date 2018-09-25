@@ -4,13 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>汽配人——用户注册</title>
-    <link href="../css/css_base.css" rel="stylesheet" type="text/css">
-    <link href="../css/css_top_mall.css" rel="stylesheet" type="text/css">
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <!--<script src="../js/jquery.cookie.js"></script>
-    <script src="../js/jquery.form.js"></script>
-    <script src="../js/CommonJS.js"></script>
-    <script src="../js/v.js"></script>-->
+    <link href="static/css/css_base.css" rel="stylesheet" type="text/css">
+    <link href="static/css/css_top_mall.css" rel="stylesheet" type="text/css">
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <!--<script src="static/js/jquery.cookie.js"></script>
+    <script src="static/js/jquery.form.js"></script>
+    <script src="static/js/CommonJS.js"></script>
+    <script src="static/js/v.js"></script>-->
 </head>
 <body>
     <div class="h-top" id="headTopNav">
@@ -54,10 +54,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="../css/css_base.css"><link rel="stylesheet" type="text/css" href="../css/css_top.css">
-    <link rel="stylesheet" type="text/css" href="../css/css_top_mall.css">
-    <link rel="stylesheet" type="text/css" href="../css/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="../css/pc-loginregister.css">
+    <link rel="stylesheet" type="text/css" href="static/css/css_base.css"><link rel="stylesheet" type="text/css" href="static/csscss_top.css">
+    <link rel="stylesheet" type="text/css" href="static/css/css_top_mall.css">
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="static/css/pc-loginregister.css">
     
 </head>
 <body>
@@ -134,20 +134,20 @@
                success:function (data){
                    //注册失败返回原页面
                    if (data.status!="success"){
-                       location.href = 'http://localhost:8080/html/LoginAndRegister/Register.html';
+                       location.href = '/resigter';
                    }
                    else{
                        var prevLink = document.referrer;
                        alert(prevLink.trim());
                        if($.trim(prevLink)==''){
 
-                           location.href = 'http://localhost:8080/html/Main/Index.html';
+                           location.href = '/index';
                        }else{
-                           if(prevLink.indexOf('http://localhost:8080/')==-1){	//来自其它站点
-                               location.href = 'http://localhost:8080/html/Main/Index.html';
+                           if(prevLink.indexOf('')==-1){	//来自其它站点
+                               location.href = '/index';
                            }
-                           if(prevLink.indexOf('http://localhost:8080/html/LoginAndRegister/Login.html')!=-1){		//来自注册页面
-                               location.href = 'http://localhost:8080/html/Main/Index.html';
+                           if(prevLink.indexOf('/login')!=-1){		//来自注册页面
+                               location.href = '/index';
                            }
                            location.href = prevLink;
                        }

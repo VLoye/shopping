@@ -47,9 +47,9 @@
 				link.href = layer.path + href;
 				link.id = id;
 
-				if (!document.getElementById(id)) {
+				/*if (!document.getElementById(id)) {
 					head.appendChild(link);
-				}
+				}*/
 
 				if (typeof fn !== 'function') return;
 
