@@ -17,14 +17,15 @@ import java.util.Set;
 @Service
 public class GoodsServiceImpl implements GoodsService {
     private final int LIMIT = 8;
-    private final int[] floors ={
-            10018,
+
+    final int oneF=GoodsEnum.TYPE_ENGINE_SYSTEM.getType();
+    private final  int[] floors ={
             GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
             GoodsEnum.TYPE_TRADITION_SYSTEM.getType(),
             GoodsEnum.TYPE_WALK_SYSTEM.getType(),
             GoodsEnum.TYPE_ELECTRICAL_SYSTEM.getType(),
             GoodsEnum.TYPE_BODYD_RIVER.getType(),
-            GoodsEnum.TYPE_CARFACIAL.getType(),
+            GoodsEnum.TYPE_CARFACIAL.getType()
     };
 
     @Autowired
@@ -61,6 +62,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<Object> querySaleByGoodType() {
+
+
 
         List<Object> floorsList = new ArrayList<Object>();
         for(int floor:floors) {

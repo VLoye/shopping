@@ -95,10 +95,11 @@
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+
         <property name="securityManager" ref="securityManager"/>
         <!--当访问需要认证的资源时，如果没有认证，那么将自动跳转到该url-->
         <property name="loginUrl" value="/login.jsp"/>
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="unauthorizedUrl" value="/login"/>
         <!--key 代表你要标志访问资源时候 需要经过formAuthenticationFilter
         在filterChainDefinitions标注与key匹配的都要经过formAuthenticationFilter-->
    <!--    <property name="filters">
@@ -127,6 +128,8 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+
+
 
     <aop:config proxy-target-class="true"></aop:config>
 

@@ -1,6 +1,10 @@
 package com.team6.dao;
 
 import com.team6.entity.Comment;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface CommentMapper {
     /**
@@ -58,4 +62,26 @@ public interface CommentMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Comment record);
+
+   List<Map<String,Object>> queryCommentByGoodsId(@Param("goodsId") int id,@Param("num")int num);
+
+   //查询评论总数
+   int queryCommentCountByGoodsId(@Param("entityId") int id);
+
+   Map<String ,Object> quertReplyById(@Param("id") int id);
+
+    /**
+     * 查询用户以评论的商品
+     * @param userId
+     * @return
+     */
+   List<Map> queryCommentByUserId(@Param("userId") int userId);
+
+    /**
+     * 查询用户没有评论的商品
+     * @param userId
+     * @return
+     */
+   List<Map> queryNoCommentByUserId(@Param("userId") int userId);
+
 }

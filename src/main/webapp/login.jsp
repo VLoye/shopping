@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>测试2</title>
 </head>
 <body>
 <form id="login_form" action="" method="post">
@@ -29,21 +29,40 @@
         document.getElementById('vcode').src="/vcode?c="+Math.random();
     }
 $(document).ready(function () {
+    var list=new Array();
+    var count=new Array();
+    for(var i=0;i<20;i++){
+       list.push(i+10);
+       if(i%2==1) count.push(1) ;
+       else count.push(2);
+    }
+       var obj ={};
+        obj['goodsId']="1";
+        obj['content']="sdfasd"
+
     $("#login").click(function(){
 
         var name=$("#name").val();
+      /*  $.post("/shopCar/detailData",{"idList":JSON.stringify(list),"countList":JSON.stringify(count)});*/
         $.ajax({
             //提交数据的类型 POST GET
             type:"POST",
+            contentType: 'application/json',
             //提交的网址
-            url:"/login",
+            url:"/indexData",
             async:true,
             //提交的数据
-            data:$("#login_form").serialize(),
+            /*data:JSON.stringify(obj),*/
             //返回数据的格式
             datatype: "json",
             //成功返回之后调用的函数
             success:function (data){
+
+                console.log(data);
+                console.log(data.clist);
+                var obj = data.clist[0];
+                console.log(obj);
+                console.log(obj[0].name);
                 //登陆失败更换验证码
                 if (data.status!="success"){
                     changecode();

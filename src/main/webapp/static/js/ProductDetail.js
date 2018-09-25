@@ -849,12 +849,12 @@ $(function () {
     });
 
     //自营店产品详情跟普通店铺不一样显示
-    changeShowView();
+    //changeShowView();
 
     
 });
 
-function changeShowView() {
+/*function changeShowView() {
     if (isSellerAdminProdcut == "true") {
         $("#sp-search,#sp-category").hide();
         $("#shopname").attr("href", "#")
@@ -863,7 +863,7 @@ function changeShowView() {
     else {
         $("#sp-brand-official,#sp-category-official").hide();
     }
-}
+}*/
 
 function checkBuyNum() {
     var num = 0;

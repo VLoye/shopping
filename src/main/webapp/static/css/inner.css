@@ -296,7 +296,7 @@ del { text-decoration: line-through; }
 .hl_red_bg { color: #fff; background: #0066CD; padding:3px 5px; line-height: 12px; margin-right: 5px; display: inline-block;  border-radius: 2px; }/*modify*/
 .hl_red, a.hl_red, .hl_red:hover, .hl_red:visited, #summary .hl_red { color: #0066CD; }/*modify*/
 .hl_red, a.hl_red, .hl_red:hover, .hl_red:visited, #summary .hl_red { color: #0066CD; } /*modify*/
-.spec-control, #store-selector .text b, #choose .selected b, .slogens b, #brand-bar .slogens .fore2, #brand-bar .slogens .fore4, .star, .wrap-input a, #brand-bar .slogens dt, #brand-bar .seller-btn a, .itemover-title button, .topic .icon, #ranklist .tabcon span, #comment .btn-comment, #recomment .master s, .topic-best, .master s, .suits li s, #recommend .infos s, #favorable-suit .infos s, .btn-buy, #product-detail .detail-correction b, div.nav-minicart-buynow a, #consult .btn-search, #comments-list .tl, .item-warnning s, .share-list-item a, .share-ft b, #view-bigimg, #tab-services table td .btn-buy, #evaluate s, #evaluate-detail s, .li-img a b, #store-selector .close, .extra-ico, .f-sercvice-list b, .btn-append-extra, .u-name a b, #more-fitting-link b, #summary-countdown s, .s-item .active b, #product-detail .p-tab s, .m3 .p-info s { background-image: url(../Images/newicon20140417.png); background-repeat: no-repeat; }
+.spec-control, #store-selector .text b, #choose .selected b, .slogens b, #brand-bar .slogens .fore2, #brand-bar .slogens .fore4, .star, .wrap-input a, #brand-bar .slogens dt, #brand-bar .seller-btn a, .itemover-title button, .topic .icon, #ranklist .tabcon span, #comment .btn-comment, #recomment .master s, .topic-best, .master s, .suits li s, #recommend .infos s, #favorable-suit .infos s, .btn-buy, #product-detail .detail-correction b, div.nav-minicart-buynow a, #consult .btn-search, #comments-list .tl, .item-warnning s, .share-list-item a, .share-ft b, #view-bigimg, #tab-services table td .btn-buy, #evaluate s, #evaluate-detail s, .li-img a b, #store-selector .close, .extra-ico, .f-sercvice-list b, .btn-append-extra, .u-name a b, #more-fitting-link b, #summary-countdown s, .s-item .active b, #product-detail .p-tab s, .m3 .p-info s { background-image: url(../img/newicon.png); background-repeat: no-repeat; }
 .star { display: inline-block; width: 75px; height: 14px; }
 .sa0 { background-position: -184px -239px; }
 .sa1 { background-position: -169px -239px; }
@@ -348,7 +348,7 @@ del { text-decoration: line-through; }
 #brand-bar-pop #evaluate-detail .mc dl { padding-bottom: 1px; border: 0; padding: 0; }
 #evaluate-detail .mc dt { float: left; color: #999; line-height: 1.1em; margin-right:10px; }/*modify*/
 #brand-bar-pop #evaluate-detail .mc dd { overflow: hidden; clear: none;font-size: 12px;line-height: 13px;color: #FF6600; }/*modify*/
-#brand-bar-pop #evaluate-detail i{ width:10px; height:10px; display:inline-block; margin:0 25px;background: url(../Images/newicon20140417.png) no-repeat;}/*modify*/
+#brand-bar-pop #evaluate-detail i{ width:10px; height:10px; display:inline-block; margin:0 25px;background: url(../img/newicon.png) no-repeat;}/*modify*/
 #brand-bar-pop #evaluate-detail i.up{ background-position:-140px -96px;}
 #brand-bar-pop #evaluate-detail i.down{ background-position:-151px -85px;}
 #evaluate-detail .mc dd { overflow: hidden; line-height: 1.1em; }
@@ -774,7 +774,7 @@ a.css3-btn, a.css3-btn:hover, a.css3-btn:visited { color: #fff; }
 .cart-dibu .fdibu .shopping b { background-position: 0 -28px; }
 .cart-total-2014 { background-color: #f7f7f7; border-top: 1px solid #ddd; height: 48px; line-height: 48px; }
 .cart-total-2014 .cart-button { float: right; padding: 0; }
-.cart-dibu .cart-button a.checkout, .cart-dibu .cart-button a.checkout-jd, .cart-dibu .cart-button a.checkout-jdInt { float: none; height: 50px; line-height: 50px; top: -1px; font-size: 18px; font-weight: bold; background: url(../Images/btn-check-20140627.png) no-repeat #e43f42; text-indent: -999em; }
+.cart-dibu .cart-button a.checkout, .cart-dibu .cart-button a.checkout-jd, .cart-dibu .cart-button a.checkout-jdInt {float: none; height: 50px; line-height: 50px; top: -1px; font-size: 18px; font-weight: bold; background:#e43f42; text-indent: -999em; }
 .cart-button a.checkout { width: 135px; display: block; overflow: hidden; text-indent: 33px; color: #fff; position: relative; font-family: "\5FAE\8F6F\96C5\9ED1"; }
 .cart-total-2014 .total { margin-right: 20px; }
 .cart-total-2014 .total span { vertical-align: middle; color: #0078F0; font-size: 20px; font-weight: 400; font-family: Verdana, Arial; }
@@ -855,7 +855,7 @@ a.css3-btn, a.css3-btn:hover, a.css3-btn:visited { color: #fff; }
 #consignee .list .label, .invoice-form .list .label { width: 85px; height: 26px; margin-right: 5px; float: left; color: #666; line-height: 26px; text-align: right; }
 #consignee .phone span, #consignee .phone em, .invoice-form .phone span, .invoice-form .phone em { float: left; }
 #consignee .list .label em, .invoice-form .list .label em { margin-right: 5px; color: #f60; font-family: sans-serif; }
-#consignee .list .field { height: 26px; float: left; line-height: 26px; }
+#consignee .list .field { height: 26px; float: left; line-height: 29px; }
 #consignee .textbox, .invoice-form .textbox { width: 138px; height: 16px; border: 1px solid #ccc; padding: 4px 3px; font-family: Arial, "\5b8b\4f53", sans-serif; }
 #consignee .message, .invoice-form .message { border: 1px solid #db9a9a; padding: 4px 0; background-color: #ffe8e8; }
 #consignee .message .error, .invoice-form .error { height: 26px; padding-left: 6px; float: left; color: #c00; line-height: 26px; }
@@ -865,9 +865,9 @@ a.css3-btn, a.css3-btn:hover, a.css3-btn:visited { color: #fff; }
 #consignee .phone, .invoice-form .phone { float: left; }
 #consignee .phone em, .invoice-form .phone em { padding: 0 20px 0 5px; color: #999; }
 #consignee .form-btn { height: 30px; padding-top: 4px; }
-#checkout .btn-submit { height: 30px; margin-right: 10px; padding-left: 20px; float: left; line-height: 30px; font-size: 14px; font-weight: 700; background: url(../Images/btn-20130725.png) no-repeat; }
+#checkout .btn-submit { height: 30px; margin-right: 10px; padding-left: 20px; float: left; line-height: 30px; font-size: 14px; font-weight: 700; }
 #checkout a.btn-submit, #checkout a.btn-submit:visited, #checkout a.btn-submit:hover { color: #fff; text-decoration: none; }
-#checkout .btn-submit span { height: 30px; padding-right: 20px; float: left; cursor: pointer; background: url(../Images/btn-20130725.png) no-repeat 100% -30px; }
+#checkout .btn-submit span { height: 30px; padding-right: 20px; float: left; cursor: pointer; }
 .loading, .checkout-state { background: #fff; }
 .loading-1, .checkout-state { height: 28px; border: 1px solid #edd28b; padding: 0 10px; float: left; line-height: 28px; }
 .loading b, .checkout-state b { width: 28px; height: 28px; float: left; background: url(../Images/loading2.gif) no-repeat center center; }

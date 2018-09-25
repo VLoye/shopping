@@ -154,8 +154,9 @@ public class LoginServiceImp implements LoginService {
             map = jwtUtil.verifyToken(token);
             if(map.size()>0){
                 currentUserInfo = new HashMap<>();
-                currentUserInfo.put("username",map.get("name"));
-                currentUserInfo.put("userid",map.get("id"));
+                currentUserInfo.put("username",map.get("name").asString());
+                currentUserInfo.put("userid",map.get("id").asInt());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
