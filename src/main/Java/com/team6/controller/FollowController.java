@@ -44,7 +44,7 @@ public class FollowController {
     FollowService followService;
 
 
-    @ApiOperation(value = "关注商品/商家",httpMethod = "Post",notes = "关注商品/商家")
+    @ApiOperation(value = "关注商品/商家",notes = "关注商品/商家")
     @RequestMapping(value = "follow/{id}/{type}" ,method = RequestMethod.POST)
     @ResponseBody
     public String follow(@PathVariable("id")int id,@PathVariable("type")int type){
@@ -52,7 +52,7 @@ public class FollowController {
         return JSONUtil.toJSON(map);
     }
 
-    @ApiOperation(value = "取关",httpMethod = "Post")
+    @ApiOperation(value = "取关")
     @RequestMapping(value = "unfollow/{id}/{type}" ,method = RequestMethod.POST)
     @ResponseBody
     public String unfollow(@PathVariable("id")int id,@PathVariable("type")int type){
@@ -60,7 +60,7 @@ public class FollowController {
         return JSONUtil.toJSON(map);
     }
 
-    @ApiOperation(value = "返回所有关注",httpMethod = "Get")
+    @ApiOperation(value = "返回所有关注")
     @RequestMapping(value = "follows/{type}",method = RequestMethod.GET)
     @ResponseBody
     public String follows(@PathVariable("type")int type){
