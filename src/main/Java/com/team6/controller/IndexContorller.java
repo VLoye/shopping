@@ -27,7 +27,9 @@ public class IndexContorller {
     @Autowired
     RbService rbService;
 
-    @RequestMapping(value = "/index")
+
+
+    @RequestMapping("/index")
     public String toIndex(){
 
         return "/Main/Index";
@@ -42,12 +44,10 @@ public class IndexContorller {
      * @return
      */
 
-    @RequestMapping(value = "/indexData",method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
     @ResponseBody
+    @RequestMapping(value = "/indexData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
     public Object getIndexPageInfo(Model model,
-                                         HttpServletRequest request, HttpServletResponse response){
-
-
+                                  HttpServletRequest request, HttpServletResponse response){
 
         //获取轮播图
         List rblist = (List)rbService.queryAllInfo();
@@ -65,12 +65,12 @@ public class IndexContorller {
         //展示轮播图
         model.addAttribute("rblist",rblist);
 
-
-
         /*ModelAndView modelAndView = new ModelAndView("/Main/Index", "data",model);*/
 
         return JSONUtil.toJSON(model);
     }
+
+
 
     /**
      *

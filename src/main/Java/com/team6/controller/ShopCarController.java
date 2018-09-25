@@ -66,18 +66,18 @@ public class ShopCarController {
     @ResponseBody
     @PostMapping("/shopCar/delSelect")
     /*@RequestMapping(value = "/shopCar/delSelect",method = RequestMethod.POST)*/
-    public Object ShopCarDelSelect(@RequestParam("list") List<String> idList, HttpServletRequest request){
+    public Object ShopCarDelSelect(@RequestParam("ids[]") int ids[], HttpServletRequest request){
 
          
-        return shopCarService.delUserGoodsByIdsSelect(idList,request);
+        return shopCarService.delUserGoodsByIdsSelect(ids,request);
 
     }
 
 
     @PostMapping(value = "/shopCar/detailData")
     public ModelAndView shopDetailData(
-         @RequestParam("idList[]") int[] ids,
-            @RequestParam("countList[]") int[] counts,
+         @RequestParam("ids[]") int[] ids,
+            @RequestParam("counts[]") int[] counts,
             Model model,
             HttpServletRequest request){
 
