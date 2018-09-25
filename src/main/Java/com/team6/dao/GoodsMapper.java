@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface GoodsMapper {
     /**
@@ -73,5 +74,23 @@ public interface GoodsMapper {
     List<Map<String,Object>> querySaleByGoodType(@Param("typeId") int typeId,@Param("limit") int limit);
 
 
+    /**
+    *@author VLoye
+    *@Description  通过一个id集合查找商品
+    *@Date 10:43 2018/9/14
+    *@Param [idList]
+    *@return java.util.List<com.team6.entity.Goods>
+    **/
+    List<Goods> queryGoodsByIdList(List idList);
+
+
+    /**
+    *@author VLoye
+    *@Description  通过一个id数组查找商品
+    *@Date 15:58 2018/9/25
+    *@Param [objects]
+    *@return java.util.List<com.team6.entity.Goods>
+    **/
+    List<Goods> queryGoodsByIdArray(Object[] objects);
 
 }

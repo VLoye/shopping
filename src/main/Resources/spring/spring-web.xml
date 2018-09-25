@@ -37,6 +37,14 @@
 <!--    <mvc:resources mapping="html/**" location="/WEB-INF/html/"/>-->
     <mvc:resources mapping="static/**" location="/static/"/>
 
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.team6.interceptor.UserInfoInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 3.配置jsp 显示ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
