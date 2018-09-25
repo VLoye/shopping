@@ -36,15 +36,21 @@
         <div class="pw-w1200 pwt-link" id="headTopNav">
 
 		<div class="pw-w1200 pwt-link">
-		    <span class="pw-fl mr10" islogin="true" style="display: none;">
-		        您好，
-		        <a href="../../LoginAndResigter/Login.html" target="_blank" style="color:#F60" rel="nofollow"></a>
-		        ，已登录 <a href="http://www.qipeiren.com/User/" target="_blank">会员中心</a> [<a href="http://www.qipeiren.com/User/UserLoginOut.asp">退出</a>]
-		    </span>
-		    <span class="pw-fl mr10" islogin="false">您好，欢迎光临汽配人网！</span>
-		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Login.html" target="_blank">请登录</a>
-		    <i class="pw-fl pw-vline" islogin="false">|</i>
-		    <a class="pw-fl" islogin="false" href="../../LoginAndResigter/Register.html" target="_blank">免费注册</a>
+			<div id = "loginstatus">
+
+				<#if user.username>
+				<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+				<a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
+				<i class="h-fl h-vline">|</i>
+				<input type = "hidden" id = "userid" value = "${user.userid}"/>
+				<a class="h-fl" href="">[退出]</a>
+				<#else>
+				<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+				<a class="h-fl" href="/Login">登录</a>
+				<i class="h-fl h-vline">|</i>
+				<a class="h-fl" href="/Register">注册</a>
+			</#if>
+			</div>
 		    <a class="pw-fr" href="http://www.auto333.com" target="_blank">国际站</a>
 		    <dl class="pw-fr pw-down ml0 ltb1">
 		        <dt>

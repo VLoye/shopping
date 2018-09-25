@@ -6,23 +6,23 @@
     <meta name="renderer" content="webkit|ie-stand" />
     <meta charset="utf-8" />
     <title>核对并提交订单</title>
-    <link href="static/css/css_base.css" rel="stylesheet" type="text/css" />
-    <link href="static/css/css_top_mall.css" rel="stylesheet" type="text/css" />
-    <link href="static/css/common.css" rel="stylesheet" />
-    <link href="static/css/inner.css" rel="stylesheet" />
-    <link href="static/css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
-    <link href="static/css/artdilog.css" rel="stylesheet" />
-    <script src="static/js/jquery-3.3.1.min.js"></script>
-    <script src="static/js/jquery.cookie.js"></script>
-    <script src="static/js/jQuery.mouseDelay.min.js"></script>
-    <script src="static/js/jquery.scrollLoading.min.js"></script>
-    <script src="static/js/web.js"></script>
-    <script src="static/js/CommonJS.js"></script>
-    <script src="static/js/jquery.artDialog.js"></script>
-    <script src="static/js/artDialog.iframeTools.js"></script>
+    <link href="/static/css/css_base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/css_top_mall.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/common.css" rel="stylesheet" />
+    <link href="/static/css/inner.css" rel="stylesheet" />
+    <link href="/static/css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/artdilog.css" rel="stylesheet" />
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/jQuery.mouseDelay.min.js"></script>
+    <script src="/static/js/jquery.scrollLoading.min.js"></script>
+    <script src="/static/js/web.js"></script>
+    <script src="/static/js/CommonJS.js"></script>
+    <script src="/static/js/jquery.artDialog.js"></script>
+    <script src="/static/js/artDialog.iframeTools.js"></script>
 
-    <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
-    <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
+    <script charset="utf-8" src="/static/template/admin/js/sysUtils.js"></script>
+    <script charset="utf-8" src="/static/template/admin/js/template-web.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -36,11 +36,11 @@
                 url: myurl,
                 type: "post",
                 dataType: "json",
-                success: function(res){
-                    $("#consignee-list").template("dataAddress",{list:res});
-                    $("#s-content").template("selectedc",{list:res});
+                success: function(data){
+                    $("#consignee-list").template("dataAddress",{list:ata});
+                    $("#s-content").template("selectedc",{list:data});
                 },
-                error: function(res){
+                error: function(data){
                     //alert("ajax error : "+res);
                 }
             });
@@ -81,8 +81,8 @@
             <a class="h-fl" href="/Login">登录</a>
             <i class="h-fl h-vline">|</i>
             <a class="h-fl" href="/Register">注册</a>
-            </#if>
-        </div>
+        </#if>
+</div>
 <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
 <dl class="h-fr h-down ml0 ltb1">
     <dt>
@@ -104,7 +104,7 @@
         <a href="/ShopConcern/Index">关注的店铺</a>
     </dd>
 </dl>
-<a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
+<a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
 <i class="h-fr h-vline">|</i>
 <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
 </div>
@@ -132,9 +132,9 @@
     .quantity-text {width: 34px;height: 18px;border: 1px solid #ddd;border-top-color: #aaa;border-left-color: #aaa;padding-top: 2px;overflow: hidden;text-align: center;background-color: #fff;
     }
 </style>
-<link href="static/css/base.css" rel="stylesheet">
-<link href="static/css/myjd.easebuy.css" rel="stylesheet">
-<script class="resources library" src="static/js/area.js" type="text/javascript"></script>
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/myjd.easebuy.css" rel="stylesheet">
+<script class="resources library" src="/static/js/area.js" type="text/javascript"></script>
 
 <div class="w990 m2">
     <div id="checkout">
@@ -160,7 +160,7 @@
                                 {{/each}}
                             </script>
                             <div class="s-content" id = "s-content">
-                                <p id="selectedAddress">李天 &nbsp; 13376255489 &nbsp; 北京 北京市 门头沟区 &nbsp;垃圾场&nbsp;</p>
+
                             </div>
                             <div class="form" id="addressListArea" style="display: none">
                                 <div id="consignee-list">
@@ -184,27 +184,6 @@
                                         </div>
                                         {{each}}
                                     </script>
-
-                                    <div class="item" name="li-1">
-                                        <label>
-                                            <input type="radio" id = "1" class="hookbox" name="address" checked="" value="1">
-                                            <span id = "linkman-1">李梅</span>&nbsp;<span id = "region-1">湖北省 宜昌市 远安县</span>&nbsp;<span id = "detailedaddress-1">垃圾场 </span>&nbsp;<span id = "tel-1">13376255489</span>&nbsp;
-                                        </label>
-                                        <span class="item-action">
-                                    			<a href="javascript:;" onclick="showEditArea('1')">编辑</a> &nbsp;
-                                    			<a href="javascript:;" onclick="deleteAddress('1')">删除</a>&nbsp;
-                                    		</span>
-                                    </div>
-                                    <div class="item" name="li-6671">
-                                        <label>
-                                            <input type="radio" id = "6671" class="hookbox" name="address" checked="checked" value="6670">
-                                            <span id = "linkman-6671">张天</span>&nbsp;<span id = "region-6671">湖北省 宜昌市 远安县</span>&nbsp;<span id = "detailedaddress-6671">垃圾场 </span>&nbsp;<span id = "tel-6671">13376255489</span>&nbsp;
-                                        </label>
-                                        <span class="item-action">
-                                    			<a href="javascript:;" onclick="showEditArea('6671')">编辑</a> &nbsp;
-                                    			<a href="javascript:;" onclick="deleteAddress('6671')">删除</a>&nbsp;
-                                    		</span>
-                                    </div>
                                 </div>
                                 <div style="display: none" class="item" id="use-new-address">
                                     <input type="radio" onclick="showEditArea(0)" class="hookbox" name="address" id="consignee_radio_new" />
@@ -368,28 +347,6 @@
 								                                               <label>x</label>  <span name = "ngoodscount"> ${item.count}  </span>                                                              </td>
 								                                    </tr>
                                                                 </#list>
-
-                                                                <tr skuid="1951_0_0_0" quntity="1" price="2170.0000">
-                                                                    <td class="fore1" style="padding: 10px;">
-                                                                        <div class="p-goods">
-                                                                            <div class="p-img">
-                                                                                <a href="/Product/Detail/1951" target="_blank">
-                                                                                    <img alt="" src="/Storage/Shop/8/Products/1951/1_50.png" />
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="p-detail">
-                                                                                <div class="p-name">
-                                                                                    <a href="/Product/Detail/1951" target="_blank">
-                                                                                        东风原厂  康明斯  6L四配套 配活塞4987914 &nbsp; <br />
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="p-price"><strong>￥2170.00</strong></td>
-                                                                    <td class="fore2">
-                                                                           <label>x</label> <span>1</span>                                                                    </td>
-                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -430,10 +387,10 @@
                 <span class="total" style="float: left;"><a href="/cart/cart" class="return-edit">返回修改购物车</a></span>
                 <button type="button" id="submit" class="checkout-submit">提交订单</button>
                 <span class="total">
-                                <label>应付总额：</label>
-                                <strong id="payPriceId" data-real="${total.totalprice}.00" data="${total.totalprice}.00">${total.totalprice}.00</strong>
-                                <label>元</label>
-                            </span>
+                    <label>应付总额：</label>
+                    <strong id="payPriceId" data-real="${total.totalprice}.00" data="${total.totalprice}.00">${total.totalprice}.00</strong>
+                    <label>元</label>
+                </span>
             </div>
         </#if>
     </div>
@@ -481,11 +438,11 @@
 <!--<input type="hidden" id="shippingAddressId" value="6618" />
 <input type="hidden" id="cartItemIds" value="993" />-->
 
-<script src="static/js/Region.js"></script>
-<script src="static/js/regionBind.js"></script>
-<script src="static/js/submitOrder.js"></script>
-<script src="static/js/CommonJS.js"></script>
-<script src="static/js/jquery.json.js"></script>
+<script src="/static/js/Region.js"></script>
+<script src="/static/js/regionBind.js"></script>
+<script src="/static/js/submitOrder.js"></script>
+<script src="/static/js/CommonJS.js"></script>
+<script src="/static/js/jquery.json.js"></script>
 
 <!--<script>
     var orderUrl = 'http://order.qipeiren.com';
@@ -704,7 +661,7 @@
 </script>-->
 
 
-<link href="static/css/css_foot.css" rel="stylesheet" />
+<link href="/static/css/css_foot.css" rel="stylesheet" />
 <div class="h-bottom ms-foot">
     <div class="h-w1200 msf-service">
         <a href="/Article/mallintr" target="_blank">
@@ -793,7 +750,7 @@
     </div>
 </div>
 
-<link href="static/css/css_sitefoot.css" rel="stylesheet" />
+<link href="/static/css/css_sitefoot.css" rel="stylesheet" />
 <div class="pw-panel pw-foot">
     <div class="pw-w1200">
         <div class="foot-box clearfix">
@@ -909,13 +866,6 @@
         </div>
     </div>
 </div>
-
-<span style="display:none">
-    <script type="text/javascript">
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F607271da1d927f7e761e62f3d232b15a' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-</span>
 
 </body>
 </html>

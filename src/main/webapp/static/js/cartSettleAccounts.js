@@ -550,7 +550,8 @@ function bindToSettlement(isB2B) {
             if ($(e).attr('checked')) {
 
                 ids[num] = $(e).attr('sku');
-                counts[num] = document.getElementById('count'+i);
+                counts[num]
+                    = document.getElementById('count'+i);
                 num++;
             }
         });
