@@ -4,6 +4,8 @@ import com.team6.service.Goods.GoodsService;
 import com.team6.service.login.LoginService;
 import com.team6.service.rb.RbService;
 import org.noggit.JSONUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class IndexContorller {
+    private static final Logger logger = LoggerFactory.getLogger(IndexContorller.class);
 
     @Autowired
     LoginService loginService;
@@ -43,12 +47,11 @@ public class IndexContorller {
      * @param response
      * @return
      */
+
     @ResponseBody
     @RequestMapping(value = "/indexData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
     public Object getIndexPageInfo(Model model,
                                   HttpServletRequest request, HttpServletResponse response){
-
-
 
         //获取轮播图
         List rblist = (List)rbService.queryAllInfo();
@@ -65,6 +68,7 @@ public class IndexContorller {
         model.addAttribute("clist",clist);
         //展示轮播图
         model.addAttribute("rblist",rblist);
+
         /*ModelAndView modelAndView = new ModelAndView("/Main/Index", "data",model);*/
 
         return JSONUtil.toJSON(model);

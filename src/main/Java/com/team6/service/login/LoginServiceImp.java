@@ -120,6 +120,8 @@ public class LoginServiceImp implements LoginService {
         return permission;
     }
 
+    //位置是否需要调整？？？
+
     /**
      * 根据token取得用户信息
      * @param request
