@@ -27,77 +27,212 @@
 <body>
 <!--shortcut start-->
 
+<script type="text/javascript">
+	$(function () {
+        PsFormat();
+    });
+    function GetQueryString(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+		if(r!=null) return  unescape(r[2]); return null;
+    }
+	var PsFormat = function () {
+		var key = GetQueryString("key");
+        document.getElementById("keycontent").innerHTML = key;
+        $.ajax({
+            url: '/searchData',
+            type: "post",
+			data:{key:key,brandid:'',typeid:''},
+            dataType: "json",
+            success: function(data){
+                $("#loginstatus").append(template("logstatus",{data:data.user}));
+				$("#goodscontent").append(template("goodsFormat",{list:data.glist}));
+				$("#jpcontent").append(template("jpFormat",{list:data.jplist}));
+
+            },
+            error: function(data){
+                //parent.layer.msg(res.title);
+                //alert(res.title);
+            }
+        });
+    }
+    var CartAdd = function (goodsid) {
+
+        $.post('/shopCar/add/'+goodsid, { goodsid: goodsid, count: 1 }, function (result) {
+            //loading.close();
+            if (result.success) {
+               	alert("添加成功");
+            }
+            else {
+                $.dialog.errorTips(result.msg);
+            }
+        });
+    }
+    var refreshData = function () {
+        var nkey = document.getElementById("key");
+        var key = nkey.value;
+        var brandids = new Array();
+        var typeids = new Array();
+
+		var bstrs = $("#bidstr").val().split(",");
+		var tstrs = $("#tidstr").val().split(",");
+
+        for (var i = 0; i < bstrs.length; i++) {
+            brandids.push(bstrs[i]);
+
+        }
+
+        for (var j = 0; j < tstrs.length; j++) {
+            typeids.push(tstrs[j]);
+        }
+
+        $.ajax({
+            url: '/searchData',
+            type: "post",
+            data:{key:key,brandid:brandids,typeid:typeids},
+            dataType: "json",
+            success: function(data){
+                $("#goodscontent").append(template("goodsFormat",{list:data.glist}));
+                $("#jpcontent").append(template("jpFormat",{list:data.jplist}));
+
+            },
+            error: function(data){
+                //parent.layer.msg(res.title);
+                //alert(res.title);
+            }
+        });
+    }
+    var yuclose = function(num){
+        if (num == 1) {
+            $("#bid").remove();
+            $("#bidstr").val('');
+            $("#bnamestr").val('');
+            //brandstr = '';
+        }
+        else{
+            $("#tid").remove();
+            $("#tidstr").val('');
+            $("#tnamestr").val('');
+            //typestr = '';
+        }
+        var isb = ($("#bid").length>0)?true:false;
+        var ist = ($("#tid").length>0)?true:false;
+        if(!isb){
+            if(!ist){
+                $('#arrowsearch').remove();
+            }
+        }
+
+    }
+    var brandkeydown = function (brandid,name) {
+
+        if(($("#bidstr").val()=="")) {
+
+            $("#bidstr").val($("#bidstr").val()+brandid);
+            $("#bnamestr").val($("#bnamestr").val()+name);
+        }
+        else{
+
+            if($("#bidstr").val().indexOf(brandid)>=0){
+
+            }else{
+                $("#bidstr").val($("#bidstr").val()+","+brandid);
+                $("#bnamestr").val($("#bnamestr").val()+","+name);
+            }
+        }
+        var content1 = $("#selectedkey").html();
+        if(content1 == null||content1.length == 0)
+        {
+            $("#selectedkey").append('<i class="crumbs-arrow" id="arrowsearch">&gt;</i>');
+        }
+        var isb = ($("#bid").length>0)?true:false;
+        if(isb){
+            document.getElementById("bstr").innerText = $("#bnamestr").val();
+        }else{
+            $("#selectedkey").append('<a class="crumb-select-item" id="bid" onclick="yuclose(1)" rel="nofollow" title="">'+
+                '			<b>品牌：</b><em id="bstr">'+ $("#bnamestr").val() +'</em><i></i></a>');
+        }
+
+        refreshData();
+    }
+    var typekeydown = function(typeid,name) {
+
+        var tnamestr = $("#tnamestr").val();
+        if(($("#tidstr").val()=="")){
+            $("#tidstr").val(typeid);
+            $("#tnamestr").val(name);
+        }
+        else{
+            if($("#tidstr").val().indexOf(typeid)>=0){
+
+            }else{
+                $("#tidstr").val($("#tidstr").val()+","+typeid);
+                $("#tnamestr").val($("#tnamestr").val()+","+name);
+            }
+        }
+        var content2 = $("#selectedkey").html();
+        if(content2 == null || content2.length == 0)
+        {
+            $("#selectedkey").append('<i class="crumbs-arrow" id="arrowsearch">&gt;</i>');
+        }
+        var ist = ($("#tid").length>0)?true:false;
+        if(ist){
+            var ss = $("#tnamestr").val();
+            document.getElementById("tstr").innerText = ss;
+        }else{
+            $("#selectedkey").append('<a class="crumb-select-item" id="tid" onclick="yuclose(2)" rel="nofollow" title="">'+
+                '			<b>类型：</b><em><span id="tstr">'+ $("#tnamestr").val() +'</span></em><i></i></a>');
+        }
+        refreshData();
+    }
+</script>
+
+<script id = "logstatus" type = "text/html">
+	{{if data}}
+	<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+	<a class="h-fl" href="/UserCenter" target="_blank">{{data.username}}</a>
+	<input type = "hidden" text = "{{data.userid}}" id = "userid"/>
+	<i class="h-fl h-vline">|</i>
+	<a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/cart/cart">[退出]</a>
+	{{else}}
+	<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+	<a class="h-fl" href="/Login">登录</a>
+	<i class="h-fl h-vline">|</i>
+	<a class="h-fl" href="/Register">注册</a>
+	{{/if}}
+	<a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+	<dl class="h-fr h-down ml0 ltb1">
+		<dt>
+			<a href="/scrz/" target="_blank">商城入驻</a>
+			<i class="h-icon"></i>
+		</dt>
+		<dd>
+			<a href="/Article/mallintr" target="_blank">商城介绍</a>
+			<a href="/scrz/" target="_blank">商城入驻</a>
+		</dd>
+	</dl>
+	<dl class="h-fr h-down h-sd mr0">
+		<dt>
+			<a href="#2">收藏夹</a>
+			<i class="h-icon"></i>
+		</dt>
+		<dd>
+			<a href="/ProductConcern/Index">关注的商品</a>
+			<a href="/ShopConcern/Index">关注的店铺</a>
+		</dd>
+	</dl>
+	<a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+	<i class="h-fr h-vline">|</i>
+	<a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+</script>
 
 <div class="pw-top">
 	<div class="pw-w1200 pwt-link" id="headTopNav">
 
-		<div class="pw-w1200 pwt-link">
+		<div class="pw-w1200 pwt-link" id = "loginstatus">
 
-			<div id = "loginstatus">
-				<#if user.username>
-				<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-				<a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
-				<i class="h-fl h-vline">|</i>
-				<input type = "hidden" id = "userid" value = "${user.userid}"/>
-				<a class="h-fl" href="">[退出]</a>
-				<#else>
-				<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-				<a class="h-fl" href="/Login">登录</a>
-				<i class="h-fl h-vline">|</i>
-				<a class="h-fl" href="/Register">注册</a>
-				</#if>
+		</div>
 	</div>
-
-	<a class="pw-fr" href="http://www.auto333.com" target="_blank">国际站</a>
-	<dl class="pw-fr pw-down ml0 ltb1">
-		<dt>
-			<a href="#none">网站服务</a>
-			<i class="pw-icon"></i>
-		</dt>
-		<dd>
-			<a href="../../LoginAndResigter/Login.html" target="_blank">汽配旺铺</a>
-			<a href="http://www.qipeiren.com/cms/yxb/" target="_blank">营销宝</a>
-			<a href="http://www.qipeiren.com/helper/" target="_blank">汽配助手</a>
-			<a href="http://mall.qipeiren.com/complaint/center" target="_blank">规则中心</a>
-		</dd>
-	</dl>
-	<dl class="pw-fr pw-down pw-down-unique mr0">
-		<dt>
-			<a href="#none">特色市场</a>
-			<i class="pw-icon"></i>
-		</dt>
-		<dd>
-			<a href="http://cyc.qipeiren.com/" target="_blank">乘用车市场</a>
-			<a href="http://dongfeng.qipeiren.com/" target="_blank">东风市场</a>
-			<a href="http://zhongqi.qipeiren.com/" target="_blank">重汽市场</a>
-			<a href="http://shanqi.qipeiren.com/" target="_blank">陕汽市场</a>
-			<a href="http://yiqi.qipeiren.com/" target="_blank">一汽市场</a>
-			<a href="http://beiqi.qipeiren.com/" target="_blank">北汽市场</a>
-			<a href="http://jianghuai.qipeiren.com/" target="_blank">江淮市场</a>
-			<a href="http://jiangsu.qipeiren.com/" target="_blank">江苏分站</a>
-			<a href="http://guangdong.qipeiren.com/" target="_blank">广东分站</a>
-			<a href="http://zq.qipeiren.com/" target="_blank">山东分站</a>
-			<a href="http://henan.qipeiren.com/" target="_blank">河南分站</a>
-			<a href="http://cydsy.qipeiren.com" target="_blank">十堰产业带</a>
-		</dd>
-	</dl>
-	<a class="pw-fr" href="http://www.qipeiren.com/User/Index.asp" target="_blank">会员中心</a>
-	<i class="pw-fr pw-vline">|</i>
-	<a class="pw-fr" href="http://mall.qipeiren.com/cart/cart" target="_blank">购物车<b style="color:#F60" class="cookie_cart_count"></b></a>
-	<dl class="pw-fr pw-down">
-		<dt>
-			<a href="http://mall.qipeiren.com/" target="_blank">汽配商城</a>
-			<i class="pw-icon"></i>
-		</dt>
-		<dd>
-			<a href="http://mall.qipeiren.com/Article/mallintr" target="_blank">商城介绍</a>
-			<a href="http://mall.qipeiren.com/scrz/" target="_blank">商城入驻</a>
-
-		</dd>
-	</dl>
-	<a class="pw-fr" href="http://www.qipeiren.com/" target="_blank">汽配人首页</a>
-</div>
-</div>
 </div>
 
 <div id="o-header-2013"><div id="header-2013" style="display:none;"></div></div>
@@ -112,7 +247,7 @@
 		<ul id="shelper" class="hide"></ul>
 		<div class="form">
 			<input type="text" onkeydown="javascript:if(event.keyCode==13) search('key');" autocomplete="off" id="key" accesskey="s" class="text" />
-			<button onclick="search()" class="button cw-icon"><i></i>搜索</button>
+			<button onclick="refreshData()" class="button cw-icon"><i></i>搜索</button>
 		</div>
 	</div>
 	<div id="settleup-2014" class="dorpdown">
@@ -165,20 +300,20 @@
 		<span class="clr"></span>
 	</div>
 </div>
-<!--nav end--><div style="display:none"><a href="//club.jd.com/rank/6294.html">好评度</a><a href="//club.jd.com/koubei/e7be8ee5beb7e5a881e7ab8be5bc8fe992a2e790b4.html">美德威立式钢琴</a><a href="//club.jd.com/koubei/e59388e7bd97e5beb7efbc88484152524f44534552efbc89e992a2e790b4.html">哈罗德（HARRODSER）钢琴</a><a href="//club.jd.com/koubei/e5a48de59088e99fb3e69dbfe992a2e790b4.html">复合音板钢琴</a><a href="//club.jd.com/koubei/e9b1bce9b39ee69dbee992a2e790b4.html">鱼鳞松钢琴</a><a href="//club.jd.com/koubei/e5ae9ee69ca8e99fb3e69dbfe992a2e790b4.html">实木音板钢琴</a><a href="//club.jd.com/koubei/e99b85e9a9ace59388efbc8859414d414841efbc89e7ab8be5bc8fe992a2e790b4.html">雅马哈（YAMAHA）立式钢琴</a><a href="//club.jd.com/koubei/e699aee9b281e789b9e5a89cefbc8850525554454e4552efbc89e7ab8be5bc8fe992a2e790b4.html">普鲁特娜（PRUTENER）立式钢琴</a><a href="//club.jd.com/koubei/e58da1e7bd97e5beb7efbc884341524f44efbc89e992a2e790b4.html">卡罗德（CAROD）钢琴</a><a href="//club.jd.com/koubei/e58589e99da2e4b98ce9bb91e889b2e992a2e790b4.html">光面乌黑色钢琴</a><a href="//club.jd.com/koubei/e5bab7e68b89e5beb7e6a0bce68b89e5a4abe992a2e790b4.html">康拉德格拉夫钢琴</a><a href="//www.jd.com/chanpin/317282.html">进口日本钢琴</a><a href="//www.jd.com/chanpin/340349.html">系列钢琴</a><a href="//www.jd.com/chanpin/351409.html">carod卡罗德钢琴</a><a href="//www.jd.com/chanpin/399120.html">乔治钢琴</a><a href="//www.jd.com/chanpin/402334.html">北京钢琴</a><a href="//www.jd.com/chanpin/411925.html">恺撒堡钢琴</a><a href="//www.jd.com/chanpin/426059.html">舒尔茨钢琴</a><a href="//www.jd.com/chanpin/426060.html">舒曼钢琴</a><a href="//www.jd.com/chanpin/426433.html">英国钢琴</a><a href="//www.jd.com/chanpin/436610.html">theone钢琴</a><a href="//www.jd.com/chanpin/450093.html">家用钢琴</a><a href="//www.jd.com/chanpin/455505.html">教学用钢琴</a><a href="//www.jd.com/chanpin/455511.html">教学钢琴</a><a href="//www.jd.com/chanpin/459692.html">水钢琴</a><a href="//www.jd.com/chanpin/474632.html">钢琴弦</a><a href="//www.jd.com/chanpin/570775.html">数码学习机</a><a href="//www.jd.com/chanpin/571919.html">智能钢琴学习机</a><a href="//www.jd.com/chanpin/583480.html">钢琴学习机</a><a href="//www.jd.com/chanpin/635531.html">一对一钢琴</a><a href="//www.jd.com/chanpin/635555.html">实木钢琴</a><a href="//www.jd.com/chanpin/635558.html">petrof钢琴</a><a href="//www.jd.com/chanpin/635562.html">珠江教学钢琴</a><a href="//www.jd.com/chanpin/635576.html">惠州钢琴</a><a href="//www.jd.com/chanpin/665783.html">FIND钢琴</a><a href="//www.jd.com/chanpin/668434.html">HAPE钢琴</a><a href="//www.jd.com/chanpin/671685.html">JIANGJIE钢琴</a><a href="//www.jd.com/chanpin/686675.html">SPYKER钢琴</a><a href="//www.jd.com/chanpin/698138.html">世爵钢琴</a><a href="//www.jd.com/chanpin/716787.html">克劳迪奥钢琴</a><a href="//www.jd.com/chanpin/717544.html">公爵钢琴</a><a href="https://www.jd.com/pinpai/263118.html">拿漫（NAMAN）</a><a href="https://www.jd.com/pinpai/251524.html">钧成</a><a href="https://www.jd.com/pinpai/6294-227496.html">淘木人（TAOMUREN）</a><a href="https://www.jd.com/pinpai/6294-236303.html">华洛芙</a><a href="https://www.jd.com/pinpai/6294-327825.html">ISABELL</a><a href="https://www.jd.com/jiage/6233eb1d45b7b301aa51.html">珠江钢琴珠江系列</a><a href="https://www.jd.com/jiage/623366c0166112b5aa30.html">珠江钢琴UP125RKS</a><a href="https://www.jd.com/jiage/6233bdf7e42a60f8f794.html">雅马哈钢琴</a><a href="https://www.jd.com/jiage/6233570e9808f804956b.html">胡桃木色钢琴</a><a href="https://www.jd.com/jiage/62332910427cb1ce5833.html">星海E-123LE</a><a href="https://www.jd.com/tupian/6233d19a52a420797d3b.html">琴行钢琴</a><a href="https://www.jd.com/tupian/6233623551c6a79d8cc8.html">世爵HD-W186</a><a href="https://www.jd.com/tupian/62332f413443e94f734e.html">铁三角（atechnica）</a><a href="https://www.jd.com/tupian/62335d10224cb9fd710c.html">Mason&Hamlin</a><a href="https://www.jd.com/tupian/62332d2292f9db6430b2.html">专业院校钢琴</a><a href="https://www.jd.com/xinkuan/62332e5816d68fe5c904.html">珠江钢琴UP120TL</a><a href="https://www.jd.com/xinkuan/6233745307260b020d58.html">珠江钢琴全新</a><a href="https://www.jd.com/xinkuan/62339ec6e6381fa6a640.html">BRUNO钢琴</a><a href="https://www.jd.com/xinkuan/6233d72524a9c59116e2.html">可弹奏小钢琴</a><a href="https://www.jd.com/xinkuan/6233072ecea61b41764c.html">艾茉森（Amason）立式钢琴</a><a href="https://yp.jd.com/623310580ea8559808a9.html">星海立式钢琴</a><a href="https://yp.jd.com/6233f264cb8242f5a506.html">雅马哈（YAMAHA）立式钢琴</a><a href="https://yp.jd.com/62336386c123f3789002.html">美德威立式钢琴</a><a href="https://yp.jd.com/6233072ecea61b41764c.html">艾茉森（Amason）立式钢琴</a><a href="https://yp.jd.com/6233a7d146373ff3c7df.html">珠江（pearlriver）立式钢琴</a><a href="https://www.jd.com/phb/key_62336b2bf4b9564262ab.html">思雅晨（Saysn）钢琴</a><a href="https://www.jd.com/phb/key_62339e0a72025102eaf2.html">唐爵（TALLJO）立式钢琴</a><a href="https://www.jd.com/phb/key_623388c5996caeb86edd.html">牧川</a><a href="https://www.jd.com/phb/key_623317e1fb3712c310eb.html">新宝（XinBao）</a><a href="https://www.jd.com/phb/key_6233887afed4740cf95c.html">上海钢琴</a><a href="https://www.jd.com/phb/6233d4df199d74c6291f.html">家用钢琴</a><a href="https://www.jd.com/phb/623361521edbd90cc171.html">立式钢琴</a><a href="https://www.jd.com/phb/62330a305b6f59d441f5.html">钢琴</a><a href="https://www.jd.com/phb/6233a082b1300f7db51f.html">全新钢琴</a><a href="https://www.jd.com/phb/9987f9cb421e7ecffed1.html">防尘塞</a><a href="https://www.jd.com/jiage/6233e086adf257f44f74.html">XINGHAI  INSTRUMENT</a><a href="https://www.jd.com/jiage/62338b869ad8cb8b5a68.html">珠江钢琴UP118RKS</a><a href="https://www.jd.com/jiage/62332a06b2ad7230269c.html">网童奇贝三角钢琴</a><a href="https://www.jd.com/jiage/6233caf19cceb3a783ad.html">诗帝堡诗帝堡ST-Z8</a><a href="https://www.jd.com/jiage/623332efab8d0c6c9018.html">钢琴日本</a><a href="https://www.jd.com/phb/zhishi/77a0c6686e900d54.html">钢琴放在家里的什么位置好？</a><a href="https://www.jd.com/phb/zhishi/e914be213ae6e9c8.html">钢琴多长时间调律一次比较好？</a><a href="https://www.jd.com/phb/zhishi/d3e3e3abe4cbe9c8.html">钢琴定期调律的必要性</a><a href="https://www.jd.com/phb/zhishi/d0d5eaf20a3b5326.html">使用者说 | 钢琴这件漫漫长路，静心扎实地走下去</a><a href="https://www.jd.com/phb/zhishi/bc44136cb5111cdd.html">学习钢琴要重视练琴方法</a><a href="https://www.jd.com/jiage/17133e097cc1603d2a2a.html">伊东</a><a href="https://www.jd.com/jiage/171327ea2a849e44cb76.html">花千骨</a><a href="https://www.jd.com/jiage/1713895310492a6de064.html">奇点</a><a href="https://www.jd.com/jiage/1713fbf899c8f3ddffb8.html">莫奈</a><a href="https://www.jd.com/jiage/171320d4a7ae727277e8.html">布谷鸟</a></div><div id="J_searchWrap" class="w">
 	<div id="J_crumbsBar" class="crumbs-bar">
 		<div class="crumbs-nav">
 			<div class="crumbs-nav-main clearfix">
 				<div class="crumbs-nav-item">
-					<div class="crumbs-first"><a href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123">全部结果</a></div>
+					<div class="crumbs-first"><a href="">全部结果</a></div>
 				</div>
 				<i class="crumbs-arrow">&gt;</i>
 				<div class="crumbs-nav-item">
-					<strong class="search-key">"123"</strong>
+					<strong class="search-key"><span id = "keycontent"></span></strong>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div id="J_container" class="container">
 		<div id="J_selector" class="selector">
 			<div class="J_selectorLine s-brand">
@@ -189,30 +324,12 @@
 						<div class="clr"></div>
 						<div class="sl-v-logos">
 							<ul class="J_valueList v-fixed">
-
-								<li id="brand-177598" data-initial="Z" style="display:block;">
-									<a href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&ev=exbrand_%E7%8F%A0%E6%B1%9F%E9%92%A2%E7%90%B4%EF%BC%88PEARLRIVER%EF%BC%89%5E&uc=0#J_searchWrap" rel="nofollow" onclick="searchlog(1,0,0,71,'品牌::珠江钢琴（PEARLRIVER）')" title="珠江钢琴（PEARLRIVER）">
-										<i></i><img src="../img/logo_1.png" width="102" height="36">珠江钢琴（PEARLRIVER）						</a>
+								<#list brand as data>
+								<li data-initial="Z" style="display:block;">
+									<a id="${data.brandid}" href="" rel="nofollow" onclick="brandkeydown('"+ ${data.brandid} +"')" title="${data.brandname}">
+										<i></i><img src="${data.img_url}" width="102" height="36">${data.brandname}					</a>
 								</li>
-
-							</ul>
-						</div>
-						<div class="sl-b-selected J_brandSelected"><span class="sl-b-key">已选条件：</span><ul class="sl-v-list brand-selected"></ul></div>
-					</div>
-				</div>
-			</div>
-			<div class="J_selectorLine s-category">
-				<div class="sl-wrap">
-					<div class="sl-key"><strong>图书：</strong></div>
-					<div class="sl-value">
-						<div class="sl-v-list">
-							<ul class="J_valueList">
-								<li>
-									<a title="童书" data-v="3263" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid2=3263#J_searchWrap" onclick="searchlog(1,3263,10000,51)"><i></i>童书</a>
-								</li>
-								<li>
-									<a title="中小学教辅" data-v="3289" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid2=3289#J_searchWrap" onclick="searchlog(1,3289,10001,51)"><i></i>中小学教辅</a>
-								</li>
+								</#list>
 							</ul>
 						</div>
 					</div>
@@ -220,53 +337,26 @@
 			</div>
 			<div class="J_selectorLine s-category">
 				<div class="sl-wrap">
-					<div class="sl-key"><strong>乐器：</strong></div>
+					<div class="sl-key"><strong>类型：</strong></div>
 					<div class="sl-value">
 						<div class="sl-v-list">
-							<ul class="J_valueList">
+							< class="J_valueList">
+								<#list type as data>
 								<li>
-									<a title="钢琴" data-v="6294" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6294#J_searchWrap" onclick="searchlog(1,6294,20000,51)"><i></i>钢琴</a>
+									<a title="${data.typename}" id="${data.typeid}" data-v="6294" href="" onclick="typekeydown('"+ ${data.typeid} +"')"><i></i>钢琴</a>
 								</li>
-								<li>
-									<a title="乐器配件" data-v="6305" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6305#J_searchWrap" onclick="searchlog(1,6305,20001,51)"><i></i>乐器配件</a>
-								</li>
-								<li>
-									<a title="工艺礼品乐器" data-v="6308" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6308#J_searchWrap" onclick="searchlog(1,6308,20002,51)"><i></i>工艺礼品乐器</a>
-								</li>
-								<li>
-									<a title="电子琴" data-v="6296" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6296#J_searchWrap" onclick="searchlog(1,6296,20003,51)"><i></i>电子琴</a>
-								</li>
-								<li>
-									<a title="吉他" data-v="6299" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6299#J_searchWrap" onclick="searchlog(1,6299,20004,51)"><i></i>吉他</a>
-								</li>
-								<li>
-									<a title="电钢琴" data-v="14224" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=14224#J_searchWrap" onclick="searchlog(1,14224,20005,51)"><i></i>电钢琴</a>
-								</li>
-								<li>
-									<a title="西洋管弦" data-v="6301" href="search?keyword=123&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=123&stock=1&cid3=6301#J_searchWrap" onclick="searchlog(1,6301,20006,51)"><i></i>西洋管弦</a>
-								</li>
+								</#list>
 							</ul>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="sl-wrap">
-				<div class="sl-key"><span>高级选项：</span></div>
-				<div class="sl-value">
-					<div class="sl-v-tab">
-						<div class="sl-tab-trigger clearfix">
-							<a class="trig-item" href="javascript:;"><span class="text">启蒙类型</span><i class="arrow"></i></a>
-							<a class="trig-item" href="javascript:;"><span class="text">适用对象</span><i class="arrow"></i></a>
-							<a class="trig-item" href="javascript:;"><span class="text">材质</span><i class="arrow"></i></a>
-							<a class="trig-item" href="javascript:;"><span class="text">背板材质</span><i class="arrow"></i></a>
-							<a class="trig-item" href="javascript:;"><span class="text">其他分类</span><i class="arrow"></i></a>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
+
+		<input type="hidden" id="bidstr" value=""/>
+		<input type="hidden" id="bnamestr" value=""/>
+		<input type="hidden" id="tidstr" value=""/>
+		<input type="hidden" id="tnamestr" value=""/>
 
 		<div id="J_main" class="g-main2">
 			<div class="m-list">
@@ -304,63 +394,72 @@
 						</div>
 					</div>
 					<div id="J_goodsList" class="goods-list-v2 gl-type-1 J-goods-list">
-						<ul class="gl-warp clearfix" data-tpl="1">
-							<#list glist as data>
-							<li data-sku="${data.gid}" class="gl-item">
+						<ul class="gl-warp clearfix" data-tpl="1" id="goodscontent">
 
-								<div class="gl-i-wrap">
-									<div class="p-img">
-										<a target="_blank" title="${data.gbrand} ${data.gname}" href="" onclick="searchlog(1,1195464225,0,2,'','adwClk=1')">
-											<img width="220" height="220" class="err-product" data-img="1" source-data-lazy-img="${data.gimg}" />
-										</a>						<div data-lease="" data-catid="6294" data-venid="78166" data-presale=""></div>
-									</div>
-									<div class="p-price">
-										<strong class="J_1195464225" data-done="1"><em>￥</em><i>${data.gprice}</i></strong>					</div>
-									<div class="p-name p-name-type-2">
-										<a target="_blank" title="" href="" onclick="searchlog(1,1195464225,0,1,'','adwClk=1')">
-											<em>${data.gbrand} ${data.gname} <font class="skcolor_ljg">123</font>全国联保+15天退换货</em>
-											<i class="promo-words" id="J_AD_1195464225"></i>
-										</a>
-									</div>
-									<div class="p-operate">
-										<a class="p-o-btn contrast J_contrast" data-sku="1195464225" href="javascript:;" onclick="searchlog(1,1195464225,0,6,'','adwClk=1')"><i></i>对比</a>
-										<a class="p-o-btn focus J_focus" data-sku="1195464225" href="javascript:;" onclick="searchlog(1,1195464225,0,5,'','adwClk=1')"><i></i>关注</a>
-										<a class="p-o-btn addcart" href="//cart.jd.com/gate.action?pid=1195464225&pcount=1&ptype=1" target="_blank" onclick="searchlog(1,1195464225,0,4,'','adwClk=1')" data-limit="0"><i></i>加入购物车</a>
-									</div>
-
-								</div>
-
-							</li>
-						</#list>
 
 						</ul><span class="clr"></span></div><div class="page clearfix"><div id="J_bottomPage" class="p-wrap"></div></div>		</div>
 			</div>
+
+			<script type="text/html" id="goodsFormat">
+				{{each list data}}
+				<li data-sku="{{data.gid}}" class="gl-item">
+
+					<div class="gl-i-wrap">
+						<div class="p-img">
+							<a target="_blank" title="{{data.gbrand}} {{data.gname}}" href="" onclick="">
+								<img width="220" height="220" class="err-product" data-img="1" source-data-lazy-img="{{data.gimg}}" />
+							</a>						<div data-lease="" data-catid="6294" data-venid="78166" data-presale=""></div>
+						</div>
+						<div class="p-price">
+							<strong class="J_1195464225" data-done="1"><em>￥</em><i>{{data.gprice}}</i></strong>					</div>
+						<div class="p-name p-name-type-2">
+							<a target="_blank" title="" href="" onclick="">
+								<em>{{data.gbrand}} {{data.gname}}全国联保+15天退换货</em>
+								<i class="promo-words" id="J_AD_1195464225"></i>
+							</a>
+						</div>
+						<div class="p-operate">
+							<!--<a class="p-o-btn contrast J_contrast" data-sku="{{data.gid}}" href="javascript:;" onclick=""><i></i>对比</a>-->
+							<a class="p-o-btn focus J_focus" data-sku="{{data.gid}}" href="/follow/{{data.goodsid}}/1"><i></i>关注</a>
+							<a class="p-o-btn addcart" href="" target="_blank" onclick="CartAdd('"+ {{data.goodsid}} +"')" data-limit="0"><i></i>加入购物车</a>
+						</div>
+
+					</div>
+
+				</li>
+				{{/each}}
+			</script>
+
+			<script type="text/html" id="jpFormat">
+				{{each list data}}
+					<li onclick="/goods/{{data.jpid}}">
+						<div class="p-img">
+						<a target="_blank" href="">
+						<img width="160" height="160" data-img="1" src="{{data.jpimg}}" class="err-product">
+						<img src="" class="J_adv_tuiguang_exposal" style="display:none;">
+						</a>
+						</div>
+						<div class="p-price">
+						<strong><em>¥</em><i>{{data.jpprice}}</i></strong>
+						</div>
+						<div class="p-name">
+						<a target="_blank" href="">
+						<em>{{data.jpprice}}<br/>全国联保+15天退换货</em>
+					</a>
+					</div>
+					<!--<div class="p-comm" style="padding:8px 10px 0">已有<span style="color:#005aa0">2003</span>人评价</div>-->
+					</li>
+				{{/each}}
+			</script>
+
 			<div class="m-aside">
 				<div class="aside-bar">
 					<div id="J_promGoodsWrap_291" class="ab-goods u-ad-wrap" style="display:block;">
 						<span class="u-ad"></span>
 						<div class="mt"><h3>商品精选</h3></div>
 						<div class="mc">
-							<ul class="clearfix" data-x="ab">
-								<#list jplist as data>
-								<li onclick="searchlog(1,1195464225,0,81)">
-									<div class="p-img">
-										<a target="_blank" href="">
-											<img width="160" height="160" data-img="1" src="${data.jpimg}" class="err-product">
-											<img src="" class="J_adv_tuiguang_exposal" style="display:none;">
-										</a>
-									</div>
-									<div class="p-price">
-										<strong><em>¥</em><i>${data.jpprice}</i></strong>
-									</div>
-									<div class="p-name">
-										<a target="_blank" href="">
-											<em>${data.jpprice} <font class="skcolor_ljg">123</font>全国联保+15天退换货</em>
-										</a>
-									</div>
-									<div class="p-comm" style="padding:8px 10px 0">已有<span style="color:#005aa0">2003</span>人评价</div>
-								</li>
-							</#list>
+							<ul class="clearfix" data-x="ab" id="jpcontent">
+
 							</ul>
 						</div>
 					</div>
