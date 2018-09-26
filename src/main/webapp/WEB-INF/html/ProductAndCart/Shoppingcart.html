@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -6,159 +5,158 @@
     <meta name="renderer" content="webkit|ie-stand" />
     <meta charset="utf-8" />
     <title>购物车结算</title>
-    <link href="../css/css_base.css" rel="stylesheet" type="text/css" />
-    <link href="../css/css_top_mall.css" rel="stylesheet" type="text/css" />
-    <link href="../css/common.css" rel="stylesheet" />
-    <link href="../css/inner.css" rel="stylesheet" />
-    <link href="../css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
-    <link href="../css/artdilog.css" rel="stylesheet" />
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <script src="../js/userInfo.js"></script>
-    <script src="../js/jQuery.mouseDelay.min.js"></script>
-    <script src="../js/jquery.scrollLoading.min.js"></script>
-    <script src="../js/web.js"></script>
-    <script src="../js/CommonJS.js"></script>
-    <script src="../js/jquery.artDialog.js"></script>
-    <script src="../js/artDialog.iframeTools.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#searchBtn').click(function () {
-                var keyWords = $('#searchBox').val();
-                location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")// $('#searchBox').attr('placeholder')
-            });
-            $("#searchBox").keydown(function (e) {
-                if (e.keyCode == 13) {
-                    var keyWords = $('#searchBox').val();
-                    location.href = "/search?keywords=" + encodeURIComponent(keyWords ? keyWords : "")//$('#searchBox').attr('placeholder')
-                }
-            });
-        });
-    </script>
+    <link href="static/css/css_base.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/css_top_mall.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/common.css" rel="stylesheet" />
+    <link href="static/css/inner.css" rel="stylesheet" />
+    <link href="static/css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/artdilog.css" rel="stylesheet" />
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <!--<script src="static/js/jquery.cookie.js"></script>-->
+    <script src="static/js/jQuery.mouseDelay.min.js"></script>
+    <script src="static/js/jquery.scrollLoading.min.js"></script>
+    <script src="static/js/web.js"></script>
+    <script src="static/js/CommonJS.js"></script>
+    <script src="static/js/jquery.artDialog.js"></script>
+    <script src="static/js/artDialog.iframeTools.js"></script>
+    <link href="static/css/WebLoginPlug.css" rel="stylesheet" />
+    <script src="static/js/cartSettleAccounts.js"></script>
+
+    <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
+    <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
 </head>
 <body>
-    <div class="h-top" id="headTopNav">
+<div class="h-top" id="headTopNav">
 
-<script>
-    $(function () {
-        refreshCartProducts();
-    });
-    function refreshCartProducts() {
-        var countCookie = $.cookie('qpr_mall_cart_count');
-        $('#right_cart em').text(countCookie);
-        $('#shopping-amount-self').html(countCookie)
-    }
-</script>
-<div class="h-w1200 ht-link">
-    <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-    <a class="h-fl" href="/UserCenter" target="_blank">tvbatvtt</a>
-    <i class="h-fl h-vline">|</i>
-    <a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/cart/cart">[退出]</a>
-    <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
-    <dl class="h-fr h-down ml0 ltb1">
-        <dt>
-            <a href="/scrz/" target="_blank">商城入驻</a>
-            <i class="h-icon"></i>
-        </dt>
-        <dd>
-            <a href="/Article/mallintr" target="_blank">商城介绍</a>
-            <a href="/scrz/" target="_blank">商城入驻</a>
-        </dd>
-    </dl>
-    <dl class="h-fr h-down h-sd mr0">
-        <dt>
-            <a href="#2">收藏夹</a>
-            <i class="h-icon"></i>
-        </dt>
-        <dd>
-            <a href="/ProductConcern/Index">关注的商品</a>
-            <a href="/ShopConcern/Index">关注的店铺</a>
-        </dd>
-    </dl>
-    <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
-    <i class="h-fr h-vline">|</i>
-    <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+    <!--<script>
+        $(function () {
+            refreshCartProducts();
+        });
+        function refreshCartProducts() {
+            var countCookie = $.cookie('qpr_mall_cart_count');
+            $('#right_cart em').text(countCookie);
+            $('#shopping-amount-self').html(countCookie);
+        }
+    </script>-->
+
+    <script id = "logstatus" type = "text/html">
+        {{if data.username}}
+        <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+        <a class="h-fl" href="/UserCenter" id="username" target="_blank">{{data.username}}</a>
+        <i class="h-fl h-vline">|</i>
+        <input type = "hidden" id = "userid" value = "{{data.userid}}"/>
+        <a class="h-fl" href="">[退出]</a>
+        {{else}}
+        <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+        <a class="h-fl" href="/Login">登录</a>
+        <i class="h-fl h-vline">|</i>
+        <a class="h-fl" href="/Register">注册</a>
+        {{/if}}
+    </script>
+
+    <div class="h-w1200 ht-link">
+
+        <div id = "loginstatus"></div>
+
+        <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+        <dl class="h-fr h-down ml0 ltb1">
+            <dt>
+                <a href="/scrz/" target="_blank">商城入驻</a>
+                <i class="h-icon"></i>
+            </dt>
+            <dd>
+                <a href="/Article/mallintr" target="_blank">商城介绍</a>
+                <a href="/scrz/" target="_blank">商城入驻</a>
+            </dd>
+        </dl>
+        <dl class="h-fr h-down h-sd mr0">
+            <dt>
+                <a href="#2">收藏夹</a>
+                <i class="h-icon"></i>
+            </dt>
+            <dd>
+                <a href="/ProductConcern/Index">关注的商品</a>
+                <a href="/ShopConcern/Index">关注的店铺</a>
+            </dd>
+        </dl>
+        <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
+        <i class="h-fr h-vline">|</i>
+        <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+    </div>
 </div>
-    </div>
-    <div class="w990 w1 cl">
-        <div id="logo"><a href="/"><img src="../img/logo1.jpg" title="返回商城首页" alt="返回商城首页" /></a></div>
-        <div class="logo_gwc"><img src="../img/logo4.png" /></div>
-    </div>
-      
-<div class="w990 cart">
-    <!-- <div id="js_show_loading" style="width:100%;padding:100px 0;">
-        <img src="http://img.qipeiren.com/Public/images/loading2.gif" style="margin:0 auto;" />
-    </div> -->
-    <div id="show">
-        <div class="cart-inner">
-        	<div class="message">
-                <ul>
-                    <li>购物车内暂时没有商品<span class="unLogin">，<a href="javascript:bindToSettlement();">登录</a>后，将显示您之前加入的商品</span></li>
-                    <li><a href="http://www.qipeiren.com/c/">去挑选喜欢的商品</a></li>
-                </ul>
-            </div>
+<div class="w990 w1 cl">
+    <div id="logo"><a href="/"><img src="../img/logo1.jpg" title="返回商城首页" alt="返回商城首页" /></a></div>
+    <div class="logo_gwc"><img src="../img/logo4.png" /></div>
+</div>
 
-            <div class="cart-list">
-				<p class="cart-tit">
-                    <label>全部商品<span id="selectedCount">0</span></label>
-                </p>
-                <div class="cart-thead cl">
-                    <div class="column t-checkbox form"><input type="checkbox" name="checkAll" checked="" value="" sku="0"/><label for="">全选</label></div>
-                    <div class="column t-goods">商品</div>
-                    <div class="column t-price">单价</div>
-                    <div class="column t-quantity" style="width:285px;">数量</div>
-                    <div class="column t-action" style="width:120px;">操作</div>
+<div class="w990 cart">
+    <div id="show">
+            <div class="cart-inner" id="cartcontent">
+
+
+            </div>
+            <script id = "goodsList" type="text/html">
+                {{if list}}
+                <div class="cart-list">
+                    <p class="cart-tit">
+                        <label>全部商品<span id="selectedCount">0</span></label>
+                    </p>
+                    <div class="cart-thead cl">
+                        <div class="column t-checkbox form"><input type="checkbox" checked="" name="checkAll" value="" sku="0"/><label for="">全选</label></div>
+                        <div class="column t-goods">商品</div>
+                        <div class="column t-price">单价</div>
+                        <div class="column t-quantity" style="width:285px;">数量</div>
+                        <div class="column t-action" style="width:120px;">操作</div>
+                    </div>
+
+                    <div id="product-list" class="cart-tbody">
+                        <div class="n-item-list">
+                            {{each list data}}
+                            <div class="item item_selected ">
+                                <div class="item_form cl">
+                                    <div class="cell p-checkbox">
+                                        <input class="checkbox" checked="" type="checkbox" data-cartid="" name="checkItem" value="8" sku="{{data.goodsid}}">
+                                    </div>
+                                    <div class="cell p-goods">
+                                        <div class="p-img">
+                                            <a href="{{data.goodsurl}}" target="_blank" id = "goodsurl{{$index}}"><img src="{{data.goodsimg}}" id = "goodsimg{{$index}}" alt=""></a>
+                                        </div>
+                                        <div class="p-name">
+                                            <a href="{{data.goodsurl}}" target="_blank"><span id = "goodsbrand{{$index}}">{{data.brand}} {{data.goodsname}}</span><br></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="cell p-price">
+                                        <span class="price" id = "goodsprice{{$index}}">¥{{data.goodsprice}}.00</span>
+                                    </div>
+                                    <input type = "hidden" text = "{{data.goodstype}}" />
+                                    <input type = "hidden" text = "{{data.sellerid}}" id = "sellerid{{$index}}" />
+                                    <div class="cell p-quantity">
+                                        <div class="quantity-form">
+                                            <a href="javascript:void(0);" class="decrement" sku="{{data.sellerid}}">-</a>
+                                            <input type="text" id = "count{{$index}}" class="quantity-text" value="{{data.count}}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="{{data.sellerid}}">
+                                            <a href="javascript:void(0);" class="increment" sku="{{data.sellerid}}">+</a>
+                                        </div>
+                                    </div>
+                                    <div class="cell p-remove">
+                                        <a class="cart-remove" href="javascript:removeFromCart('{{data.goodsid}}')">删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="product-list" class="cart-tbody">
-                	
-                	
-                	<div class="n-item-list"> 
-						<div class="item item_selected ">                              
-						<div class="item_form cl">                                
-						<div class="cell p-checkbox">                                  
-						<input class="checkbox" type="checkbox" data-cartid="993" name="checkItem" checked="" value="8" sku="1951_0_0_0">                                
-						</div>
-						<div class="cell p-goods">                  
-						<div class="p-img">
-						<a href="/product/detail/1951" target="_blank"><img src="/Storage/Shop/8/Products/1951/1_50.png" alt=""></a>
-						</div>                  
-						<div class="p-name">
-						<a href="/product/detail/1951" target="_blank">东风原厂  康明斯  6L四配套 配活塞4987914<br></a>
-						<br>
-						</div>
-						<div class="p-code">商品图号：DFL 14A 114
-						</div>
-						</div>                
-						<div class="cell p-price">
-						<span class="price">¥2170.00</span>
-						</div>                
-						<div class="cell p-quantity">                  
-						<div class="quantity-form">                    
-						<a href="javascript:void(0);" class="decrement" sku="1951_0_0_0">-</a>                    
-						<input type="text" class="quantity-text" value="1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="1951_0_0_0">                    
-						<a href="javascript:void(0);" class="increment" sku="1951_0_0_0">+</a>                  
-						</div>                
-						</div>                
-						<div class="cell p-remove">
-						<a class="cart-remove" href="javascript:removeFromCart('1951_0_0_0',0)">删除</a>
-						</div>              
-						</div>            
-						</div>
-				</div>
-                	
-                	
-                	
-                </div>
+                {{each}}
                 <div class="ui-ceilinglamp-1">
                     <div class="cart-dibu">
                         <div class="cart-total-2014">
-                            <span class="column t-checkbox form" style="float:left; margin-right:10px;">
-                                <input type="checkbox" checked="" name="checkAll" value="" class="jdcheckbox" sku="0" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;" />
-                                <label for="">全选</label>
-                            </span>
+			                        <span class="column t-checkbox form" style="float:left; margin-right:10px;">
+			                            <input type="checkbox" checked="" name="checkAll" value="" class="jdcheckbox" sku="0" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;" />
+			                            <label for="">全选</label>
+			                        </span>
                             <span class="delete" style="float: left; margin-right: 10px;">
-                                <a href="javascript:void(0);" id="remove-batch">删除选中的商品</a>
-                            </span>
+			                            <a href="javascript:void(0);" id="remove-batch">删除选中的商品</a>
+			                        </span>
                             <div class="cart-button">
                                 <a class="checkout" href="javascript:void(0);" id="toSettlement">去结算</a>
                             </div>
@@ -166,38 +164,16 @@
                         </div>
                     </div>
                 </div>
-			</div>
+                {{else}}
+                <div class="message">
+                    <ul>
+                        <li>购物车内暂时没有商品<span class="unLogin" style="display: none;"></li>
+                        <li><a href="">去挑选喜欢的商品</a></li>
+                    </ul>
+                </div>
+                {{/if}}
+            </script>
 
-            <!-- <div class="B2B-cart-list" style="display:none; margin-top:30px;">
-                <p class="cart-tit">
-                    <label>需卖家确认订单<span id="selectedCountB2B">0</span></label>
-                </p>
-                <div class="cart-thead cl">
-                    <div class="column t-checkbox form"><input type="checkbox" name="checkAll" checked="" value="" sku="1" /><label for="">全选</label></div>
-                    <div class="column t-goods">商品</div>
-                    <div class="column t-price">单价</div>
-                    <div class="column t-quantity" style="width:285px;">数量</div>
-                    <div class="column t-action" style="width:120px;">操作</div>
-                </div>
-                <div id="B2B-product-list" class="cart-tbody"></div>
-                <div class="ui-ceilinglamp-1">
-                    <div class="cart-dibu">
-                        <div class="cart-total-2014">
-                            <span class="column t-checkbox form" style="float:left; margin-right:10px;">
-                                <input type="checkbox" checked="" name="checkAll" value="" class="jdcheckbox" sku="1" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;" />
-                                <label for="">全选</label>
-                            </span>
-                            <span class="delete" style="float: left; margin-right: 10px;">
-                                <a href="javascript:void(0);" id="B2B-remove-batch">删除选中的商品</a>
-                            </span>
-                            <div class="cart-button">
-                                <a class="checkout" href="javascript:void(0);" id="toSettlementB2B"><b></b>提交订单</a>
-                            </div>
-                            <div class="total fr">总计（不含运费）：<span id="finalPriceB2B">¥ 0</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
@@ -205,15 +181,25 @@
 <input type="hidden" value="2" id="hidAuditStatus" />
 <input type="hidden" value="1" id="hidSaleStatus" />
 
-<link href="../css/WebLoginPlug.css" rel="stylesheet" />
-<script type="text/javascript">var currQprUrl = 'http://www.qipeiren.com';</script>
-<!-- <script src="../js/jQuery.Web.Login.js"></script> -->
-<script src="../js/CommonJS.js"></script>
-<script src="../js/jquery.cookie.js"></script>
-<script src="../js/cartSettleAccounts.js"></script>
+<script type="text/javascript">
+    $(function () {
+        CartFormat();
+    });
+    var myurl = "/shopCarData";
+    var CartFormat = function(){
+        $.ajax({
+            url: myurl,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                $("#loginstatus").template("logstatus",{data:data.user});
+                $("#cartcontent").template("goodsList",{list:data.goods});
+            }
+        });
+    };
+</script>
 
-
-<link href="../css/css_foot.css" rel="stylesheet" />
+<link href="static/css/css_foot.css" rel="stylesheet" />
 <div class="h-bottom ms-foot">
     <div class="h-w1200 msf-service">
         <a href="/Article/mallintr" target="_blank">
@@ -224,7 +210,7 @@
                     <p>正规渠道，质量保障</p>
                 </dd>
             </dl>
-        </a>  
+        </a>
         <a href="/Article/mallintr" target="_blank">
             <dl class="msfs-2">
                 <dt><i class="op-icon opi-50-2"></i></dt>
@@ -233,7 +219,7 @@
                     <p>各大车系千万配件，一站购齐</p>
                 </dd>
             </dl>
-        </a>  
+        </a>
         <a href="/Article/mallintr" target="_blank">
             <dl class="msfs-3">
                 <dt><i class="op-icon opi-50-3"></i></dt>
@@ -242,7 +228,7 @@
                     <p>源头直达，价格大幅优于传统渠道</p>
                 </dd>
             </dl>
-        </a>  
+        </a>
         <a href="/Article/mallintr" target="_blank">
             <dl class="msfs-4">
                 <dt><i class="op-icon opi-50-4"></i></dt>
@@ -251,47 +237,47 @@
                     <p>安心选购，品牌保障，售后无忧</p>
                 </dd>
             </dl>
-        </a>  
+        </a>
     </div>
     <div class="h-w1200 msf-info">
-            <dl class="msfi-1">
+        <dl class="msfi-1">
             <dt><strong>新手入门</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/62 " target="_blank" rel="nofollow">会员注册</a> 
-                    </dd>
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/63 " target="_blank" rel="nofollow">购物流程</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-2">
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/62 " target="_blank" rel="nofollow">会员注册</a>
+            </dd>
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/63 " target="_blank" rel="nofollow">购物流程</a>
+            </dd>
+        </dl>
+        <dl class="msfi-2">
             <dt><strong>常见问题</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/65 " target="_blank" rel="nofollow">退换货政策</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-3">
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/65 " target="_blank" rel="nofollow">退换货政策</a>
+            </dd>
+        </dl>
+        <dl class="msfi-3">
             <dt><strong>支付方式</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/66 " target="_blank" rel="nofollow">支付方式</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-4">
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/66 " target="_blank" rel="nofollow">支付方式</a>
+            </dd>
+        </dl>
+        <dl class="msfi-4">
             <dt><strong>配送说明</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/64 " target="_blank" rel="nofollow">关于配送</a> 
-                    </dd>
-            </dl>
-            <dl class="msfi-5">
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/64 " target="_blank" rel="nofollow">关于配送</a>
+            </dd>
+        </dl>
+        <dl class="msfi-5">
             <dt><strong>关于我们</strong></dt>
 
-                    <dd>
-                        <i>&gt;</i><a href="/Article/Details/67 " target="_blank" rel="nofollow">商城介绍</a> 
-                    </dd>
-            </dl>
+            <dd>
+                <i>&gt;</i><a href="/Article/Details/67 " target="_blank" rel="nofollow">商城介绍</a>
+            </dd>
+        </dl>
         <dl class="msfi-6">
             <dt>
                 <img src="http://img.qipeiren.com/Public/images/b_ewm.png" />
@@ -302,7 +288,7 @@
     </div>
 </div>
 
-<link href="../css/css_sitefoot.css" rel="stylesheet" />
+<link href="static/css/css_sitefoot.css" rel="stylesheet" />
 <div class="pw-panel pw-foot">
     <div class="pw-w1200">
         <div class="foot-box clearfix">
@@ -418,14 +404,6 @@
         </div>
     </div>
 </div>
-
-<span style="display:none">
-    <script type="text/javascript">
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F607271da1d927f7e761e62f3d232b15a' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-</span>
-
 </body>
 </html>
 

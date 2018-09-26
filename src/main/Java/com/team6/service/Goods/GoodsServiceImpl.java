@@ -17,6 +17,7 @@ import java.util.Set;
 @Service
 public class GoodsServiceImpl implements GoodsService {
     private final int LIMIT = 8;
+
     final int oneF=GoodsEnum.TYPE_ENGINE_SYSTEM.getType();
     private final  int[] floors ={
             GoodsEnum.TYPE_ENGINE_SYSTEM.getType(),
