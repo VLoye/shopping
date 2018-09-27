@@ -122,4 +122,15 @@
       company = #{company,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryShopByIdArray" parameterType="Object[]" resultType="com.team6.entity.Shop">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM shop
+    where id IN
+    <foreach collection="array" index="index" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
 </mapper>

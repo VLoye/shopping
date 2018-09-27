@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <properties resource="jdbc.properties"/>
+    <!--<properties resource="jdbc.properties"/>-->
 
     <!-- 配置全局属性 -->
     <settings>
