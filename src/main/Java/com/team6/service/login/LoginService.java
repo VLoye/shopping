@@ -50,7 +50,7 @@ public interface LoginService {
      */
     public Set<String> getPermissionByRole(int role);
 
-    public Map<String,Object> getCurrentUserInfo(HttpServletRequest request);
+    public Map<String,Object> getIndexUserInfo(HttpServletRequest request);
 
 
 }

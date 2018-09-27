@@ -50,7 +50,7 @@
 
 <!--
 
-                <table tableName="address"
+            <!--    <table tableName="address"
                        domainObjectName="Address"
                        enableCountByExample="false"
                        enableDeleteByExample="false"
@@ -133,27 +133,13 @@
                        enableCountByExample="false"
                        enableDeleteByExample="false"
                        enableSelectByExample="false"
-                       enableUpdateByExample="false"/>-->
-
-       <!-- <table tableName="lb"
-               domainObjectName="Lb"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+                       enableUpdateByExample="false"/>
 
 
-
+-->
 
         <table tableName="address"
                domainObjectName="Address"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false"/>
--->
-        <table tableName="goods"
-               domainObjectName="Goods"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
