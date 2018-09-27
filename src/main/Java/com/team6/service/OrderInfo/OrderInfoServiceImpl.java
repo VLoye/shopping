@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-
+//哈哈哈哈哈标志大法
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService{
     @Autowired

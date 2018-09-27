@@ -2,7 +2,7 @@ package com.team6.service.OrderInfo;
 
 import com.team6.entity.OrderInfo;
 import com.team6.util.enums.OrderInfoEnum;
-
+//哈哈哈哈哈标志大法2
 public interface OrderInfoService {
     public OrderInfoEnum insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
                                          int userId,int addressId);
