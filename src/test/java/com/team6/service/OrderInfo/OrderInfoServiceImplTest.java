@@ -14,23 +14,29 @@ import java.util.Date;
 @ContextConfiguration({"classpath:spring/spring-dao.xml",
         "classpath:spring/spring-service.xml"})
 public class OrderInfoServiceImplTest {
-       @Autowired
-       private OrderInfoService orderInfoService;
-        @Autowired
-        private WebTime webTime;
-       @Test
-       public void testOrderInfo() {
-           OrderInfo orderInfo = new OrderInfo();
-           orderInfo.setUserId(1000811);
-           orderInfo.setStartTime(webTime.getNetworkTime());
-           orderInfo.setAddressId(123);
-           orderInfo.setStatus(0);
-           orderInfoService.insertOrderInfo(orderInfo);
-           System.out.println("当前时间"+orderInfo.getStartTime());
-       }
-       @Test
+    @Autowired
+    private OrderInfoService orderInfoService;
+    @Autowired
+    private WebTime webTime;
+    @Test
+    public void testOrderInfo() {
+        int[] testGoodsId={31,32,11,12,22,52,13};
+        int[] testCounts={5,5,10,10,10,5,10};
+        int[] testSellerId={3,3,3,3,1,1,1};
+        int testUserId=1;
+        int testaddressId=2;
+        orderInfoService.insertOrderInfo(testGoodsId,testCounts,testSellerId,
+                testUserId,testaddressId);
+    }
+    @Test
     public void testDel(){
-           int id=1;
-           orderInfoService.delOrderInfo(id);
-       }
+        int id=24;
+        orderInfoService.delOrderInfo(id);
+    }
+
+    @Test
+    public void testUpdateStatus(){
+        int id=1;
+        orderInfoService.queryOrderByUserid(id);
+    }
 }

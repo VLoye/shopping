@@ -4,12 +4,8 @@ import com.team6.entity.OrderInfo;
 import com.team6.util.enums.OrderInfoEnum;
 
 public interface OrderInfoService {
-    /**
-     * 插入生成订单信息，并返回插入订单结果
-     * @param orderInfo
-     * @return
-     */
-    public OrderInfoEnum insertOrderInfo(OrderInfo orderInfo);
+    public OrderInfoEnum insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
+                                         int userId,int addressId);
     /**
      * 删除订单信息
      * 接收orderInfo的id
@@ -18,6 +14,9 @@ public interface OrderInfoService {
     public OrderInfoEnum delOrderInfo(int id);
 
     /**
-     *
+     *查询用户订单信息
      */
+    public void queryOrderByUserid(int userId);
+
+
 }

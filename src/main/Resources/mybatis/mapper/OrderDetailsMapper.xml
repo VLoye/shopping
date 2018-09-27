@@ -39,7 +39,7 @@
 
   <delete id="deleterByOrderId" parameterType="java.lang.Integer">
     delete from order_details
-    where order_id=#{order_id,jdbcType=INTEGER}
+    where order_id=#{order_id ,jdbcType=INTEGER}
   </delete>
 
   <insert id="insert" parameterType="com.team6.entity.OrderDetails" >

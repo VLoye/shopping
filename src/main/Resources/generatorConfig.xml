@@ -15,7 +15,7 @@
 
         <!-- 数据库的相关配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.71.2.201:3306/shopping?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC&amp;useSSL=false"
+                        connectionURL="jdbc:mysql://39.108.66.72:3306/shopping?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=UTC&amp;useSSL=false"
                         userId="root"
                         password="123456"/>
 
