@@ -89,7 +89,7 @@
         $.ajax({
             url: '/searchData',
             type: "post",
-            data:{key:key,brandid:brandids,typeid:typeids},
+            data:{key:key,brandids:brandids,typeids:typeids},
             dataType: "json",
             success: function(data){
                 $("#goodscontent").append(template("goodsFormat",{list:data.glist}));
@@ -101,6 +101,14 @@
                 //alert(res.title);
             }
         });
+    }
+    var ismore = function(){
+        if(!($("#blist").hasClass("extend"))){
+            $("#blist").addClass("extend");
+        }
+        else{
+            $("#blist").removeClass("extend");
+        }
     }
     var yuclose = function(num){
         if (num == 1) {
@@ -317,7 +325,7 @@
 	<div id="J_container" class="container">
 		<div id="J_selector" class="selector">
 			<div class="J_selectorLine s-brand">
-				<div class="sl-wrap">
+				<div id="blist" class="sl-wrap">
 					<div class="sl-key"><strong>品牌：</strong></div>
 					<div class="sl-value">
 						<ul class="sl-b-letter J_brandLetter" onclick="searchlog(1,0,0,48)"><li data-initial="0" class="curr">所有品牌</li><li data-initial="A">A</li><li data-initial="B">B</li><li data-initial="C">C</li><li data-initial="F">F</li><li data-initial="H">H</li><li data-initial="J">J</li><li data-initial="K">K</li><li data-initial="L">L</li><li data-initial="P">P</li><li data-initial="R">R</li><li data-initial="S">S</li><li data-initial="T">T</li><li data-initial="W">W</li><li data-initial="X">X</li><li data-initial="Y">Y</li><li data-initial="Z">Z</li></ul>
@@ -333,7 +341,11 @@
 							</ul>
 						</div>
 					</div>
+					<div class="sl-ext">
+						<a class="sl-e-more J_extMore" onclick="ismore()" style="visibility: visible;">更多<i></i></a>
+					</div>
 				</div>
+
 			</div>
 			<div class="J_selectorLine s-category">
 				<div class="sl-wrap">

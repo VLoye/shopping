@@ -1,12 +1,12 @@
 
-<!DOCTYPE html">
+<!DOCTYPE html>
 <html>
 <head><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta name="renderer" content="webkit|ie-stand" /><meta charset="utf-8" />
 
     <link href="static/css/css_base.css" rel="stylesheet" type="text/css"/>
     <link href="static/css/css_top.css" rel="stylesheet" type="text/css"/>
     <link href="static/css/hayui.css" rel="stylesheet" type="text/css"/>
-    
+
     <link href="static/css/leagueradmin-nav-sidemenu.css" rel="stylesheet" type="text/css"/>
     <link href="static/css/css_order.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
@@ -31,7 +31,7 @@
                     hayui.use(['element', 'topservice'], function (element, topservice) { });
                 }
             });
-            
+
         });
         function qpr_skip() {
             var options = { path: "/" };
@@ -49,21 +49,103 @@
 
 </title></head>
 
+<script type="text/javascript">
+	$(function(){
+		securityFormat();
+	});
+	var securityFormat = function(){
+		$.ajax({
+				url: '/buyer/AccountSecurityData',
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					$("#content").template("security",{list:data.user});
+				},
+				error: function(data){
+					//alert("ajax error : "+res);
+				}
+			});
+	}
+</script>
+
 <body class="hayui-bg-gray-light">
 
-                
+
+      <script type="text/html" id="security">
+      		{{if data}}
+      			<ul class="account-safety">
+                <li>
+                    <dl>
+                        <dt><i class="os-icon as-right"></i><label>登录密码</label></dt>
+                        <dd class="w600"><span>修改登录密码</span></dd>
+                        <dd class="w120"></dd>
+                        <dd><a class="a-color369" href="/resigter">修改</a></dd>
+                      </dl>
+                </li>
+
+        <!--手机验证码 Beg-->
+
+                <li>
+                    <dl>
+                        <dt><i class="os-icon as-right"></i><label>手机验证</label></dt>
+                        <dd class="w600">
+                            <span>您验证的手机：<em>{{data.tel}}</em></span>
+                            <span> 您可以用手机号登录，若手机号有变动，请立即更新</span>
+                        </dd>
+                        <dd class="w120"></dd>
+                        <dd><a class="a-color369" href="http://mall.qipeiren.com/UserInfo/ReBind?pluginid=Plugin.Message.SMS">修改</a></dd>
+                    </dl>
+                </li>
+
+        <!--手机验证码 End-->
+
+        <!--添加 支付密码 Beg-->
+
+                <li>
+                    <dl>
+                        <dt><i class="os-icon as-warn"></i><label>支付密码</label></dt>
+                        <dd class="w600"><span>您还没有设置支付密码，进行支付密码设置</span></dd>
+                        <dd class="w120"></dd>
+                        <dd><a class="a-color369" href="setpwd1.aspx">设置</a></dd>
+                    </dl>
+                </li>
+
+        <!--End-->
+
+                  <li class="as-lbb0">
+
+                  <dl>
+                    <dt><i class="os-icon as-warn"></i><label>实名认证</label></dt>
+                    <dd class="w600">
+
+                                <span style="color:#F60"> 先设置支付密码才能进行实名认证</span>
+
+                    </dd>
+
+                    <dd></dd>
+                    <dd>
+
+
+                    </dd>
+                  </dl>
+
+                </li>
+              </ul>
+      		{{/if}}
+      </script>
+
       <div class="content_right">
         <div class="order-sys-right-content">
           <div class="osrc-top"><label>账户安全</label></div>
           <div class="osrc-center">
-            <div class="osrc-accont-content">
+            <div class="osrc-accont-content" id = "content">
               <ul class="account-safety">
                 <li>
                     <dl>
                         <dt><i class="os-icon as-right"></i><label>登录密码</label></dt>
                         <dd class="w600"><span>修改登录密码</span></dd>
                         <dd class="w120"></dd>
-                        <dd><a class="a-color369" href="http://mall.qipeiren.com/UserInfo/ChangePassword">修改</a></dd>
+                        <dd><a class="a-color369" href="BuyerChangePassword.html">修改</a></dd>
                       </dl>
                 </li>
 
@@ -103,22 +185,22 @@
                     <dd class="w600">
                  
                                 <span style="color:#F60"> 先设置支付密码才能进行实名认证</span>
-                            
-                    </dd>
-                  
-                    <dd></dd>
-                    <dd>
-                        
 
-                    </dd>
-                  </dl>
-        
-                </li>
-              </ul>
-            </div>
-        </div>
-      </div>
-    </div>
+</dd>
+
+<dd></dd>
+<dd>
+
+
+</dd>
+</dl>
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 
 </body>
 </html>
