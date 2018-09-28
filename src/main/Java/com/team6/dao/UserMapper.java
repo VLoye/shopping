@@ -1,5 +1,6 @@
 package com.team6.dao;
 
+import com.team6.entity.Goods;
 import com.team6.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -57,5 +58,6 @@ public interface UserMapper {
      * @return
      */
    public List<String> queryPermissionByRoleId(@Param("role") int role);
+
 
 }

@@ -4,6 +4,8 @@ import com.team6.service.Goods.GoodsService;
 import com.team6.service.login.LoginService;
 import com.team6.service.rb.RbService;
 import org.noggit.JSONUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class IndexContorller {
+    private static final Logger logger = LoggerFactory.getLogger(IndexContorller.class);
 
     @Autowired
     LoginService loginService;
