@@ -2,7 +2,7 @@ package com.team6.service.OrderInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
-//测试测试
+//测试测试2
 public interface OrderInfoService {
     public Object insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
                                          Integer userId,int addressId);
