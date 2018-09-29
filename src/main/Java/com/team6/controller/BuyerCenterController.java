@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +98,10 @@ public class BuyerCenterController {
         List tab2 = commentService.noComment(userId);
         model.addAttribute("tab1",tab1);
         model.addAttribute("tab2",tab2);
-        return new ModelAndView("Personality/Buyer/BuyerCommentManage","data",model);
+        Map<String,Object> map = new HashMap();
+        map.put("tab1",tab1);
+        map.put("tab2",tab2);
+        return new ModelAndView("Personality/Buyer/BuyerCommentManage",map);
 
     }
 

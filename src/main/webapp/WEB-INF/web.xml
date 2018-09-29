@@ -23,8 +23,9 @@
       <param-value>
 <!--        classpath:spring/spring-web.xml-->
         classpath:mybatis/mybatis-config.xml,
-        classpath:spring/spring-web.xml,
-<!--        ,classpath:shiro/shiro.xml-->
+        classpath:spring/spring-web.xml
+
+     ,classpath:shiro/shiro.xml
       </param-value>
     </init-param>
 
@@ -50,6 +51,8 @@
       classpath:spring/spring-dao.xml,
         classpath:spring/spring-service.xml,
       classpath:shiro/shiro.xml
+      <!--,classpath:freemarker/spring-freemarker.xml-->
+
     </param-value>
   </context-param>
 
