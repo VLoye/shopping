@@ -37,7 +37,7 @@ public class BuyerCenterController {
     //跳转到买家个人中心
     @RequestMapping(value = "/buyer")
     public Object toBuyerCenterPage(){
-        return "Buyer_model";
+        return "/Personality/Buyer/Buyer_model";
     }
 
     //跳转账户安全界面

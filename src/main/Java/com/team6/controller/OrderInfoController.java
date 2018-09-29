@@ -21,11 +21,6 @@ public class OrderInfoController {
     @Autowired
     LoginService loginService;
 
-    @RequestMapping(value="/orders")
-    public ModelAndView orders(){
-        return new ModelAndView();
-    }
-
     /**
      * 插入订单信息
      * @param request
