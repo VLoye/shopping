@@ -1,8 +1,10 @@
 package com.team6.dao;
 
 import com.team6.entity.OrderInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderInfoMapper {
     /**
@@ -60,6 +62,13 @@ public interface OrderInfoMapper {
      */
     void updateOrderStatus(int userId);
 
-    List queryOrderByUserid(int userId);
+    /**
+     * 查找用户的订单信息
+     * 根据订单的状态，分别有1-待付款 2-待发货  3-待收货  4-订单过时  null-所有
+     * @param userId
+     * @param status
+     * @return
+     */
+    List<Map<String, Object>> queryOrderByUserId(@Param("user_id") int userId, @Param("status") Integer status);
 
 }

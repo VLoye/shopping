@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-//哈哈哈哈哈标志大法
+
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService{
     @Autowired
@@ -104,14 +104,13 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         Map<String,Object> returnMap=new HashMap<>();
         //订单总价,初始化为运费10元
             long totalPrice=10;
-/*        //用户信息
+       //用户信息
         Map<String,Object> userInfo = loginService.getCurrentUserInfo(request);
         if(userInfo==null){
             returnMap.put("msg", LoginEnum.LOGIN_OFF.getInfo());
             return returnMap;
         }
-       int userId = (Integer) userInfo.get("userid");*/
-        int userId=1;
+       int userId = (Integer) userInfo.get("userid");
         //返回查询订单结果之前先更新订单的状态
         orderInfoMapper.updateOrderStatus(userId);
         //获取用户的订单（根据key的值搜索订单的状态）

@@ -1,6 +1,9 @@
 package com.team6.dao;
 
+import com.team6.dto.order.UserOrderData;
 import com.team6.entity.OrderDetails;
+
+import java.util.List;
 
 public interface OrderDetailsMapper {
     /**
@@ -51,5 +54,15 @@ public interface OrderDetailsMapper {
      */
     int updateByPrimaryKey(OrderDetails record);
 
+    /**
+     * 删除相关订单的详细信息
+     * @param order_id
+     * @return
+     */
     int deleterByOrderId(Integer order_id);
+
+    /**
+     * 封装订单的详细信息
+     */
+    List<UserOrderData> queryOrderDate(Integer order_id);
 }
