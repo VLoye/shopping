@@ -2,20 +2,15 @@ package com.team6.controller;
 
 import com.team6.service.login.LoginService;
 import com.team6.service.shopcar.ShopCarService;
-import org.apache.commons.math3.analysis.solvers.NewtonRaphsonSolver;
-import org.apache.ibatis.annotations.Param;
 import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -52,20 +47,20 @@ public class ShopCarController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shopCar/add/{goodsId}")
+    @RequestMapping(value = "/shopCar/add/{goodsId}",method = RequestMethod.POST)
     public Object shopCardAdd(HttpServletRequest request,@PathVariable("goodsId") int goodsId, @RequestParam("count") int count){
 
         return shopCarService.addShopCar(goodsId,count,request);
     }
 
     @ResponseBody
-    @RequestMapping("/shopCar/del/{goodsId}")
+    @RequestMapping(value = "/shopCar/del/{goodsId}",method = RequestMethod.POST)
     public Object shopCardDelById(@PathVariable("goodsId") int goodsId,HttpServletRequest request){
         return shopCarService.delUserGoodsById(goodsId ,request);
     }
 
     @ResponseBody
-    @PostMapping("/shopCar/delSelect")
+    @RequestMapping(value = "/shopCar/delSelect",method = RequestMethod.POST)
     /*@RequestMapping(value = "/shopCar/delSelect",method = RequestMethod.POST)*/
     public Object ShopCarDelSelect(@RequestParam("ids[]") int ids[], HttpServletRequest request){
 
@@ -75,7 +70,7 @@ public class ShopCarController {
     }
 
 
-    @PostMapping(value = "/shopCar/detailData")
+    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST)
     public ModelAndView shopDetailData(
          @RequestParam("ids[]") int[] ids,
             @RequestParam("counts[]") int[] counts,
@@ -88,7 +83,7 @@ public class ShopCarController {
         return new ModelAndView("detailData","good",good);
 
     }
-    @PostMapping(value = "/shujzu")
+    @RequestMapping(value = "/shujzu")
     public Object shuzuTest( @RequestParam("idList") String[] idList,
                              @RequestParam("countList") String countList){
         return null;

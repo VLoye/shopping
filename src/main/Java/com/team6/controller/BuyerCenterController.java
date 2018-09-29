@@ -9,13 +9,11 @@ import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,51 +35,55 @@ public class BuyerCenterController {
     //跳转到买家个人中心
     @RequestMapping(value = "/buyer")
     public Object toBuyerCenterPage(){
-        return "Buyer_model";
+        return "Personality/Buyer/Buyer_model";
     }
 
     //跳转账户安全界面
-    @RequestMapping(value="/buyer/AccountSecurity")
+    @RequestMapping(value="/buyer/AccountSecurity",method = RequestMethod.POST)
     public Object toAccountSecurityDataPage(){
-        return "BuyerAccountSecurity";
+        return "Personality/Buyer/BuyerAccountSecurity";
     }
     //跳转收货地址管理页面
-    @RequestMapping(value = "/buyer/Address")
+    @RequestMapping(value = "/buyer/Address",method = RequestMethod.POST)
     public Object toBuyerAddressPage(){
-        return "BuyerAddress";
+        return "Personality/Buyer/BuyerAddress";
     }
 
     //跳转到修改密码页面
-    @RequestMapping(value = "/buyer/ChangePassword")
+    @RequestMapping(value = "/buyer/ChangePassword",method = RequestMethod.POST)
     public Object toBuyerChangePasswordPage(){
-        return "BuyerChangePassword";
+        return "Personality/Buyer/BuyerChangePassword";
     }
 
     //跳转关注商品页面
-    @RequestMapping(value = "/buyer/Concernedgoods")
+    @RequestMapping(value = "/buyer/Concernedgoods",method = RequestMethod.POST)
     public Object toBuyerConcernedGoodsPage(){
-        return "BuyerConcernedGoods";
+        return "Personality/Buyer/BuyerConcernedGoods";
     }
 
     //跳转关注商店页面
-    @RequestMapping(value = "/buyer/Concernedshop")
+    @RequestMapping(value = "/buyer/Concernedshop",method = RequestMethod.POST)
     public Object toBuyerConcernedShopPage(){
-        return "BuyerConcernedShop";
+        return "Personality/Buyer/BuyerConcernedShop";
     }
 
     //跳转关注商店页面
-    @RequestMapping(value = "/buyer/Consult")
+    @RequestMapping(value = "/buyer/Consult",method = RequestMethod.POST)
     public Object toBuyerConsultManagePage(){
-        return "BuyerConsultManage";
+        return "Personality/Buyer/BuyerConsultManage";
     }
 
     //跳转已购商品页面
-    @RequestMapping(value = "/buyer/OwnGoods")
+    @RequestMapping(value = "/buyer/OwnGoods",method = RequestMethod.POST)
     public Object toBuyerOwnGoodsPage(){
-        return "BuyerOwnGoods";
+        return "Personality/Buyer/BuyerOwnGoods";
     }
+    //跳转到
 
-    @RequestMapping(value = "/buyer/Comment")
+
+
+
+        @RequestMapping(value = "/buyer/Comment")
     public Object toCommentManage(Model model, HttpServletRequest request){
         //获取用户信息
         Map userInfo = loginService.getCurrentUserInfo(request);
@@ -93,7 +95,10 @@ public class BuyerCenterController {
         List tab2 = commentService.noComment(userId);
         model.addAttribute("tab1",tab1);
         model.addAttribute("tab2",tab2);
-        return new ModelAndView("BuyerCommentManage","data",model);
+        Map<String,Object> map = new HashMap();
+        map.put("tab1","1111");
+        map.put("tab2",tab2);
+        return new ModelAndView("Personality/Buyer/BuyerCommentManage",map);
 
     }
 
@@ -126,5 +131,11 @@ public class BuyerCenterController {
     @RequestMapping(value="/buyer/OwnGoodsData")
     public Object OwnGoodsData(@Param("key") Integer key, HttpServletRequest request){
         return orderInfoService.queryOrderByUserid(key,request);
+    }
+
+    @RequestMapping(value = "/testfm",method = RequestMethod.GET)
+    public Object testfm(Model model){
+        model.addAttribute("name","zwk");
+        return  "test/index";
     }
 }
