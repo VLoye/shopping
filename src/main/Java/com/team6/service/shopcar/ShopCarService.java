@@ -28,5 +28,5 @@ public interface ShopCarService {
 
     public Object delUserGoodsByIdsSelect(int[] ids,HttpServletRequest request);
 
-    public Object detailData(int[] ids,int[] counts,HttpServletRequest request);
+    public Object detailData(int[] ids,int[] counts     ,HttpServletRequest request);
 }
