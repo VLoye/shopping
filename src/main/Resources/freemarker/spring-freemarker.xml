@@ -17,6 +17,7 @@
 		</property>
 		<property name="suffix">
 			<value>.html</value>
+
 		</property>
 		<property name="contentType" value="text/html; charset=UTF-8"/>
 		<property name="exposeRequestAttributes" value="false"/>
@@ -29,8 +30,8 @@
         class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
         <property name="templateLoaderPaths">
         <list>
-		<value>/WEB-INF/html/</value>
-		<!--<value>/front/</value>-->
+		<value>/WEB-INF/html/test/</value>
+		<value>/front/</value>
 		</list>
         </property>
         

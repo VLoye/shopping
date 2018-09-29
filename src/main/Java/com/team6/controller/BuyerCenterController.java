@@ -9,10 +9,7 @@ import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,7 +96,7 @@ public class BuyerCenterController {
         model.addAttribute("tab1",tab1);
         model.addAttribute("tab2",tab2);
         Map<String,Object> map = new HashMap();
-        map.put("tab1",tab1);
+        map.put("tab1","1111");
         map.put("tab2",tab2);
         return new ModelAndView("Personality/Buyer/BuyerCommentManage",map);
 
@@ -134,5 +131,11 @@ public class BuyerCenterController {
     @RequestMapping(value="/buyer/OwnGoodsData")
     public Object OwnGoodsData(@Param("key") Integer key, HttpServletRequest request){
         return orderInfoService.queryOrderByUserid(key,request);
+    }
+
+    @RequestMapping(value = "/testfm",method = RequestMethod.GET)
+    public Object testfm(Model model){
+        model.addAttribute("name","zwk");
+        return  "test/index";
     }
 }
