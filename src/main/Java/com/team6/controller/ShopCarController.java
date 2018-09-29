@@ -42,7 +42,7 @@ public class ShopCarController {
         int userid = (int) map.get("userid");
         //购物车信息
         List list = (List) shopCarService.shopCar(userid);
-         model.addAttribute("user",map);
+        model.addAttribute("user",map);
         model.addAttribute("goods",list);
       /*  ModelAndView modelAndView = new ModelAndView("", "data",model);*/
 

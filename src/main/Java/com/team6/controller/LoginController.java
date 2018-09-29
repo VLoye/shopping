@@ -21,9 +21,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -44,6 +46,12 @@ public class LoginController {
     public void vcode(HttpServletRequest request,HttpServletResponse response) {
         code.getRandcode(request, response);
     }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public ModelAndView login(){
+    return new ModelAndView("/LoginAndResigter/Login");
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces="application/json;charset=UTF-8" )

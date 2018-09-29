@@ -22,21 +22,14 @@ public class OrderInfoServiceImplTest {
     public void testOrderInfo() {
         int[] testGoodsId={31,32,11,12,22,52,13};
         int[] testCounts={5,5,10,10,10,5,10};
-        int[] testSellerId={3,3,3,3,1,1,1};
+        int[] testSellerId={2,3,3,3,1,1,1};
         int testUserId=1;
         int testaddressId=2;
         orderInfoService.insertOrderInfo(testGoodsId,testCounts,testSellerId,
                 testUserId,testaddressId);
     }
     @Test
-    public void testDel(){
-        int id=24;
-        orderInfoService.delOrderInfo(id);
-    }
+    public void testQuery(){
 
-    @Test
-    public void testUpdateStatus(){
-        int id=1;
-        orderInfoService.queryOrderByUserid(id);
     }
 }

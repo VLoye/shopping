@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
     <title>登录</title>
-    <link rel="stylesheet" type="text/css" href="../css/css_base.css" />
-    <link rel="stylesheet" type="text/css" href="../css/css_top.css" />
-    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="../css/pc-loginregister.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/css_base.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/css_top.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/pc-loginregister.css" />
 </head>
 <body>
     <div class="usersimple-head">
         <div class="head-in pw-w1200">
             <a href="http://127.0.0.1:8020/shopping/html/index.html">
-                <img src="../img/logo1.jpg" alt="qipeiren" height="52" />
+                <img src="static/img/logo1.jpg" alt="qipeiren" height="52" />
             </a>
             <b>欢迎登录</b>
         </div>
     </div>
-    <div class="usersimple-body" style="background:url(../img/5.jpg);background-size: cover;">
+    <div class="usersimple-body" style="background:url(static/img/5.jpg);background-size: cover;">
         <div class="body-content pw-w1200">
             <div class="login-box">
                     <div class="login-left"></div>
@@ -75,9 +75,9 @@
         <div class="usersimple-foot pw-w1200">
             Copyright &copy; 2005-2018 十堰亿脉科技有限公司 版权所有 经营许可证编号：鄂B2-20140114
         </div>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <script src="../js/CommonJS.js"></script>
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/jquery.cookie.js"></script>
+    <script src="static/js/CommonJS.js"></script>
     <script type="text/javascript">
         //更新验证码
         function changecode(){
@@ -108,13 +108,13 @@
                         alert(prevLink.trim());
                         if($.trim(prevLink)==''){
 
-                            location.href = 'http://localhost:8080/html/Main/Index.html';
+                            location.href = '/index';
                         }else{
-                            if(prevLink.indexOf('http://localhost:8080')==-1){	//来自其它站点
-                                location.href = 'http://localhost:8080/html/Main/Index.html';
+                            if(prevLink.indexOf('')==-1){	//来自其它站点
+                                location.href = '/index';
                             }
-                            if(prevLink.indexOf('http://localhost:8080/html/LoginAndRegister/Register.html')!=-1){		//来自注册页面
-                                location.href = 'http://localhost:8080/html/Main/Index.html';
+                            if(prevLink.indexOf('/resigter')!=-1){		//来自注册页面
+                                location.href = '/index';
                             }
                             location.href = prevLink;
                         }
@@ -131,8 +131,8 @@
         });
         
     </script>
-    <script type="text/javascript" src="../js/jquery.sendcode.js"></script>
-    <script type="text/javascript" src="../js/pc-login.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/nc.js"></script>
+    <script type="text/javascript" src="static/js/jquery.sendcode.js"></script>
+    <script type="text/javascript" src="static/js/pc-login.js"></script>
+    <script type="text/javascript" charset="utf-8" src="static/js/nc.js"></script>
 </body>
 </html>

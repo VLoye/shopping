@@ -1,9 +1,8 @@
 package com.team6.controller;
 
-import com.team6.entity.OrderInfo;
 import com.team6.service.OrderInfo.OrderInfoService;
 import com.team6.service.login.LoginService;
-import com.team6.util.enums.OrderInfoEnum;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +20,10 @@ public class OrderInfoController {
     OrderInfoService orderInfoService;
     @Autowired
     LoginService loginService;
+
     @RequestMapping(value="/orders")
-    @ResponseBody
-    public ModelAndView getUserOrders(HttpServletRequest request){
-        return null;
+    public ModelAndView orders(){
+        return new ModelAndView();
     }
 
     /**
@@ -36,8 +35,9 @@ public class OrderInfoController {
      * @param addressId 收货地址id
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "/order/add",method = RequestMethod.POST)
-    public boolean insertOrderInfo(HttpServletRequest request,
+    public Object insertOrderInfo(HttpServletRequest request,
                                    @RequestParam("goodsId[]") int[] goodsId,
                                    @RequestParam("count[]") int[] count,
                                    @RequestParam("sellerId[]") int[] sellerId,
@@ -45,12 +45,20 @@ public class OrderInfoController {
                                    ){
         //用户信息
         Map<String,Object> map=loginService.getCurrentUserInfo(request);
-        int userid=(Integer)map.get("userid");//获取下单的用户id
-        OrderInfoEnum result=orderInfoService.insertOrderInfo(goodsId,count,sellerId,userid,addressId);
-        if(result.equals(OrderInfoEnum.INSERT_ORDERINFO_SUCCESS))
-            return true;
-        else return false;
+        Integer userid=(Integer)map.get("userid");//获取下单的用户id
+        return orderInfoService.insertOrderInfo(goodsId,count,sellerId,userid,addressId);
     }
 
+    @ResponseBody
+    @RequestMapping(value="/order/del")
+    public Object OrderDel(@Param("orderId")int orderId,HttpServletRequest request){
+        return orderInfoService.delOrderInfo(orderId,request);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/buyer/OwnGoodsData")
+    public Object OwnGoodsData(@Param("key") Integer key,HttpServletRequest request){
+      return orderInfoService.queryOrderByUserid(key,request);
+    }
 
 }

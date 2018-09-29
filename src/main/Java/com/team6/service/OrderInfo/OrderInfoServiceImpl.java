@@ -1,15 +1,21 @@
 package com.team6.service.OrderInfo;
-import com.team6.entity.OrderDetails;
-import com.team6.util.WebTime;
+
 import com.team6.dao.OrderDetailsMapper;
 import com.team6.dao.OrderInfoMapper;
+import com.team6.dto.order.UserOrderData;
+import com.team6.entity.OrderDetails;
 import com.team6.entity.OrderInfo;
-import com.team6.util.enums.OrderInfoEnum;
+import com.team6.service.Goods.GoodsService;
+import com.team6.service.login.LoginService;
+import com.team6.util.WebTime;
+import com.team6.util.enums.LoginEnum;
+import com.team6.util.enums.UCRDEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Service
@@ -20,10 +26,19 @@ public class OrderInfoServiceImpl implements OrderInfoService{
     private WebTime webTime;
     @Autowired
     private OrderDetailsMapper orderDetailsMapper;
-
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private GoodsService goodsService;
     @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
-    public OrderInfoEnum insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
-                                         int userId,int addressId) {
+    public Object insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
+                                         Integer userId,int addressId) {
+        Map<String,Object> resultMap=new HashMap<>();
+        int result=-1;
+        if(userId==null){
+            resultMap.put("msg", LoginEnum.LOGIN_OFF.getInfo());
+            return resultMap;
+        }
         //初始化订单固定参数
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setUserId(userId);
@@ -39,7 +54,7 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         for(int id:sellerIds) {
             orderInfo.setSellerId(id);//将订单的卖家Id赋值
             //将初始化完的orderInfo插入数据库表orderInfo
-            orderInfoMapper.insert(orderInfo);
+            result=orderInfoMapper.insert(orderInfo);
             //int error=1/0;//模拟出现错误状况
             //通过key获取其value，循环遍历value，得到对应的goods和count
             for(int j=0;j<SellerIdAndLocation.get(id).size();j++){
@@ -51,30 +66,67 @@ public class OrderInfoServiceImpl implements OrderInfoService{
                 orderDetails.setGoodsId(goodsId[SellerIdAndLocation.get(id).get(j)]);
                 //对应的数量
                 orderDetails.setCount(counts[SellerIdAndLocation.get(id).get(j)]);
-                orderDetailsMapper.insert(orderDetails);
+                result=orderDetailsMapper.insert(orderDetails);
             }
         }
-        return OrderInfoEnum.INSERT_ORDERINFO_SUCCESS;
+        if(result>0) {//添加订单成功
+            resultMap.put("msg", UCRDEnum.UCRD_SUCCESS.getInfo());
+            return resultMap;
+        }else{
+            resultMap.put("msg",UCRDEnum.UCRD_ERROR.getInfo());
+            return resultMap;
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
-    public OrderInfoEnum delOrderInfo(int id) {
+    public Object delOrderInfo(int id, HttpServletRequest request) {
+        Map<String,Object> returnMap=new HashMap<>();
+        //用户信息
+        Map<String,Object> userInfo = loginService.getCurrentUserInfo(request);
+        if(userInfo==null){
+            returnMap.put("msg", LoginEnum.LOGIN_OFF.getInfo());
+            return returnMap;
+        }
         int delNumOnOrderInfo=orderInfoMapper.deleteByPrimaryKey(id);
         int delNumOnOrderDetails=orderDetailsMapper.deleterByOrderId(id);
-        if(delNumOnOrderInfo>0&&delNumOnOrderDetails>0)
-            return OrderInfoEnum.DELETE_ORDERINFO_SUCCESS;
-        else
-            return OrderInfoEnum.DELETE_ORDERINFO_ERROR;
+        if(delNumOnOrderInfo>0&&delNumOnOrderDetails>0) {//删除订单信息成功
+            returnMap.put("msg",UCRDEnum.UCRD_SUCCESS.getInfo());
+            return returnMap;
+        }
+        else//删除订单信息失败
+        {
+            returnMap.put("msg",UCRDEnum.UCRD_ERROR.getInfo());
+            return returnMap;
+        }
     }
 
-    public void queryOrderByUserid(int userId) {
+    public Object queryOrderByUserid(Integer key,HttpServletRequest request) {
+        Map<String,Object> returnMap=new HashMap<>();
+        //订单总价,初始化为运费10元
+            long totalPrice=10;
+       //用户信息
+        Map<String,Object> userInfo = loginService.getCurrentUserInfo(request);
+        if(userInfo==null){
+            returnMap.put("msg", LoginEnum.LOGIN_OFF.getInfo());
+            return returnMap;
+        }
+       int userId = (Integer) userInfo.get("userid");
         //返回查询订单结果之前先更新订单的状态
         orderInfoMapper.updateOrderStatus(userId);
-        List<OrderInfo> list=orderInfoMapper.queryOrderByUserid(userId);
-        System.out.println(list.size());
-        for(OrderInfo o:list){
-            System.out.println("当前订单信息"+o.getStartTime());
+        //获取用户的订单（根据key的值搜索订单的状态）
+        List<Map<String, Object>> list=orderInfoMapper.queryOrderByUserId(userId,key);
+        for(Map<String,Object> map:list){
+            Integer orderId=map.get("id").hashCode();
+            //获取每个订单的详细信息
+            List<UserOrderData> glist=orderDetailsMapper.queryOrderDate(orderId);
+            for(UserOrderData data:glist){
+                totalPrice+=(data.getPrice()*data.getCount());
+            }
+            map.put("totalPrice",totalPrice);
+            map.put("goods",glist);
+            totalPrice=10;
         }
+        return list;
     }
 
 
