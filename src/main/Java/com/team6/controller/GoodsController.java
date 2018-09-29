@@ -34,6 +34,7 @@ public class GoodsController {
     public String insertGoods(@RequestParam MultipartFile imageFile,
                               Goods goods,
                               HttpServletRequest request){
+        System.out.println("hello world");
         if(imageFile!=null){
             String imgUrl=saveImageFile(imageFile,request);
             goods.setImgUrl(imgUrl);

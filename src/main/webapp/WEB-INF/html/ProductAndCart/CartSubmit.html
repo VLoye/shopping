@@ -359,14 +359,14 @@
                                     <div id = "totalA" class="order-summary" style="margin-top: 30px; border-top: 1px solid #E6E6E6;">
                                         <div class="statistic fr">
                                         	<#if total>
-                                            <div class="list">
-                                                <span><em id="span-skuNum">${total.totalcount}</em> 件商品，总商品金额：</span>
-                                                <em class="price" id="warePriceId" v="2170.0000">￥${total.totalprice}.00</em>
-                                            </div>
-                                            <div class="list"><span>运费：</span>
-                                                <em class="price" id="totalFreight"> ￥0.00</em>
-                                            </div>
-                                            <em class="price" id="id_c" style="width:122px;"></em>
+                                                <div class="list">
+                                                    <span><em id="span-skuNum">${total.totalcount}</em> 件商品，总商品金额：</span>
+                                                    <em class="price" id="warePriceId" v="2170.0000">￥${total.totalprice}.00</em>
+                                                </div>
+                                                <div class="list"><span>运费：</span>
+                                                    <em class="price" id="totalFreight"> ￥10.00</em>
+                                                </div>
+                                                <em class="price" id="id_c" style="width:122px;"></em>
                                             </#if>
                                        </div>
                                     </div>
@@ -390,11 +390,11 @@
                 <button type="button" id="submit" class="checkout-submit">提交订单</button>
                 <span class="total">
                     <label>应付总额：</label>
-                    <strong id="payPriceId" data-real="${total.totalprice}.00" data="${total.totalprice}.00">${total.totalprice}.00</strong>
+                    <strong id="payPriceId" data-real="${total.totalprice + 10}.00" data="${total.totalprice}.00">${total.totalprice}.00</strong>
                     <label>元</label>
                 </span>
             </div>
-        </#if>
+            </#if>
     </div>
 </div>
 </div>

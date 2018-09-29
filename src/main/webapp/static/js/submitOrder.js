@@ -532,7 +532,7 @@ function bindAddressRadioClick() {
 function deleteAddress(id) {
     $.dialog.confirm('您确定要删除该收货地址吗？', function () {
         var loading = showLoading();
-        $.post('/shopCar/del', { id: id }, function (result) {
+        $.post('/address/deladdress', { id: id }, function (result) {
             loading.close();
             if (result.success) {
                 var current = $('div[name="li-' + id + '"]');
@@ -551,11 +551,14 @@ function deleteAddress(id) {
 function saveAddress(adid,linkman, tel, detailedaddress, province, city, area , userid , callBack) {
     id = isNaN(parseInt(adid)) ? '' : parseInt(adid);
 
-    var url = '/order/saveorupdateaddress';
+    var url = '/address/saveorupdateaddress';
 
     var data = {};
-    if (id)
+    if (id) {
         data['addressid'] = id;
+    }else{
+        data['addressid'] = '';
+    }
     data['linkman'] = linkman;
     data['detailedaddress'] = detailedaddress;
     data['tel'] = tel;

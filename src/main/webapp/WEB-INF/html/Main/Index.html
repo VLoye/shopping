@@ -101,6 +101,14 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    var searchwithkey = function () {
+        var searchBox = document.getElementById("searchBox");
+        var key = searchBox.value;
+        location.href = "/search?key="+key;
+    }
+</script>
+
 <div class="h-head">
     <div class="h-w1200 hh-panel">
         <div class="hhp-logo">
@@ -117,7 +125,7 @@
         <div class="hhp-search">
             <div class="hhps-form">
                 <input type="text" id="searchBox" class="hs-text" name="" value="" placeholder=" ">
-                <input type="button" id="searchBtn" class="hs-btn" value="搜索">
+                <input type="button" id="searchBtn" onclick="searchwithkey()" class="hs-btn" value="搜索">
             </div>
 
             <div class="hhps-hot">
