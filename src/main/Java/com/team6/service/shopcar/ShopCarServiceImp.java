@@ -122,8 +122,6 @@ public class ShopCarServiceImp implements ShopCarService {
             returnMap.put("msg", UCRDEnum.UCRD_ERROR.getInfo());
             return returnMap;
         }
-
-
     }
 
     @Override
