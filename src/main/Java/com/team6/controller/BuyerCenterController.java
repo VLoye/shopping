@@ -1,8 +1,10 @@
 package com.team6.controller;
 
 import com.team6.service.FollowService;
+import com.team6.service.OrderInfo.OrderInfoService;
 import com.team6.service.comment.CommentService;
 import com.team6.service.login.LoginService;
+import org.apache.ibatis.annotations.Param;
 import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,9 @@ public class BuyerCenterController {
 
     @Autowired
     FollowService followService;
+
+    @Autowired
+    OrderInfoService orderInfoService;
     //跳转到买家个人中心
     @RequestMapping(value = "/buyer")
     public Object toBuyerCenterPage(){
@@ -116,4 +121,10 @@ public class BuyerCenterController {
         return JSONUtil.toJSON(list);
     }
 
+
+    @ResponseBody
+    @RequestMapping(value="/buyer/OwnGoodsData")
+    public Object OwnGoodsData(@Param("key") Integer key, HttpServletRequest request){
+        return orderInfoService.queryOrderByUserid(key,request);
+    }
 }
