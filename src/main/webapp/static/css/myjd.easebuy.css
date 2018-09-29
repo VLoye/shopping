@@ -36,7 +36,7 @@ a.save-btn { height: 28px; line-height: 28px; padding: 0 14px; font-size: 14px; 
 #describe .op strong { margin: 0 10px; }
 #describe .extra { width: 226px; }
 .easebuy-m { border: 1px solid #e6e6e6; }
-.easebuy-m .smt { padding-left: 10px; line-height: 36px; position: relative; display: inline-block; display: block; overflow: hidden; }
+.easebuy-m .smt { padding-left: 10px; line-height: 36px; position: relative; display: inline-block; display: block; overflow: hidden;width:1000px; }
 .easebuy-m .smt:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 * html .easebuy-m .smt { height: 1%; }
 * + html .easebuy-m .smt { min-height: 1%; }

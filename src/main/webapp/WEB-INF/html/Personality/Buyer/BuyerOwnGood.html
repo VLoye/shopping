@@ -6,16 +6,26 @@
     <link href="static/css/css_base.css" rel="stylesheet" type="text/css"/>
     <link href="static/css/css_top.css" rel="stylesheet" type="text/css"/>
     <link href="static/css/hayui.css" rel="stylesheet" type="text/css"/>
-      <link href="static/css/leagueradmin-nav-sidemenu.css" rel="stylesheet" type="text/css"/>
+    <link href="static/css/leagueradmin-nav-sidemenu.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
-    
+
+    <link href="static/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="static/css/amazeui.css" rel="stylesheet" type="text/css">
+    <link href="static/css/personal.css" rel="stylesheet" type="text/css">
+    <link href="static/css/orstyle.css" rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="static/js/bootstrap.js" ></script>
+    <script type="text/javascript" src="static/js/bootstrap.js" ></script>
     <script type="text/javascript" src="static/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="static/js/hayui.js" type="text/javascript"></script>
 
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/amazeui.js"></script>
+    <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
+    <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
+
     <link href="static/css/css_order.css" rel="stylesheet" type="text/css" />
-    
+
     <style type="text/css">
         .btndisnone {
             display: none;
@@ -39,7 +49,7 @@
                     hayui.use(['element', 'topservice'], function (element, topservice) { });
                 }
             });
-            
+
         });
         function qpr_skip() {
             var options = { path: "/" };
@@ -53,162 +63,330 @@
             location.href = "http://mall.qipeiren.com/selleradmin/home";
         }
     </script>
-    
+
     <title>已买到的货品</title>
     <script src="static/js/jQuery.datePicker.js"></script>
-<title>
+    <title>
 
-</title></head>
+    </title></head>
+<script type="text/javascript">
+    $(function(){
+        OwnGoodsFormat0();
+        OwnGoodsFormat1();
+        OwnGoodsFormat2();
+        OwnGoodsFormat3();
+        OwnGoodsFormat4();
+    });
+    var OwnGoodsFormat0 = function(){
+        $.ajax({
+            url: '/buyer/OwnGoodsData',
+            type: "post",
+            data:{key:''},
+            dataType: "json",
+            success: function(data){
+                $("#tab1").append(template("orderFormat",{list:data}));
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+    var OwnGoodsFormat1 = function(){
+        $.ajax({
+            url: '/buyer/OwnGoodsData',
+            type: "post",
+            data:{key:'0'},
+            dataType: "json",
+            success: function(data){
+                $("#tab2").append(template("orderFormat",{list:data}));
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+    var OwnGoodsFormat2 = function(){
+        $.ajax({
+            url: '/buyer/OwnGoodsData',
+            type: "post",
+            data:{key:'1'},
+            dataType: "json",
+            success: function(data){
+                $("#tab3").append(template("orderFormat",{list:data}));
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+    var OwnGoodsFormat3 = function(){
+        $.ajax({
+            url: '/buyer/OwnGoodsData',
+            type: "post",
+            data:{key:'2'},
+            dataType: "json",
+            success: function(data){
+                $("#tab4").append(template("orderFormat",{list:data}));
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+    var OwnGoodsFormat4 = function(){
+        $.ajax({
+            url: '/buyer/OwnGoodsData',
+            type: "post",
+            data:{key:'3'},
+            dataType: "json",
+            success: function(data){
+                $("#tab5").append(template("orderFormat",{list:data}));
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+</script>
 <body class="hayui-bg-gray-light">
 
-                
 
-
-    <div class="content_right">
-        <div class="order-sys-right-content">
-          <div class="osrc-top"><label>已买到的货品</label></div>
-          <div class="osrc-center">
+<div class="content_right">
+    <div class="order-sys-right-content">
+        <div class="osrc-top"><label>已买到的货品</label></div>
+        <div class="osrc-center">
             <div class="osrc-search-hight-grade">
-              <form id="js_grade_form" name="" action="?" method="get">
-                <div class="os-hg-title">
-                  <ul class="hgt-left">
-                    <li class="hgt-active" ><a href="?">全部订单</a></li>
-                    <li class="" ><a href="?ss=31">待卖家确认[<em>0</em>]</a></li>
-                    <li class="" ><a href="?ss=2">待付款[<em>0</em>]</a></li>
-                    <li class="" ><a href="?ss=3">待发货[<em>0</em>]</a></li>
-                    <li class="" ><a href="?ss=5">待确认收货[<em>0</em>]</a></li>
-                    <li class="" ><a href="?ss=4">待处理退款[<em>0</em>]</a></li>
-                    <li class="" ><a href="?ss=251">交易成功</a></li>
-                    <li class="" ><a href="?ss=1">交易关闭</a></li>
-            
-                  </ul>
-                  <div class="hgt-right">
-                    <input class="w150 hayui-br-none" name="goods_name" type="text" value="" />
-                    <label id="js_search"><span>搜索</span></label>
-                  </div>
-                </div>
-                <div id="js_grade_panel" class="os-hg-list">
-                  <ul>
-                    <li>
-                      <div class="list-text">
-                        <label for="order_cate">订单类型：</label>
-                        <select name="order_cate">                            
-                                            <option value="">全部</option>
-                                            <option value="2">商品订单</option>
-                                            <option value="1">协议订单</option>
-                        </select>
-                      </div>
-                      <div class="list-text">
-                        <label for="mh_date1">下单日期：</label>
-                        <span class="ui-date">
-                          <input type="text" id="time1" name="time1" readonly="true" value="" />
-                          <i class="os-icon date"></i>  
-                        </span>
-                        <em>-</em>
-                        <span class="ui-date">
-                          <input type="text" id="time2" name="time2" value="" readonly="true" />
-                          <i class="os-icon date"></i>  
-                        </span>  
-                      </div>
-                      <div class="list-text">
-                        <label for="order_num">卖家昵称：</label>
-                        <input type="text" name="user_name" value="" />
-                      </div>
-                    </li>
-                    <li>
-                      <div class="list-text">
-                          <label for="state">评价状态：</label>
-                          <select>
-                            <option value="">全部</option>
-                            <option value="31"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
-                      <div class="list-text">
-                          <label for="state">交易状态：</label>
-                          <select name="ss">                              
-                                            <option value="">全部</option>
-                                            <option value="31">待卖家确认</option>
-                                            <option value="2">待付款</option>
-                                            <option value="3">待发货</option>
-                                            <option value="5">待确认收货</option>
-                                            <option value="4">待处理退款</option>
-                                            <option value="251">交易成功</option>
-                                            <option value="1">交易关闭</option> 
-                          </select>
-                        </div>
-                        <div class="list-text ml170">
-                          <label for="state">售后服务：</label>
-                          <select>
-                            <option value="">全部</option>
-                            <option value="31"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
-                    </li>
-                  </ul>
-                  <span id="js_grade_close" class="hg-close-btn">
-                    <i class="os-icon hg-close"></i>
-                  </span>
-                </div>
-              </form>
-            </div> 
-              <form action="Pay.aspx" method="get" id="allcheckform" target="_blank">
-            <div class="osrc-thead">
-              <ul class="osrct-title hayui-clearfix">
-                <li class="w300">货品</li>
-                <li class="w135">单价</li>
-                <li class="w140">数量</li>
-                <li class="w140">实付款(元)</li>
-                <li class="w135">订单状态</li>
-                <li class="w110">交易操作</li>
-              </ul>
-            </div>
-              
-            <div class="osrc-page">
-              <div class="page-checkbox">
-                <input type="checkbox" name="checkAll" id="checkAll" jsCheckAll="true"/>
-                <label for="checkAll">全选</label>
-                <input class="pc-btn" type="button" isComb="true" value="合并付款" />
-                <span class="pc-tips" isCombTips="true"></span>
-              </div>
-              
-                
-              <ul class="page-list">
-                        
-              </ul>
-            </div>
-              
-
-            <div class="osrc-tcont" id="js_listData">
-                   
-              <div class="osrct-none">
-                <p class="osrctn-message">
-                  <i class="os-icon"></i>
-                  <span>亲，您暂无订单，这里都空空的，快去挑选合适的商品吧</span>
-                  
-                </p>
-              </div> 
+                <form id="js_grade_form" name="" action="?" method="get">
             </div>
 
-                </form>
-               
-          </div> 
-          <div class="osrc-bottom"> 
-            <div class="osrcb-tips">
-              <dl>
-                <dt><i class="os-icon"></i><span>温馨提示:</span></dt>
-                <dd>1.提交订单后，您可以及时联系卖家确认订单的货品和金额，只有卖家确认后您才能付款。</dd>
-                <dd>2.卖家发货后，请关注订单状态，并注意自动确认收货的时间，若交易过程中有争议请及时与卖家联系。</dd>
-              </dl>
+            <div class="center">
+
+
+                <div class="user-order">
+
+                    <!--标题 -->
+                    <!--div class="am-cf am-padding">
+                        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Order</small></div>
+                    </div>-->
+                    <hr/>
+                    <script type="text/html" id="orderFormat">
+                        <div class="order-top">
+                            <div class="th th-item">
+                                <td class="td-inner">商品</td>
+                            </div>
+                            <div class="th th-price">
+                                <td class="td-inner">单价</td>
+                            </div>
+                            <div class="th th-number">
+                                <td class="td-inner">数量</td>
+                            </div>
+                            <div class="th th-operation">
+                                <td class="td-inner">商品操作</td>
+                            </div>
+                            <div class="th th-amount">
+                                <td class="td-inner">合计</td>
+                            </div>
+                            <div class="th th-status">
+                                <td class="td-inner">交易状态</td>
+                            </div>
+                            <div class="th th-change">
+                                <td class="td-inner">交易操作</td>
+                            </div>
+                        </div>
+                        {{if list}}
+                        {{each list data}}
+                        <div class="order-status5">
+                            <div class="order-title">
+                                <div class="dd-num">订单编号：<a href="javascript:;">{{data.id}}</a></div>
+                                <span>成交时间：{{data.paytime}}</span>
+                                <!--    <em>店铺：小桔灯</em>-->
+                            </div>
+                            <div class="order-content">
+                                <div class="order-left">
+                                    {{each list data.goods as item}}
+                                    <ul class="item-list">
+                                        <li class="td td-item">
+                                            <div class="item-pic">
+                                                <a href="#" class="J_MakePoint">
+                                                    <img src="{{item.img_url}}" class="itempic J_ItemImg">
+                                                </a>
+                                            </div>
+                                            <div class="item-info">
+                                                <div class="item-basic-info">
+                                                    <a href="#">
+                                                        <input type="hidden" id="{{item.goodsid}}{{index}}" value="{{item.goodsid}}"/>
+                                                        <p>{{item.goodsname}}</p>
+                                                        <!--<p class="info-little">颜色：12#川南玛瑙
+                                                            <br/>包装：裸装 </p>-->
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="td td-price">
+                                            <div class="item-price">
+                                                {{item.goodsprice}}
+                                            </div>
+                                        </li>
+                                        <li class="td td-number">
+                                            <div class="item-number">
+                                                <span>×</span>{{item.count}}
+                                            </div>
+                                        </li>
+                                        {{if data.status == 0 || data.status == 4}}
+                                        <li class="td td-operation">
+                                            <div class="item-operation">
+
+                                            </div>
+                                        </li>
+                                        {{else if data.status == 1}}
+                                        <li class="td td-operation">
+                                            <div class="item-operation">
+                                                <a href="">退款</a>
+                                            </div>
+                                        </li>
+                                        {{else if data.status == 2 || data.status == 3}}
+                                        <li class="td td-operation">
+                                            <div class="item-operation">
+                                                <a href="">退款/退货</a>
+                                            </div>
+                                        </li>
+                                        {{/if}}
+                                    </ul>
+                                    {{/each}}
+                                </div>
+                                <div class="order-right">
+                                    <li class="td td-amount">
+                                        <div class="item-amount">
+                                            合计：{{data.totalprice}}
+                                            <p>含运费：<span>10.00</span></p>
+                                        </div>
+                                    </li>
+                                    {{if data.status == 0}}
+                                    <div class="move-right">
+                                        <li class="td td-status">
+                                            <div class="item-status">
+                                                <p class="Mystatus">等待买家付款</p>
+                                                <p class="order-info"><a href="#">取消订单</a></p>
+
+                                            </div>
+                                        </li>
+                                        <li class="td td-change">
+                                            <a href="pay.html">
+                                                <div class="am-btn am-btn-danger anniu">
+                                                    一键支付</div></a>
+                                        </li>
+                                    </div>
+                                    {{else if data.status == 1}}
+                                    <div class="move-right">
+                                        <li class="td td-status">
+                                            <div class="item-status">
+                                                <p class="Mystatus">买家已付款</p>
+                                                <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+                                            </div>
+                                        </li>
+                                        <li class="td td-change">
+                                            <div class="am-btn am-btn-danger anniu">
+                                                提醒发货</div>
+                                        </li>
+                                    </div>
+                                    {{else if data.status == 2}}
+                                    <div class="move-right">
+                                        <li class="td td-status">
+                                            <div class="item-status">
+                                                <p class="Mystatus">卖家已发货</p>
+                                                <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+                                                <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                                <p class="order-info"><a href="#">延长收货</a></p>
+                                            </div>
+                                        </li>
+                                        <li class="td td-change">
+                                            <div class="am-btn am-btn-danger anniu">
+                                                确认收货</div>
+                                        </li>
+                                    </div>
+                                    {{else if data.status == 3}}
+                                    <div class="move-right">
+                                        <li class="td td-status">
+                                            <div class="item-status">
+                                                <p class="Mystatus">交易成功</p>
+                                                <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+                                                <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                            </div>
+                                        </li>
+                                        <li class="td td-change">
+                                            <a href="commentlist.html">
+                                                <div class="am-btn am-btn-danger anniu">
+                                                    评价商品</div>
+                                            </a>
+                                        </li>
+                                    </div>
+                                    {{else if data.status == 4}}
+                                    <div class="move-right">
+                                        <li class="td td-status">
+                                            <div class="item-status">
+                                                <p class="Mystatus">订单过时</p>
+                                            </div>
+                                        </li>
+                                        <li class="td td-change">
+
+                                        </li>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{/if}}
+                    </script>
+                    <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+                        <ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">所有订单</a></li>
+                            <li><a href="#tab2">待付款</a></li>
+                            <li><a href="#tab3">待发货</a></li>
+                            <li><a href="#tab4">待收货</a></li>
+                            <li><a href="#tab5">待评价</a></li>
+                        </ul>
+
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+
+
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab2">
+
+
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab3">
+
+
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab4">
+
+
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab5">
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="osrc-bottom">
+                <div class="osrcb-tips">
+                    <dl>
+                        <dt><i class="os-icon"></i><span>温馨提示:</span></dt>
+                        <dd>1.提交订单后，您可以及时联系卖家确认订单的货品和金额，只有卖家确认后您才能付款。</dd>
+                        <dd>2.卖家发货后，请关注订单状态，并注意自动确认收货的时间，若交易过程中有争议请及时与卖家联系。</dd>
+                    </dl>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+
 
     <script type="text/javascript" src="static/js/jQuery.page.logic.js" charset="utf-8"></script>
     <script type="text/javascript" src="static/js/jQuery.datePicker.js" charset="utf-8"></script>
@@ -222,7 +400,7 @@
 
             //开始、结束日期区间
             $("#time1").datePicker({
-                maxDate: "#F{$dp.$D(\'time2\')}"    
+                maxDate: "#F{$dp.$D(\'time2\')}"
             });
             $("#time2").datePicker({
                 minDate: "#F{$dp.$D(\'time1\')}"
@@ -242,7 +420,7 @@
                 }).on('click', function(){
                     var dataListCheck = $('#js_listData ul li input:checkbox:checked');
                     checkAll.attr('checked', dataList.length == dataListCheck.length);
-                }); 
+                });
             });
 
             //comb pay for
@@ -266,26 +444,26 @@
                     //window.location.href="pay.aspx?id="+ids;
                 }
             });
-        }); 
-    
+        });
+
         function tz(index,type,url){
             var newindex=$("#"+index).val();//新页码   
-            if(newindex>0&&newindex<=type){ 
+            if(newindex>0&&newindex<=type){
                 window.location.href=url+newindex;
             }else alert("输入页码有问题");
         }
-</script>
+    </script>
 
     <form name="aspnetForm" method="post" action="listB.aspx?type=b" id="aspnetForm">
-<div>
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTYyNzI1ODA1NmRklfQzDrR1laoKRwBA9AN0p5rA7Xoy9ZRgqa9TTp29PKE=" />
-</div>
+        <div>
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTYyNzI1ODA1NmRklfQzDrR1laoKRwBA9AN0p5rA7Xoy9ZRgqa9TTp29PKE=" />
+        </div>
 
-<div>
+        <div>
 
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="74DB4A93" />
-	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAINk6E0/IeeCnpfsW5HNIwaS1DZef2mRBAnqRLk+R2xayq4F/U2XLLn6balMHVjku3gP9QUY0vxXglk1Mb0OgGw" />
-</div>
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="74DB4A93" />
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAINk6E0/IeeCnpfsW5HNIwaS1DZef2mRBAnqRLk+R2xayq4F/U2XLLn6balMHVjku3gP9QUY0vxXglk1Mb0OgGw" />
+        </div>
         <input name="ctl00$ContentPlaceHolder1$textBox1" type="text" value="201" id="ctl00_ContentPlaceHolder1_textBox1" hidden="hidden" />
     </form>
 

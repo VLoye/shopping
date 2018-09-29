@@ -563,11 +563,8 @@ function bindToSettlement(isB2B) {
             	$.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
             		
 	                loading.close();
-	                if (result.success){
-	                	location.href = "/shopCar/detailData";
-	                }
 	                    
-	                else
+	                if(result.error)
 	                    $.dialog.errorTips(result.msg);
                     
             	});
