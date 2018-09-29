@@ -4,6 +4,7 @@ import com.team6.service.login.LoginService;
 import com.team6.service.shopcar.ShopCarService;
 import org.apache.commons.math3.analysis.solvers.NewtonRaphsonSolver;
 import org.apache.ibatis.annotations.Param;
+import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,7 @@ public class ShopCarController {
 
     @ResponseBody
     @RequestMapping(value = "/shopCarData")
-    public Model shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
+    public Object shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
 
         //用户信息
         Map<String,Object> map = loginService.getCurrentUserInfo(request);
@@ -46,7 +47,7 @@ public class ShopCarController {
         model.addAttribute("goods",list);
       /*  ModelAndView modelAndView = new ModelAndView("", "data",model);*/
 
-        return model;
+        return JSONUtil.toJSON(model);
 
     }
 
