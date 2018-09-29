@@ -55,10 +55,6 @@ public class OrderInfoController {
         return orderInfoService.delOrderInfo(orderId,request);
     }
 
-    @ResponseBody
-    @RequestMapping(value="/buyer/OwnGoodsData")
-    public Object OwnGoodsData(@Param("key") Integer key,HttpServletRequest request){
-      return orderInfoService.queryOrderByUserid(key,request);
-    }
+
 
 }
