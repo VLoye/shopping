@@ -95,10 +95,13 @@ public class BuyerCenterController {
         List tab2 = commentService.noComment(userId);
         model.addAttribute("tab1",tab1);
         model.addAttribute("tab2",tab2);
-        Map<String,Object> map = new HashMap();
+       /* Map<String,Object> map = new HashMap();
         map.put("tab1","1111");
-        map.put("tab2",tab2);
-        return new ModelAndView("Personality/Buyer/BuyerCommentManage",map);
+        map.put("tab2",tab2);*/
+        return new ModelAndView("Personality/Buyer/BuyerCommentManage","model",model);
+          /*  ModelAndView view = new ModelAndView("Personality/Buyer/BuyerCommentManage");
+            view.addObject("data","郑伟坑sb");
+            return  view;*/
 
     }
 
@@ -136,6 +139,10 @@ public class BuyerCenterController {
     @RequestMapping(value = "/testfm",method = RequestMethod.GET)
     public Object testfm(Model model){
         model.addAttribute("name","zwk");
-        return  "test/index";
+        Map<String,Object> my = new HashMap<>();
+        my.put("name","zwk");
+        ModelAndView view = new ModelAndView("test/fm");
+        view.addObject("name","zwk");
+        return view;
     }
 }

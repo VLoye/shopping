@@ -3,8 +3,16 @@
     <title>freemarker Test</title>
 </head>
 <body>
-<h1>Hello,${model.name}</h1>
-<h1>Hello,${model.name}</h1>
+<h1>Hello,${my.name}</h1>
+<h1>Hello,${name}</h1>
+<#assign keys = my?keys>
+    <#list keys as key>
+${key} = ${my[key]};
+     </#list>
+
+<script type="text/javascript">
+    console.log(request())
+</script>
 </body>
 </html>
 
