@@ -45,11 +45,13 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- 3.配置jsp 显示ViewResolver -->
+    <!-- 3.配置jsp 显示ViewResolver (springmvc视图解释器)-->
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="order" value="1"/>
         <property name="prefix" value="/WEB-INF/html/" />
         <property name="suffix" value=".html" />
+
     </bean>
 
     <bean  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -93,35 +95,53 @@
         <property name="maxInMemorySize" value="4096"></property>
     </bean>
 
-    <!--freemarker配置-->
-   <!-- <bean id="freeMarkerConfigurer"
+    <bean id="viewRosolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
+        </property>
+        <property name="order" value="0"/>
+        <!--<property name="prefix" value="/WEB-INF/html/" />-->
+        <property name="suffix" value=".html" />
+
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="false"/>
+        <property name="exposeSessionAttributes" value="false"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="cache" value="false"></property>
+    </bean>
+    <!-- FreeMarker模板路径 -->
+    <bean id="freemarkerConfig"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/WEB-INF/ftl/"></property>
-        <property name="defaultEncoding" value="utf-8" />
+        <property name="templateLoaderPath">
+            <!-- <list>-->
+            <value>/WEB-INF/html/</value>
+            <!--	<value>/front/</value>
+                </list>-->
+        </property>
+
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape" />
+            </map>
+        </property>
         <property name="freemarkerSettings">
             <props>
-                <prop key="template_update_delay">1</prop>
-                <prop key="locale">zh_CN</prop>
-                <prop key="datetime_format">yyyy-MM-dd</prop>&lt;!&ndash; 时间格式化 &ndash;&gt;
+                <prop key="template_update_delay">3</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <prop key="locale">en</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
                 <prop key="date_format">yyyy-MM-dd</prop>
-                <prop key="number_format">#.##</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">0.######</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <prop key="classic_compatible">true</prop>
             </props>
         </property>
     </bean>
-
-    <bean id="freeMarkerViewResolver"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="cache" value="true" />
-        <property name="prefix" value="" />&lt;!&ndash; 上面已经配了，这里就不用配啦 &ndash;&gt;
-        <property name="suffix" value=".ftl" />
-        <property name="contentType" value="text/html;charset=UTF-8" />
-        <property name="allowSessionOverride" value="true" />
-        <property name="allowRequestOverride" value="true" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-        <property name="requestContextAttribute" value="request" />
-    </bean>-->
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
 
 
 </beans>

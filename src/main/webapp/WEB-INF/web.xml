@@ -23,8 +23,8 @@
       <param-value>
 <!--        classpath:spring/spring-web.xml-->
         classpath:mybatis/mybatis-config.xml,
-        classpath:spring/spring-web.xml,
-          classpath:freemarker/spring-freemarker.xml
+        classpath:spring/spring-web.xml
+          <!--,classpath:freemarker/spring-freemarker.xml-->
 <!--        ,classpath:shiro/shiro.xml-->
       </param-value>
     </init-param>
