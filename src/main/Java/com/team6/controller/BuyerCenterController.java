@@ -39,44 +39,44 @@ public class BuyerCenterController {
     }
 
     //跳转账户安全界面
-    @RequestMapping(value="/buyer/AccountSecurity",method = RequestMethod.POST)
+    @RequestMapping(value="/buyer/AccountSecurity",method = RequestMethod.GET)
     public Object toAccountSecurityDataPage(){
         return "Personality/Buyer/BuyerAccountSecurity";
     }
     //跳转收货地址管理页面
-    @RequestMapping(value = "/buyer/Address",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/Address",method = RequestMethod.GET)
     public Object toBuyerAddressPage(){
         return "Personality/Buyer/BuyerAddress";
     }
 
     //跳转到修改密码页面
-    @RequestMapping(value = "/buyer/ChangePassword",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/ChangePassword",method = RequestMethod.GET)
     public Object toBuyerChangePasswordPage(){
         return "Personality/Buyer/BuyerChangePassword";
     }
 
     //跳转关注商品页面
-    @RequestMapping(value = "/buyer/Concernedgoods",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/Concernedgoods",method = RequestMethod.GET)
     public Object toBuyerConcernedGoodsPage(){
         return "Personality/Buyer/BuyerConcernedGoods";
     }
 
     //跳转关注商店页面
-    @RequestMapping(value = "/buyer/Concernedshop",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/Concernedshop",method = RequestMethod.GET)
     public Object toBuyerConcernedShopPage(){
         return "Personality/Buyer/BuyerConcernedShop";
     }
 
     //跳转关注商店页面
-    @RequestMapping(value = "/buyer/Consult",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/Consult",method = RequestMethod.GET)
     public Object toBuyerConsultManagePage(){
         return "Personality/Buyer/BuyerConsultManage";
     }
 
     //跳转已购商品页面
-    @RequestMapping(value = "/buyer/OwnGoods",method = RequestMethod.POST)
+    @RequestMapping(value = "/buyer/OwnGoods",method = RequestMethod.GET)
     public Object toBuyerOwnGoodsPage(){
-        return "Personality/Buyer/BuyerOwnGoods";
+        return "Personality/Buyer/BuyerOwnGood";
     }
     //跳转到
 
@@ -131,7 +131,7 @@ public class BuyerCenterController {
 
 
     @ResponseBody
-    @RequestMapping(value="/buyer/OwnGoodsData")
+    @RequestMapping(value="/buyer/OwnGoodsData",method = RequestMethod.POST)
     public Object OwnGoodsData(@Param("key") Integer key, HttpServletRequest request){
         return orderInfoService.queryOrderByUserid(key,request);
     }
