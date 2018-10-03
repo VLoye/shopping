@@ -24,8 +24,8 @@ public class ShopCarController {
 
 
     @RequestMapping(value = "/shopCar")
-    public ModelAndView shopCar(){
-        return new ModelAndView("");
+    public Object toBuyerCenterPage(){
+        return "ProductAndCart/Shoppingcart";
     }
 
 

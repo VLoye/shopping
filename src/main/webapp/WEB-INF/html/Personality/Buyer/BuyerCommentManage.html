@@ -65,7 +65,19 @@
             location.href = "http://mall.qipeiren.com/selleradmin/home";
         }
     </script>-->
+    <script type="text/javascript">
+        var tabchange = function (num) {
 
+            for (var i = 1; i <= 2; i++) {
+                if(i != num&&$("#tab"+i).hasClass("am-active")){
+                    $("#tab"+i).removeClass("am-active");
+                    $("#tab"+i).removeClass("am-in");
+                }
+            }
+            $("#tab"+num).addClass("am-active");
+            $("#tab"+num).addClass("am-in");
+        }
+    </script>
     <title>已买到的货品</title>
     <script src="../../static/js/jQuery.datePicker.js"></script>
     <title>
@@ -99,8 +111,8 @@
                     <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
 
                         <ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
-                            <li class="am-active"><a href="#tab1">已评价商品</a></li>
-                            <li><a href="#tab2">未评价商品</a></li>
+                            <li class="am-active"><a href="#tab1" onclick="tabchange(1)">已评价商品</a></li>
+                            <li><a href="#tab2" onclick="tabchange(2)">未评价商品</a></li>
 
                         </ul>
 
