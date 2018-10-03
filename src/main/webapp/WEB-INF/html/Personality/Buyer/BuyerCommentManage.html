@@ -1,28 +1,32 @@
 <!--买家交易管理-已买到的货品-->
 <!DOCTYPE html>
 <html>
-<head><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta name="renderer" content="webkit|ie-stand" /><meta charset="utf-8" />
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
 
-    <link href="static/css/css_base.css" rel="stylesheet" type="text/css"/>
-    <link href="static/css/css_top.css" rel="stylesheet" type="text/css"/>
-    <link href="static/css/hayui.css" rel="stylesheet" type="text/css"/>
-    <link href="static/css/leagueradmin-nav-sidemenu.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
 
-    <link href="static/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="static/css/amazeui.css" rel="stylesheet" type="text/css">
-    <link href="static/css/personal.css" rel="stylesheet" type="text/css">
-    <link href="static/css/orstyle.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/css_base.css" rel="stylesheet" type="text/css"/>
+    <link href="../../static/css/css_top.css" rel="stylesheet" type="text/css"/>
+    <link href="../../static/css/hayui.css" rel="stylesheet" type="text/css"/>
+    <link href="../../static/css/leagueradmin-nav-sidemenu.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
 
-    <script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="static/js/bootstrap.js" ></script>
-    <script type="text/javascript" src="static/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="static/js/hayui.js" type="text/javascript"></script>
+    <link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/personal.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">
 
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/amazeui.js"></script>
+    <script type="text/javascript" src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../static/js/bootstrap.js" ></script>
+    <script type="text/javascript" src="../../static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../static/js/hayui.js" type="text/javascript"></script>
 
-    <link href="static/css/css_order.css" rel="stylesheet" type="text/css" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/amazeui.js"></script>
+
+    <link href="../../static/css/css_order.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         .btndisnone {
@@ -61,9 +65,21 @@
             location.href = "http://mall.qipeiren.com/selleradmin/home";
         }
     </script>-->
+    <script type="text/javascript">
+        var tabchange = function (num) {
 
+            for (var i = 1; i <= 2; i++) {
+                if(i != num&&$("#tab"+i).hasClass("am-active")){
+                    $("#tab"+i).removeClass("am-active");
+                    $("#tab"+i).removeClass("am-in");
+                }
+            }
+            $("#tab"+num).addClass("am-active");
+            $("#tab"+num).addClass("am-in");
+        }
+    </script>
     <title>已买到的货品</title>
-    <script src="static/js/jQuery.datePicker.js"></script>
+    <script src="../../static/js/jQuery.datePicker.js"></script>
     <title>
 
     </title></head>
@@ -78,6 +94,7 @@
         <div class="osrc-center">
             <div class="osrc-search-hight-grade">
                 <form id="js_grade_form" name="" action="?" method="get">
+                </form>
             </div>
 
             <div class="center">
@@ -94,8 +111,8 @@
                     <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
 
                         <ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
-                            <li class="am-active"><a href="#tab1">已评价商品</a></li>
-                            <li><a href="#tab2">未评价商品</a></li>
+                            <li class="am-active"><a href="#tab1" onclick="tabchange(1)">已评价商品</a></li>
+                            <li><a href="#tab2" onclick="tabchange(2)">未评价商品</a></li>
 
                         </ul>
 
@@ -132,17 +149,18 @@
                                             <div class="order-content">
                                                 <div class="order-left">
                                                     <#list tab1 as data>
+
                                                     <ul class="item-list">
                                                         <li class="td td-item">
                                                             <div class="item-pic">
-                                                                <a href="/goods/${data.goodsid}" class="J_MakePoint">
-                                                                    <img src="${data.goodimg}" class="itempic J_ItemImg">
+                                                                <a href="/goods/${data.goodsId}" class="J_MakePoint">
+                                                                    <img src="${data.goodImg}" class="itempic J_ItemImg">
                                                                 </a>
                                                             </div>
                                                             <div class="item-info">
                                                                 <div class="item-basic-info">
                                                                     <a href="/goods/${data.goodsid}">
-                                                                        <p>${data.goodsname}</p>
+                                                                        <p>${data.goodsName}</p>
 
                                                                     </a>
                                                                 </div>
@@ -150,26 +168,28 @@
                                                         </li>
                                                         <li class="td td-price">
                                                             <div class="item-price">
-                                                                ${data.goodsprice}
+                                                                ${data.price}
                                                             </div>
                                                         </li>
                                                         <li class="td td-operation">
                                                             <div class="item-operation">
-                                                                ${data.sellername}
+                                                                ${data.sellerName}
                                                             </div>
                                                         </li>
                                                         <li class="td td-operation">
                                                             <div class="item-operation">
-                                                                ${data.brandname}
+                                                                ${data.brandName}
                                                             </div>
                                                         </li>
                                                         <li class="td td-operation">
                                                             <div class="item-operation">
-                                                                ${data.typename}
+                                                                ${data.typeName}
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                </#list>
+                                                    </#list>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -212,18 +232,18 @@
                                         </div>-->
                                         <div class="order-content">
                                             <div class="order-left">
-                                                <#list tab2 as data>
+                                                <#list tab2 as data2>
                                                 <ul class="item-list">
                                                     <li class="td td-item">
                                                         <div class="item-pic">
-                                                            <a href="/goods/${data.goodsid}" class="J_MakePoint">
-                                                                <img src="${data.goodimg}" class="itempic J_ItemImg">
+                                                            <a href="/goods/${data.goodsId}" class="J_MakePoint">
+                                                                <img src="${data.goodImg}" class="itempic J_ItemImg">
                                                             </a>
                                                         </div>
                                                         <div class="item-info">
                                                             <div class="item-basic-info">
                                                                 <a href="/goods/${data.goodsid}">
-                                                                    <p>${data.goodsname}</p>
+                                                                    <p>${data2.goodsName}</p>
 
                                                                 </a>
                                                             </div>
@@ -231,22 +251,22 @@
                                                     </li>
                                                     <li class="td td-price">
                                                         <div class="item-price">
-                                                            ${data.goodsprice}
+                                                            ${data2.price}
                                                         </div>
                                                     </li>
                                                     <li class="td td-operation">
                                                         <div class="item-operation">
-                                                            ${data.sellername}
+                                                            ${data2.sellername}
                                                         </div>
                                                     </li>
                                                     <li class="td td-operation">
                                                         <div class="item-operation">
-                                                            ${data.brandname}
+                                                            ${data2.brandName}
                                                         </div>
                                                     </li>
                                                     <li class="td td-operation">
                                                         <div class="item-operation">
-                                                            ${data.typename}
+                                                            ${data2.typeName}
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -265,8 +285,8 @@
                                         <div class="order-left">
                                             <ul class="item-list">
                                                 <li class="td td-item">
-
-
+                                                </li>
+                                            </ul>
 
 
                                         </div>
@@ -300,8 +320,8 @@
 </div>-->
 
 
-    <script type="text/javascript" src="static/js/jQuery.page.logic.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/jQuery.datePicker.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../static/js/jQuery.page.logic.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../static/js/jQuery.datePicker.js" charset="utf-8"></script>
     <script type="text/javascript">
         $(function(){
             //搜索按钮点击事件
