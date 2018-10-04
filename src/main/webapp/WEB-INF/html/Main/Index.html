@@ -54,15 +54,15 @@
     <script id = "logstatus" type = "text/html">
         {{if data}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-        <a class="h-fl" href="/UserCenter" target="_blank">{{data.username}}</a>
+        <a class="h-fl" href="/buyer" target="_blank">{{data.username}}</a>
         <input type = "hidden" text = "{{data.userid}}" id = "userid"/>
         <i class="h-fl h-vline">|</i>
         <a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/cart/cart">[退出]</a>
         {{else}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-        <a class="h-fl" href="/Login">登录</a>
+        <a class="h-fl" href="/login">登录</a>
         <i class="h-fl h-vline">|</i>
-        <a class="h-fl" href="/Register">注册</a>
+        <a class="h-fl" href="/register">注册</a>
         {{/if}}
         <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
         <dl class="h-fr h-down ml0 ltb1">
@@ -694,12 +694,6 @@
 
 </div>
 
-<!--<script src="http://img.qipeiren.com/qipeiren/ShopDecoration/javascripts/ui/jQuery.picPlay.js?vid=0808" type="text/javascript"></script>
-<script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.slide-lor.js?vid=0808" type="text/javascript"></script>
-
-<script src="http://img.qipeiren.com/Site/Web/javascripts/jQuery.index-logic.js?vid=0808"></script>
-<script src="http://img.qipeiren.com/qipeiren/Scripts/jQuery.loading.spin.js?vid=0808" type="text/javascript"></script>-->
-
 <style>
     * {
         margin:0;
@@ -779,131 +773,34 @@
 
         <!-- 自动轮播图片-->
 
-        <!--<div class="hp1-ad" id="js_hp1_ad">
+        <div class="hp1-ad" id="js_hp1_ad">
+
             {{each list data}}
-            <a href="{{data.rburl}}" id="{{data.rbid}}" target="_blank">
+            {{if $index != 0}}
+            <a href="{{data.rburl}}" id="rb{{data.rbid}}" target="_blank" style="display: none;">
                 <img src="{{data.rburl}}" height="276">
             </a>
+            {{else}}
+            <a href="{{data.rburl}}" id="rb{{data.rbid}}" target="_blank" style="display: block;">
+                <img src="{{data.rburl}}" height="276">
+            </a>
+            {{/if}}
             {{/each}}
 
-            <p class="hp1-ad-btn" id="js_hp1_ad_btn"></p>
-            <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn">
+            <p class="hp1-ad-btn" id="js_hp1_ad_btn">
+                <span class="hp1-ad-btn-active" id="ad1"></span>
+                <span class="" id="ad2"></span>
+                <span class="" id="ad3"></span>
+                <span class="" id="ad4"></span>
+            </p>
+            <div class="hp1-ad-lr-btn" id="js_hp1_ad_lr_btn" style="display:block;">
                 <div class="hp1-ad-lr-btn-in">
-                    <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left"><i></i></span>
-                    <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right"><i></i></span>
+                    <span class="ad-lr-btn ad-lr-btn-left" id="js_ad_btn_left" onclick="nextrb()"><i></i></span>
+                    <span class="ad-lr-btn ad-lr-btn-right" id="js_ad_btn_right" onclick="prevrb()"><i></i></span>
                 </div>
             </div>
-        </div>-->
-
-        <div class="container">
-            <div class="wrap" style="left: -600px;">
-                {{each list data}}
-                    {{if index == 4}}
-                        <a href="{{data.rburl}}" id="{{data.rbid}}" target="_blank">
-                            <img src="{{data.rburl}}" alt="">
-                        </a>
-                    {{/if}}
-                {{/each}}
-                {{each list data}}
-                <a href="{{data.rburl}}" id="{{data.rbid}}" target="_blank">
-                    <img src="{{data.rburl}}" alt="">
-                </a>
-                {{/each}}
-            </div>
-            <div class="buttons">
-                <span name="sw" class="on">1</span>
-                <span name="sw">2</span>
-                <span name="sw">3</span>
-                <span name="sw">4</span>
-            </div>
-            <a href="javascript:;" rel="external nofollow" class="arrow arrow_left"><</a>
-            <a href="javascript:;" rel="external nofollow" class="arrow arrow_right">></a>
         </div>
 
-        </div>
-
-</script>
-
-<script type="text/javascript">
-    var wrap = document.querySelector(".wrap");
-    var next = document.querySelector(".arrow_right");
-    var prev = document.querySelector(".arrow_left");
-    next.onclick = function () {
-        next_pic();
-    }
-    prev.onclick = function () {
-        prev_pic();
-    }
-    function next_pic () {
-        index++;
-        if(index > 3){
-            index = 0;
-        }
-        showCurrentDot();
-        var newLeft;
-        if(wrap.style.left === "-3600px"){
-            newLeft = -1200;
-        }else{
-            newLeft = parseInt(wrap.style.left)-600;
-        }
-        wrap.style.left = newLeft + "px";
-    }
-    function prev_pic () {
-        index--;
-        if(index < 0){
-            index = 3;
-        }
-        showCurrentDot();
-        var newLeft;
-        if(wrap.style.left === "0px"){
-            newLeft = -2400;
-        }else{
-            newLeft = parseInt(wrap.style.left)+600;
-        }
-        wrap.style.left = newLeft + "px";
-    }
-    var timer = null;
-    function autoPlay () {
-        timer = setInterval(function () {
-            next_pic();
-        },2000);
-    }
-    autoPlay();
-
-    var container = document.querySelector(".container");
-    container.onmouseenter = function () {
-        clearInterval(timer);
-    }
-    container.onmouseleave = function () {
-        autoPlay();
-    }
-
-    var index = 0;
-    var dots = document.getElementsByClassName("sw");
-    function showCurrentDot () {
-        for(var i = 0, len = dots.length; i < len; i++){
-            dots[i].className = "";
-        }
-        dots[index].className = "on";
-    }
-
-    for (var i = 0, len = dots.length; i < len; i++){
-        (function(i){
-            dots[i].onclick = function () {
-                var dis = index - i;
-                if(index == 3 && parseInt(wrap.style.left)!==-3000){
-                    dis = dis - 4;
-                }
-                //和使用prev和next相同，在最开始的照片5和最终的照片1在使用时会出现问题，导致符号和位数的出错，做相应地处理即可
-                if(index == 0 && parseInt(wrap.style.left)!== -600){
-                    dis = 4 + dis;
-                }
-                wrap.style.left = (parseInt(wrap.style.left) + dis * 600)+"px";
-                index = i;
-                showCurrentDot();
-            }
-        })(i);
-    }
 </script>
 
 <!--content start-->
@@ -1381,7 +1278,7 @@
             </div>
             <input type = "hidden" id="{{data.type_id}}" value="{{data.type_id}}" />
             <div class="aid-titbox">
-                <div class="aid-tit"><a href="/goodspage?goodsid={{data.id}}" target="_blank">{{data.name}}</a></div>
+                <div class="aid-tit"><a href="/goods/{{data.id}}" target="_blank">{{data.name}}</a></div>
                 <!--<div class="aid-price"><span>{{data.gprice}}</span></div>-->
             </div>
         </div>
@@ -1697,8 +1594,6 @@
 
 <!-- 楼层6  END-->
 
-
-
 <script type="text/javascript">
 
     var myurl = "/indexData";
@@ -1858,6 +1753,62 @@
         });
 
     });
+
+    var nextrb = function () {
+        var num1 = 0;
+        for (var i = 1; i <= 4; i++) {
+            if($("#rb"+i).css("display") === 'block'){
+                num1 = i;
+                break;
+            }
+        }
+        if(num1 < 4)
+            num1++;
+        else if(num1 >= 4){
+            num1 = 1;
+        }
+        for (var i = 1; i <= 4; i++) {
+
+            if(num1 == i){
+                $("#rb"+i).css("display","block");
+                $("#ad"+i).addClass("hp1-ad-btn-active");
+            }
+            else{
+                $("#rb"+i).css("display","none");
+                if($("#ad"+i).hasClass("hp1-ad-btn-active")){
+                    $("#ad"+i).removeClass("hp1-ad-btn-active");
+                }
+            }
+        }
+    }
+    var prevrb = function () {
+        var num2 = 0;
+        for (var i = 1; i <= 4; i++) {
+            if($("#rb"+i).css("display") === 'block'){
+                num2 = i;
+                break;
+            }
+        }
+        if(num2 > 1) {
+            num2--;
+        }
+        else if(num2 <= 1){
+            num2 = 4;
+        }
+        for (var i = 1; i <= 4; i++) {
+
+            if(num2 == i){
+                $("#rb"+i).css("display","block");
+                $("#ad"+i).addClass("hp1-ad-btn-active");
+            }
+            else{
+                $("#rb"+i).css("display","none");
+                if($("#ad"+i).hasClass("hp1-ad-btn-active")){
+                    $("#ad"+i).removeClass("hp1-ad-btn-active");
+                }
+            }
+        }
+    }
 
     function bindSelectAll() {
         $('input[name="s-checkAll"]').change(function () {
