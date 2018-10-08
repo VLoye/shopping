@@ -152,7 +152,7 @@
     and user_id=#{userId,jdbcType=INTEGER}
     having time>=1)as t
     on o.id=t.id
-    set o.`status`=3
+    set o.`status`=4
   </update>
 
   <select id="queryOrderByUserId" resultType="map">

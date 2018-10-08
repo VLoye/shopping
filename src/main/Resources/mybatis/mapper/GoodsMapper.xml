@@ -184,7 +184,7 @@
   </update>
 
     <select id="querySaleByGoodType" resultType="java.util.Map">
-   select g.id,g.name,g.type_id,g.img_url from goods g
+   select g.id,g.name,g.type_id,g.img_url,g.price  from goods g
 	inner join goods_type t on t.super_id = #{typeId} and g.type_id = t.id
 	order by g.price desc limit #{limit};
   </select>

@@ -30,7 +30,7 @@ public class ShopCarController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/shopCarData")
+    @RequestMapping(value = "/shopCarData",produces = "text/json;charset=UTF-8")
     public Object shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
 
         //用户信息
@@ -70,7 +70,7 @@ public class ShopCarController {
     }
 
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST)
+    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
     public ModelAndView shopDetailData(
          @RequestParam("ids[]") int[] ids,
             @RequestParam("counts[]") int[] counts,
