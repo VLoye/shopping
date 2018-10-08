@@ -54,6 +54,7 @@
     <script id = "logstatus" type = "text/html">
         {{if data}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+
         <a class="h-fl" href="/buyer" target="_blank">{{data.username}}</a>
         <input type = "hidden" text = "{{data.userid}}" id = "userid"/>
         <i class="h-fl h-vline">|</i>
@@ -85,9 +86,9 @@
                 <a href="/ShopConcern/Index">关注的店铺</a>
             </dd>
         </dl>
-        <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+        <a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
         <i class="h-fr h-vline">|</i>
-        <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+        <a class="h-fr" href="/index" target="_blank">汽配人首页</a>
     </script>
 
     <div class="h-w1200 ht-link" id="loginstatus">
@@ -138,7 +139,7 @@
                 <a onclick="location.href=encodeURI( $(this).attr('url'))" style=" cursor:pointer; " url="/search?keywords=齿轮" target="_blank">齿轮</a>
             </div>
         </div>
-        <a class="hhp-mycart" href="/Cart/Cart" target="_blank">
+        <a class="hhp-mycart" href="/shopCar" target="_blank">
             <i class="h-icon hhpm-car"></i>
             <span>我的购物车</span>
             <i class="h-icon hhpm-arrow"></i>
@@ -198,7 +199,7 @@
                 <div class="hnmcr-cont">
                     <div class="hnmcr-item-l">
                         <dl class="ldi-list">
-                            <dd class=""><a target="_blank" href="/Search?cid=11">发动机总成</a></dd>
+                            <dd class=""><a target="_blank" href="/search?key=">发动机总成</a></dd>
                             <dd class=""><a target="_blank" href="/Search?cid=12">发动机悬置</a></dd>
                             <dd class=""><a target="_blank" href="/Search?cid=13">汽缸体</a></dd>
                             <dd class=""><a target="_blank" href="/Search?cid=14">汽缸盖</a></dd>
@@ -633,7 +634,7 @@
                 <input type="hidden" value="2" id="hidAuditStatus" />
                 <input type="hidden" value="1" id="hidSaleStatus" />
                 <div class="cart-top">
-                    <a href="/cart/cart" title="" target="_blank">查看全部</a>
+                    <a href="/shopCar" title="" target="_blank">查看全部</a>
                 </div>
                 <div class="cart-list">
                     <ul id="side-cart-list">
@@ -1271,7 +1272,7 @@
         <div class="ai-dl">
             <div class="aid-imgbox">
                 <div class="aid-img">
-                    <a href="/goodspage?goodsid={{data.goodsid}}" target="_blank">
+                    <a href="/goodspage?goodsid={{data.id}}" target="_blank">
                     <img src="{{data.img_url}}" alt="{{data.name}}">
                     </a>
                 </div>
@@ -1279,7 +1280,7 @@
             <input type = "hidden" id="{{data.type_id}}" value="{{data.type_id}}" />
             <div class="aid-titbox">
                 <div class="aid-tit"><a href="/goods/{{data.id}}" target="_blank">{{data.name}}</a></div>
-                <!--<div class="aid-price"><span>{{data.gprice}}</span></div>-->
+                <div class="aid-price"><span>{{data.price}}</span></div>
             </div>
         </div>
     </div>
@@ -1658,11 +1659,12 @@
 
         IndexFormat();
         ShopCarFormat();
+        setInterval(nextrb,4000);
         var rightSide=$('.right-side');
         var rightContent=$('.side-content');
         $('.right-side .menu-top li[arrow]').click(function() {
 
-            if (isloginbool){
+            if (!isloginbool){
                 location.href = '/login';
                 ShopCarFormat();
             }else{

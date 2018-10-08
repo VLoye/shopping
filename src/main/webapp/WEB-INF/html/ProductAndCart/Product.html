@@ -199,15 +199,15 @@
 
             <#if user.username>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-            <a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
+            <a class="h-fl" href="/buyer" id="username" target="_blank">${user.username}</a>
             <i class="h-fl h-vline">|</i>
             <input type = "hidden" id = "userid" value = "${user.userid}"/>
             <a class="h-fl" href="">[退出]</a>
             <#else>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-            <a class="h-fl" href="/Login">登录</a>
+            <a class="h-fl" href="/login">登录</a>
             <i class="h-fl h-vline">|</i>
-            <a class="h-fl" href="/Register">注册</a>
+            <a class="h-fl" href="/register">注册</a>
             </#if>
 
         </div>
@@ -234,9 +234,9 @@
             <a href="/ShopConcern/Index">关注的店铺</a>
         </dd>
     </dl>
-    <a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+    <a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
     <i class="h-fr h-vline">|</i>
-    <a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+    <a class="h-fr" href="/index" target="_blank">汽配人首页</a>
 </div>
 </div>
 
