@@ -8,18 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加商品信息</title>
+    <title>添加地址信息</title>
 </head>
 <body>
     <div style="margin: 0 auto; margin-top:50px">
-        <form action="/goods/add" method="post" enctype="multipart/form-data">
-            商品id:
+       <%-- <form action="/goods/add" method="post" enctype="multipart/form-data">
+            地址id:
             <input type="text" name="id"/><br/>
-            商品名称：
+            地址名称：
             <input type="text" name="name"/><br/>
-            商品价格:
+            地址价格:
             <input type="text" name="price"/><br/>
-            商品数量：
+            地址数量：
             <input type="text" name="stock"/><br/>
             seller_id:
             <input type="text" name="sellerId"/><br/>
@@ -31,7 +31,27 @@
             <input type="file" name="imageFile"/><br/>
             <br/>
             <input type="submit" value="提交">
-        </form>
+        </form>--%>
+           <form action="/address/saveorupdateaddress" method="post" >
+               地址id:
+               <input type="text" name="id"/><br/>
+               收货人：
+               <input type="text" name="linkman"/><br/>
+               联系电话:
+               <input type="text" name="tel"/><br/>
+               procince：
+               <input type="text" name="province"/><br/>
+               城市:
+               <input type="text" name="city"/><br/>
+               area:
+               <input type="text" name="area"/><br/>
+               detailed_address:
+               <input type="text" name="detailedAddress"/><br/>
+               user_id:
+               <input type="text" name="userId">
+               <br/>
+               <input type="submit" value="提交">
+           </form>
     </div>
 </body>
 </html>
