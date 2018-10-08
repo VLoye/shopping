@@ -8,11 +8,13 @@ import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 import static com.alibaba.druid.util.Utils.md5;
@@ -167,4 +169,17 @@ public class LoginServiceImp implements LoginService {
         return currentUserInfo;
     }
 
+    @Override
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie c:cookies){
+            if (c.getName().equals(LoginEnum.USER_COOKIE_TOKEN.getInfo())) {
+              c.setMaxAge(0);
+              response.addCookie(c);
+            }
+        }
+    }
 }
