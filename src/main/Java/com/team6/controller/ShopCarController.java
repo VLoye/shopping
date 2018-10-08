@@ -30,7 +30,7 @@ public class ShopCarController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/shopCarData")
+    @RequestMapping(value = "/shopCarData",produces = "text/json;charset=UTF-8")
     public Object shopCarPage(Model model , HttpServletRequest request, HttpServletResponse response){
 
         //用户信息
