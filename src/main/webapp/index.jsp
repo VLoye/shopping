@@ -2,6 +2,6 @@
 <html>
 <body>
 <h2>Hello World!</h2>
-
+<a href="/seller?url=Seller_model">Seller_model</a>
 </body>
 </html>
