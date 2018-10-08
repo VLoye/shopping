@@ -119,18 +119,18 @@
                                     </div>
                                     <div class="cell p-goods">
                                         <div class="p-img">
-                                            <a href="{{data.goodsurl}}" target="_blank" id = "goodsurl{{$index}}"><img src="{{data.goodsimg}}" id = "goodsimg{{$index}}" alt=""></a>
+                                            <a href="/goods/{{data.id}}" target="_blank" id = "goodsurl{{$index}}"><img src="{{data.imgUrl}}" id = "goodsimg{{$index}}" alt=""></a>
                                         </div>
                                         <div class="p-name">
-                                            <a href="{{data.goodsurl}}" target="_blank"><span id = "goodsbrand{{$index}}">{{data.brand}} {{data.goodsname}}</span><br></a>
+                                            <a href="/goods/{{data.id}}" target="_blank"><span id = "goodsbrand{{$index}}">{{data.brand}} {{data.name}}</span><br></a>
                                             <br>
                                         </div>
                                     </div>
                                     <div class="cell p-price">
-                                        <span class="price" id = "goodsprice{{$index}}">¥{{data.goodsprice}}.00</span>
+                                        <span class="price" id = "goodsprice{{$index}}">¥{{data.price}}.00</span>
                                     </div>
-                                    <input type = "hidden" text = "{{data.goodstype}}" />
-                                    <input type = "hidden" text = "{{data.sellerid}}" id = "sellerid{{$index}}" />
+                                    <input type = "hidden" text = "{{data.gtype}}" />
+                                    <input type = "hidden" text = "{{data.sellerId}}" id = "sellerid{{$index}}" />
                                     <div class="cell p-quantity">
                                         <div class="quantity-form">
                                             <a href="javascript:void(0);" class="decrement" sku="{{data.sellerid}}">-</a>

@@ -70,7 +70,7 @@ public class ShopCarController {
     }
 
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST)
+    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
     public ModelAndView shopDetailData(
          @RequestParam("ids[]") int[] ids,
             @RequestParam("counts[]") int[] counts,
