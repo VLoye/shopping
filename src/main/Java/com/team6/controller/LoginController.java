@@ -52,6 +52,13 @@ public class LoginController {
     return new ModelAndView("/LoginAndResigter/Login");
     }
 
+    @RequestMapping(value = "/logout")
+    public Object logout(HttpServletRequest request,HttpServletResponse response){
+            loginService.logout(request,response);
+
+        return new ModelAndView("redirect:/index");
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces="application/json;charset=UTF-8" )
@@ -120,7 +127,7 @@ public class LoginController {
         Cookie[] cookies =request.getCookies();
         Cookie cookie=null;
         for(Cookie c :cookies){
-            if(c.getName().equals(LoginEnum.LOGIN_COOKIE_TOKEN_NAME.getInfo())){
+            if(c.getName().equals(LoginEnum.USER_COOKIE_TOKEN.getInfo())){
                 cookie = c;
                 break;
             }
