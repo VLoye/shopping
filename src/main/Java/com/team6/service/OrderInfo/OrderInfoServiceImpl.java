@@ -129,6 +129,43 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         return list;
     }
 
+    @Override
+    public Object OrderPay(Integer orderId, HttpServletRequest request) {
+        int result=-1;
+        Map<String,Object> returnMap=new HashMap<>();
+        //用户信息
+        Map<String,Object> userInfo=loginService.getCurrentUserInfo(request);
+        if(userInfo==null){
+            returnMap.put("msg",LoginEnum.LOGIN_OFF);
+            return returnMap;
+        }
+        //获取orderId的订单
+        OrderInfo orderInfo=orderInfoMapper.selectByPrimaryKey(orderId);
+        //更新订单  状态为已支付和支付时间
+        orderInfo.setStatus(1);
+        orderInfo.setPayTime(webTime.getNetworkTime());
+        result=orderInfoMapper.updateByPrimaryKey(orderInfo);
+        if(result>-1){
+            returnMap.put("msg",UCRDEnum.UCRD_SUCCESS);
+            return returnMap;
+        }else{
+            returnMap.put("msg",UCRDEnum.UCRD_ERROR);
+            return returnMap;
+        }
+    }
+
+    @Override
+    public Object queryOrderByOrderid(Integer orderId, HttpServletRequest request) {
+        Map<String,Object> returnMap=new HashMap<>();
+        //用户信息
+        Map<String,Object> userInfo=loginService.getCurrentUserInfo(request);
+        if(userInfo==null){
+            returnMap.put("msg",LoginEnum.LOGIN_OFF);
+            return returnMap;
+        }
+        return null;
+    }
+
 
     /**
      * 使用linkedhashmap

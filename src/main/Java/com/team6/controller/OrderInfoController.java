@@ -5,10 +5,7 @@ import com.team6.service.login.LoginService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +17,6 @@ public class OrderInfoController {
     OrderInfoService orderInfoService;
     @Autowired
     LoginService loginService;
-
-    @RequestMapping(value="/orders")
-    public ModelAndView orders(){
-        return new ModelAndView();
-    }
 
     /**
      * 插入订单信息
@@ -50,9 +42,15 @@ public class OrderInfoController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/order/del")
-    public Object OrderDel(@Param("orderId")int orderId,HttpServletRequest request){
+    @RequestMapping(value="/order/del/{orderId}")
+    public Object OrderDel(@PathVariable("orderId")int orderId, HttpServletRequest request){
         return orderInfoService.delOrderInfo(orderId,request);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/order/pay/{orderId}")
+    public Object OrderPay(@PathVariable("orderId")int orderId,HttpServletRequest request){
+        return orderInfoService.OrderPay(orderId,request);
     }
 
 
