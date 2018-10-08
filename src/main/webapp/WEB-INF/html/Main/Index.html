@@ -595,7 +595,7 @@
         {{each list data}}
         <div class="cart-list-goods cl">
             <input type="hidden" name="gid" id="gid{{$index}}" value="{{data.id}}"/>
-            <a href="" title="{{data.name}}" target="_blank">
+            <a href="/goods/{{data.id}}" title="{{data.name}}" target="_blank">
                 <img src="{{data.imgUrl}}" alt=""></a>
             <div class="s-num"><span id="gcount{{$index}}">{{data.count}}</span></div>
             <div class="s-g-price">¥{{data.price}}</div>
