@@ -1,5 +1,6 @@
 package com.team6.controller;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.team6.service.login.LoginService;
 import com.team6.service.shopcar.ShopCarService;
 import org.noggit.JSONUtil;
@@ -70,17 +71,17 @@ public class ShopCarController {
     }
 
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
+    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST/*, produces = "text/json;charset=UTF-8"*/)
     public ModelAndView shopDetailData(
          @RequestParam("ids[]") int[] ids,
             @RequestParam("counts[]") int[] counts,
             Model model,
             HttpServletRequest request){
 
-       Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
+      //Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
 
 
-        return new ModelAndView("detailData","good",good);
+       return new ModelAndView("ProductAndCart/Shoppingcart");
 
     }
     @RequestMapping(value = "/shujzu")
@@ -88,6 +89,11 @@ public class ShopCarController {
                              @RequestParam("countList") String countList){
         return null;
 
+    }
+
+    @RequestMapping(value = "test/index")
+    public Object test(){
+        return "test/index";
     }
 
 

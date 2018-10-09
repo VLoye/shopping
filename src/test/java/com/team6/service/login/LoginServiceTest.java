@@ -2,6 +2,7 @@ package com.team6.service.login;
 
 import com.team6.dao.UserMapper;
 import com.team6.entity.User;
+import com.team6.util.MailUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,16 @@ public class LoginServiceTest {
         String prePassword="guoxiaofeng";
         String newPassword="123456";
         System.out.println(loginService.updatePassword(name,prePassword,newPassword));
+    }
+
+    @Test
+    public void testSendMail(){
+        try {
+            MailUtil.sendMail("1002463796@qq.com","你妈逼");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

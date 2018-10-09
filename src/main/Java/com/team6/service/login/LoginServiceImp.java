@@ -7,10 +7,12 @@ import com.team6.dao.UserMapper;
 import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ import static com.alibaba.druid.util.Utils.md5;
 
 @Service
 public class LoginServiceImp implements LoginService {
-
+    private static final String SMS_QUEUE = "email.queue";
 
     @Autowired
     private UserMapper userMapper;
@@ -74,6 +76,10 @@ public class LoginServiceImp implements LoginService {
         user = this.setPasswordAndsalt(user);
 
         int count = userMapper.insert(user);
+
+        //发送邮件激活
+
+
         if (count>0)
          return LoginEnum.REGIEST_SUCCESS;        //注册成功
         return LoginEnum.REGIEST_ERROR;            //注册失败
