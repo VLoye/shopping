@@ -445,14 +445,8 @@ function bindToSettlement(isB2B) {
                 num++;
             }
         });
-        $.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
 
-            loading.close();
-
-            if(result.error)
-                $.dialog.errorTips(result.msg);
-
-        });
+        window.location.href = "/shopCar/detail?ids="+ids+"&counts="+counts;
 
 
     }
