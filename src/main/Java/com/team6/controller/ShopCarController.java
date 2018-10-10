@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -71,14 +72,16 @@ public class ShopCarController {
     }
 
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST/*, produces = "text/json;charset=UTF-8"*/)
+    @RequestMapping(value = "/shopCar/detailData"/*,method = RequestMethod.POST*//*, produces = "text/json;charset=UTF-8"*/)
     public ModelAndView shopDetailData(
-         @RequestParam("ids[]") int[] ids,
-            @RequestParam("counts[]") int[] counts,
+        /* @RequestParam("ids[]") String[] ids,
+            @RequestParam("counts[]") String[] counts,*/
             Model model,
             HttpServletRequest request){
+        String[] ids =  request.getParameter("ids").split(",");
+        String[] counts = request.getParameter("counts").split(",");
 
-      //Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
+      Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
 
 
        return new ModelAndView("ProductAndCart/Shoppingcart");

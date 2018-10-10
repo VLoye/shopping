@@ -53,7 +53,7 @@ public class LoginServiceTest {
     @Test
     public void testSendMail(){
         try {
-            MailUtil.sendMail("1002463796@qq.com","你妈逼");
+            MailUtil.sendMail("597931083@qq.com","你好哦铿逗先生");
         }catch (Exception e){
             e.printStackTrace();
         }

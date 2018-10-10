@@ -11,10 +11,11 @@
 <script type="text/javascript">
     var good = new Array();
     good.push(1);
+    good.push(2)
     var count = new Array();
     count.push(1);
 
- $.post("/shopCar/detailData",{"ids":good,"counts":count},null,"json");
+    window.location.href="/shopCar/detailData?ids="+good+"&counts="+count;
 </script>
 
 </html>
