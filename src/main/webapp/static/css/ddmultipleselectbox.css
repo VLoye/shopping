@@ -1,0 +1,33 @@
+/* select cate style */
+.ddmultipleselectbox-panel{overflow:hidden; width:100%;}
+.ddmultipleselectbox-panel .ddmultipleselectbox-cont{height:auto; overflow:hidden; }
+.ddmultipleselectbox-panel .dd-box{position:relative; height:200px; padding:5px; background:#FFF; overflow:hidden;overflow-y:scroll;zoom:1;}
+.ddmultipleselectbox-panel .dd-box .db-dl{overflow:hidden; line-height:20px;}
+.ddmultipleselectbox-panel .dd-box .db-dl dt{color:#ABABAB; padding:5px; cursor:pointer;}
+.ddmultipleselectbox-panel .dd-box .db-dl dt a{font-weight:700; color:#444;}
+.ddmultipleselectbox-panel .dd-box .db-dl dd{text-indent:20px; cursor:pointer; padding:5px 0;}
+/* .ddmultipleselectbox-panel .dd-box .db-dl dt:hover{background:#F5F5F5;}
+.ddmultipleselectbox-panel .dd-box .db-dl dt:hover a{color:#0070EA;}
+.ddmultipleselectbox-panel .dd-box .db-dl dt.checked{background:#ECF5FF;}
+.ddmultipleselectbox-panel .dd-box .db-dl dt.checked a{color:#0070EA;}
+.ddmultipleselectbox-panel .dd-box .db-dl dd:hover{background:#F5F5F5;}
+.ddmultipleselectbox-panel .dd-box .db-dl dd:hover a{color:#0070EA;}
+.ddmultipleselectbox-panel .dd-box .db-dl dd.checked{background:#ECF5FF;}
+.ddmultipleselectbox-panel .dd-box .db-dl dd.checked a{color:#0070EA;}
+
+ */
+
+.ddmultipleselectbox-panel .dd-box .db-dl .disabled{cursor:not-allowed;}
+.ddmultipleselectbox-panel .dd-box .db-dl .disabled a{cursor:not-allowed; white-space:nowrap; overflow:hidden; color:inherit; font-weight:700; font-style:italic;}
+.ddmultipleselectbox-panel .dd-box .db-dl .disabled:hover a{cursor:not-allowed; color:inherit;}
+.ddmultipleselectbox-panel .dd-box .db-dl .selected{cursor:not-allowed;}
+.ddmultipleselectbox-panel .dd-box .db-dl .selected a{cursor:not-allowed; white-space:nowrap; overflow:hidden; color:#ABABAB;}
+.ddmultipleselectbox-panel .dd-box .db-dl .selected:hover a{cursor:not-allowed; color:#ABABAB;}
+
+
+
+.ddmultipleselectbox-result-box{overflow:hidden; margin-top:5px; zoom:1;}
+.ddmultipleselectbox-result-box .res-item{float:left; position:relative; height:30px; line-height:30px; margin-right:10px; margin:5px 5px 0 0; padding:0 30px 0 10px; background:#F5F5F5;}
+.ddmultipleselectbox-result-box .res-item .item-del{position:absolute; top:0; right:5px; font-size:14px; color:#F60; cursor:pointer;}
+.ddmultipleselectbox-result-box .res-item:hover{color:#444;}
+.ddmultipleselectbox-result-box .res-item:hover .item-del{color:#0070EA;}
