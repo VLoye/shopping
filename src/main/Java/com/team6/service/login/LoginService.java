@@ -55,5 +55,6 @@ public interface LoginService {
 
     public void logout(HttpServletRequest request, HttpServletResponse response);
 
+    public boolean sendCode(HttpServletRequest request,String email);
 
 }
