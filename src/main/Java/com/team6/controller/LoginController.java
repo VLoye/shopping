@@ -33,6 +33,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.CookieStore;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,17 @@ public class LoginController {
 
         return new ModelAndView("redirect:/index");
     }
-
+    //查看是否登陆
+    @RequestMapping(value = "/isLogin",method = RequestMethod.POST)
+    @ResponseBody
+    public Object islogin(Model model,HttpServletRequest request){
+        Map<String,Object> info = loginService.getCurrentUserInfo(request);
+        //没登陆
+        if(info!=null) model.addAttribute("success",true);
+        //登陆了
+        else model.addAttribute("success",true);
+        return JSON.toJSON(model);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces="application/json;charset=UTF-8" )

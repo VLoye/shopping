@@ -78,8 +78,8 @@ public class ShopCarController {
             @RequestParam("counts[]") String[] counts,*/
             Model model,
             HttpServletRequest request){
-        String[] ids =  request.getParameter("ids").split(",");
-        String[] counts = request.getParameter("counts").split(",");
+        String[] ids =  ((String)request.getParameter("ids")).split(",");
+        String[] counts = ((String)request.getParameter("counts")).split(",");
 
       Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
 

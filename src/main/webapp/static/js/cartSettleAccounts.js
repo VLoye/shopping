@@ -429,11 +429,11 @@ function getCheckProductCount(isB2B) {
 
 ///去结算按钮
 function bindToSettlement(isB2B) {
-    var memberId = $.cookie('token');
+    //var memberId = $.cookie('userToken');
 
     if (!isB2B) {
-        var ids = {};
-        var counts = {};
+        var ids = new Array();
+        var counts = new Array();
 
         var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
@@ -444,9 +444,11 @@ function bindToSettlement(isB2B) {
                 counts[num] = document.getElementById('count'+i).value;
                 num++;
             }
-        });
 
-        window.location.href = "/shopCar/detail?ids="+ids+"&counts="+counts;
+        });
+        console.log(ids);
+        console.log(counts);
+        /*window.location.href = "/shopCar/detailData?ids="+ids+"&&counts="+counts;*/
 
 
     }
