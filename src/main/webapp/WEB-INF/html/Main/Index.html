@@ -1603,10 +1603,13 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
+                alert(data.user);
+                if(data.user != null){
+                    isloginbool = true;
+                }
                 $("#rb").append(template("goodsAdvertisement", {list: data.rblist}));
                 $("#loginstatus").append(template("logstatus", {data: data.user}));
-                //alert(data);
-                isloginbool = true;
+
                 var goodslist = data.clist;
                 var list1 = goodslist[0],
                     list2 = goodslist[1],
@@ -1637,17 +1640,17 @@
 
 
         IndexFormat();
-        ShopCarFormat();
         setInterval(nextrb,4000);
         var rightSide=$('.right-side');
         var rightContent=$('.side-content');
         $('.right-side .menu-top li[arrow]').click(function() {
 
             if (!isloginbool){
+                alert(isloginbool);
                 location.href = '/login';
-                ShopCarFormat();
+                //ShopCarFormat();
             }else{
-
+                ShopCarFormat();
                 var tag=$(this).data('tag');
                 switch(tag){
                     case 'cart':
