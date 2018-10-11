@@ -63,8 +63,6 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Object> querySaleByGoodType() {
 
-
-
         List<Object> floorsList = new ArrayList<Object>();
         for(int floor:floors) {
             //每层展示的商品

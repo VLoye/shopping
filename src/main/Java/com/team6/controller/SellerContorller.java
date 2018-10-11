@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SellerContorller {
     @RequestMapping("/seller")
     public String toPage(@Param("url") String url){
-        return "/Personality/Seller/"+url+".html";
+        return "/Personality/Seller/"+url;
     }
 }
