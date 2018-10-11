@@ -165,6 +165,7 @@ public class ShopCarServiceImp implements ShopCarService {
             totalprice +=goods.getPrice()*Integer.parseInt(counts[i]);
             totalcount +=Integer.parseInt(counts[i]);
             Map<String,Object> gMap = TransformUtil.beanToMap(goods);
+            gMap.put("count",counts[i]);
             gList.add(gMap);
         }
         total.put("totalprice",totalprice);

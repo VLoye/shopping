@@ -84,7 +84,7 @@ public class ShopCarController {
       Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
 
 
-       return new ModelAndView("ProductAndCart/Shoppingcart");
+       return new ModelAndView("ProductAndCart/CartSubmit",good);
 
     }
     @RequestMapping(value = "/shujzu")

@@ -171,6 +171,10 @@
 <input type="hidden" value="1" id="hidSaleStatus" />
 
 <script type="text/javascript">
+
+
+
+
     $(function () {
         CartFormat();
         bindAddAndReduceBtn();
@@ -195,16 +199,14 @@
     var changeitem =  function (id) {
         var checked = $('#r'+id).attr('checked');
         checked = checked ? true : false;
-        alert(checked);
-        alert($('input[name="checkItem"]'));
         if (checked) {
             $('#r'+id).removeAttr('checked');
             $('#r'+id).prop('checked',false);
             $('#r'+id).parents('.item').removeClass('item_selected');
 
             //$("#pdlist").find('input[name="checkAll"]').removeAttr('checked');
-            $("input:checkbox").removeAttr("checked");
-            $("input:checkbox").prop('checked',false);
+          /*  $("input:checkbox").removeAttr("checked");
+            $("input:checkbox").prop('checked',false);*/
             $('#finalPrice').html('¥' + getCheckProductPrice(false));
             $('#selectedCount').html(getCheckProductCount(false));
 
@@ -223,7 +225,7 @@
     }
     ///购物车汇总价格更新
     function getCheckProductPrice(isB2B) {
-        alert(isB2B);
+
         if (!isB2B) {
             var t = 0;
             $.each($("#product-list").find('input[name="checkItem"]:checked'), function () {

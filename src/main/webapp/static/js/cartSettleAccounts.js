@@ -1,17 +1,15 @@
 
-$(function () {
+$(document).ready(function () {
     loadCartInfo();
     var total = getCheckProductPrice(false);
     $('#finalPrice').html('¥' + total);
     $('#selectedCount').html(getCheckProductCount(false));
 
-    $('#toSettlement').click(function () {
+    $('#toSettlement').on("click",null,function () {
         bindToSettlement(false);
-    });
-
-
-
-});
+    }
+    )
+})
 
 ///购物车数据加载
 function loadCartInfo() {
@@ -28,7 +26,7 @@ function bindSelectAll() {
     $('input[name="checkAll"]').change(function () {
         var checked = $(this).attr('checked');
         checked = checked ? true : false;
-        alert(checked);
+
         var sku = $(this).attr("sku");
         if (sku == "1") {
             if (checked) {
@@ -431,24 +429,26 @@ function getCheckProductCount(isB2B) {
 
 ///去结算按钮
 function bindToSettlement(isB2B) {
-    var memberId = $.cookie('token');
+    // var memberId = $.cookie('token');
 
     if (!isB2B) {
-        var ids = {};
-        var counts = {};
-
+        var ids = new Array();
+        var counts = new Array();
         var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
 
             if ($(e).attr('checked')) {
-
+                console.log($(e).attr('sku'));
                 ids[num] = $(e).attr('sku');
-                counts[num] = document.getElementById('count'+i).value;
+               counts[num] = document.getElementById('count'+i).value;
                 num++;
             }
+
         });
 
-        window.location.href = "/shopCar/detail?ids="+ids+"&counts="+counts;
+        console.log(ids);
+        console.log(counts);
+        window.location.href = "/shopCar/detailData?ids="+ids+"&counts="+counts;
 
 
     }

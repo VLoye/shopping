@@ -3,6 +3,7 @@ package com.team6.service.Goods;
 import com.team6.dao.GoodsMapper;
 import com.team6.entity.Goods;
 import com.team6.util.enums.GoodsEnum;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class GoodsServiceImpl implements GoodsService {
         else
             return GoodsEnum.INSERT_GOODS_ERROR;
     }
-    public Goods queryGoodsById(int id) {
+    public Goods queryGoodsById(@Param("id") int id) {
         Goods goods=goodsMapper.queryGoodsById(id);
         return goods;
     }
@@ -72,6 +73,12 @@ public class GoodsServiceImpl implements GoodsService {
             floorsList.add(floorList);
         }
         return floorsList;
+    }
+
+    @Override
+    public Map<String,Object> queryProductInfo( int id){
+        Map<String,Object> map = goodsMapper.queryProductInfo(id);
+        return map;
     }
 
 }
