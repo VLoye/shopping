@@ -20,7 +20,6 @@
     <script src="static/js/jquery.artDialog.js"></script>
     <script src="static/js/artDialog.iframeTools.js"></script>
     <link href="static/css/WebLoginPlug.css" rel="stylesheet" />
-    <script src="static/js/cartSettleAccounts.js"></script>
 
     <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
     <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
@@ -136,10 +135,10 @@
 <script id = "goodsList" type="text/html">
 
                 {{each list data}}
-                <div class="item item_selected ">
+                <div class="item">
                     <div class="item_form cl">
                         <div class="cell p-checkbox">
-                            <input class="checkbox" type="checkbox" data-cartid="993" name="checkItem"  value="8" sku="{{data.id}}">
+                            <input id="r{{data.id}}" onchange="changeitem({{data.id}})" name="checkItem" class="checkbox" type="checkbox" data-cartid="993" value="8" sku="{{data.id}}">
                         </div>
                         <div class="cell p-goods">
                             <div class="p-img"><a href="/goods/{{data.id}}" target="_blank" id="goodsurl{{$index}}"><img src="{{data.imgUrl}}" alt=""></a>
@@ -167,6 +166,7 @@
 
 </script>
 
+
 <input type="hidden" value="2" id="hidAuditStatus" />
 <input type="hidden" value="1" id="hidSaleStatus" />
 
@@ -188,6 +188,87 @@
         });
     };
 
+</script>
+<script src="static/js/cartSettleAccounts.js"></script>
+
+<script type="text/javascript">
+    var changeitem =  function (id) {
+        var checked = $('#r'+id).attr('checked');
+        checked = checked ? true : false;
+        alert(checked);
+        alert($('input[name="checkItem"]'));
+        if (checked) {
+            $('#r'+id).removeAttr('checked');
+            $('#r'+id).prop('checked',false);
+            $('#r'+id).parents('.item').removeClass('item_selected');
+
+            //$("#pdlist").find('input[name="checkAll"]').removeAttr('checked');
+            $("input:checkbox").removeAttr("checked");
+            $("input:checkbox").prop('checked',false);
+            $('#finalPrice').html('¥' + getCheckProductPrice(false));
+            $('#selectedCount').html(getCheckProductCount(false));
+
+        } else {
+            $('#r'+id).prop('checked',true);
+            $('#r'+id).attr('checked','checked');
+            $('#r'+id).parents('.item').addClass('item_selected');
+            /*var ILength = $('.item').length;
+            var ItemLength = $('.item_selected').length;
+            if(ItemLength == ILength){
+                $("#pdlist").find('input[type="checkbox"][name="checkAll"]').attr('checked','');
+            }*/
+            $('#finalPrice').html('¥' + getCheckProductPrice(false));
+            $('#selectedCount').html(getCheckProductCount(false));
+        }
+    }
+    ///购物车汇总价格更新
+    function getCheckProductPrice(isB2B) {
+        alert(isB2B);
+        if (!isB2B) {
+            var t = 0;
+            $.each($("#product-list").find('input[name="checkItem"]:checked'), function () {
+                var a = $(this).parent().parent().find('.price').html(),
+                    b = a.replace('¥', ''),
+                    c = $(this).parent().parent().find('input[name="count"]').val(),
+                    d = (+b) * (+c);
+                t += d;
+            })
+            return t.toFixed(2);
+        }
+        else {
+            var t = 0;
+            $.each($("#B2B-product-list").find('input[name="checkItem"]:checked'), function () {
+                var a = $(this).parent().parent().find('.price').html(),
+                    b = a.replace('¥', ''),
+                    c = $(this).parent().parent().find('input[name="count"]').val(),
+                    d = (+b) * (+c);
+                t += d;
+            })
+            return t.toFixed(2);
+        }
+    }
+    ///购物车汇总数量更新
+    function getCheckProductCount(isB2B) {
+        if (!isB2B) {
+            var t = 0;
+            $.each($("#product-list").find('input[name="checkItem"]:checked'), function () {
+                var c = $(this).parent().parent().find('input[name="count"]').val();
+                d = parseInt(c);
+                t += d;
+            })
+            return t;
+        }
+        else {
+            var t = 0;
+            $.each($("#B2B-product-list").find('input[name="checkItem"]:checked'), function () {
+                var c = $(this).parent().parent().find('input[name="count"]').val();
+                d = parseInt(c);
+                t += d;
+            })
+            return t;
+        }
+
+    }
 </script>
 
 <link href="static/css/css_foot.css" rel="stylesheet" />

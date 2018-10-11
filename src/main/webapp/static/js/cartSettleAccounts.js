@@ -9,6 +9,8 @@ $(function () {
         bindToSettlement(false);
     });
 
+
+
 });
 
 ///购物车数据加载
@@ -429,11 +431,11 @@ function getCheckProductCount(isB2B) {
 
 ///去结算按钮
 function bindToSettlement(isB2B) {
-    //var memberId = $.cookie('userToken');
+    var memberId = $.cookie('token');
 
     if (!isB2B) {
-        var ids = new Array();
-        var counts = new Array();
+        var ids = {};
+        var counts = {};
 
         var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
@@ -444,11 +446,9 @@ function bindToSettlement(isB2B) {
                 counts[num] = document.getElementById('count'+i).value;
                 num++;
             }
-
         });
-        console.log(ids);
-        console.log(counts);
-        /*window.location.href = "/shopCar/detailData?ids="+ids+"&&counts="+counts;*/
+
+        window.location.href = "/shopCar/detail?ids="+ids+"&counts="+counts;
 
 
     }
