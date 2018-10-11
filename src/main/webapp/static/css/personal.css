@@ -238,7 +238,7 @@ b.line{display: block;width:100%;height:2px ;border-bottom:2px solid #d2364c;}
 .long-title {width:180px;}
 .nav-cont {padding-left: 180px;}
 /*固定框架*/
-.center{width:96%;max-width:1200px; margin:0px auto;min-height: 1px;margin-top:15px ;}
+.center{width:90%;max-width:1200px; margin:0px auto;min-height: 1px;margin-top:15px ;}
 aside {width: 160px;}
 .main-wrap {margin-left: 180px;}
 .am-container , .bloglist{max-width: 1200px;}
