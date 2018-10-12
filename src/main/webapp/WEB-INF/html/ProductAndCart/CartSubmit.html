@@ -323,28 +323,28 @@
                                                         <table class="order-table" shopid="8">
                                                         <tbody>
 
-                                                                <#list goods as item i>
-                                                                	<tr id="${item.goodsid}" skuid="${item.goodsid}" quntity="1" price="${item.goodsprice}">
+                                                                <#list goods as item >
+                                                                	<tr id="${item.id}" skuid="${item.id}" quntity="1" price="${item.price}">
 								                                        <td class="fore1" style="padding: 10px;">
 								                                            <div class="p-goods">
 								                                                <div class="p-img">
 								                                                    <a href="${item.goodsurl}" target="_blank">
-								                                                        <img alt="" src="${item.goodsimg}" />
+								                                                        <img alt="" src="${item.imgUrl}" />
 								                                                    </a>
 								                                                </div>
 
 								                                                <div class="p-detail">
 								                                                    <div class="p-name">
 								                                                        <a href="${item.goodsurl}" target="_blank">
-								                                                            ${item.goodsname}<br />
+								                                                            ${item.name}<br />
 								                                                        </a>
-                                                                                        <input type="hidden" value="${item.goodsid}" name = "goodsid"/>
-                                                                                        <input type="hidden" value="${item.sellerid}" name = "sellerid"/>
+                                                                                        <input type="hidden" value="${item.id}" name = "goodsid"/>
+                                                                                        <input type="hidden" value="${item.sellerId}" name = "sellerid"/>
 								                                                    </div>
 								                                                </div>
 								                                            </div>
 								                                        </td>
-								                                        <td class="p-price"><strong>￥${item.goodsprice}</strong></td>
+								                                        <td class="p-price"><strong>￥${item.price}</strong></td>
 								                                        <td class="fore2">
 								                                               <label>x</label>  <span class = "ngoodscount"> ${item.count}  </span>                                                              </td>
 								                                    </tr>

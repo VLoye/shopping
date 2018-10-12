@@ -93,4 +93,11 @@ public interface GoodsMapper {
     **/
     List<Goods> queryGoodsByIdArray(Object[] objects);
 
+    /**
+     * 根据id查询商品详情页信息
+     * @param id
+     * @return
+     */
+    public Map<String,Object> queryProductInfo(@Param("id") int id);
+
 }

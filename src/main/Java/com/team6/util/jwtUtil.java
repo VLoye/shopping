@@ -31,8 +31,11 @@ public  class jwtUtil {
 
         }catch (Exception e){
                 throw new ErrorTokenException("token验证错误");
+
+        }finally {
+            return map;
         }
-        return map;
+
 
     }
 

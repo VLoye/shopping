@@ -1,17 +1,15 @@
 
-$(function () {
+$(document).ready(function () {
     loadCartInfo();
     var total = getCheckProductPrice(false);
     $('#finalPrice').html('¥' + total);
     $('#selectedCount').html(getCheckProductCount(false));
 
-    $('#toSettlement').click(function () {
+    $('#toSettlement').on("click",null,function () {
         bindToSettlement(false);
-    });
-
-
-
-});
+    }
+    )
+})
 
 ///购物车数据加载
 function loadCartInfo() {
@@ -28,12 +26,11 @@ function bindSelectAll() {
     $('input[name="checkAll"]').change(function () {
         var checked = $(this).attr('checked');
         checked = checked ? true : false;
-        alert(checked);
+
         var sku = $(this).attr("sku");
         if (sku == "1") {
             if (checked) {
                 $("#B2B-product-list").find('input[type="checkbox"]').attr('checked', checked);
-                $("#B2B-product-list").find('input[name="checkItem"]').attr('checked', checked);
                 $("#B2B-product-list").find('.item').addClass('item_selected');
                 $(".B2B-cart-list").find('input[name="checkAll"]').attr('checked', checked);
                 var total = getCheckProductPrice(true);
@@ -41,7 +38,6 @@ function bindSelectAll() {
             }
             else {
                 $("#B2B-product-list").find('input[type="checkbox"]').removeAttr('checked');
-
                 $("#B2B-product-list").find('.item').removeClass('item_selected');
                 $(".B2B-cart-list").find('input[name="checkAll"]').removeAttr('checked');
                 $('#finalPriceB2B').html('¥' + "0.00");
@@ -50,32 +46,16 @@ function bindSelectAll() {
         } else {
             if (checked) {
 
-                /*$("#product-list").find('input[type="checkbox"]').removeAttr('checked');
-                $("#product-list").find('.item').removeClass('item_selected');*/
-                $("#content1").find('input[name="checkItem"]').removeAttr('checked');
-                $("#content1").find('input[name="checkItem"]').prop('checked',false);
-
-                $("#content1").find('.item').removeClass('item_selected');
-                //$("#plist").find('input[type="checkbox"]').removeAttr('checked');
-                //$("#plist").find('.item').removeClass('item_selected');
+                $("#product-list").find('input[type="checkbox"]').removeAttr('checked');
+                $("#product-list").find('.item').removeClass('item_selected');
                 $(".cart-list").find('input[name="checkAll"]').removeAttr('checked');
-                $(".cart-list").find('input[name="checkAll"]').prop('checked',false);
-                $("input:checkbox").removeAttr("checked");
                 var total = getCheckProductPrice(false);
                 $('#finalPrice').html('¥' + total);
             }
             else {
-                /*$("#product-list").find('input[type="checkbox"]').attr('checked', 'checked');
-                $("#product-list").find('.item').addClass('item_selected');*/
-                $("#content1").find('input[name="checkItem"]').prop('checked', true);
-                $("#content1").find('input[name="checkItem"]').attr('checked', 'checked');
-
-                $("#content1").find('.item').addClass('item_selected');
-                //$("#plist").find('input[type="checkbox"]').attr('checked', 'checked');
-                //$("#plist").find('.item').addClass('item_selected');
-                $(".cart-list").find('input[name="checkAll"]').prop('checked', true);
-                $(".cart-list").find('input[name="checkAll"]').attr('checked', 'checked');
-                $("input:checkbox").prop('checked',true);
+                $("#product-list").find('input[type="checkbox"]').attr('checked', '');
+                $("#product-list").find('.item').addClass('item_selected');
+                $(".cart-list").find('input[name="checkAll"]').attr('checked', '');
                 var total = getCheckProductPrice(false);
                 $('#finalPrice').html('¥' + total);
 
@@ -84,18 +64,19 @@ function bindSelectAll() {
         }
     });
 
-    /*$('input[name="checkItem"]').change(function () {
+
+
+    $('input[name="checkItem"]').change(function () {
         var checked = $(this).attr('checked');
         var sku = $(this).attr('sku');
+        v = $(this).val();
         checked = checked ? true : false;
-        alert(checked);
         if (checked) {
             $(this).attr('checked', false);
             $(this).parents('.item').removeClass('item_selected');
 
             $(".cart-list").find('input[name="checkAll"]').removeAttr('checked');
-            $('#finalPrice').html('¥' + getCheckProductPrice(false));
-            $('#selectedCount').html(getCheckProductCount(false));
+
 
         } else {
             $(this).attr('checked',true);
@@ -105,10 +86,13 @@ function bindSelectAll() {
             if(ItemLength == ILength){
                 $("#pdlist").find('input[type="checkbox"][name="checkAll"]').attr('checked','');
             }
-            $('#finalPrice').html('¥' + getCheckProductPrice(false));
-            $('#selectedCount').html(getCheckProductCount(false));
         }
-    });*/
+
+        $('#finalPrice').html('¥' + getCheckProductPrice(false));
+        $('#selectedCount').html(getCheckProductCount(false));
+
+    });
+
 }
 
 function priceAll(tag, bool, checked) {
@@ -445,23 +429,25 @@ function getCheckProductCount(isB2B) {
 
 ///去结算按钮
 function bindToSettlement(isB2B) {
-    //var memberId = $.cookie('token');
+    // var memberId = $.cookie('token');
 
     if (!isB2B) {
-        var ids = {};
-        var counts = {};
-
+        var ids = new Array();
+        var counts = new Array();
         var num = 0;
         $("#product-list").find('input[name="checkItem"]').each(function (i, e) {
 
             if ($(e).attr('checked')) {
-
+                console.log($(e).attr('sku'));
                 ids[num] = $(e).attr('sku');
-                counts[num] = document.getElementById('count'+i).value;
+               counts[num] = document.getElementById('count'+i).value;
                 num++;
             }
+
         });
 
+        console.log(ids);
+        console.log(counts);
         window.location.href = "/shopCar/detailData?ids="+ids+"&counts="+counts;
 
 
