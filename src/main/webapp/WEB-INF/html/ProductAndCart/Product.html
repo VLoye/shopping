@@ -1223,8 +1223,8 @@
                         <div class="dt" style="  font-family: simsun">数&nbsp;&nbsp;量：</div>
                         <div class="dd" style="width:auto;">
                             <div class="wrap-input">
-                                <a class="btn-reduce" href="javascript:;"><img src = "../img/reduce.png" />减少数量</a>
-                                <a class="btn-add" href="javascript:;"><img src = "../img/add.png" />增加数量</a>
+                                <a class="btn-reduce" href="javascript:;"><img src = "../../static/img/reduce.png" />减少数量</a>
+                                <a class="btn-add" href="javascript:;"><img src = "../../static/img/add.png" />增加数量</a>
                                 <input class="text quantity-text" id="buy-num" value="1" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'1'); if(this.value==''){this.value='1'}}).call(this)" onblur="this.v()" />
                             </div>
                         </div>
@@ -1257,10 +1257,11 @@
 
             <div id="preview">
                 <div class="jqzoom">
-                    <#if data>
 
-                    <#list data.imgUrl as m>
-                    <#if m_i == 0>
+                    <#assign a = data.imgUrl>
+                    <#list a as m>
+
+                    <#if m_index == 0>
 
                     <a class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:0,lensOpacity:1" href="${m}" style="position: relative; display: block;">
                         <img src="${m}" alt="" style="display: block;">
@@ -1268,22 +1269,22 @@
                     </#if>
 
                     </#list>
-                    </#if>
-                    <!--<a class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:0,lensOpacity:1" href="${data.imgUrl}" style="position: relative; display: block;">
-                        <img src="${data.imgUrl}" alt="" style="display: block;">
-                    </a>-->
+
 
     </div>
 
     <div id="spec-list">
         <ul class="lh">
-            <#if data>
-            <#list img as m>
+
+
+            <#assign a = data.imgUrl>
+            <#list a as m>
+
             <li><a href="${m}" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '${m}'"><img src="${m}" width="50" height="50"></a></li>
 
-            </#list>
-            </#if>
-            <!--<li><a href="${data.imgUrl}" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '${m}'"><img src="${data.imgUrl}" width="50" height="50"></a></li>-->
+
+    </#list>
+
         </ul>
 
 </div>
@@ -1326,7 +1327,7 @@
 
 <script type = "text/javascript">
     var addCart = function (goodsid) {
-       alert(goodsid);
+
         var count = document.getElementById("buy-num");
         $.post('/shopCar/add', { goodsId:goodsid, count: count }, function (result) {
             //loading.close();
