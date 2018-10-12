@@ -1606,6 +1606,7 @@
                 alert(data.user);
                 if(data.user != null){
                     isloginbool = true;
+                    ShopCarFormat();
                 }
                 $("#rb").append(template("goodsAdvertisement", {list: data.rblist}));
                 $("#loginstatus").append(template("logstatus", {data: data.user}));
@@ -1650,7 +1651,7 @@
                 location.href = '/login';
                 //ShopCarFormat();
             }else{
-                ShopCarFormat();
+
                 var tag=$(this).data('tag');
                 switch(tag){
                     case 'cart':

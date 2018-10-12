@@ -201,10 +201,9 @@
             $('#r'+id).removeAttr('checked');
             $('#r'+id).prop('checked',false);
             $('#r'+id).parents('.item').removeClass('item_selected');
-
             //$("#pdlist").find('input[name="checkAll"]').removeAttr('checked');
-            $("input:checkbox").removeAttr("checked");
-            $("input:checkbox").prop('checked',false);
+            //$("input:checkbox").removeAttr("checked");
+            //$("input:checkbox").prop('checked',false);
             $('#finalPrice').html('¥' + getCheckProductPrice(false));
             $('#selectedCount').html(getCheckProductCount(false));
 
@@ -212,13 +211,17 @@
             $('#r'+id).prop('checked',true);
             $('#r'+id).attr('checked','checked');
             $('#r'+id).parents('.item').addClass('item_selected');
-            /*var ILength = $('.item').length;
-            var ItemLength = $('.item_selected').length;
-            if(ItemLength == ILength){
-                $("#pdlist").find('input[type="checkbox"][name="checkAll"]').attr('checked','');
-            }*/
             $('#finalPrice').html('¥' + getCheckProductPrice(false));
             $('#selectedCount').html(getCheckProductCount(false));
+        }
+        var ILength = $('.item').length;
+        var ItemLength = $('.item_selected').length;
+        if(ItemLength >= ILength){
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').attr('checked','checked');
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').prop('checked',true);
+        }else{
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').removeAttr('checked');
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').prop('checked',false);
         }
     }
     ///购物车汇总价格更新
