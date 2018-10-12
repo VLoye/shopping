@@ -21,7 +21,7 @@
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">
 
 
-    <script src="../../static/js/jsamazeui.js"></script>
+    <script src="../../static/js/amazeui.js"></script>
     <script src="../../static/js/jquery-1.7.1.min.js"></script>
 
     <style type="text/css">
@@ -1153,7 +1153,7 @@
                     <li id="summary-service">
                         <div class="dt" style="line-height: 26px;">物&nbsp;&nbsp;流：</div>
                         <div class="dd">
-                            <span id="addressId"><!--${data.province}--></span> &nbsp; 至 &nbsp; <a class="address-choose" id="addressChoose" data-select="">请选择</a> &nbsp;| &nbsp;<span id="spFreight">运费买家到付</span>
+                            <span id="addressId">${data.shopAddress}</span> &nbsp; 至 &nbsp; <a class="address-choose" id="addressChoose" data-select="">请选择</a> &nbsp;| &nbsp;<span id="spFreight">运费买家到付</span>
                         </div>
                     </li>
                 </ul>
@@ -1254,7 +1254,7 @@
             <div id="preview">
                 <div class="jqzoom">
                     <#if data>
-                    <#list img as m >
+                    <#list data.imgUrl as m >
                     <#if i == 0>
                     <a class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:0,lensOpacity:1" href="${m}" style="position: relative; display: block;">
                         <img src="${m}" alt="" style="display: block;">
