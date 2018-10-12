@@ -12,8 +12,8 @@
     KindEditor.ready(function(K) {
             window.editor = K.create(
                     '#editor_id', {
-                        uploadJson : 'Kindeditor/uploadFile',
-                        fileManagerJson : 'Kindeditor/fileManager',
+                        uploadJson : 'kindeditor/jsp/upload_json.jsp',
+                        fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
                         allowImageUpload : true, //多图上传
                         allowFileManager : true, //浏览图片空间
                         filterMode : false, //HTML特殊代码过滤
