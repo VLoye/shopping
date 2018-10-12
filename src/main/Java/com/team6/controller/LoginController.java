@@ -2,6 +2,7 @@ package com.team6.controller;
 
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.interfaces.Claim;
 import com.team6.entity.User;
 import com.team6.service.login.LoginService;
@@ -19,21 +20,24 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.Request;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.CookieStore;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 @Controller
 public class LoginController {
@@ -52,6 +56,23 @@ public class LoginController {
     return new ModelAndView("/LoginAndResigter/Login");
     }
 
+    @RequestMapping(value = "/logout")
+    public Object logout(HttpServletRequest request,HttpServletResponse response){
+            loginService.logout(request,response);
+
+        return new ModelAndView("redirect:/index");
+    }
+    //查看是否登陆
+    @RequestMapping(value = "/isLogin",method = RequestMethod.POST)
+    @ResponseBody
+    public Object islogin(Model model,HttpServletRequest request){
+        Map<String,Object> info = loginService.getCurrentUserInfo(request);
+        //没登陆
+        if(info!=null) model.addAttribute("success",true);
+        //登陆了
+        else model.addAttribute("success",true);
+        return JSON.toJSON(model);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST,produces="application/json;charset=UTF-8" )
@@ -84,27 +105,65 @@ public class LoginController {
     }
 
 
+    //跳转到注册页面
+    @RequestMapping(value = "/toRegister")
+    public Object toRegister(){
+        return "/LoginAndResigter/Register";
+    }
+
+    //发送验证码
+    @ResponseBody
+    @RequestMapping(value = "/sendCode",method = RequestMethod.POST)
+    public Object tre(Model model, @Param("email") String email, HttpServletRequest request){
+
+        boolean success=false;
+        if(loginService.sendCode(request,email)){
+            success = true;
+        }
+        model.addAttribute("success",success);
+        return JSON.toJSON(model);
+    }
+
+
     @ResponseBody
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public Map<String,String> regiest(User user,HttpServletResponse response ){
+    public Object register(Model model,HttpServletRequest request){
+        User user = new User();
+        String code = (String)request.getSession().getAttribute("code");
+
+        //数据封装
+        String[] data = request.getParameterValues("name");
+
+        //首先检验验证码
+        if(!data[4].equals(code)){
+            //验证码不正确
+            model.addAttribute("msg","验证码不正确");
+            return JSON.toJSON(model);
+        }
+
+        user.setName(data[0]);
+        user.setPassword(data[1]);
+        user.setEmail(data[3]);
 
         //角色默认为普通用户
         user.setRole(LoginEnum.USER_ROLE_USER.getRole());
       LoginEnum anEnum = loginService.regiest(user);
-        Map<String,String> map = new HashMap<>();
+
         //注册成功
       if(anEnum.equals(LoginEnum.REGIEST_SUCCESS)){
           //暂时不实现这个注册后自动登陆的的功能
           /*Subject subject = SecurityUtils.getSubject();
           subject.login(new UsernamePasswordToken(user.getName(),user.getPassword()));*/
 
-          map.put("status",LoginEnum.REGIEST_SUCCESS.getInfo());
-          return map;
+          model.addAttribute("success",true);
+
+          return JSON.toJSON(model);
       }
       else{
-          map.put("status",LoginEnum.REGIEST_ERROR.getInfo());
-          return map;
-      }
+          model.addAttribute("success",false);
+          model.addAttribute("msg","注册失败");
+          return JSON.toJSON(model);
+    }
 
     }
 
@@ -120,7 +179,7 @@ public class LoginController {
         Cookie[] cookies =request.getCookies();
         Cookie cookie=null;
         for(Cookie c :cookies){
-            if(c.getName().equals(LoginEnum.LOGIN_COOKIE_TOKEN_NAME.getInfo())){
+            if(c.getName().equals(LoginEnum.USER_COOKIE_TOKEN.getInfo())){
                 cookie = c;
                 break;
             }

@@ -119,7 +119,7 @@ ul.td-changeorder {width:20%}
 
 /*布局*/
 
-.th-item,.td-item{width:40%;overflow: hidden;}
+.th-item,.td-item{width:30%;overflow: hidden;}
 .th-price,.td-price{width:10%}
 .th-number,.td-number{width:5%}
 .th-operation,.td-operation{width:15%}

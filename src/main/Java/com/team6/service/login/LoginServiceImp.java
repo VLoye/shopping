@@ -5,21 +5,31 @@ import com.auth0.jwt.interfaces.Claim;
 import com.team6.dao.PermissionMapper;
 import com.team6.dao.UserMapper;
 import com.team6.entity.User;
+import com.team6.util.MailUtil;
 import com.team6.util.enums.LoginEnum;
 import com.team6.util.jwtUtil;
+
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 import static com.alibaba.druid.util.Utils.md5;
 
 @Service
 public class LoginServiceImp implements LoginService {
+    private  final Logger logger= LoggerFactory.getLogger(this.getClass());
 
+    private static final String SMS_QUEUE = "email.queue";
 
     @Autowired
     private UserMapper userMapper;
@@ -72,6 +82,10 @@ public class LoginServiceImp implements LoginService {
         user = this.setPasswordAndsalt(user);
 
         int count = userMapper.insert(user);
+
+        //发送邮件激活
+
+
         if (count>0)
          return LoginEnum.REGIEST_SUCCESS;        //注册成功
         return LoginEnum.REGIEST_ERROR;            //注册失败
@@ -167,4 +181,47 @@ public class LoginServiceImp implements LoginService {
         return currentUserInfo;
     }
 
+    @Override
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie c:cookies){
+            if (c.getName().equals(LoginEnum.USER_COOKIE_TOKEN.getInfo())) {
+              c.setMaxAge(0);
+              response.addCookie(c);
+            }
+        }
+    }
+
+    @Override
+    public boolean sendCode(HttpServletRequest request, String email) {
+        final Timer timer = new Timer();
+        //消费者代码 发送验证码
+        try {
+            String code = this.getCode();
+            final HttpSession session = request.getSession();
+            session.setAttribute("code",code);
+            MailUtil.sendMail(email, code);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                session.removeAttribute("code");
+                timer.cancel();
+                }
+            },5*60*1000);
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+
+        }
+        return true;
+    }
+    //取得6位数验证码
+    private String getCode(){
+        Random rad=new Random();
+        return rad.nextInt(1000000)+"";
+    }
 }

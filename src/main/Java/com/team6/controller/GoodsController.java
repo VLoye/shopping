@@ -7,16 +7,22 @@ import org.apache.ibatis.annotations.Param;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping(value = "/goods")
 public class GoodsController {
@@ -52,12 +58,13 @@ public class GoodsController {
     查询商品信息
      */
     @RequestMapping(value="/{id}",method = RequestMethod.GET)
-    public String queryById(@PathVariable("id")int id){
-        Goods goods=goodsService.queryGoodsById(id);
-        if(goods!=null) return "success";
-        else return "error";
+    public Object queryById( @PathVariable("id")int id){
+       Map<String,Object> map=goodsService.queryProductInfo(id);
+        Map<String,Object> model = new HashMap<>();
+        model.put("data",map);
+        return new ModelAndView("/ProductAndCart/Product",model);
     }
-    @RequestMapping(value="/del")
+/*    @RequestMapping(value="/del")
     public String deleteById(@RequestParam int id,
                               HttpServletRequest request){
         Goods goods=goodsService.queryGoodsById(id);
@@ -69,7 +76,7 @@ public class GoodsController {
             return "success";
          else
           return "error";
-    }
+    }*/
     /*
     保存图片信息并返回文件保存的路径
      */

@@ -36,33 +36,112 @@
     </script>
     
 </head>
+<script type="text/html" id="shopFormat">
+    {{each list data}}
+    <div id="{{data.shopid}}" class="storeinfo">
+        <div class="i-store">
+            <div class="i-logo">
+                <input type="checkbox" class="check" name="r" value="224">
+                <label>
+                    <div class="s-name"><a href="/shop/home/4" target="_blank"> {{data.shopname}} </a></div>
+                </label>
+            </div>
+            <!-- 标签功能-->
+            <ul class="list-info">
+                <li>店铺电话：{{data.tel}}</li>
+                <li>店铺地址： {{data.address}} </li>
+            </ul>
+            <div class="btns">
+                <a class="btn btn-11 id_follow" data="224" href="javascript:;"><s></s>取消关注</a><br /><br />
+
+            </div>
+        </div>
+        <div class="i-shop">
+
+            <div class="mscon">
+                <!-- 本店热卖-->
+
+                <div class="mscoll" id="hot224" data="hot_224">
+                    <!--<div class="mleft">上一个</div>
+                    <div class="mright">下一个</div>-->
+                    <div class="mslist" style="height:220px;width:710px;">
+                        <ul class="list-h" style="width:1845px;" id="hot_224">
+                            {{each list data.goods as item}}
+                            <li>
+                                <div class="p-img" style="height:110px;">
+                                    <a href="/goods/{{item.id}}" title="{{item.goodsname}}" target="_blank">
+                                        <img width="130" height="130" data-img="1" src="{{item.imgUrl}}" alt="{{item.goodsname}}">
+                                    </a>
+                                </div>
+                                <div class="p-name" style="height:auto">
+
+                                    <a href="/goods/{{item.id}}" title="{{item.goodsname}}" target="_blank">{{item.goodsname}}</a>
+                                </div>
+                                <div class="p-price">价格：<strong class="ftx-01">￥{{item.goodsprice}}.00</strong></div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    $(function{
+        Concernedshop();
+    })
+    var Concernedshop = function(){
+        $.ajax({
+            url: "/buyer/ConcernedgoodsData",
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                $("#shopcontent").template("shopFormat",{list:data});
+
+            },
+            error: function(data){
+                //alert("ajax error : "+res);
+            }
+        });
+    }
+</script>
+
 <body class="hayui-bg-gray-light">
 
+<div class="">
     <div class="title bot-border">
         <h3 class="title_txt cur">店铺关注</h3>
     </div>
     <div class="border-box">
-            <div class="empty">暂时没有关注任何店铺！</div>
-        		<div class="mb mt10" style="margin-bottom:10px;">
-			<div class="i-option">
-				<input type="checkbox" class="check checkall" value="" name="" id="allCheckbox">
-				<label for="allCheckbox">全选</label>
-				<a class="id_follow" href="javascript:;">取消关注</a>
-			</div>
-			<div id="pagin-btm" class="pagin fr">
 
-				
-				<span class="page-skip">
-					<em>&nbsp;&nbsp;共 0 页&nbsp;&nbsp;&nbsp;&nbsp;</em>
+        <div id="shopcontent"></div>
+
+        <div class="mb mt10" style="margin-bottom:10px;">
+            <div class="i-option">
+                <input type="checkbox" class="check checkall" value="" name="" id="allCheckbox">
+                <label for="allCheckbox">全选</label>
+                <a class="id_follow" href="javascript:;">取消关注</a>
+            </div>
+            <div id="pagin-btm" class="pagin fr">
+
+                <a class="prev-disabled">上一页</a><a class="current" href="/ShopConcern?pageNo=1">1</a><a class="next-disabled">下一页</a>
+                <span class="page-skip">
+					<em>&nbsp;&nbsp;共 1 页&nbsp;&nbsp;&nbsp;&nbsp;</em>
 				</span>
-			</div>
-		</div>
+            </div>
+        </div>
     </div>
+</div>
 
 
 <script>
-(function ($) {
-        
+    (function ($) {
+
         $('.checkall').change(function () {
             $('.storeinfo').find('input[type=checkbox]').attr('checked', this.checked);
 
@@ -158,9 +237,9 @@
     }(jQuery));
 </script>
 </div>
-        </div>
-    </div>
-    <script type="text/javascript"> hayui.use(['element', 'topservice'], function (element, topservice) { });</script>
-    
+</div>
+</div>
+<script type="text/javascript"> hayui.use(['element', 'topservice'], function (element, topservice) { });</script>
+
 </body>
 </html>
