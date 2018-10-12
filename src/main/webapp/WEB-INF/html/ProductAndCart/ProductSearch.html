@@ -198,15 +198,15 @@
 <script id = "logstatus" type = "text/html">
 	{{if data}}
 	<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-	<a class="h-fl" href="/UserCenter" target="_blank">{{data.username}}</a>
+	<a class="h-fl" href="/buyer" target="_blank">{{data.username}}</a>
 	<input type = "hidden" text = "{{data.userid}}" id = "userid"/>
 	<i class="h-fl h-vline">|</i>
-	<a class="h-fl" href="/logout?resulturl=http://mall.qipeiren.com/cart/cart">[退出]</a>
+	<a class="h-fl" href="/logout">[退出]</a>
 	{{else}}
 	<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-	<a class="h-fl" href="/Login">登录</a>
+	<a class="h-fl" href="/login">登录</a>
 	<i class="h-fl h-vline">|</i>
-	<a class="h-fl" href="/Register">注册</a>
+	<a class="h-fl" href="/register">注册</a>
 	{{/if}}
 	<a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
 	<dl class="h-fr h-down ml0 ltb1">
@@ -229,9 +229,9 @@
 			<a href="/ShopConcern/Index">关注的店铺</a>
 		</dd>
 	</dl>
-	<a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+	<a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
 	<i class="h-fr h-vline">|</i>
-	<a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+	<a class="h-fr" href="/index" target="_blank">汽配人首页</a>
 </script>
 
 <div class="pw-top">
@@ -262,7 +262,7 @@
 		<div class="cw-icon">
 			<i class="iconfont">&#xe607;</i>
 			<i class="iconfont arrow">&#xe601;</i>
-			<a target="_blank" href="//cart.jd.com/cart.action">我的购物车</a>
+			<a target="_blank" href="/shopCar">我的购物车</a>
 		</div>
 		<div class="dorpdown-layer">
 			<div class="spacer"></div>

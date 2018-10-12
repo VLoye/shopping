@@ -37,8 +37,8 @@
                 type: "post",
                 dataType: "json",
                 success: function(data){
-                    $("#consignee-list").template("dataAddress",{list:ata});
-                    $("#s-content").template("selectedc",{list:data});
+                    $("#consignee-list").append(template("dataAddress",{list:data}));
+                    $("#s-content").append(template("selectedc",{list:data}));
                 },
                 error: function(data){
                     //alert("ajax error : "+res);
@@ -72,15 +72,15 @@
         <div id = "loginstatus">
             <#if user.username>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-            <a class="h-fl" href="/UserCenter" id="username" target="_blank">${user.username}</a>
+            <a class="h-fl" href="/buyer" id="username" target="_blank">${user.username}</a>
             <i class="h-fl h-vline">|</i>
             <input type = "hidden" id = "userid" value = "${user.userid}"/>
-            <a class="h-fl" href="">[退出]</a>
+            <a class="h-fl" href="/logout">[退出]</a>
             <#else>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-            <a class="h-fl" href="/Login">登录</a>
+            <a class="h-fl" href="/login">登录</a>
             <i class="h-fl h-vline">|</i>
-            <a class="h-fl" href="/Register">注册</a>
+            <a class="h-fl" href="/register">注册</a>
         </#if>
 </div>
 <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
@@ -104,9 +104,9 @@
         <a href="/ShopConcern/Index">关注的店铺</a>
     </dd>
 </dl>
-<a class="h-fr" target="_blank" href="/cart/cart">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
+<a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">1</span>】</em></a>
 <i class="h-fr h-vline">|</i>
-<a class="h-fr" href="http://www.qipeiren.com" target="_blank">汽配人首页</a>
+<a class="h-fr" href="/index" target="_blank">汽配人首页</a>
 </div>
 </div>
 <div class="w990 w1 cl">
@@ -323,28 +323,28 @@
                                                         <table class="order-table" shopid="8">
                                                         <tbody>
 
-                                                                <#list goods as item i>
-                                                                	<tr id="${item.goodsid}" skuid="${item.goodsid}" quntity="1" price="${item.goodsprice}">
+                                                                <#list goods as item >
+                                                                	<tr id="${item.id}" skuid="${item.id}" quntity="1" price="${item.price}">
 								                                        <td class="fore1" style="padding: 10px;">
 								                                            <div class="p-goods">
 								                                                <div class="p-img">
 								                                                    <a href="${item.goodsurl}" target="_blank">
-								                                                        <img alt="" src="${item.goodsimg}" />
+								                                                        <img alt="" src="${item.imgUrl}" />
 								                                                    </a>
 								                                                </div>
 
 								                                                <div class="p-detail">
 								                                                    <div class="p-name">
 								                                                        <a href="${item.goodsurl}" target="_blank">
-								                                                            ${item.goodsname}<br />
+								                                                            ${item.name}<br />
 								                                                        </a>
-                                                                                        <input type="hidden" value="${item.goodsid}" name = "goodsid"/>
-                                                                                        <input type="hidden" value="${item.sellerid}" name = "sellerid"/>
+                                                                                        <input type="hidden" value="${item.id}" name = "goodsid"/>
+                                                                                        <input type="hidden" value="${item.sellerId}" name = "sellerid"/>
 								                                                    </div>
 								                                                </div>
 								                                            </div>
 								                                        </td>
-								                                        <td class="p-price"><strong>￥${item.goodsprice}</strong></td>
+								                                        <td class="p-price"><strong>￥${item.price}</strong></td>
 								                                        <td class="fore2">
 								                                               <label>x</label>  <span class = "ngoodscount"> ${item.count}  </span>                                                              </td>
 								                                    </tr>
@@ -386,7 +386,7 @@
         <div class="sticky-wrap">
             <#if total>
             <div class="inner">
-                <span class="total" style="float: left;"><a href="/cart/cart" class="return-edit">返回修改购物车</a></span>
+                <span class="total" style="float: left;"><a href="/shopCar" class="return-edit">返回修改购物车</a></span>
                 <button type="button" id="submit" class="checkout-submit">提交订单</button>
                 <span class="total">
                     <label>应付总额：</label>

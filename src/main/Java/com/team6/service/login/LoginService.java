@@ -4,6 +4,7 @@ import com.team6.entity.User;
 import com.team6.util.enums.LoginEnum;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -52,5 +53,8 @@ public interface LoginService {
 
     public Map<String,Object> getCurrentUserInfo(HttpServletRequest request);
 
+    public void logout(HttpServletRequest request, HttpServletResponse response);
+
+    public boolean sendCode(HttpServletRequest request,String email);
 
 }

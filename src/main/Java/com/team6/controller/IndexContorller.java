@@ -39,6 +39,12 @@ public class IndexContorller {
         return "/Main/Index";
     }
 
+    @RequestMapping("/index1")
+    public String toIndex1(){
+
+        return "/Main/Index1";
+    }
+
     /**
      * 首页一些需要的信息的信息
      *

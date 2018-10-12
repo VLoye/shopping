@@ -151,7 +151,7 @@ public class ShopCarServiceImp implements ShopCarService {
     }
 
     @Override
-    public Object detailData(int[] ids, int[] counts, HttpServletRequest request) {
+    public Object detailData(String[] ids, String[] counts, HttpServletRequest request) {
         Map<String,Object> good = new HashMap<>();
         long totalprice = 0;
         long totalcount = 0;
@@ -160,11 +160,12 @@ public class ShopCarServiceImp implements ShopCarService {
         List<Object> gList = new ArrayList<>();
         for(int i = 0;i<ids.length;i++){
 
-            Goods goods =goodsMapper.queryGoodsById(ids[i]);
+            Goods goods =goodsMapper.queryGoodsById(Integer.parseInt(ids[i]));
             //计算总数和价格
-            totalprice +=goods.getPrice()*counts[i];
-            totalcount +=counts[i];
+            totalprice +=goods.getPrice()*Integer.parseInt(counts[i]);
+            totalcount +=Integer.parseInt(counts[i]);
             Map<String,Object> gMap = TransformUtil.beanToMap(goods);
+            gMap.put("count",counts[i]);
             gList.add(gMap);
         }
         total.put("totalprice",totalprice);
