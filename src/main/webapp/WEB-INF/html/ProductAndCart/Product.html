@@ -21,7 +21,7 @@
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">-->
 
     <link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
-    <link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">
+ <!--   <link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">-->
     <link href="../../static/css/personal.css" rel="stylesheet" type="text/css">
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">
 
@@ -734,7 +734,7 @@
             <div class="s-num"><span>{{data.count}}</span></div>
             <div class="s-g-price">{{data.price}}</div>
             <div class="s-g-remove">
-                <a href="/shopCar/del/{{data.id}}">删除</a>
+                <a onclick="delShopCart('{{data.id}}')">删除</a>
             </div>
         </div>
         {{/each}}
@@ -750,7 +750,7 @@
                 type: "post",
                 dataType: "json",
                 success: function(res){
-                    $("#side-cart-list").append(template("shopCarFormat",{list:res.goods}));
+                    $("#side-cart-list").html(template("shopCarFormat",{list:res.goods}));
 
                 },
                 error: function(res){
@@ -759,6 +759,28 @@
                 }
             });
         }
+
+        //删除购物车
+        var delShopCart = function(goodsId){
+            alert(goodsId);
+            $.ajax({
+                url: "/shopCar/del/"+goodsId,
+                type: "post",
+                dataType: "json",
+                success: function(res){
+                  if (res.msg =="SUCCESS")
+                      ShopCarFormat();
+                  else alert("删除失败")
+
+                },
+                error: function(res){
+                    //parent.layer.msg(res.title);
+                    //alert(res.title);
+                }
+            });
+        }
+
+
         $(function(){
             ShopCarFormat();
         });
@@ -1329,13 +1351,18 @@
 <script type = "text/javascript">
     var addCart = function (goodsid) {
 
-        var count = document.getElementById("buy-num");
-        $.post('/shopCar/add', { goodsId:goodsid, count: count }, function (result) {
+        var count =$("#buy-num").val();
+
+        $.post('/shopCar/add', { goodsId:goodsid, count: count },function (result) {
+
             //loading.close();
-            if (result.success) {
+            if (result.msg=="SUCCESS") {
                 alert(result.msg);
+                ShopCarFormat();
+
             }
             else {
+                alert(result.msg)
                 $.dialog.errorTips(result.msg);
             }
         });
@@ -1399,26 +1426,103 @@
                                 <div style='margin: 0px auto; width: 750px; overflow: hidden;'>
                                     <div style='overflow: hidden;'>
                                         <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
-                                            <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;' isjstit='true'>品牌介绍</span>
+                                            <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
+                                                  isjstit='true'>品牌介绍</span>
                                             <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Brand introduction</span>
                                         </div>
                                         <div style='text-align: left;'><span style='font-size: 18px;'>陕西法士特汽车传动集团有限责任公司由陕西汽车齿轮总厂整体改制而成，是我国最大的以重型汽车变速器、分动器、取力器和各种汽车齿轮及其锻、铸件为主要产品的大型专业化生产企业和出口基地，注册资本5亿元，资产总额30亿元，旗下拥有陕西法士特齿轮有限公司、西安法士特汽车传动有限公司、宝鸡法士特齿轮有限公司、宝鸡法士特铸造公司、西安法士特取力器公司、美国法士特分销公司等10余家控、参股公司。在跨越式发展中，法士特已跻身中国汽车工业30强、中国机械工业100强、中国制造业500强行列。</span>
-                                        </div><br/>
-                                    </div><
-                                    div style='overflow: hidden;'><div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
-                                    <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;' isjstit='true'>公司介绍</span>
-                                    <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>company profile</span>
-                                </div>
-                                    <span style='font-size: 16px;'><br/></span><div><span style='font-size: 18px;'>十堰林华工贸有限公司成立于1996年，是一家专门销售法士特齿轮，变速箱总成及零部件的公司。公司以连续六年取得销售东风变速箱总成第一名的好成绩，连续六年被众多企业评为最佳经销商。公司拥有东风变速箱总成SH、HX、ST系列变速箱独家销售权，也是全国唯一一家以销售商命名的变速箱总成的公司。2002年公司后我公司成为法士特的中转销售库。公司变速箱总成配套主要客户有中国重汽、湖北三环、武汉汉特、安徽江环、福建龙岩、福建永安等。平均每年销售达到变速箱总成3&nbsp;万台，销售额达到2.5亿元。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><br/><p><span style='font-size: 18px;'>我公司还可以为客户提供更换变速箱业务，可以将原车匹配的各种变速箱更换您要求的变速箱-----差异化改装!&nbsp;&nbsp;&nbsp;&nbsp; 差异化改装是针对东风商用车公司、湖北三环、中国重汽、陕汽等汽车生产厂家生产的标准车型进行个性化改装，从而有效提升标准车型的生产效率，同时最大程度满足客户的个性化需求。&nbsp;&nbsp;&nbsp; 　希望我们用“诚心、真心、热心、耐心、细心”换取您对我们的“信心”。我们将“无言而不信，无德而不报，投我以桃，报之以李”。林华公司愿与您共成长!</span></p>
-                                    <p><span style='font-size: 18px;'><br/></span></p><p><br/></p>
-                                    <p style='background: rgb(252, 248, 248)'><span style='font-size:18px;font-family:宋体;color:red'>购买变速箱，我只选择林华公司，只因为林华公司是陕西法士特公司全国唯一两家代理商之一，林华公司只经营陕西法士特齿轮有限公司原厂变速箱、缓速器及取力器总成，公司承诺：假一赔十</span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <
+                                    div style='overflow: hidden;'>
+                                    <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
+                                        <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
+                                              isjstit='true'>公司介绍</span>
+                                        <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>company profile</span>
+                                    </div>
+                                    <span style='font-size: 16px;'><br/></span>
+                                    <div><span style='font-size: 18px;'>十堰林华工贸有限公司成立于1996年，是一家专门销售法士特齿轮，变速箱总成及零部件的公司。公司以连续六年取得销售东风变速箱总成第一名的好成绩，连续六年被众多企业评为最佳经销商。公司拥有东风变速箱总成SH、HX、ST系列变速箱独家销售权，也是全国唯一一家以销售商命名的变速箱总成的公司。2002年公司后我公司成为法士特的中转销售库。公司变速箱总成配套主要客户有中国重汽、湖北三环、武汉汉特、安徽江环、福建龙岩、福建永安等。平均每年销售达到变速箱总成3&nbsp;万台，销售额达到2.5亿元。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </div>
+                                    <br/>
+                                    <p><span style='font-size: 18px;'>我公司还可以为客户提供更换变速箱业务，可以将原车匹配的各种变速箱更换您要求的变速箱-----差异化改装!&nbsp;&nbsp;&nbsp;&nbsp; 差异化改装是针对东风商用车公司、湖北三环、中国重汽、陕汽等汽车生产厂家生产的标准车型进行个性化改装，从而有效提升标准车型的生产效率，同时最大程度满足客户的个性化需求。&nbsp;&nbsp;&nbsp; 　希望我们用“诚心、真心、热心、耐心、细心”换取您对我们的“信心”。我们将“无言而不信，无德而不报，投我以桃，报之以李”。林华公司愿与您共成长!</span>
+                                    </p>
+                                    <p><span style='font-size: 18px;'><br/></span></p>
+                                    <p><br/></p>
+                                    <p style='background: rgb(252, 248, 248)'><span
+                                            style='font-size:18px;font-family:宋体;color:red'>购买变速箱，我只选择林华公司，只因为林华公司是陕西法士特公司全国唯一两家代理商之一，林华公司只经营陕西法士特齿轮有限公司原厂变速箱、缓速器及取力器总成，公司承诺：假一赔十</span>
                                         <span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>!</span>
                                         <span style='font-size:18px;font-family:宋体;color:red'>不满意就退换</span>
-                                        <span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>!</span></p>
-                                    <p style='background: rgb(252, 248, 248)'><span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>&nbsp; &nbsp; </span><span style='font-size:18px;font-family:宋体;color:red'>公司网址：</span>
-                                        <span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>http://www.syscd.net, &nbsp; &nbsp; &nbsp;</span><span style='font-size:18px;font-family: 宋体;color:red'>淘宝网：</span><span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>https://shop63195606.taobao.com &nbsp;</span>
-                                        <span style='font-size:18px;font-family:宋体;color:red'>阿里巴巴网址：</span><span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>http://shop1412786580643.1688.com&nbsp;</span></p><p><br/></p><br/><p><span style='font-size: 18px;'>地址：十堰市汽配物流广场7栋32－38号　　网址：</span>
-                                    <a style='font-size: 18px; text-decoration: underline;' href='http://www.syscd.net/'><span style='font-size: 18px;'>http://www.syscd.net</span></a> </p><p><span style='font-size: 18px;'>QQ:　294366459&nbsp;&nbsp;&nbsp;&nbsp; 电邮、 支付宝：</span><a style='font-size: 18px; text-decoration: underline;' href='mailto:sylyx@126.com'><span style='font-size: 18px;'>sylyx@126.com</span></a></p><p><span style='font-size: 18px;'>电话（传真）：0719-8368508、8368509　手机微信：15997805888　18986895050　</span></p><p><span style='font-size: 18px;'><img src='/Storage/Shop/12/Products/3971/Details/041c082907c84d5493a56fb65d753bfc.jpg'  /></span></p><p><span style='font-size: 18px;'><img src='/Storage/Shop/12/Products/3971/Details/6cf15d0adba8422caaf4563c913df694.jpg'  />　</span></p><br/></div><div style='overflow: hidden;'><div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'><span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;' isjstit='true'>产品展示</span><span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Product display</span></div><p style='margin: 10px 0px; text-align: center;'><img src='/Storage/Shop/12/Products/3971/Details/3f2d7ef549ff458f9f4901b6039aa303.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/3e674fb7a30f471ea394e4a44338578a.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/43bd4c6c1e3f476a81f07638e2190908.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/90cd04747f0c4e70acd6d8f30da08d89.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/176e589d0bd74f20bab52c524ed2f647.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/1dfe25b104a440cc90e791d939733f7b.jpg'/><br/><img src='/Storage/Shop/12/Products/3971/Details/91e733a67b76454292df73d8770a6383.JPG'/><br/></p><p style='margin: 10px 0px;'><br/></p><p style='margin: 10px 0px;'><br/></p></div><div style='overflow: hidden;'><div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'><span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;' isjstit='true'>包装展示</span><span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Packaging display</span><p style='text-align:center'><br/></p></div><div style='margin: 10px 0px; text-align: center;'><img src='/Storage/Shop/12/Products/3971/Details/64c59169062a4bcbb5776d1c39a735b6.jpg'   style='float: left;'/></div></div><div style='overflow: hidden;'><div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'><span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;' isjstit='true'>物流配送</span><span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Logistics distribution</span></div><br/><div style='text-align: left;'><span style='font-size: 18px;'>大件商品默认发物流到付。小件商品发快递。 买家如有特殊要求请联系客服沟通具体细节。</span></div><br/></div></div>
+                                        <span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>!</span>
+                                    </p>
+                                    <p style='background: rgb(252, 248, 248)'><span
+                                            style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>&nbsp; &nbsp; </span><span
+                                            style='font-size:18px;font-family:宋体;color:red'>公司网址：</span>
+                                        <span style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>http://www.syscd.net, &nbsp; &nbsp; &nbsp;</span><span
+                                                style='font-size:18px;font-family: 宋体;color:red'>淘宝网：</span><span
+                                                style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>https://shop63195606.taobao.com &nbsp;</span>
+                                        <span style='font-size:18px;font-family:宋体;color:red'>阿里巴巴网址：</span><span
+                                                style='font-size:18px;font-family:&#39;Microsoft Yahei&#39;;color:red'>http://shop1412786580643.1688.com&nbsp;</span>
+                                    </p>
+                                    <p><br/></p><br/>
+                                    <p><span style='font-size: 18px;'>地址：十堰市汽配物流广场7栋32－38号　　网址：</span>
+                                        <a style='font-size: 18px; text-decoration: underline;'
+                                           href='http://www.syscd.net/'><span style='font-size: 18px;'>http://www.syscd.net</span></a>
+                                    </p>
+                                    <p><span
+                                            style='font-size: 18px;'>QQ:　294366459&nbsp;&nbsp;&nbsp;&nbsp; 电邮、 支付宝：</span><a
+                                            style='font-size: 18px; text-decoration: underline;'
+                                            href='mailto:sylyx@126.com'><span
+                                            style='font-size: 18px;'>sylyx@126.com</span></a></p>
+                                    <p><span style='font-size: 18px;'>电话（传真）：0719-8368508、8368509　手机微信：15997805888　18986895050　</span>
+                                    </p>
+                                    <p><span style='font-size: 18px;'>
+                                   <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/></span></p>
+                                    <p><span style='font-size: 18px;'>
+                                       <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/></span></p>
+                                    <br/>
+                                </div>
+                                <div style='overflow: hidden;'>
+                                    <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
+                                        <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
+                                              isjstit='true'>产品展示</span>
+                                        <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Product display</span>
+                                    </div>
+                                    <p style='margin: 10px 0px; text-align: center;'>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/></p>
+                                    <p style='margin: 10px 0px;'><br/></p>
+                                    <p style='margin: 10px 0px;'><br/></p>
+                                </div>
+                                <div style='overflow: hidden;'>
+                                    <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
+                                        <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
+                                              isjstit='true'>包装展示</span>
+                                        <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Packaging display</span>
+                                        <p style='text-align:center'><br/></p></div>
+                                    <div style='margin: 10px 0px; text-align: center;'>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png' style='float: left;'/>
+                                    </div>
+                                </div>
+                                <div style='overflow: hidden;'>
+                                    <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
+                                        <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
+                                              isjstit='true'>物流配送</span>
+                                        <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Logistics distribution</span>
+                                    </div>
+                                    <br/>
+                                    <div style='text-align: left;'><span style='font-size: 18px;'>大件商品默认发物流到付。小件商品发快递。 买家如有特殊要求请联系客服沟通具体细节。</span>
+                                    </div>
+                                    <br/>
+                                </div>
+
+
+                                </t>
                             </td>
                             <td class="mb-r">
                                 <div class="mbr-cont">
@@ -1426,8 +1530,12 @@
                                         <p class="mbro-tit">在线咨询：</p>
                                         <p class="mbro-cus">
 
-                                            <a style="width:26px;float:left;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=294366459&amp;site=qq&amp;menu=yes" title="林华">
-                                                <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:294366459:52" style="vertical-align: middle;" />
+                                            <a style="width:26px;float:left;" target="_blank"
+                                               href="http://wpa.qq.com/msgrd?v=3&amp;uin=294366459&amp;site=qq&amp;menu=yes"
+                                               title="林华">
+                                                <img border="0" style="display:inline-block;"
+                                                     src="http://wpa.qq.com/pa?p=2:294366459:52"
+                                                     style="vertical-align: middle;"/>
                                             </a>
 
                                         </p>
