@@ -75,7 +75,7 @@ public class GoodsController {
      */
     private String saveImageFile(MultipartFile imageFile, HttpServletRequest request) {
         //获取文件上传到服务器的路径
-        String uploadUrl=getRealPath(request)+"img/";
+        String uploadUrl=getRealPath(request)+"static/uploadImg/";
         System.out.println("文件路径为："+uploadUrl);
         //获取从客户端传过来的文件名
         String filename=imageFile.getOriginalFilename();
