@@ -725,15 +725,16 @@
         </ul>
     </div>
 
-    <script type="text/html" id = "shopCarFormat">
+        <script type="text/html" id = "shopCarFormat">
         {{each list data}}
         <div class="cart-list-goods cl">
-            <a href="" title="{{data.goodsname}}" target="_blank">
-                <img src="{{data.goodsimg}}" alt=""></a>
+            <input type="hidden" name="gid" id="gid{{$index}}" value="{{data.id}}"/>
+            <a href="" title="{{data.name}}" target="_blank">
+                <img src="{{data.imgUrl}}" alt=""></a>
             <div class="s-num"><span>{{data.count}}</span></div>
-            <div class="s-g-price">{{data.goodsprice}}</div>
+            <div class="s-g-price">{{data.price}}</div>
             <div class="s-g-remove">
-                <a href="/shopCar/del/{{data.goodsid}}">删除</a>
+                <a href="/shopCar/del/{{data.id}}">删除</a>
             </div>
         </div>
         {{/each}}
