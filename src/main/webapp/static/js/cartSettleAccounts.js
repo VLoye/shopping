@@ -46,16 +46,32 @@ function bindSelectAll() {
         } else {
             if (checked) {
 
-                $("#product-list").find('input[type="checkbox"]').removeAttr('checked');
-                $("#product-list").find('.item').removeClass('item_selected');
+                /*$("#product-list").find('input[type="checkbox"]').removeAttr('checked');
+                $("#product-list").find('.item').removeClass('item_selected');*/
+                $("#content1").find('input[name="checkItem"]').removeAttr('checked');
+                $("#content1").find('input[name="checkItem"]').prop('checked',false);
+
+                $("#content1").find('.item').removeClass('item_selected');
+                //$("#plist").find('input[type="checkbox"]').removeAttr('checked');
+                //$("#plist").find('.item').removeClass('item_selected');
                 $(".cart-list").find('input[name="checkAll"]').removeAttr('checked');
+                $(".cart-list").find('input[name="checkAll"]').prop('checked',false);
+                $("input:checkbox").removeAttr("checked");
                 var total = getCheckProductPrice(false);
                 $('#finalPrice').html('¥' + total);
             }
             else {
-                $("#product-list").find('input[type="checkbox"]').attr('checked', '');
-                $("#product-list").find('.item').addClass('item_selected');
-                $(".cart-list").find('input[name="checkAll"]').attr('checked', '');
+                /*$("#product-list").find('input[type="checkbox"]').attr('checked', 'checked');
+                $("#product-list").find('.item').addClass('item_selected');*/
+                $("#content1").find('input[name="checkItem"]').prop('checked', true);
+                $("#content1").find('input[name="checkItem"]').attr('checked', 'checked');
+
+                $("#content1").find('.item').addClass('item_selected');
+                //$("#plist").find('input[type="checkbox"]').attr('checked', 'checked');
+                //$("#plist").find('.item').addClass('item_selected');
+                $(".cart-list").find('input[name="checkAll"]').prop('checked', true);
+                $(".cart-list").find('input[name="checkAll"]').attr('checked', 'checked');
+                $("input:checkbox").prop('checked',true);
                 var total = getCheckProductPrice(false);
                 $('#finalPrice').html('¥' + total);
 
@@ -66,7 +82,7 @@ function bindSelectAll() {
 
 
 
-    $('input[name="checkItem"]').change(function () {
+    /*$('input[name="checkItem"]').change(function () {
         var checked = $(this).attr('checked');
         var sku = $(this).attr('sku');
         v = $(this).val();
@@ -91,7 +107,7 @@ function bindSelectAll() {
         $('#finalPrice').html('¥' + getCheckProductPrice(false));
         $('#selectedCount').html(getCheckProductCount(false));
 
-    });
+    });*/
 
 }
 

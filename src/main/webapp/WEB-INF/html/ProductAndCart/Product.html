@@ -15,13 +15,15 @@
     <link href="../../static/css/common.css" rel="stylesheet" />
     <link href="../../static/css/inner.css" rel="stylesheet" />
     <link href="../../static/css/artdilog.css" rel="stylesheet" />
-    <link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
+    <!--<link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
     <link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">
     <link href="../../static/css/personal.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">-->
+
+    <link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/personal.css" rel="stylesheet" type="text/css">
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">
-
-
-    <script src="../../static/js/jsamazeui.js"></script>
+    <script src="../../static/js/js/amazeui.js"></script>
     <script src="../../static/js/jquery-1.7.1.min.js"></script>
 
     <style type="text/css">
@@ -1145,7 +1147,7 @@
                             <div class="b-02 dt">评分：</div>
                             <div class="dt summary-grade">
 
-                                <img src="../img/star5.png" />
+                                <img src="../../static/img/star5.png" />
                             </div>
 
                         </div>
@@ -1253,26 +1255,29 @@
 
             <div id="preview">
                 <div class="jqzoom">
-                    <#if data>
-                    <#list img as m >
-                    <#if i == 0>
+                    <!--<#if data>
+                    <#list data.imgUrl as m>
+                    <#if m_i == 0>
                     <a class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:0,lensOpacity:1" href="${m}" style="position: relative; display: block;">
                         <img src="${m}" alt="" style="display: block;">
                     </a>
                     </#if>
-            </#list>
-        </#if>
-
+                    </#list>
+                    </#if>-->
+                    <a class="cloud-zoom" id="zoom1" rel="adjustX: 10, adjustY:0,lensOpacity:1" href="${data.imgUrl}" style="position: relative; display: block;">
+                        <img src="${data.imgUrl}" alt="" style="display: block;">
+                    </a>
     </div>
 
     <div id="spec-list">
         <ul class="lh">
-            <#if data>
+            <!--<#if data>
             <#list img as m>
             <li><a href="${m}" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '${m}'"><img src="${m}" width="50" height="50"></a></li>
-        </#list>
-    </#if>
-    </ul>
+            </#list>
+            </#if>-->
+            <li><a href="${data.imgUrl}" class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: '${m}'"><img src="${data.imgUrl}" width="50" height="50"></a></li>
+        </ul>
 </div>
 <div class="attent-goods" id="choose-btn-coll">
     <a href="#none" class="btn-coll">关注商品</a>
