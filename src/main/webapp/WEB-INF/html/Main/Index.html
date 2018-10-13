@@ -1734,8 +1734,8 @@
         });
 
         $('#toSubmitOrder').click(function() {
-            var ids = {};
-            var counts = {};
+       /*     var ids = new Array();
+            var counts = new Array();
 
             var num = 0;
             $("#side-cart-list").find('input[name="gid"]').each(function (i, e) {
@@ -1746,7 +1746,8 @@
             });
 
             if(ids != null){
-                $.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
+
+                $.post('/shopCar/detailData', {ids:ids,counts:counts}, function (result) {
 
                     loading.close();
 
@@ -1754,9 +1755,11 @@
                         $.dialog.errorTips(result.msg);
 
                 });
-            }
 
+            }*/
+            window.location.href = '/shopCar';
         });
+
 
     });
 
