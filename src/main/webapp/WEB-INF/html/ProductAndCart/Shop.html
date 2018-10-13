@@ -1,0 +1,1654 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta property="qc:admins" content="45417012167221416513066547" />
+    <meta name="renderer" content="webkit|ie-stand" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="东鑫旺配件专营店,上海弗列加系列滤清器,雷诺系列,东风4H发动机配件,美国派克滤清器系列,潍柴发动机,东风商用车" />
+    <meta name="description" content="东鑫旺配件专营店是在汽配商城开设的专业汽配店铺，主要经营上海弗列加系列滤清器,雷诺系列,东风4H发动机配件,美国派克滤清器系列,潍柴发动机,东风商用车，欢迎您在线订购。" />
+    <title>东鑫旺配件专营店</title>
+    <link href="/static/css/css_base.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/css_top_mall.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/common.css" rel="stylesheet" />
+    <link href="/static/css/inner.css" rel="stylesheet" />
+    <link href="/static/css/artdilog.css" rel="stylesheet" />
+    <link href="/static/css/qpr-small-icon.css" rel="stylesheet" type="text/css" />
+    
+    <link href="/static/css/ms_shop.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .green {
+            color: green;
+            font-size: 15px;
+        }
+
+        .red {
+            color: red;
+            font-size: 15px;
+        }
+    </style>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/web.js"></script>
+    <script src="/static/js/CommonJS.js"></script>
+    <script src="/static/js/jquery.nicescroll.min.js"></script>
+    <script src="/static/js/jQuery.mouseDelay.min.js"></script>
+    <script src="/static/js/jquery.scrollLoading.min.js"></script>
+    <script src="/static/js/jquery.artDialog.js"></script>
+    <script src="/static/js/artDialog.iframeTools.js"></script>
+    <script src="/static/js/jQuery.Web.Login.js"></script>
+    <script src="/static/js/jQuery.Web.Alert.js"></script>
+    
+        <!--<meta name="mobile-agent" content="format=html5;url=http://m.qipeiren.com/vshop/detail/3">
+        <meta name="mobile-agent" content="format=xhtml;url=http://m.qipeiren.com/vshop/detail/3">
+        <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.qipeiren.com/vshop/detail/3" />-->
+    <script type="text/javascript" src="/static/js/wapuaredirect.js"></script>
+    <script type="text/javascript">
+        var IsExpired="False";
+        $(function () {
+            if(IsExpired=="True"){
+                $.dialog.errorTips('该店铺已过期！','',5000);
+            }
+        });
+    </script>
+
+<script type="text/javascript">
+    var tcomid = 655;
+    var dftype = 3;
+    var vproid = 0;
+</script>
+<script src="/static/js/census-flow.js" type="text/javascript"></script>
+
+<script src="/static/js/jquery.cookie.js"></script>
+<script src="/static/js/jQuery.fakePage.js"></script>
+<!--<script src="/static/js/jQuery.ms_shop-logisic.js"></script>-->
+<script charset="utf-8" src="/static/template/admin/js/sysUtils.js"></script>
+<script charset="utf-8" src="/static/template/admin/js/template-web.js"></script>
+
+    <!--<script>
+        function addFavorite(shopId) {
+            checkLogin(function (func) {
+                addFavoriteFun(shopId, func);
+            });
+        }
+        function addFavoriteFun(shopId, callBack) {
+            $.post('/shop/AddFavorite', { shopId: shopId }, function (result) {
+                if (result.success)
+                    $.dialog.succeedTips('关注成功', function () { callBack && callBack(); });
+                else
+                    $.dialog.succeedTips(result.msg, function () { callBack && callBack(); });
+
+            });
+        }
+        function checkLogin(callBack) {
+            var memberId = $.cookie('qpr_mall_user');
+            var member = "UUUyNXppN2l2c2tEK2d2OTF3cnFOUT09";
+            if (memberId && memberId != member) {
+                callBack();
+            }
+            else {
+                $.fn.login({}, function () {
+                    callBack(function () { location.reload(); });
+                }, './', '', '/Login/Login');
+            }
+        }
+
+        /* 计算规则：
+        高 （商家得分-同行业平均分）/（同行业商家最高得分-同行业平均分）
+        低 （同行业平均分-商家得分）/（同行业平均分-同行业商家最高低分）
+        */
+
+        var upImage = "arri-up";
+        var dowmImage = "arri-down";
+        var eqImage = "arri-eq";
+        var red = "red";
+        var green = "green";
+
+        var productAndDescription = parseFloat("5").toFixed(2);
+        var productAndDescriptionPeer = parseFloat("5").toFixed(2);
+        var productAndDescriptionMax = parseFloat("5").toFixed(2);
+        var productAndDescriptionMin = parseFloat("5").toFixed(2);
+        var productAndDescriptionContrast = 0;
+        var productAndDescriptionColor = "";
+        if (productAndDescription > productAndDescriptionPeer) {
+            if (productAndDescriptionMax - productAndDescriptionPeer == 0) {
+                productAndDescriptionContrast = "持平";
+            } else {
+                productAndDescriptionContrast = (((productAndDescription - productAndDescriptionPeer) / (productAndDescriptionMax - productAndDescriptionPeer)) * 100).toFixed(2) + '%';
+            }
+            productAndDescriptionColor = red;
+        }
+        else {
+            if (productAndDescriptionPeer - productAndDescriptionMin == 0) {
+                productAndDescriptionContrast = "持平";
+                productAndDescriptionColor = red;
+            }
+            else {
+                productAndDescriptionContrast = ((productAndDescriptionPeer - productAndDescription) / (productAndDescriptionPeer - productAndDescriptionMin) * 100).toFixed(2) + '%';
+                productAndDescriptionColor = green;
+            }
+        }
+
+        var sellerServiceAttitude = parseFloat("5").toFixed(2);
+        var sellerServiceAttitudePeer = parseFloat("5").toFixed(2);
+        var sellerServiceAttitudeMax = parseFloat("5").toFixed(2);
+        var sellerServiceAttitudeMin = parseFloat("5").toFixed(2);
+        var sellerServiceAttitudeContrast = 0;
+        var sellerServiceAttitudeColor = "";
+
+        if (sellerServiceAttitude > sellerServiceAttitudePeer) {
+            if (sellerServiceAttitudeMax - sellerServiceAttitudePeer == 0) {
+                sellerServiceAttitudeContrast = "持平";
+            } else {
+                sellerServiceAttitudeContrast = (((sellerServiceAttitude - sellerServiceAttitudePeer) / (sellerServiceAttitudeMax - sellerServiceAttitudePeer)) * 100).toFixed(2) + '%';
+            }
+
+            sellerServiceAttitudeColor = red;
+        }
+        else {
+            if (sellerServiceAttitudePeer - sellerServiceAttitudeMin == 0) {
+                sellerServiceAttitudeContrast = "持平";
+                sellerServiceAttitudeColor = red;
+            } else {
+                sellerServiceAttitudeContrast = ((sellerServiceAttitudePeer - sellerServiceAttitude) / (sellerServiceAttitudePeer - sellerServiceAttitudeMin) * 100).toFixed(2) + '%';
+                sellerServiceAttitudeColor = green;
+            }
+        }
+
+        var sellerDeliverySpeed = parseFloat("5").toFixed(2);
+        var sellerDeliverySpeedPeer = parseFloat("5").toFixed(2);
+        var sellerDeliverySpeedMax = parseFloat("5").toFixed(2);
+        var sellerDeliverySpeedMin = parseFloat("5").toFixed(2);
+        var sellerDeliverySpeedContrast = 0;
+        var sellerDeliverySpeedColor = "";
+        if (sellerDeliverySpeed > sellerDeliverySpeedPeer) {
+            if (sellerDeliverySpeedMax - sellerDeliverySpeedPeer == 0) {
+                sellerDeliverySpeedContrast = "持平";
+            }
+            else {
+                sellerDeliverySpeedContrast = (((sellerDeliverySpeed - sellerDeliverySpeedPeer) / (sellerDeliverySpeedMax - sellerDeliverySpeedPeer)) * 100).toFixed(2) + '%';
+            }
+            sellerDeliverySpeedColor = red;
+        }
+        else {
+            if (sellerDeliverySpeedPeer - sellerDeliverySpeedMin == 0) {
+                sellerDeliverySpeedContrast = "持平";
+                sellerDeliverySpeedColor = red;
+            }
+            else {
+                sellerDeliverySpeedContrast = ((sellerDeliverySpeedPeer - sellerDeliverySpeed) / (sellerDeliverySpeedPeer - sellerDeliverySpeedMin) * 100).toFixed(2) + '%';
+                sellerDeliverySpeedColor = green;
+            }
+        }
+
+        var productAndDescriptionImage = (productAndDescriptionContrast == "持平") ? eqImage : (productAndDescription > productAndDescriptionPeer ? upImage : dowmImage);
+        var sellerServiceAttitudeImage = (sellerDeliverySpeedContrast == "持平") ? eqImage : (sellerServiceAttitude > sellerServiceAttitudePeer ? upImage : dowmImage);
+        var sellerDeliverySpeedImage = (sellerServiceAttitudeContrast == "持平") ? eqImage : (sellerDeliverySpeed > sellerDeliverySpeedPeer ? upImage : dowmImage);
+
+        var pAdv = productAndDescription;
+        var pAdi = '<i class="arr-icon ms-fl mt3 ' + productAndDescriptionImage + '"></i>';
+        var pAdc = productAndDescriptionContrast;
+
+        var sDsv = sellerDeliverySpeed;
+        var sDsi = '<i class="arr-icon ms-fl mt3 ' + sellerDeliverySpeedImage + '"></i>';
+        var sDsc = sellerDeliverySpeedContrast;
+
+        var sSav = sellerServiceAttitude;
+        var sSai = '<i class="arr-icon ms-fl mt3 ' + sellerServiceAttitudeImage + '"></i>';
+        var sSac = sellerServiceAttitudeContrast;
+
+        $(function () {
+            $("#productAndDescription").html('<span class="di-vm ms-fl c-666">' + pAdv + '</span>' + pAdi);
+            $("#sellerDeliverySpeed").html('<span class="di-vm ms-fl c-666">' + sDsv + '</span>' + sDsi);
+            $("#sellerServiceAttitude").html('<span class="di-vm ms-fl c-666">' + sSav + '</span>' + sSai);
+            $('[proAndDes_v="true"]').html(pAdv);
+            $('[proAndDes_i="true"]').html(pAdi);
+            $('[proAndDes_c="true"]').html(pAdc);
+            $('[selDelSpe_v="true"]').html(sDsv);
+            $('[selDelSpe_i="true"]').html(sDsi);
+            $('[selDelSpe_c="true"]').html(sDsc);
+            $('[selSerAtt_v="true"]').html(sSav);
+            $('[selSerAtt_i="true"]').html(sSai);
+            $('[selSerAtt_c="true"]').html(sSac);
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            //商场searchText
+            $('#searchBoxMS').bind('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    var keyWords = $('#searchBoxMS').val();
+                    location.href = "/search?keywords=" + encodeURIComponent(keyWords);
+                }
+            });
+            //商场searchBtnM
+            $('#searchBtnM').bind('click', function () {
+                var keyWords = $('#searchBoxMS').val();
+                location.href = "/search?keywords=" + encodeURIComponent(keyWords);
+            });
+
+            //店铺searchBtnS
+            $('#searchBtnS').bind('click', function () {
+                var keyWords = $('#searchBoxMS').val();
+                location.href = "/Shop/Search?pageNo=1&sid=4&keywords=" + keyWords;
+            });
+
+
+            //导航店铺searchText
+            $('#shopSearchText').bind('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    var text = $("#shopSearchText").val();
+                    if (text.length === 0) {
+                        $.dialog.errorTips('请输入搜索的关键字');
+                        return;
+                    } else {
+                        location.href = "/Shop/Search?pageNo=1&sid=4&keywords=" + text;
+                    }
+                }
+            });
+            
+
+            //店内搜索searchText
+            $('#inShopSearchText, #inShopSearchPriceMin, #inShopSearchPriceMax').bind('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    var text = $("#inShopSearchText").val();
+                    var priceMin = $.trim($("#inShopSearchPriceMin").val());// === -1 ? "" : $.trim($("#inShopSearchPriceMin").val());
+                    var priceMax = $.trim($("#inShopSearchPriceMax").val());// === -1 ? "" : $.trim($("#inShopSearchPriceMax").val());
+                    if (text.length === 0 && priceMin === 0 && priceMax === 0) {
+                        $.dialog.errorTips('请输入搜索条件');
+                        return;
+                    } else {
+                        location.href = "/Shop/Search?pageNo=1&sid=4&keywords=" + text + "&startPrice=" + priceMin + "&endPrice=" + priceMax;
+                    }
+                }
+            });
+
+            //店内搜索searchBtn
+            $("#inShopSearchBtn").bind('click', function () {
+                var text = $("#inShopSearchText").val();
+                var priceMin = $.trim($("#inShopSearchPriceMin").val());// === -1 ? "" : $.trim($("#inShopSearchPriceMin").val());
+                var priceMax = $.trim($("#inShopSearchPriceMax").val());// === -1 ? "" : $.trim($("#inShopSearchPriceMax").val());
+
+                if (text.length === 0 && priceMin === 0 && priceMax === 0) {
+                    $.dialog.errorTips('请输入搜索条件');
+                    return;
+                } else {
+                    location.href = "/Shop/Search?pageNo=1&sid=4&keywords=" + text + "&startPrice=" + priceMin + "&endPrice=" + priceMax;
+                }
+            });
+        });
+    </script>-->
+</head>
+<body>
+    <!--Top-->
+    <div class="h-top" id="headTopNav">
+
+<script>
+    $(function () {
+        refreshCartProducts();
+    });
+    function refreshCartProducts() {
+        var countCookie = $.cookie('qpr_mall_cart_count');
+        $('#right_cart em').text(countCookie);
+        $('#shopping-amount-self').html(countCookie)
+    }
+</script>
+        <div class="h-top" id="headTopNav">
+            <script id = "logstatus" type = "text/html">
+                {{if data}}
+                <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+
+                <a class="h-fl" href="/buyer" target="_blank">{{data.username}}</a>
+                <input type = "hidden" text = "{{data.userid}}" id = "userid"/>
+                <i class="h-fl h-vline">|</i>
+                <a class="h-fl" href="/logout">[退出]</a>
+                {{else}}
+                <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
+                <a class="h-fl" href="/login">登录</a>
+                <i class="h-fl h-vline">|</i>
+                <a class="h-fl" href="/toRegister">注册</a>
+                {{/if}}
+                <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+                <dl class="h-fr h-down ml0 ltb1">
+                    <dt>
+                        <a href="/scrz/" target="_blank">商城入驻</a>
+                        <i class="h-icon"></i>
+                    </dt>
+                    <dd>
+                        <a href="/Article/mallintr" target="_blank">商城介绍</a>
+                        <a href="/scrz/" target="_blank">商城入驻</a>
+                    </dd>
+                </dl>
+                <dl class="h-fr h-down h-sd mr0">
+                    <dt>
+                        <a href="#2">收藏夹</a>
+                        <i class="h-icon"></i>
+                    </dt>
+                    <dd>
+                        <a href="/ProductConcern/Index">关注的商品</a>
+                        <a href="/ShopConcern/Index">关注的店铺</a>
+                    </dd>
+                </dl>
+                <a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+                <i class="h-fr h-vline">|</i>
+                <a class="h-fr" href="/index" target="_blank">汽配人首页</a>
+            </script>
+
+            <div class="h-w1200 ht-link" id = "loginstatus">
+
+
+            </div>
+    </div>
+    </div>
+    <!--Logo、Search-->
+    <div class="ms-panel">
+        <div class="ms-w1200 ms-head">
+            <div class="msh-logo">
+                <a class="logo" href="http://www.qipeiren.com" target="_blank">
+                    <img src="static/img/logo1.jpg" height="56" alt="" />
+                </a>
+                <a class="logo-1" href="http://mall.qipeiren.com" target="_blank">
+                    <img src="static/img/logo3.png" height="37" alt="" />
+                </a>
+                <a class="logo-2" href="http://mall.qipeiren.com" target="_blank">
+                    <img src="static/img/logo4.png" height="22" alt="" />
+                </a>
+            </div>
+            <div class="msh-info">
+                <div class="mshi-0" id="js_mshi0_hover">
+                    <div class="mshi0-1">
+                        <dl class="mshi-x wAuto">
+                            <dt id="seller"><a class="f14 fw7 mb2" href="/shop/home/4">东鑫旺配件专营店</a></dt>
+                            <dd>
+                                
+<a style="width:26px;float:left;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2881843715&amp;site=qq&amp;menu=yes" title="东鑫旺客服1">
+    <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:2881843715:52" style="vertical-align: middle;" />
+</a>
+<a style="width:26px;float:left;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2881843716&amp;site=qq&amp;menu=yes" title="东鑫旺客服2">
+    <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:2881843716:52" style="vertical-align: middle;" />
+</a>
+
+                            </dd>
+                        </dl>
+                    </div>
+                    <i class="msh-vline ms-fl mt5"></i>
+                    <div class="mshi0-2">
+                        <dl class="mshi-x ml15 ie6-ml5">
+                            <dt class="c-333">描述</dt>
+                            <dd id="productAndDescription" title="（商家得分-行业平均得分）/（行业商家最高得分-行业平均得分）">
+                            </dd>
+                        </dl>
+                        <dl class="mshi-x">
+                            <dt class="c-333">物流</dt>
+                            <dd id="sellerDeliverySpeed" title="（行业平均得分-商家得分）/（行业平均得分-行业商家最低得分）">
+
+                            </dd>
+                        </dl>
+                        <dl class="mshi-x">
+                            <dt class="c-333">服务</dt>
+                            <dd id="sellerServiceAttitude" title="（行业平均得分-商家得分）/（行业平均得分-行业商家最低得分）">
+                            </dd>
+                        </dl>
+                        <span class="ms-fl di-vm mt15 ml5"><i class="aro-icon aroi-on"></i></span>
+                    </div>
+                    <div class="mshi0-show" id="js_mshi0_show">
+                        <div class="mshils-in">
+                            <div class="mshi0-b bt0">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="w120 t-l">店铺动态评分</th>
+                                            <th></th>
+                                            <th class="t-c">与同行业相比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="t-l">描述相符：<span class="c-C81623" proanddes_v="true"></span></td>
+                                            <td class="t-r" proanddes_i="true"></td>
+                                            <td class="t-c c-C81623" proanddes_c="true"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="t-l">物流相符：<span class="c-C81623" seldelspe_v="true"></span></td>
+                                            <td class="t-r" seldelspe_i="true"></td>
+                                            <td class="t-c c-C81623" seldelspe_c="true"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="t-l">服务相符：<span class="c-C81623" selseratt_v="true"></span></td>
+                                            <td class="t-r" selseratt_i="true"></td>
+                                            <td class="t-c c-C81623" selseratt_c="true"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mshi0-b">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="w65 t-r">在线客服：</td>
+                                            <td>
+                                                
+<a style="width:26px;float:left;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2881843715&amp;site=qq&amp;menu=yes" title="东鑫旺客服1">
+    <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:2881843715:52" style="vertical-align: middle;" />
+</a>
+<a style="width:26px;float:left;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2881843716&amp;site=qq&amp;menu=yes" title="东鑫旺客服2">
+    <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:2881843716:52" style="vertical-align: middle;" />
+</a>
+
+                                            </td>
+                                        </tr>
+                                        <tr id="pop-company">
+                                            <td class="w65 t-r">公司名称：</td>
+                                            <td>十堰市东鑫旺工贸有限公司</td>
+                                        </tr>
+                                        <tr id="pop-address">
+                                            <td class="w65 t-r">所在地：</td>
+                                            <td id="regionAddressId">湖北省 十堰市 茅箭区</td>
+                                        </tr>
+                                        <tr id="hotline">
+                                            <td class="w65 t-r">联系电话：</td>
+                                            <td>0719-8316538</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mshi0-b">
+                                <a class="mshi0-btn" href="/shop/home/4"><i class="ms-icon msi-dp"></i><span>进店逛逛</span></a>
+                                <a class="mshi0-btn-x" id="plus-attent" href="javascript:addFavorite(4)"><i class="ms-icon msi-gz"></i><span>加关注</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <i class="msh-vline ms-fl mt5"></i>
+                    <div class="mshi-1" id="js_mshi1_hover">
+                        <dl class="ml20">
+                            <dt>
+                                <i class="ms-icon msi-mdp"></i>
+                                <span class="di-vm ie7-ml5 ie6-mt5">
+                                    <i class="aro-icon aroi-off"></i>
+                                </span>
+                            </dt>
+                            <dd class="c-666 mt3">手机端</dd>
+                        </dl>
+                        <div class="mshi1-show" id="js_mshi1_show">
+                            <div class="mshil1-in">
+                                <img src="http://m.qipeiren.com/Storage/Shop/4/VShop/VShopQRCode.jpg" width="120" height="120" />
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="msh-search">
+                <div class="ms-form">
+                    <input class="ms-text" type="text" name="KeyWord" id="searchBoxMS" placeholder="请输入产品关键词" />
+                    <input type="button" class="ms-btn" id="searchBtnM" value="搜商城" />
+                </div>
+                <input type="button" class="ms-btn-x" id="searchBtnS" value="搜本站" />
+            </div>
+        </div>
+    </div>
+    <!--Shop_dianzhao-->
+    <div class="ms-panel ms-top-ad">
+        <a class="di-vm" target="_blank" href="" style="background:url(/Storage/Shop/4/ImageAd/201703301602302511700.jpg) no-repeat center center;"></a>
+    </div>
+    <!--ShopNav-->
+    <div class="ms-panel ms-nav">
+        <div class="ms-w1200 msn-menu">
+            <ul class="msnm-list" id="js_menu" style="width:1200px;">
+                <li class="nav-li"><a class="nav-a" href="/shop/home/4"><span>店铺首页</span></a></li>
+                
+                <li class="nav-li">
+                    <a class="nav-a" href="/shop/home/4">
+                        <span>供应产品</span>
+                        <b class="pull-down ml5">
+                            <i class="pull-down-1"></i>
+                            <i class="pull-down-2"></i>
+                        </b>
+                    </a>
+                    <div class="nav-cate" id="js_menuNavPageBox">
+                        <ul class="cate-ul" ispagecont="true"> 
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=10&amp;sid=4&amp;pageNo=1">上海弗列加系列滤清器</a>
+                                            <b class="pull-right ml5">
+                                                <i class="pull-right-1"></i>
+                                                <i class="pull-right-2"></i>
+                                            </b>
+                                        </div>
+                                    </div>
+                                    <dl class="cu-sub"> 
+                                            <dd><a href="/shop/Search?cid=49&amp;sid=4&amp;pageNo=1">机油滤</a></dd>
+                                            <dd><a href="/shop/Search?cid=50&amp;sid=4&amp;pageNo=1">燃油滤</a></dd>
+                                            <dd><a href="/shop/Search?cid=51&amp;sid=4&amp;pageNo=1">油水分离器</a></dd>
+                                            <dd><a href="/shop/Search?cid=52&amp;sid=4&amp;pageNo=1">空滤</a></dd>
+                                    </dl>
+                                </li>
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=12&amp;sid=4&amp;pageNo=1">雷诺系列</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=13&amp;sid=4&amp;pageNo=1">东风4H发动机配件</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=14&amp;sid=4&amp;pageNo=1">美国派克滤清器系列</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=24&amp;sid=4&amp;pageNo=1">潍柴发动机</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cate-li">
+                                    <div class="cu-tit">
+                                        <div class="ct-in">
+                                            <em class="mall-spot"></em>
+                                            <a href="/Shop/Search?cid=63&amp;sid=4&amp;pageNo=1">东风商用车</a>
+                                        </div>
+                                    </div>
+                                </li>
+                        </ul>
+                    </div>
+                </li>
+
+                    <li class="nav-li"><a class="nav-a" href="/Shop/act?Id=153&shop_id=4" idiv="153"><span>公司介绍</span></a></li>
+                    <li class="nav-li"><a class="nav-a" href="/Shop/act?Id=154&shop_id=4" idiv="154"><span>授权品牌</span></a></li>
+                    <li class="nav-li"><a class="nav-a" href="/Shop/act?Id=157&shop_id=4" idiv="157"><span>公司荣誉</span></a></li>
+            </ul>
+            
+        </div>
+    </div>
+    <script type="text/html" id="rblistformat">
+        <div class="pa-img" id="js_ms_ad_panel">
+            {{each list as value index}}
+            {{if index == 0}}
+            <span id="rb{{index+1}}" style="display:block;"><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.imgUrl}}') no-repeat center center;"></a></span>
+            {{else}}
+            <span id="rb{{index+1}}" style=""><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.imgUrl}}') no-repeat center center;"></a></span>
+            {{/if}}
+            {{/each}}
+        </div>
+        <p class="pa-btn" id="js_ms_ad_btn"></p>
+        <div class="pa-ad-lr-btn" id="js_ms_ad_lr_btn" style="display: block;">
+            <div class="pa-lr-btn-in">
+                <span class="ad-lr-btn ad-lr-btn-left" onclick="prevrb()" id="js_ad_btn_left"><i></i></span>
+                <span class="ad-lr-btn ad-lr-btn-right" onclick="nextrb()" id="js_ad_btn_right"><i></i></span>
+            </div>
+        </div>
+    </script>
+        <div class="ms-panel">
+            <div class="ms-ad" id="js_ms_ad">
+
+            </div>
+        </div>
+    <!--Left-->
+    <div class="ms-panel">
+        <div class="ms-w1200 ms-content">
+            <div class="msc-l">
+                <div class="mscl-box">
+                    <p class="msclb-tit"><span>店内搜索</span></p>
+                    <div class="msclb-cont">
+                        <table class="msclbc-1">
+                            <tr>
+                                <td>关键字:</td>
+                                <td><input class="mscl-txt" type="text" id="inShopSearchText" /></td>
+                            </tr>
+                            <tr>
+                                <td>价&nbsp;格:</td>
+                                <td>
+                                    <input class="mscl-txt w45" type="text" id="inShopSearchPriceMin" onkeyup="this.value = value.replace(/[^\d.]/g, '')" maxlength="8" />
+                                    <span class="di-vm">到</span>
+                                    <input class="mscl-txt w45" type="text" id="inShopSearchPriceMax" onkeyup="this.value = value.replace(/[^\d.]/g, '')" maxlength="8" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input class="mscl-btn" type="button" value="搜索" id="inShopSearchBtn" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="mscl-box mt20">
+                    <p class="msclb-tit"><span>店铺分类</span></p>
+                    <div class="msclb-cont">
+                        <div class="msclbc-2" id="js_ms_cate">
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=10&amp;sid=4&amp;pageNo=1">上海弗列加系列滤清器</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                                <li><a href="/shop/Search?cid=49&amp;sid=4&amp;pageNo=1">机油滤</a></li>
+                                                <li><a href="/shop/Search?cid=50&amp;sid=4&amp;pageNo=1">燃油滤</a></li>
+                                                <li><a href="/shop/Search?cid=51&amp;sid=4&amp;pageNo=1">油水分离器</a></li>
+                                                <li><a href="/shop/Search?cid=52&amp;sid=4&amp;pageNo=1">空滤</a></li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=12&amp;sid=4&amp;pageNo=1">雷诺系列</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=13&amp;sid=4&amp;pageNo=1">东风4H发动机配件</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=14&amp;sid=4&amp;pageNo=1">美国派克滤清器系列</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=24&amp;sid=4&amp;pageNo=1">潍柴发动机</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                        </ol>
+                                    </dd>
+                                </dl>
+                                <dl class="msclbc-item">
+                                    <dt>
+                                        <i class="ps-icon psi-p ml20"></i>
+                                        <a href="/Shop/Search?cid=63&amp;sid=4&amp;pageNo=1">东风商用车</a>
+                                    </dt>
+                                    <dd>
+                                        <ol class="item-sub">
+                                        </ol>
+                                    </dd>
+                                </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="mscl-box mt20">
+                    <div class="msclbc-3">
+                        <ul class="mscl-tab" id="js_hotTab">
+                            <li class="active">销量排行</li>
+                            <li>关注排行</li>
+                        </ul>
+                        <div class="mscl-body" id="js_hotBod">
+                            <div class="msclb-cont" ishotbod="true">
+                                    <a href="/Product/Detail/576" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/576/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>空气滤清器(上海弗列加)AA2960</h5>
+                                                <p>￥205.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/552" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/552/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>发动机滤清器(商用车)D5000681013</h5>
+                                                <p>￥50.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/1399" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/1399/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>东风商用车原装DCi11雷诺发动机专用机油 DFCV-L30-20W50-18L</h5>
+                                                <p>￥355.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/1559" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/1559/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>空气滤清器A660-SET2</h5>
+                                                <p>￥150.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/416" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/416/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>康明斯发动机滤清器LF9009(上海弗列加）</h5>
+                                                <p>￥108.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                            </div>
+                            <div class="msclb-cont" ishotbod="true" style="display:none;">
+                                    <a href="/Product/Detail/567" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/567/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>空气滤清器（上海弗列加）AA2948</h5>
+                                                <p>￥180.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/6522" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/6522/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>油水分离器传感器F076-078</h5>
+                                                <p>￥25.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/466" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/466/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>发动机滤清器(弗列加)FS1022进口</h5>
+                                                <p>￥210.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/551" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/551/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>发动机滤清器（弗列加）FS36234</h5>
+                                                <p>￥79.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                                    <a href="/Product/Detail/643" target="_blank">
+                                        <dl>
+                                            <dt>
+                                                <img src="/Storage/Shop/4/Products/643/1_50.png" alt="" />
+                                            </dt>
+                                            <dd>
+                                                <h5>离合器从动盘总成直径350双桥加强型1601.6B-130</h5>
+                                                <p>￥160.00</p>
+                                            </dd>
+                                        </dl>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<script type="text/html" id="clistformat">
+    {{each list data}}
+    <dl class="mscr-item">
+        <dt><a href="/goods/{{data.id}}" target="_blank"><img class="lazyload" src="{{data.imgUrl}}" data-url="{{data.imgUrl}}" alt="" /></a></dt>
+        <dd>
+            <h5><a target="_blank" href="/goods/{{data.id}}">{{data.name}}</a></h5>
+            <h6>¥{{data.price}}</h6>
+            <p>已售<span>{{data.count}}</span>件</p>
+        </dd>
+    </dl>
+    {{/each}}
+</script>
+
+<div class="msc-r">
+    <div class="mscr-x mscr-1">
+        <h3><span>精品推荐</span><a href="/Shop/Search?sid=4">查看更多&gt;&gt;</a></h3>
+        <div class="mscr-list" id="clistcontent">
+
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    <!--Bottom-->
+
+<link href="/static/css/css_foot.css" rel="stylesheet" />
+<div class="h-bottom ms-foot">
+    <div class="h-w1200 msf-service">
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-1">
+                <dt><i class="op-icon opi-50-1"></i></dt>
+                <dd>
+                    <h4>质量保障</h4>
+                    <p>正规渠道，质量保障</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-2">
+                <dt><i class="op-icon opi-50-2"></i></dt>
+                <dd>
+                    <h4>品类齐全</h4>
+                    <p>各大车系千万配件，一站购齐</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-3">
+                <dt><i class="op-icon opi-50-3"></i></dt>
+                <dd>
+                    <h4>全网低价</h4>
+                    <p>源头直达，价格大幅优于传统渠道</p>
+                </dd>
+            </dl>
+        </a>  
+        <a href="/Article/mallintr" target="_blank">
+            <dl class="msfs-4">
+                <dt><i class="op-icon opi-50-4"></i></dt>
+                <dd>
+                    <h4>售后无忧</h4>
+                    <p>安心选购，品牌保障，售后无忧</p>
+                </dd>
+            </dl>
+        </a>  
+    </div>
+    <div class="h-w1200 msf-info">
+            <dl class="msfi-1">
+            <dt><strong>新手入门</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/62 " target="_blank" rel="nofollow">会员注册</a> 
+                    </dd>
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/63 " target="_blank" rel="nofollow">购物流程</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-2">
+            <dt><strong>常见问题</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/65 " target="_blank" rel="nofollow">退换货政策</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-3">
+            <dt><strong>支付方式</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/66 " target="_blank" rel="nofollow">支付方式</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-4">
+            <dt><strong>配送说明</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/64 " target="_blank" rel="nofollow">关于配送</a> 
+                    </dd>
+            </dl>
+            <dl class="msfi-5">
+            <dt><strong>关于我们</strong></dt>
+
+                    <dd>
+                        <i>&gt;</i><a href="/Article/Details/67 " target="_blank" rel="nofollow">商城介绍</a> 
+                    </dd>
+            </dl>
+        <dl class="msfi-6">
+            <dt>
+                <img src="http://img.qipeiren.com/Public/images/b_ewm.png" />
+            </dt>
+            <dd><span>扫码关注</span></dd>
+            <dd>汽配人网官方微信</dd>
+        </dl>
+    </div>
+</div>
+
+<link href="/static/css/css_sitefoot.css" rel="stylesheet" />
+<div class="pw-panel pw-foot">
+    <div class="pw-w1200">
+        <div class="foot-box clearfix">
+            <div class="fb-logo">
+                <a href="http://www.qipeiren.com" class="logo-img"></a>
+            </div>
+            <div class="fb-service">
+                <div class="group-spot clearfix">
+                    <dl class="spot-item">
+                        <dt class="item-tit">新手指南</dt>
+                        <dd class="item-list">
+                            <a href="http://mall.qipeiren.com/Register" target="_blank">注册新用户</a>
+                            <a href="http://mall.qipeiren.com/Article" target="_blank">帮助中心</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">网站服务</dt>
+                        <dd class="item-list">
+                            <a href="http://www.qipeiren.com/cms/wp" target="_blank">汽配旺铺</a>
+                            <a href="http://mall.qipeiren.com/Article/mallintr" target="_blank">汽配商城</a>
+                            <a href="http://www.qipeiren.com/helper" target="_blank">汽配助手</a>
+                            <a href="http://www.qipeiren.com/cms/yxb" target="_blank">营销宝</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item item-multiseriate">
+                        <dt class="item-tit">特色市场</dt>
+                        <dd class="item-list">
+                            <a href="http://syc.qipeiren.com" target="_blank">商用车市场</a>
+                            <a href="http://cyc.qipeiren.com" target="_blank">乘用车市场</a>
+                            <a href="http://dongfeng.qipeiren.com" target="_blank">东风市场</a>
+                            <a href="http://zhongqi.qipeiren.com" target="_blank">重汽市场</a>
+                            <a href="http://shanqi.qipeiren.com" target="_blank">陕汽市场</a>
+                            <a href="http://yiqi.qipeiren.com" target="_blank">一汽市场</a>
+                            <a href="http://beiqi.qipeiren.com" target="_blank">北汽市场</a>
+                            <a href="http://jianghuai.qipeiren.com" target="_blank">江淮市场</a>
+                            <a href="http://zyc.qipeiren.com" target="_blank">专用汽车</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">地方分站</dt>
+                        <dd class="item-list">
+                            <a href="http://jiangsu.qipeiren.com" target="_blank">江苏分站</a>
+                            <a href="http://guangdong.qipeiren.com" target="_blank">广东分站</a>
+                            <a href="http://zq.qipeiren.com" target="_blank">山东分站</a>
+                            <a href="http://henan.qipeiren.com" target="_blank">河南分站</a>
+                        </dd>
+                    </dl>
+                    <dl class="spot-item">
+                        <dt class="item-tit">移动端</dt>
+                        <dd class="item-list">
+                            <div class="m-siteurl"><a href="http://m.qipeiren.com" target="_blank">手机登录：m.qipeiren.com</a></div>
+                            <div class="qr-code">
+                                <div class="app-btn">
+                                    <i class="app-v-icon avi-i"></i>
+                                    <span class="di-vm ml5">iPhone</span>
+                                </div>
+                                <div class="app-code">
+                                    <div class="qpr-qrcode">
+                                        <i class="app-qpr-qrcode"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="qr-code">
+                                <div class="app-btn">
+                                    <i class="app-v-icon avi-a"></i>
+                                    <span class="di-vm ml5">Android</span>
+                                </div>
+                                <div class="app-code">
+                                    <div class="qpr-qrcode">
+                                        <i class="app-qpr-qrcode"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="fb-siteinfo">
+                    <div class="site-nav clearfix">
+                        <a href="http://www.qipeiren.com/About/About.asp" target="_blank" rel="nofollow">关于我们</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/About/Exempt.asp" target="_blank" rel="nofollow">法律声明</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/About/Link.asp" target="_blank">友情链接</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/sitemap.html" target="_blank">网站地图</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/chanpin/" target="_blank">汽车配件批发</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/pic/" target="_blank">汽车配件图片</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/peijian/" target="_blank">汽车配件大全</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/ask/" target="_blank">汽配问答</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/changjia/" target="_blank">汽配厂家</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/brand/" target="_blank">汽配品牌</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/topics/" target="_blank">汽配主题</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.qipeiren.com/qpc/" target="_blank">汽配城</a>
+                        <label class="v-line">|</label>
+                        <a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">鄂ICP备14009261号</a>
+                    </div>
+                    <div class="site-info">
+                        <a>经营许可证编号：鄂B2-20140114</a>
+                        <span class="ml20">服务热线：0719-8311727</span>
+                        <br />
+                        <span class="di-vm">Copyright &copy; 2005-2018 十堰亿脉科技有限公司 版权所有</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<span style="display:none">
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F607271da1d927f7e761e62f3d232b15a' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</span>-->
+
+    <!--Right-->
+    <div class="right-side">
+<div class="right-side-menu">
+    <ul class="menu-top">
+        <s></s>
+        <li data-tag="cart" arrow class="side-cart" id="right_cart">
+            <i class="cart"></i>
+            <p>购物车</p>
+            <em>0</em>
+        </li>
+        <s></s>
+
+    </ul>
+    <ul class="menu-bot">
+
+    </ul>
+</div>
+
+<script type="text/html" id = "shopCarFormat">
+    {{each list data}}
+    <div class="cart-list-goods cl">
+        <input type="hidden" name="gid" id="gid{{$index}}" value="{{data.id}}"/>
+        <a href="/goods/{{data.id}}" title="{{data.name}}" target="_blank">
+            <img src="{{data.imgUrl}}" alt=""></a>
+        <div class="s-num"><span id="gcount{{$index}}">{{data.count}}</span></div>
+        <div class="s-g-price">¥{{data.price}}</div>
+        <div class="s-g-remove">
+            <a href="/shopCar/del/{{data.id}}">删除</a>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<div class="side-content">
+    <div class="side-cart-c">
+        <div class="side-bd">
+            <input type="hidden" value="2" id="hidAuditStatus" />
+            <input type="hidden" value="1" id="hidSaleStatus" />
+            <div class="cart-top">
+                <a href="/shopCar" title="" target="_blank">查看全部</a>
+            </div>
+            <div class="cart-list">
+                <ul id="side-cart-list">
+
+                </ul>
+                <ul id="side-B2Bcart-list" style="margin-top:16px;"></ul>
+            </div>
+        </div>
+        <div class="side-bt">
+            <input type="button" id="toSubmitOrder" value="购物车结算">
+        </div>
+    </div>
+    <div class="side-asset-c">
+        <div class="side-hd">
+            <a class="side-close" title="关闭">>></a>
+            <a href="/UserCoupon/Index" target="_blank">资产中心</a>
+        </div>
+        <div class="side-bd">
+            <div class="side-asset-total cl">
+                <div>
+                    <span>0</span>
+                    <p>我的积分</p>
+                </div>
+                <div>
+                    <span>0</span>
+                    <p>优惠券</p>
+                </div>
+            </div>
+            <div class="side-asset-list" id="myCouponList">
+                <p>已领取的优惠券</p>
+                <ul>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="side-atgoods-c">
+        <div class="side-hd">
+            <a class="side-close" title="关闭">>></a>
+            <a href="productConcern/index" target="_blank">关注商品</a>
+        </div>
+        <div class="side-bd">
+            <ul class="side-goods-list cl">
+            </ul>
+        </div>
+    </div>
+    <div class="side-history-c">
+        <div class="side-hd">
+            <a class="side-close" title="关闭">>></a>
+            <a href="#" target="_blank">浏览历史</a>
+        </div>
+        <div class="side-bd">
+            <ul class="side-goods-list cl">
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var myurl = "/shopData";
+    var shopCarurl = "/shopCarData";
+    var isloginbool =false;
+    var ShopCarFormat = function(){
+        $.ajax({
+            url: shopCarurl,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+                $("#side-cart-list").append(template("shopCarFormat",{list:data.goods}));
+
+            },
+            error: function(data){
+                //parent.layer.msg(res.title);
+                //alert(res.title);
+            }
+        });
+    }
+
+    var ShopDetailFormat = function() {
+
+        $.ajax({
+            url: myurl,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                alert(data.user);
+                if(data.user != null){
+                    isloginbool = true;
+                    ShopCarFormat();
+                }
+                $("#js_ms_ad").append(template("rblistformat", {list: data.rblist}));
+                $("#loginstatus").append(template("logstatus", {data: data.user}));
+                $("#clistcontent").append(template("clistformat", {list: data.clist}));
+
+
+
+
+
+            },
+            error: function (data) {
+                alert("error")
+                //parent.layer.msg(res.title);
+                //alert(res.title);
+            }
+        });
+    }
+    $(function(){
+
+
+        ShopDetailFormat();
+        setInterval(nextrb,4000);
+        var rightSide=$('.right-side');
+        var rightContent=$('.side-content');
+        $('.right-side .menu-top li[arrow]').click(function() {
+
+            if (!isloginbool){
+                alert(isloginbool);
+                location.href = '/login';
+                //ShopCarFormat();
+            }else{
+
+                var tag=$(this).data('tag');
+                switch(tag){
+                    case 'cart':
+                        rightContent.find('.side-cart-c').show().siblings().hide();
+                        break;
+                    case 'asset':
+                        rightContent.find('.side-asset-c').show().siblings().hide();
+                        break;
+                    case 'at-goods':
+                        rightContent.find('.side-atgoods-c').show().siblings().hide();
+                        break;
+                    case 'history':
+                        rightContent.find('.side-history-c').show().siblings().hide();
+                        break;
+                }
+                if (rightContent.is(':hidden')) {
+                    rightContent.show();
+                    rightSide.css('right','-220px').animate({right:'0'},300);
+                }
+                $(this).addClass('active').siblings().removeClass('active');
+                isloginbool = true;
+            }
+        });
+
+        $('.right-side-menu li').hover(function(){
+            $(this).find('span').show().stop(false,true).animate({'right':40,'opacity':1},300);
+        },function(){
+            $(this).find('span').stop(false,true).animate({'right':60,'opacity':0},300,function(){$(this).hide()});
+        });
+        /*IE6 右侧固定 modify right-side*/
+        /*if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
+            $(window).scroll(function(){
+                if($('.right-side')){
+                    $('.right-side').css({'top':document.documentElement.scrollTop +'px'});
+                }
+            });
+        }*/
+        $(document).on('click', function(e){
+            var  event = e ? e : window.event;
+            var obj = event.srcElement ? event.srcElement : event.target;
+            if (! $.contains(rightSide.get(0), obj)) {
+                sideRightClose();
+            }
+        });
+
+        function sideRightClose(){
+            if (rightContent.is(':visible')) {
+                if(!rightSide.is(':animated')){
+                    rightSide.animate({right:'-220px'},200,function(){
+                        rightContent.hide();
+                        rightSide.css('right',0);
+                        $('.right-side .menu-top li[arrow]').removeClass('active')
+                    });
+                }
+            }
+        }
+
+        $('.side-close').click(function() {
+            sideRightClose();
+        });
+
+        $('#right_advise').click(function(){
+            window.open("/advise","_blank");
+        });
+
+        $('.go-top').click(function() {
+            $('body,html').animate({'scrollTop':0},300);
+        });
+
+        $('.side-cart-c .cart-list').height($(window).height()-120);
+        $(window).resize(function() {
+            $('.side-cart-c .cart-list').height($(window).height()-120);
+        });
+
+        $(".side-asset-c .side-bd,.side-atgoods-c .side-bd,.side-history-c .side-bd,.side-cart-c .cart-list").niceScroll({
+            cursorwidth:5,
+            cursorcolor:"#616161",
+            cursorborder :0,
+            cursorborderradius:0
+        });
+
+        $('#toSubmitOrder').click(function() {
+            var ids = {};
+            var counts = {};
+
+            var num = 0;
+            $("#side-cart-list").find('input[name="gid"]').each(function (i, e) {
+
+                ids[num] = document.getElementById('gid'+i).value;
+                counts[num] = document.getElementById('gcount'+i).innerHtml;
+                num++;
+            });
+
+            if(ids != null){
+                $.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
+
+                    loading.close();
+
+                    if(result.error)
+                        $.dialog.errorTips(result.msg);
+
+                });
+            }
+
+        });
+
+    });
+
+    var nextrb = function () {
+        var num1 = 0;
+        for (var i = 1; i <= 2; i++) {
+            if($("#rb"+i).css("display") === 'block'){
+                num1 = i;
+                break;
+            }
+        }
+        if(num1 < 2)
+            num1++;
+        else if(num1 >= 2){
+            num1 = 1;
+        }
+        for (var i = 1; i <= 2; i++) {
+
+            if(num1 == i){
+                $("#rb"+i).css("display","block");
+                //$("#ad"+i).addClass("hp1-ad-btn-active");
+            }
+            else{
+                $("#rb"+i).css("display","none");
+                /*if($("#ad"+i).hasClass("hp1-ad-btn-active")){
+                    $("#ad"+i).removeClass("hp1-ad-btn-active");
+                }*/
+            }
+        }
+    }
+    var prevrb = function () {
+        var num2 = 0;
+        for (var i = 1; i <= 2; i++) {
+            if($("#rb"+i).css("display") === 'block'){
+                num2 = i;
+                break;
+            }
+        }
+        if(num2 > 1) {
+            num2--;
+        }
+        else if(num2 <= 1){
+            num2 = 2;
+        }
+        for (var i = 1; i <= 2; i++) {
+
+            if(num2 == i){
+                $("#rb"+i).css("display","block");
+                //$("#ad"+i).addClass("hp1-ad-btn-active");
+            }
+            else{
+                $("#rb"+i).css("display","none");
+                /*if($("#ad"+i).hasClass("hp1-ad-btn-active")){
+                    $("#ad"+i).removeClass("hp1-ad-btn-active");
+                }*/
+            }
+        }
+    }
+
+    function bindSelectAll() {
+        $('input[name="s-checkAll"]').change(function () {
+            var checked = this.checked;
+            $('#side-cart-list input[type=checkbox]').prop('checked',this.checked);
+            if (checked) {
+                $('#s-total-money').html(getCheckProductPrice());
+                $('#side-cart-list li').each(function() {
+                    var shopP=$(this).find('.cart-shop-price');
+                    shopP.html(shopP.data('shoprice').toFixed(2));
+                });
+            }
+            else {
+                $('#s-total-money').html("0.00");
+                $('#side-cart-list .cart-shop-price').html("0.00");
+
+            }
+            $('#s-total-num').html(getCheckProductCount());
+        });
+
+        $('input[name="checkShop"]').change(function () {
+            var checked = this.checked;
+            var total = $(this).siblings('.cart-shop-price').html();
+            $(this).parent().siblings().find('input[type="checkbox"]').prop('checked', checked);
+
+            var allShopChecked = true;
+            $('#side-cart-list input[type="checkbox"]').each(function () {
+                if (!$(this).prop('checked')) {
+                    allShopChecked = false;
+                }
+            });
+            if (allShopChecked)
+                $('input[name="s-checkAll"]').prop('checked', true);
+            else
+                $('input[name="s-checkAll"]').prop('checked',false);
+
+            var t = 0;
+            $.each($(this).parent().siblings(), function () {
+                var a = $(this).find('input[name="checkItem"]:checked').siblings('.s-g-price').html();
+                t += (+a);
+            })
+            $(this).siblings('.cart-shop-price').html(t.toFixed(2));
+            $('#s-total-money').html(getCheckProductPrice());
+            $('#s-total-num').html(getCheckProductCount());
+        });
+
+        $('input[name="checkItem"]').change(function () {
+            var checked = this.checked;
+            if (checked)
+                $(this).prop('checked', checked);
+            else
+                $(this).removeAttr('checked');
+
+            //判断店铺下的所有商品是否全选中
+            var allProductChecked = true;
+            $(this).parent().siblings('.cart-list-goods').each(function() {
+                if (!$(this).find('input').prop('checked'))
+                    allProductChecked = false;
+            });
+            if (allProductChecked)
+                $(this).parent().siblings().find('input[name="checkShop"]').prop('checked', checked);
+            else
+                $(this).parent().siblings().find('input[name="checkShop"]').removeAttr('checked');;
+
+            //判断所有店铺是否都选中了
+            var allShopChecked = true;
+            $('#side-cart-list input[type="checkbox"]').each(function (i, e) {
+                if (!$(this).prop('checked')) {
+                    allShopChecked = false;
+                }
+            });
+            if (allShopChecked)
+                $('input[name="s-checkAll"]').prop('checked', true);
+            else
+                $('input[name="s-checkAll"]').removeAttr('checked');
+
+            var t = 0;
+            $.each($(this).parents('li').find('input[name="checkItem"]:checked'), function () {
+                var a = $(this).siblings('.s-g-price').html();
+                t += (+a);
+            })
+            $(this).parent().siblings('.cart-list-shop').find('.cart-shop-price').html(t.toFixed(2));
+
+            $('#s-total-money').html(getCheckProductPrice());
+            $('#s-total-num').html(getCheckProductCount());
+        });
+    }
+    function getCheckProductPrice() {
+        var t = 0;
+        $.each($('input[name="checkItem"]:checked'), function () {
+            var a = $(this).siblings('.s-g-price').html();
+            t += (+a);
+        })
+        return t.toFixed(2);
+    }
+    function getCheckProductCount() {
+        var t = 0;
+        $.each($('input[name="checkItem"]:checked'), function () {
+            var c = $(this).siblings('.s-num').children().html();
+            d = parseInt(c);
+            t += d;
+        })
+        return t;
+    }
+    function removeFromCartSelf(skuId, proId) {
+        var loading = showLoading();
+
+        if (skuId == "") {
+            $.post('/cart/UpdateB2BCartItem', { productId: proId, count: 0 }, function (result) {
+                loading.close();
+                if (result.success)
+                {
+                    loadCartInfo();
+                    var countCookie = $.cookie('qpr_mall_cart_count');
+                    $('#right_cart em').text(countCookie);
+                    $('#shopping-amount-self').html(countCookie)
+                    $('.side-content').find('.side-cart-c').show().siblings().hide();
+                }
+                else
+                {
+                    $.dialog.errorTips(result.msg);
+                }
+            });
+        }
+        else {
+            $.post('/cart/RemoveFromCart', { skuId: skuId }, function (result) {
+                loading.close();
+                if (result.success)
+                {
+                    loadCartInfo();
+                    var countCookie = $.cookie('qpr_mall_cart_count');
+                    $('#right_cart em').text(countCookie);
+                    $('#shopping-amount-self').html(countCookie)
+                    $('.side-content').find('.side-cart-c').show().siblings().hide();
+                }
+                else
+                {
+                    $.dialog.errorTips(result.msg);
+                }
+            });
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+        var rightSide=$('.right-side');
+        var rightContent=$('.side-content');
+
+        // 右侧个人中心图标
+        $("#right_userCenter").click(function () {
+            if (isloginbool) {
+                window.open("/UserCenter");
+            }
+            else {
+                /*$.fn.login({}, function () {
+                    location.href = "/";
+                }, '', '', '/Login/Login');*/
+                location.href = '/login';
+            }
+        });
+
+        $('.right-side .menu-top li[arrow]').click(function() {
+
+            /*if (!userprops ){
+
+                location.href = "/login";
+
+            }else{*/
+
+            var tag=$(this).data('tag');
+            switch(tag){
+                case 'cart':
+                    //loadCartInfo();
+                    rightContent.find('.side-cart-c').show().siblings().hide();
+                    break;
+                case 'asset':
+                    rightContent.find('.side-asset-c').show().siblings().hide();
+                    break;
+                case 'at-goods':
+                    rightContent.find('.side-atgoods-c').show().siblings().hide();
+                    break;
+                case 'history':
+                    rightContent.find('.side-history-c').show().siblings().hide();
+                    break;
+            }
+            if (rightContent.is(':hidden')) {
+                rightContent.show();
+                rightSide.css('right','-220px').animate({right:'0'},300);
+            }
+            $(this).addClass('active').siblings().removeClass('active');
+            //}
+        });
+
+        $('.right-side-menu li').hover(function(){
+            $(this).find('span').show().stop(false,true).animate({'right':40,'opacity':1},300);
+        },function(){
+            $(this).find('span').stop(false,true).animate({'right':60,'opacity':0},300,function(){$(this).hide()});
+        });
+        /*IE6 右侧固定 modify right-side*/
+        /*if(($.browser.msie && ($.browser.version <= '6.0') && !$.support.style)){
+            $(window).scroll(function(){
+                if($('.right-side')){
+                    $('.right-side').css({'top':document.documentElement.scrollTop +'px'});
+                }
+            });
+        }*/
+        $(document).on('click', function(e){
+            var  event = e ? e : window.event;
+            var obj = event.srcElement ? event.srcElement : event.target;
+            if (! $.contains(rightSide.get(0), obj)) {
+                sideRightClose();
+            }
+        });
+
+        function sideRightClose(){
+            if (rightContent.is(':visible')) {
+                if(!rightSide.is(':animated')){
+                    rightSide.animate({right:'-220px'},200,function(){
+                        rightContent.hide();
+                        rightSide.css('right',0);
+                        $('.right-side .menu-top li[arrow]').removeClass('active')
+                    });
+                }
+            }
+        }
+
+        $('.side-close').click(function() {
+            sideRightClose();
+        });
+
+        $('#right_advise').click(function(){
+            window.open("/advise","_blank");
+        });
+
+        $('.go-top').click(function() {
+            $('body,html').animate({'scrollTop':0},300);
+        });
+
+        $('.side-cart-c .cart-list').height($(window).height()-120);
+        $(window).resize(function() {
+            $('.side-cart-c .cart-list').height($(window).height()-120);
+        });
+
+        $(".side-asset-c .side-bd,.side-atgoods-c .side-bd,.side-history-c .side-bd,.side-cart-c .cart-list").niceScroll({
+            cursorwidth:5,
+            cursorcolor:"#616161",
+            cursorborder :0,
+            cursorborderradius:0
+        });
+
+
+    });
+</script>
+
+    </div>
+</body>
+ 
+</html>
