@@ -1585,7 +1585,7 @@
             type: "post",
             dataType: "json",
             success: function(data){
-                $("#side-cart-list").append(template("shopCarFormat",{list:data.goods}));
+                $("#side-cart-list").html(template("shopCarFormat",{list:data.goods}));
 
             },
             error: function(data){
@@ -1649,7 +1649,7 @@
             if (!isloginbool){
                 alert(isloginbool);
                 location.href = '/login';
-                //ShopCarFormat();
+                ShopCarFormat();
             }else{
 
                 var tag=$(this).data('tag');
