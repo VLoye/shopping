@@ -9,7 +9,9 @@ $(function () {
 
 function bindSubmit() {
 	$('#submit').on('click',function (){
+	    alert("提交订单");
 		var addressid = $(':radio[name="address"]:checked').val();
+		alert("收货地址"+addressid);
 		if(!addressid)
 		{
 			$.dialog.tips('请选择或新建收货地址');
@@ -24,22 +26,23 @@ function bindSubmit() {
 			$.each($('input[type="hidden"][name="sellerid"]'), function() {
 				sellerids.push($(this).val());
 			});
-            $.each($('.ngoodscount'), function() {
+            $.each($('input[type="hidden"][name="ngoodscount"]'), function() {
                 goodscounts.push($(this).val());
             });
 			$.ajax({
 	            type: "post",
 	            url: "/order/add",
-	            async: false,
+	            async: true,
 	            data: {
-	            	"goodsID":goodsids,
+	            	"goodsId":goodsids,
                     "count":goodscounts,
-                    "sellerid":sellerids,
-                    "addressid":addressid
+                    "sellerId":sellerids,
+                    "addressId":addressid
                 },
-                dataType : "text",
-	            success: function (result) {
-	                if (result.success) {
+                dataType : "json",
+	            success: function(result) {
+                    alert(result.msg);
+	                if (result.msg=="SUCCESS") {
 	                    window.location.href = "SubmitSuccess.html";
 	                }
 	                else {
@@ -50,10 +53,10 @@ function bindSubmit() {
 	                $(this).removeAttr('disabled');
 	            }
 	        });
-			
+
 		}
-		
-		
+
+
 	});
 }
 
@@ -548,7 +551,9 @@ function deleteAddress(id) {
         });
     });
 }
-function saveAddress(adid,linkman, tel, detailedaddress, province, city, area , userid , callBack) {
+
+function saveAddress(adid, linkman, tel, detailedaddress, province, city, area, userid, callBack) {
+
     id = isNaN(parseInt(adid)) ? '' : parseInt(adid);
 
     var url = '/address/saveorupdateaddress';
@@ -556,26 +561,28 @@ function saveAddress(adid,linkman, tel, detailedaddress, province, city, area , 
     var data = {};
     if (id) {
         data['addressid'] = id;
-    }else{
+    } else {
         data['addressid'] = '';
     }
     data['linkman'] = linkman;
     data['detailedaddress'] = detailedaddress;
     data['tel'] = tel;
-    data['province']=province;
-	data['city']=city;
-	data['area']=area;
-	data['userid']=userid;
+    data['province'] = province;
+    data['city'] = city;
+    data['area'] = area;
+    data['userid'] = userid;
 
     var loading = showLoading();
     $.post(url, data, function (result) {
         loading.close();
+        alert(result);
         if (result.success)
             callBack(result);
         else
             $.dialog.errorTips('保存失败!' + result.msg);
     });
 }
+
 function showEditArea(id) { 
 	if(id != 0){
 	    var detailedaddress = document.getElementById("detailedaddress-"+id).innerText;

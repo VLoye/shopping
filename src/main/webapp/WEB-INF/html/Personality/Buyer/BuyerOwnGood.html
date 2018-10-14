@@ -78,13 +78,14 @@
         OwnGoodsFormat4();
     });
     var OwnGoodsFormat0 = function(){
+
         $.ajax({
             url: '/buyer/OwnGoodsData',
             type: "post",
-            data:{key:''},
+            data:{key:""},
             dataType: "json",
             success: function(data){
-                $("#tab1").append(template("orderFormat",{list:data}));
+                $("#tab1").append(template("orderFormat",{list:data.OwnGoodsData}));
             },
             error: function(data){
                 //alert("ajax error : "+res);
@@ -98,7 +99,8 @@
             data:{key:'0'},
             dataType: "json",
             success: function(data){
-                $("#tab2").append(template("orderFormat",{list:data}));
+                console.log(data);
+                $("#tab2").append(template("orderFormat",{list:data.OwnGoodsData}));
             },
             error: function(data){
                 //alert("ajax error : "+res);
@@ -112,7 +114,7 @@
             data:{key:'1'},
             dataType: "json",
             success: function(data){
-                $("#tab3").append(template("orderFormat",{list:data}));
+                $("#tab3").append(template("orderFormat",{list:data.OwnGoodsData}));
             },
             error: function(data){
                 //alert("ajax error : "+res);
@@ -126,7 +128,7 @@
             data:{key:'2'},
             dataType: "json",
             success: function(data){
-                $("#tab4").append(template("orderFormat",{list:data}));
+                $("#tab4").append(template("orderFormat",{list:data.OwnGoodsData}));
             },
             error: function(data){
                 //alert("ajax error : "+res);
@@ -140,7 +142,7 @@
             data:{key:'3'},
             dataType: "json",
             success: function(data){
-                $("#tab5").append(template("orderFormat",{list:data}));
+                $("#tab5").append(template("orderFormat",{list:data.OwnGoodsData}));
             },
             error: function(data){
                 //alert("ajax error : "+res);
@@ -198,17 +200,17 @@
                         <div class="order-status5">
                             <div class="order-title">
                                 <div class="dd-num">订单编号：<a href="javascript:;">{{data.id}}</a></div>
-                                <span>成交时间：{{data.paytime}}</span>
+                                <span>成交时间：{{data.start_time}}</span>
                                 <!--    <em>店铺：小桔灯</em>-->
                             </div>
                             <div class="order-content">
                                 <div class="order-left">
-                                    {{each list data.goods as item}}
+                                    {{each data.goods as item}}
                                     <ul class="item-list">
                                         <li class="td td-item">
                                             <div class="item-pic">
                                                 <a href="#" class="J_MakePoint">
-                                                    <img src="{{item.img_url}}" class="itempic J_ItemImg">
+                                                    <img src="{{item.imgURL}}" class="itempic J_ItemImg">
                                                 </a>
                                             </div>
                                             <div class="item-info">
@@ -224,12 +226,12 @@
                                         </li>
                                         <li class="td td-price">
                                             <div class="item-price">
-                                                {{item.goodsprice}}
+                                                {{item.price}}
                                             </div>
                                         </li>
                                         <li class="td td-number">
                                             <div class="item-number">
-                                                <span>×</span>{{item.count}}
+                                                <span>×</span>{{item.coun}}
                                             </div>
                                         </li>
                                         {{if data.status == 0 || data.status == 4}}
@@ -257,7 +259,7 @@
                                 <div class="order-right">
                                     <li class="td td-amount">
                                         <div class="item-amount">
-                                            合计：{{data.totalprice}}
+                                            合计：{{data.totalPrice}}
                                             <p>含运费：<span>10.00</span></p>
                                         </div>
                                     </li>

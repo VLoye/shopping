@@ -131,9 +131,11 @@ public class BuyerCenterController {
 
 
     @ResponseBody
-    @RequestMapping(value="/buyer/OwnGoodsData",method = RequestMethod.POST)
-    public Object OwnGoodsData(@Param("key") Integer key, HttpServletRequest request){
-        return orderInfoService.queryOrderByUserid(key,request);
+    @RequestMapping(value="/buyer/OwnGoodsData",produces = "text/json;charset=UTF-8")
+    public Object OwnGoodsData(@Param("key") Integer key,Model model, HttpServletRequest request){
+        List list = (List) orderInfoService.queryOrderByUserid(key,request);
+        model.addAttribute("OwnGoodsData",list);
+        return JSONUtil.toJSON(model);
     }
 
     @RequestMapping(value = "/testfm",method = RequestMethod.GET)

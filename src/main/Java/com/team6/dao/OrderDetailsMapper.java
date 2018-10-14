@@ -1,9 +1,9 @@
 package com.team6.dao;
 
-import com.team6.dto.order.UserOrderData;
 import com.team6.entity.OrderDetails;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderDetailsMapper {
     /**
@@ -64,5 +64,5 @@ public interface OrderDetailsMapper {
     /**
      * 封装订单的详细信息
      */
-    List<UserOrderData> queryOrderDate(Integer order_id);
+    List<Map<String,Object>> queryOrderDate(Integer order_id);
 }
