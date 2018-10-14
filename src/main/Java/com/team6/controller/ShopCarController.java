@@ -1,6 +1,5 @@
 package com.team6.controller;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.team6.service.login.LoginService;
 import com.team6.service.shopcar.ShopCarService;
 import org.noggit.JSONUtil;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
