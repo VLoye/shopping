@@ -158,8 +158,8 @@
   <select id="queryOrderByUserId" resultType="map">
     select id,start_time,pay_time,status
     from order_info where user_id=#{user_id}
-    <if test="status != null and status!=''">
-      and status=#{status} /*如果查询的状态不为空，则加入查询条件*/
+    <if test="status != null">
+      and status=#{status,jdbcType=INTEGER} /*如果查询的状态不为空，则加入查询条件*/
     </if>
   </select>
 </mapper>
