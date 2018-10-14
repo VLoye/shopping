@@ -49,9 +49,10 @@ public class ShopCarController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shopCar/add/{goodsId}",method = RequestMethod.POST)
-    public Object shopCardAdd(HttpServletRequest request,@PathVariable("goodsId") int goodsId, @RequestParam("count") int count){
-
+    @RequestMapping(value = "/shopCar/add",method = RequestMethod.POST)
+    public Object shopCardAdd(HttpServletRequest request){
+        int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+        int count = Integer.parseInt(request.getParameter("count"));
         return shopCarService.addShopCar(goodsId,count,request);
     }
 

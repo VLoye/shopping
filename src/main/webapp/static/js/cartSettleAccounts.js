@@ -332,8 +332,10 @@ function removeFromCart(goodsId) {
         var url = '/shopCar/del/' + goodsId;
         $.post(url, function (result) {
             loading.close();
-            if (result.success) {
+            if (result.msg=="SUCCESS") {
                 loadCartInfo();
+                CartFormat();
+
                 /*var countCookie = $.cookie('qpr_mall_cart_count');
                 $('#shopping-amount-self').html(countCookie);*/
             }
