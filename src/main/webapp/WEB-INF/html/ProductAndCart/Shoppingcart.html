@@ -186,8 +186,8 @@
             type: "post",
             dataType: "json",
             success: function(data){
-                $("#loginstatus").append(template("logstatus",{data:data.user}));
-                $("#content1").append(template("goodsList",{list:data.goods}));
+                $("#loginstatus").html(template("logstatus",{data:data.user}));
+                $("#content1").html(template("goodsList",{list:data.goods}));
             }
         });
     };
