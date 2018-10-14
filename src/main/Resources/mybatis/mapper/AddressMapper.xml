@@ -157,4 +157,8 @@
       user_id = #{userId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="queryByUserId" resultType="map">
+        select id as addressid,linkman,tel,province,city,area,detailed_address
+        from address where user_id=#{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

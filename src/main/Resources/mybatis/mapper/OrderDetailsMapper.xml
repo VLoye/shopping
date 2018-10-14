@@ -28,6 +28,15 @@
     from order_details
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="queryOrderDate" resultType="map"  parameterType="java.lang.Integer">
+     select g.id as goodsid,od.count as coun,g.name as goodsname,
+     g.img_url as imgURL,g.price as price
+    from order_details as od,goods as g
+    where od.goods_id=g.id
+    and od.order_id=#{order_id,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
