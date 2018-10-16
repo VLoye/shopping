@@ -39,8 +39,8 @@
                 success: function(data){
                     console.log(data);
 
-                    $("#consignee-list").append(template("dataAddress",{list:data.address}));
-                    $("#s-content").append(template("selectedc",{list:data.address}));
+                    $("#consignee-list").html(template("dataAddress",{list:data.address}));
+                    $("#s-content").html(template("selectedc",{list:data.address}));
                 },
                 error: function(data){
 
@@ -63,6 +63,96 @@
             });
         }
 
+        function saveAddress(adid, linkman, tel, detailedaddress, province, city, area, userid) {
+
+            id = isNaN(parseInt(adid)) ? '' : parseInt(adid);
+
+            var url = '/address/saveorupdateaddress';
+            /*var data = {};
+            if (id) {
+                data['addressid'] = id;
+            } else {
+                data['addressid'] = '';
+            }
+            data['linkman'] = linkman;
+            data['detailedaddress'] = detailedaddress;
+            data['tel'] = tel;
+            data['province'] = province;
+            data['city'] = city;
+            data['area'] = area;
+            data['userid'] = userid;*/
+
+            var loading = showLoading();
+            $.post(url, {id:id,linkman:linkman,detailedAddress:detailedaddress,tel:tel,province:province,city:city,area:area,userId:userid}, function (result) {
+                loading.close();
+                alert("成功增加收货地址");
+                AddressFormat();
+            });
+        }
+
+        var addsoru = function () {
+
+            var linkman = $('input[name="shipTo"]').val();
+            var regTel = /([\d]{11}$)|(^0[\d]{2,3}-?[\d]{7,8}$)/;
+            var tel = $('input[name="phone"]').val();
+            var detailedaddress = $('input[type="text"][name="address"]').val();
+            var region = $('#s_province').val() +" "+ $('#s_city').val() +" "+ $('#s_county').val();
+            var province = $('#s_province').val();
+            var city = $('#s_city').val();
+            var area = $('#s_county').val();
+            var adid = $('#adid').val();
+            var userid = $('#userid').val();
+            alert(adid+" "+userid);
+            //alert(adid+" "+linkman+" "+tel+" "+detailedaddress+" "+province+" "+city+" "+area+" "+userid);
+
+            /*var a = getOption($('#s_province'), 0),
+                b = getOption($('#s_city'), 0),
+                c = getOption($('#s_county'), 0),
+                value = a + ',' + b + ',' + c,
+                str = province + ' ' + city + ' ' + area,
+                indexId = $('input[type="radio"][name="address"]:checked').val();*/
+
+
+            //if ($("#consignee_radio_new").attr("checked") == "checked"||tttt!="0") {
+
+            if (!linkman) {
+                $.dialog.tips('请填写收货人');
+                return false;
+            }
+            /*else if ($.trim(shipTo).length == 0) {
+                $.dialog.tips('请填写收货人');
+                return false;
+            }*/
+            else if (!tel) {
+                $.dialog.tips('请填写电话');
+                return false;
+            }
+            else if (!regTel.test(tel)) {
+                $.dialog.tips('请填写正确的电话');
+                return false;
+            }
+            else{ //RegionBind.js
+                var isprovince = ($('#s_province').val()=="省份")?false:true;
+                var iscity = ($('#s_city').val()=="地级市")?false:true;
+                var iscounty = ($('#s_county').val()=="市、县级市")?false:true;
+                if (!isprovince || !iscity || !iscounty) {
+                    $.dialog.tips('请填选择所在地区');
+                    return false;
+                }
+                else if (!detailedaddress) {
+                    $.dialog.tips('请填写详细地址');
+                    return false;
+                }
+                else if ($.trim(detailedaddress).length == 0) {
+                    $.dialog.tips('请填写详细地址');
+                    return false;
+                }
+                else {
+                    //regionId = regionId == '0' ? b : regionId;
+                    saveAddress(adid,linkman,tel,detailedaddress,province,city,area,userid);
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -157,7 +247,7 @@
                             <script type="text/html" id = "selectedc">
                                 {{each list data}}
                                 {{if index == 0}}
-                                <p id="selectedAddress">{{data.linkman}} &nbsp; {{data.tel}} &nbsp; {{data.province}} {{data.city}} {{data.area}} &nbsp;{{data.detailaddress}}&nbsp;</p>
+                                <p id="selectedAddress">{{data.linkman}} &nbsp; {{data.tel}} &nbsp;{{data.province}} {{data.city}} {{data.area}} &nbsp;{{data.detailaddress}}&nbsp;</p>
                                 {{/if}}
                                 {{/each}}
                             </script>
@@ -177,7 +267,7 @@
                                                 {{else}}
                                                 <input type="radio" id = "{{data.addressid}}" class="hookbox" name="address" checked="checked" value="{{data.addressid}}">
                                                 {{/if}}
-                                                <span id = "linkman-{{data.addressid}}">{{data.linkman}}</span id = "region-{{data.addressid}}">&nbsp;<span id = "region-{{data.addressid}}">{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailedaddress}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;
+                                                <span id = "linkman-{{data.addressid}}">{{data.linkman}}</span>&nbsp;<span id ="region-{{data.addressid}}">&nbsp;{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailed_address}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;
                                             </label>
                                             <span class="item-action">
 		                                    			<a href="javascript:;" onclick="showEditArea('{{data.addressid}}')">编辑</a> &nbsp;
@@ -192,13 +282,13 @@
                                     <label id = "newaddress" for="consignee_radio_new">使用新地址 </label>
                                     <span class="status error" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当前地址数量已达上限，若要继续添加新地址，请先删除部分收货地址。</span>
                                 </div>
-                                <form style="display: none" id="addressEditArea">
+                                <div style="display: none" id="addressEditArea">
                                     <div class="consignee-form" id="consignee-form" name="consignee-form">
                                         <input type = "hidden" id = "adid"  value = ""/>
                                         <div class="list select-address" id="name_div">
                                             <span class="label"><em>*</em>收货人：</span>
                                             <div class="field">
-                                                <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20" onblur="check_Consignee('name_div')" />
+                                                <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20"/>
                                             </div>
                                             <span class="status error" id="name_div_error"></span>
                                         </div>
@@ -243,12 +333,12 @@
                                             </div>
                                         </div>
                                         <div class="form-btn group">
-                                            <button style="background: paleturquoise;width:100px;height: 40px;" class="checkout" href="javascript:void(0);" id="saveConsigneeTitleDiv">保存收货人信息</button>
+                                            <button style="background: paleturquoise;width:100px;height: 40px;" class="checkout" onclick="addsoru()" id="saveConsigneeTitleDiv">保存收货人信息</button>
                                             <div class="loading loading-1" style="display: none"><b></b>正在提交信息，请等待！</div>
                                         </div>
                                     </div>
 
-                                </form>
+                                </div>
 
                             </div>
                         </div>
