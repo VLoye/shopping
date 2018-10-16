@@ -298,6 +298,7 @@
         <div class="h-top" id="headTopNav">
             <script id = "logstatus" type = "text/html">
                 {{if data}}
+
                 <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
 
                 <a class="h-fl" href="/buyer" target="_blank">{{data.username}}</a>
@@ -581,9 +582,10 @@
         <div class="pa-img" id="js_ms_ad_panel">
             {{each list as value index}}
             {{if index == 0}}
-            <span id="rb{{index+1}}" style="display:block;"><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.imgUrl}}') no-repeat center center;"></a></span>
+
+            <span id="rb{{index+1}}" style="display:block;"><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.rburl}}') no-repeat center center;"></a></span>
             {{else}}
-            <span id="rb{{index+1}}" style=""><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.imgUrl}}') no-repeat center center;"></a></span>
+            <span id="rb{{index+1}}" style=""><a target="_blank" href="javascript:void(0);" class="img-m" style="background:url('{{value.rburl}}') no-repeat center center;"></a></span>
             {{/if}}
             {{/each}}
         </div>
@@ -827,10 +829,10 @@
 <script type="text/html" id="clistformat">
     {{each list data}}
     <dl class="mscr-item">
-        <dt><a href="/goods/{{data.id}}" target="_blank"><img class="lazyload" src="{{data.imgUrl}}" data-url="{{data.imgUrl}}" alt="" /></a></dt>
+        <dt><a href="/goods/{{data.goodsId}}" target="_blank"><img class="lazyload" src="{{data.imgUrl}}" data-url="{{data.imgUrl}}" alt="" /></a></dt>
         <dd>
-            <h5><a target="_blank" href="/goods/{{data.id}}">{{data.name}}</a></h5>
-            <h6>¥{{data.price}}</h6>
+            <h5><a target="_blank" href="/goods/{{data.goodsId}}">{{data.goodsName}}</a></h5>
+            <h6>¥{{data.goodsPrice}}</h6>
             <p>已售<span>{{data.count}}</span>件</p>
         </dd>
     </dl>
@@ -1164,16 +1166,16 @@
 
 <script type="text/javascript">
 
-    var myurl = "/shopData";
+    var myurl = "/shop/shopData";
     var shopCarurl = "/shopCarData";
-    var isloginbool =false;
+    var isloginbool ='${pageInfo.isLogin}';
     var ShopCarFormat = function(){
         $.ajax({
             url: shopCarurl,
             type: "post",
             dataType: "json",
             success: function(data){
-                $("#side-cart-list").append(template("shopCarFormat",{list:data.goods}));
+                $("#side-cart-list").html(template("shopCarFormat",{list:data.goods}));
 
             },
             error: function(data){
@@ -1188,17 +1190,19 @@
         $.ajax({
             url: myurl,
             type: "post",
+            data:{shopId:'${pageInfo.shopId}'},
+            async:false,
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                alert(data.user);
+                console.log(data.user);
                 if(data.user != null){
                     isloginbool = true;
                     ShopCarFormat();
                 }
-                $("#js_ms_ad").append(template("rblistformat", {list: data.rblist}));
+                $("#js_ms_ad").append(template("rblistformat", {list: data.rbList}));
                 $("#loginstatus").append(template("logstatus", {data: data.user}));
-                $("#clistcontent").append(template("clistformat", {list: data.clist}));
+                $("#clistcontent").append(template("clistformat", {list: data.cList}));
 
 
 

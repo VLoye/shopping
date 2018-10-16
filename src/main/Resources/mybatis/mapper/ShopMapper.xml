@@ -133,4 +133,23 @@
     </foreach>
   </select>
 
+
+  <!--搜索店铺的所有物品-->
+  <select id="getShopData" parameterType="int" resultType="java.util.Map">
+    select g.id as goodsId,
+           g.name as goodsName,
+           g.price as goodsPrice,
+           g.stock as goodsStock,
+           g.seller_id as sellerId,
+           g.type_id as goodsTypeId,
+           g.brand_id as brandId,
+           g. img_url as imgUrl,
+           g.upload_time as goodsUploadTime,
+           g.intro as goodsIntro
+    from goods g , shop s
+    where s.id=#{shopId} and s.seller_id=g.seller_id;
+  </select>
+
+
+
 </mapper>

@@ -8,5 +8,5 @@ public interface RbMapper {
 
     public Object queryById(int id);
 
-    public Object queryByShopId(int shopid);
+    public List queryByShopId(int shopid);
 }

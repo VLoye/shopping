@@ -1,6 +1,7 @@
 package com.team6.dao;
 
 import com.team6.entity.Shop;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -55,4 +56,10 @@ public interface ShopMapper {
 
 
     List queryShopByIdArray(Object[] objects);
+
+
+    //取得商铺所有物品
+    List getShopData(@Param("shopId") int shopId);
+
+
 }
