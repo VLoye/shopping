@@ -110,6 +110,14 @@
             $("#blist").removeClass("extend");
         }
     }
+    var ismore1 = function(){
+        if(!($("#typelist").hasClass("extend"))){
+            $("#typelist").addClass("extend");
+        }
+        else{
+            $("#typelist").removeClass("extend");
+        }
+    }
     var yuclose = function(num){
         if (num == 1) {
             $("#bid").remove();
@@ -348,11 +356,11 @@
 
 			</div>
 			<div class="J_selectorLine s-category">
-				<div class="sl-wrap">
+				<div id="typelist" class="sl-wrap">
 					<div class="sl-key"><strong>类型：</strong></div>
 					<div class="sl-value">
-						<div class="sl-v-list">
-							< class="J_valueList">
+						<div class="sl-v-logos">
+							<ul class="J_valueList v-fixed">
 								<#list type as data>
 								<li>
 									<a title="${data.typename}" id="${data.typeid}" data-v="6294" href="" onclick="typekeydown('"+ ${data.typeid} +"')"><i></i>钢琴</a>
@@ -360,6 +368,10 @@
 								</#list>
 							</ul>
 						</div>
+						</div>
+					<div class="sl-ext">
+						<a class="sl-e-more J_extMore" onclick="ismore1()" style="visibility: visible;">更多<i></i></a>
+					</div>
 					</div>
 				</div>
 			</div>
