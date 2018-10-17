@@ -20,7 +20,6 @@
     <script src="static/js/jquery.artDialog.js"></script>
     <script src="static/js/artDialog.iframeTools.js"></script>
     <link href="static/css/WebLoginPlug.css" rel="stylesheet" />
-    <script src="static/js/cartSettleAccounts.js"></script>
 
     <script charset="utf-8" src="static/template/admin/js/sysUtils.js"></script>
     <script charset="utf-8" src="static/template/admin/js/template-web.js"></script>
@@ -45,7 +44,7 @@
         <a class="h-fl" href="/buyer" id="username" target="_blank">{{data.username}}</a>
         <i class="h-fl h-vline">|</i>
         <input type = "hidden" id = "userid" value = "{{data.userid}}"/>
-        <a class="h-fl" href="">[退出]</a>
+        <a class="h-fl" href="/logout">[退出]</a>
         {{else}}
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
         <a class="h-fl" href="/login">登录</a>
@@ -92,98 +91,93 @@
 <div class="w990 cart">
     <div id="show">
             <div class="cart-inner" id="cartcontent">
-
-
-            </div>
-            <script id = "goodsList" type="text/html">
-                {{if list}}
-                <div class="cart-list">
+                <div class="cart-list" id="pdlist">
                     <p class="cart-tit">
                         <label>全部商品<span id="selectedCount">0</span></label>
                     </p>
                     <div class="cart-thead cl">
-                        <div class="column t-checkbox form"><input type="checkbox" checked="" name="checkAll" value="" sku="0"/><label for="">全选</label></div>
+                        <div class="column t-checkbox form"><input type="checkbox" name="checkAll" class="checkbox"  value="" sku="0"/><label for="">全选</label></div>
                         <div class="column t-goods">商品</div>
                         <div class="column t-price">单价</div>
                         <div class="column t-quantity" style="width:285px;">数量</div>
-                        <div
-                    class="column t-queue" style="width:120px;">操作</div>
-                </div>
-                    <div id="product-list" class="cart-tbody">
-                        <div class="n-item-list">
-                            {{each list data}}
-                            <div class="item item_selected ">
-                                <div class="item_form cl">
-                                    <div class="cell p-checkbox">
-                                        <input class="checkbox" checked="" type="checkbox" data-cartid="" name="checkItem" value="8" sku="{{data.goodsid}}">
-                                    </div>
-                                    <div class="cell p-goods">
-                                        <div class="p-img">
-                                            <a href="/goods/{{data.id}}" target="_blank" id = "goodsurl{{$index}}"><img src="{{data.imgUrl}}" id = "goodsimg{{$index}}" alt=""></a>
-                                        </div>
-                                        <div class="p-name">
-                                            <a href="/goods/{{data.id}}" target="_blank"><span id = "goodsbrand{{$index}}">{{data.brand}} {{data.name}}</span><br></a>
-                                            <br>
-                                        </div>
-                                    </div>
-                                    <div class="cell p-price">
-                                        <span class="price" id = "goodsprice{{$index}}">¥{{data.price}}.00</span>
-                                    </div>
-                                    <input type = "hidden" text = "{{data.gtype}}" />
-                                    <input type = "hidden" text = "{{data.sellerId}}" id = "sellerid{{$index}}" />
-                                    <div class="cell p-quantity">
-                                        <div class="quantity-form">
-                                            <a href="javascript:void(0);" class="decrement" sku="{{data.sellerid}}">-</a>
-                                            <input type="text" id = "count{{$index}}" class="quantity-text" value="{{data.count}}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="{{data.sellerid}}">
-                                            <a href="javascript:void(0);" class="increment" sku="{{data.sellerid}}">+</a>
-                                        </div>
-                                    </div>
-                                    <div class="cell p-remove">
-                                        <a class="cart-remove" href="javascript:removeFromCart('{{data.goodsid}}')">删除</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="column t-action" style="width:120px;">操作</div>
                     </div>
-                </div>
-                {{each}}
-                <div class="ui-ceilinglamp-1">
-                    <div class="cart-dibu">
-                        <div class="cart-total-2014">
-			                        <span class="column t-checkbox form" style="float:left; margin-right:10px;">
-			                            <input type="checkbox" checked="" name="checkAll" value="" class="jdcheckbox" sku="0" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;" />
-			                            <label for="">全选</label>
-			                        </span>
-                            <span class="delete" style="float: left; margin-right: 10px;">
-			                            <a href="javascript:void(0);" id="remove-batch">删除选中的商品</a>
-			                        </span>
-                            <div class="cart-button">
-                                <a class="checkout" href="javascript:void(0);" id="toSettlement">去结算</a>
-                            </div>
-                            <div class="total fr">总计（不含运费）：<span id="finalPrice">¥ 0</span></div>
-                        </div>
-                    </div>
-                </div>
-                {{else}}
-                <div class="message">
-                    <ul>
-                        <li>购物车内暂时没有商品<span class="unLogin" style="display: none;"></li>
-                        <li><a href="">去挑选喜欢的商品</a></li>
-                    </ul>
-                </div>
-                {{/if}}
-            </script>
 
-        </div>
+                    <div id="product-list" class="cart-tbody">
+                        <div class="n-item-list" id="content1">
+
+                        </div>
+                    </div>
+
+                    <div class="ui-ceilinglamp-1">
+                        <div class="cart-dibu">
+                            <div class="cart-total-2014">
+                        <span class="column t-checkbox form" style="float:left; margin-right:10px;">
+                            <input type="checkbox" name="checkAll" class="checkbox" value="" sku="0" style="margin-left:19px;*margin-top:-4px;_margin-top:10px;"/>
+                            <label for="">全选</label>
+                        </span>
+                                <span class="delete" style="float: left; margin-right: 10px;">
+                            <a href="javascript:void(0);" id="remove-batch">删除选中的商品</a>
+                        </span>
+                                <div class="cart-button">
+                                    <button class="checkout" id="toSettlement" style="background: red;height: 40px;width: 70px;">去结算</button>
+                                </div>
+                                <div class="total fr">总计（不含运费）：<span id="finalPrice"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
+
+
+<script id = "goodsList" type="text/html">
+
+                {{each list data}}
+                <div class="item">
+                    <div class="item_form cl">
+                        <div class="cell p-checkbox">
+                            <input id="r{{data.id}}" onchange="changeitem({{data.id}})" name="checkItem" class="checkbox" type="checkbox" data-cartid="993" value="8" sku="{{data.id}}">
+                        </div>
+                        <div class="cell p-goods">
+                            <div class="p-img"><a href="/goods/{{data.id}}" target="_blank" id="goodsurl{{$index}}"><img src="{{data.imgUrl}}" alt=""></a>
+
+                            </div>
+                            <div class="p-name"><a href="/goods/{{data.id}}" target="_blank"><br></a><span id = "goodsname{{$index}}">{{data.name}}</span><br></div>
+                            <div class="p-code"><span id = "goodsbrand{{$index}}">商品品牌： {{data.brand}}</span></div></div>
+                        <div class="cell p-price"><span class="price" id = "goodsprice{{$index}}">¥{{data.price}}.00</span></div>
+                        <div class="cell p-quantity">
+                            <div class="quantity-form">
+                                <input type = "hidden" text = "{{data.gtype}}" />
+                                <input type = "hidden" text = "{{data.sellerId}}" id = "sellerid{{$index}}" />
+                                <a onclick="decrement({{data.id}})" name="decrement" class="decrement" sku="{{data.id}}">-</a>
+                                <input type="text" id = "count{{$index}}" class="quantity-text" value="{{data.count}}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v()" name="count" sku="{{data.id}}">
+                                <a onclick="increment({{data.id}})" name="increment" class="increment" sku="{{data.id}}">+</a>
+                            </div>
+                        </div>
+                        <div class="cell p-remove">
+                            <a class="cart-remove" href="javascript:removeFromCart('{{data.id}}')">删除</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+
+</script>
+
 
 <input type="hidden" value="2" id="hidAuditStatus" />
 <input type="hidden" value="1" id="hidSaleStatus" />
 
 <script type="text/javascript">
+
+
+
+
     $(function () {
         CartFormat();
+        bindAddAndReduceBtn();
     });
     var myurl = "/shopCarData";
     var CartFormat = function(){
@@ -192,11 +186,96 @@
             type: "post",
             dataType: "json",
             success: function(data){
-                $("#loginstatus").template("logstatus",{data:data.user});
-                $("#cartcontent").template("goodsList",{list:data.goods});
+                $("#loginstatus").html(template("logstatus",{data:data.user}));
+                $("#content1").html(template("goodsList",{list:data.goods}));
             }
         });
     };
+
+</script>
+<script src="static/js/cartSettleAccounts.js"></script>
+
+<script type="text/javascript">
+    var changeitem =  function (id) {
+        var checked = $('#r'+id).attr('checked');
+        checked = checked ? true : false;
+        if (checked) {
+            $('#r'+id).removeAttr('checked');
+            $('#r'+id).prop('checked',false);
+            $('#r'+id).parents('.item').removeClass('item_selected');
+            //$("#pdlist").find('input[name="checkAll"]').removeAttr('checked');
+
+            //$("input:checkbox").removeAttr("checked");
+            //$("input:checkbox").prop('checked',false);
+          
+            $('#finalPrice').html('¥' + getCheckProductPrice(false));
+            $('#selectedCount').html(getCheckProductCount(false));
+
+        } else {
+            $('#r'+id).prop('checked',true);
+            $('#r'+id).attr('checked','checked');
+            $('#r'+id).parents('.item').addClass('item_selected');
+            $('#finalPrice').html('¥' + getCheckProductPrice(false));
+            $('#selectedCount').html(getCheckProductCount(false));
+        }
+        var ILength = $('.item').length;
+        var ItemLength = $('.item_selected').length;
+        if(ItemLength >= ILength){
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').attr('checked','checked');
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').prop('checked',true);
+        }else{
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').removeAttr('checked');
+            $("#pdlist").find('input[type="checkbox"][name="checkAll"]').prop('checked',false);
+        }
+    }
+    ///购物车汇总价格更新
+    function getCheckProductPrice(isB2B) {
+
+        if (!isB2B) {
+            var t = 0;
+            $.each($("#product-list").find('input[name="checkItem"]:checked'), function () {
+                var a = $(this).parent().parent().find('.price').html(),
+                    b = a.replace('¥', ''),
+                    c = $(this).parent().parent().find('input[name="count"]').val(),
+                    d = (+b) * (+c);
+                t += d;
+            })
+            return t.toFixed(2);
+        }
+        else {
+            var t = 0;
+            $.each($("#B2B-product-list").find('input[name="checkItem"]:checked'), function () {
+                var a = $(this).parent().parent().find('.price').html(),
+                    b = a.replace('¥', ''),
+                    c = $(this).parent().parent().find('input[name="count"]').val(),
+                    d = (+b) * (+c);
+                t += d;
+            })
+            return t.toFixed(2);
+        }
+    }
+    ///购物车汇总数量更新
+    function getCheckProductCount(isB2B) {
+        if (!isB2B) {
+            var t = 0;
+            $.each($("#product-list").find('input[name="checkItem"]:checked'), function () {
+                var c = $(this).parent().parent().find('input[name="count"]').val();
+                d = parseInt(c);
+                t += d;
+            })
+            return t;
+        }
+        else {
+            var t = 0;
+            $.each($("#B2B-product-list").find('input[name="checkItem"]:checked'), function () {
+                var c = $(this).parent().parent().find('input[name="count"]').val();
+                d = parseInt(c);
+                t += d;
+            })
+            return t;
+        }
+
+    }
 </script>
 
 <link href="static/css/css_foot.css" rel="stylesheet" />

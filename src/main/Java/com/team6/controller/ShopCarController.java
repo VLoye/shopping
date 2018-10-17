@@ -47,9 +47,10 @@ public class ShopCarController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/shopCar/add/{goodsId}",method = RequestMethod.POST)
-    public Object shopCardAdd(HttpServletRequest request,@PathVariable("goodsId") int goodsId, @RequestParam("count") int count){
-
+    @RequestMapping(value = "/shopCar/add",method = RequestMethod.POST)
+    public Object shopCardAdd(HttpServletRequest request){
+        int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+        int count = Integer.parseInt(request.getParameter("count"));
         return shopCarService.addShopCar(goodsId,count,request);
     }
 
@@ -70,17 +71,19 @@ public class ShopCarController {
     }
 
 
-    @RequestMapping(value = "/shopCar/detailData",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
+    @RequestMapping(value = "/shopCar/detailData"/*,method = RequestMethod.POST*//*, produces = "text/json;charset=UTF-8"*/)
     public ModelAndView shopDetailData(
-         @RequestParam("ids[]") int[] ids,
-            @RequestParam("counts[]") int[] counts,
+        /* @RequestParam("ids[]") String[] ids,
+            @RequestParam("counts[]") String[] counts,*/
             Model model,
             HttpServletRequest request){
+        String[] ids =  ((String)request.getParameter("ids")).split(",");
+        String[] counts = ((String)request.getParameter("counts")).split(",");
 
-       Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
+      Map<String,Object> good = (Map<String,Object>)shopCarService.detailData(ids,counts,request);
 
 
-        return new ModelAndView("detailData","good",good);
+       return new ModelAndView("ProductAndCart/CartSubmit",good);
 
     }
     @RequestMapping(value = "/shujzu")
@@ -88,6 +91,11 @@ public class ShopCarController {
                              @RequestParam("countList") String countList){
         return null;
 
+    }
+
+    @RequestMapping(value = "test/index")
+    public Object test(){
+        return "test/index";
     }
 
 

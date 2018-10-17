@@ -32,7 +32,7 @@ public class RbServiceImp implements RbService{
 
     @Override
     public Object queryByShopId(int shopid) {
-        return null;
+        return rbMapper.queryByShopId(shopid);
     }
 
     @Override

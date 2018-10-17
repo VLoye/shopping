@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -25,11 +24,12 @@
     <script charset="utf-8" src="/static/template/admin/js/template-web.js"></script>
 
     <script type="text/javascript">
+
         $(function () {
             AddressFormat();
         });
 
-        var myurl = "/order/useraddress";
+        var myurl = "/address/useraddress";
 
         var AddressFormat = function(){
             $.ajax({
@@ -37,11 +37,13 @@
                 type: "post",
                 dataType: "json",
                 success: function(data){
-                    $("#consignee-list").template("dataAddress",{list:ata});
-                    $("#s-content").template("selectedc",{list:data});
+                    console.log(data);
+
+                    $("#consignee-list").html(template("dataAddress",{list:data.address}));
+                    $("#s-content").html(template("selectedc",{list:data.address}));
                 },
                 error: function(data){
-                    //alert("ajax error : "+res);
+
                 }
             });
             $('#editReciever').click(function(){
@@ -61,6 +63,96 @@
             });
         }
 
+        function saveAddress(adid, linkman, tel, detailedaddress, province, city, area, userid) {
+
+            id = isNaN(parseInt(adid)) ? '' : parseInt(adid);
+
+            var url = '/address/saveorupdateaddress';
+            /*var data = {};
+            if (id) {
+                data['addressid'] = id;
+            } else {
+                data['addressid'] = '';
+            }
+            data['linkman'] = linkman;
+            data['detailedaddress'] = detailedaddress;
+            data['tel'] = tel;
+            data['province'] = province;
+            data['city'] = city;
+            data['area'] = area;
+            data['userid'] = userid;*/
+
+            var loading = showLoading();
+            $.post(url, {id:id,linkman:linkman,detailedAddress:detailedaddress,tel:tel,province:province,city:city,area:area,userId:userid}, function (result) {
+                loading.close();
+                alert("成功增加收货地址");
+                AddressFormat();
+            });
+        }
+
+        var addsoru = function () {
+
+            var linkman = $('input[name="shipTo"]').val();
+            var regTel = /([\d]{11}$)|(^0[\d]{2,3}-?[\d]{7,8}$)/;
+            var tel = $('input[name="phone"]').val();
+            var detailedaddress = $('input[type="text"][name="address"]').val();
+            var region = $('#s_province').val() +" "+ $('#s_city').val() +" "+ $('#s_county').val();
+            var province = $('#s_province').val();
+            var city = $('#s_city').val();
+            var area = $('#s_county').val();
+            var adid = $('#adid').val();
+            var userid = $('#userid').val();
+            alert(adid+" "+userid);
+            //alert(adid+" "+linkman+" "+tel+" "+detailedaddress+" "+province+" "+city+" "+area+" "+userid);
+
+            /*var a = getOption($('#s_province'), 0),
+                b = getOption($('#s_city'), 0),
+                c = getOption($('#s_county'), 0),
+                value = a + ',' + b + ',' + c,
+                str = province + ' ' + city + ' ' + area,
+                indexId = $('input[type="radio"][name="address"]:checked').val();*/
+
+
+            //if ($("#consignee_radio_new").attr("checked") == "checked"||tttt!="0") {
+
+            if (!linkman) {
+                $.dialog.tips('请填写收货人');
+                return false;
+            }
+            /*else if ($.trim(shipTo).length == 0) {
+                $.dialog.tips('请填写收货人');
+                return false;
+            }*/
+            else if (!tel) {
+                $.dialog.tips('请填写电话');
+                return false;
+            }
+            else if (!regTel.test(tel)) {
+                $.dialog.tips('请填写正确的电话');
+                return false;
+            }
+            else{ //RegionBind.js
+                var isprovince = ($('#s_province').val()=="省份")?false:true;
+                var iscity = ($('#s_city').val()=="地级市")?false:true;
+                var iscounty = ($('#s_county').val()=="市、县级市")?false:true;
+                if (!isprovince || !iscity || !iscounty) {
+                    $.dialog.tips('请填选择所在地区');
+                    return false;
+                }
+                else if (!detailedaddress) {
+                    $.dialog.tips('请填写详细地址');
+                    return false;
+                }
+                else if ($.trim(detailedaddress).length == 0) {
+                    $.dialog.tips('请填写详细地址');
+                    return false;
+                }
+                else {
+                    //regionId = regionId == '0' ? b : regionId;
+                    saveAddress(adid,linkman,tel,detailedaddress,province,city,area,userid);
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -75,7 +167,7 @@
             <a class="h-fl" href="/buyer" id="username" target="_blank">${user.username}</a>
             <i class="h-fl h-vline">|</i>
             <input type = "hidden" id = "userid" value = "${user.userid}"/>
-            <a class="h-fl" href="">[退出]</a>
+            <a class="h-fl" href="/logout">[退出]</a>
             <#else>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
             <a class="h-fl" href="/login">登录</a>
@@ -153,9 +245,9 @@
                     <div id="consignee" class="sbox-wrap">
                         <div class="sbox" style="width:100%;">
                             <script type="text/html" id = "selectedc">
-                                {{each list as data i}}
-                                {{if i == 0}}
-                                <p id="selectedAddress">{{data.linkman}} &nbsp; {{data.tel}} &nbsp; {{data.province}} {{data.city}} {{data.area}} &nbsp;{{data.detailaddress}}&nbsp;</p>
+                                {{each list data}}
+                                {{if index == 0}}
+                                <p id="selectedAddress">{{data.linkman}} &nbsp; {{data.tel}} &nbsp;{{data.province}} {{data.city}} {{data.area}} &nbsp;{{data.detailaddress}}&nbsp;</p>
                                 {{/if}}
                                 {{/each}}
                             </script>
@@ -167,22 +259,22 @@
 
                                     <script type="text/html" id = "dataAddress">
                                         {{each list data}}
-                                        <div class="item" name="li-{{addressid}}">
+
+                                       <div class="item" name="li-{{data.addressid}}">
                                             <label>
-                                                {{if $index == 0}}
+                                                {{if index == 0}}
                                                 <input type="radio" id = "{{data.addressid}}" class="hookbox" name="address" checked="" value="{{data.addressid}}">
-                                                {{/if}}
                                                 {{else}}
                                                 <input type="radio" id = "{{data.addressid}}" class="hookbox" name="address" checked="checked" value="{{data.addressid}}">
-                                                {{/else}}
-                                                <span id = "linkman-{{data.addressid}}">{{data.linkman}}</span id = "region-{{data.addressid}}">&nbsp;<span id = "region-{{data.addressid}}">{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailedaddress}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;
+                                                {{/if}}
+                                                <span id = "linkman-{{data.addressid}}">{{data.linkman}}</span>&nbsp;<span id ="region-{{data.addressid}}">&nbsp;{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailed_address}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;
                                             </label>
                                             <span class="item-queue">
 		                                    			<a href="javascript:;" onclick="showEditArea('{{data.addressid}}')">编辑</a> &nbsp;
 		                                    			<a href="javascript:;" onclick="deleteAddress('{{data.addressid}}')">删除</a>&nbsp;
 		                                    		</span>
                                         </div>
-                                        {{each}}
+                                        {{/each}}
                                     </script>
                                 </div>
                                 <div style="display: none" class="item" id="use-new-address">
@@ -190,13 +282,13 @@
                                     <label id = "newaddress" for="consignee_radio_new">使用新地址 </label>
                                     <span class="status error" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当前地址数量已达上限，若要继续添加新地址，请先删除部分收货地址。</span>
                                 </div>
-                                <form style="display: none" id="addressEditArea">
+                                <div style="display: none" id="addressEditArea">
                                     <div class="consignee-form" id="consignee-form" name="consignee-form">
                                         <input type = "hidden" id = "adid"  value = ""/>
                                         <div class="list select-address" id="name_div">
                                             <span class="label"><em>*</em>收货人：</span>
                                             <div class="field">
-                                                <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20" onblur="check_Consignee('name_div')" />
+                                                <input type="text" class="textbox" id="consignee_name" name="shipTo" maxlength="20"/>
                                             </div>
                                             <span class="status error" id="name_div_error"></span>
                                         </div>
@@ -241,12 +333,12 @@
                                             </div>
                                         </div>
                                         <div class="form-btn group">
-                                            <button style="background: paleturquoise;width:100px;height: 40px;" class="checkout" href="javascript:void(0);" id="saveConsigneeTitleDiv">保存收货人信息</button>
+                                            <button style="background: paleturquoise;width:100px;height: 40px;" class="checkout" onclick="addsoru()" id="saveConsigneeTitleDiv">保存收货人信息</button>
                                             <div class="loading loading-1" style="display: none"><b></b>正在提交信息，请等待！</div>
                                         </div>
                                     </div>
 
-                                </form>
+                                </div>
 
                             </div>
                         </div>
@@ -323,30 +415,33 @@
                                                         <table class="order-table" shopid="8">
                                                         <tbody>
 
-                                                                <#list goods as item i>
-                                                                	<tr id="${item.goodsid}" skuid="${item.goodsid}" quntity="1" price="${item.goodsprice}">
+                                                                <#list goods as item >
+                                                                	<tr id="${item.id}" skuid="${item.id}" quntity="1" price="${item.price}">
 								                                        <td class="fore1" style="padding: 10px;">
 								                                            <div class="p-goods">
 								                                                <div class="p-img">
 								                                                    <a href="${item.goodsurl}" target="_blank">
-								                                                        <img alt="" src="${item.goodsimg}" />
+								                                                        <img alt="" src="${item.imgUrl}" />
 								                                                    </a>
 								                                                </div>
 
 								                                                <div class="p-detail">
 								                                                    <div class="p-name">
 								                                                        <a href="${item.goodsurl}" target="_blank">
-								                                                            ${item.goodsname}<br />
+								                                                            ${item.name}<br />
 								                                                        </a>
-                                                                                        <input type="hidden" value="${item.goodsid}" name = "goodsid"/>
-                                                                                        <input type="hidden" value="${item.sellerid}" name = "sellerid"/>
+                                                                                        <input type="hidden" value="${item.id}" name = "goodsid"/>
+                                                                                        <input type="hidden" value="${item.sellerId}" name = "sellerid"/>
 								                                                    </div>
 								                                                </div>
 								                                            </div>
 								                                        </td>
-								                                        <td class="p-price"><strong>￥${item.goodsprice}</strong></td>
+								                                        <td class="p-price"><strong>￥${item.price}</strong></td>
 								                                        <td class="fore2">
-								                                               <label>x</label>  <span class = "ngoodscount"> ${item.count}  </span>                                                              </td>
+								                                               <label>x</label>
+                                                                            <input type="hidden" name="ngoodscount" value="${item.count}"/>
+                                                                            <span class = "ngoodscount" > ${item.count}  </span>
+                                                                        </td>
 								                                    </tr>
                                                                 </#list>
                                                             </tbody>
@@ -386,7 +481,7 @@
         <div class="sticky-wrap">
             <#if total>
             <div class="inner">
-                <span class="total" style="float: left;"><a href="/cart/cart" class="return-edit">返回修改购物车</a></span>
+                <span class="total" style="float: left;"><a href="/shopCar" class="return-edit">返回修改购物车</a></span>
                 <button type="button" id="submit" class="checkout-submit">提交订单</button>
                 <span class="total">
                     <label>应付总额：</label>

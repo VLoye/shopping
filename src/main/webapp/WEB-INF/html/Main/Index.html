@@ -63,7 +63,7 @@
         <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
         <a class="h-fl" href="/login">登录</a>
         <i class="h-fl h-vline">|</i>
-        <a class="h-fl" href="/register">注册</a>
+        <a class="h-fl" href="/toRegister">注册</a>
         {{/if}}
         <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
         <dl class="h-fr h-down ml0 ltb1">
@@ -1578,7 +1578,7 @@
 
     var myurl = "/indexData";
     var shopCarurl = "/shopCarData";
-    var isloginbool = false;
+    var isloginbool =false;
     var ShopCarFormat = function(){
         $.ajax({
             url: shopCarurl,
@@ -1603,10 +1603,15 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
+                console.log(data.user);
+                alert(data.user);
+                if(data.user != null){
+                    isloginbool = true;
+                    ShopCarFormat();
+                }
                 $("#rb").append(template("goodsAdvertisement", {list: data.rblist}));
                 $("#loginstatus").append(template("logstatus", {data: data.user}));
-                //alert(data);
-                isloginbool = true;
+
                 var goodslist = data.clist;
                 var list1 = goodslist[0],
                     list2 = goodslist[1],
@@ -1637,15 +1642,15 @@
 
 
         IndexFormat();
-        ShopCarFormat();
         setInterval(nextrb,4000);
         var rightSide=$('.right-side');
         var rightContent=$('.side-content');
         $('.right-side .menu-top li[arrow]').click(function() {
 
             if (!isloginbool){
+                alert(isloginbool);
                 location.href = '/login';
-                ShopCarFormat();
+                //ShopCarFormat();
             }else{
 
                 var tag=$(this).data('tag');
@@ -1730,8 +1735,8 @@
         });
 
         $('#toSubmitOrder').click(function() {
-            var ids = {};
-            var counts = {};
+       /*     var ids = new Array();
+            var counts = new Array();
 
             var num = 0;
             $("#side-cart-list").find('input[name="gid"]').each(function (i, e) {
@@ -1742,7 +1747,8 @@
             });
 
             if(ids != null){
-                $.post('/shopCar/detail', {ids:ids,counts:counts}, function (result) {
+
+                $.post('/shopCar/detailData', {ids:ids,counts:counts}, function (result) {
 
                     loading.close();
 
@@ -1750,9 +1756,11 @@
                         $.dialog.errorTips(result.msg);
 
                 });
-            }
 
+            }*/
+            window.location.href = '/shopCar';
         });
+
 
     });
 

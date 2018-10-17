@@ -12,7 +12,7 @@
 </head>
 <body>
     <div style="margin: 0 auto; margin-top:50px">
-       <%-- <form queue="/goods/add" method="post" enctype="multipart/form-data">
+    <form action="/goods/add" method="post" enctype="multipart/form-data">
             地址id:
             <input type="text" name="id"/><br/>
             地址名称：
@@ -31,27 +31,8 @@
             <input type="file" name="imageFile"/><br/>
             <br/>
             <input type="submit" value="提交">
-        </form>--%>
-           <form queue="/address/saveorupdateaddress" method="post" >
-               地址id:
-               <input type="text" name="id"/><br/>
-               收货人：
-               <input type="text" name="linkman"/><br/>
-               联系电话:
-               <input type="text" name="tel"/><br/>
-               procince：
-               <input type="text" name="province"/><br/>
-               城市:
-               <input type="text" name="city"/><br/>
-               area:
-               <input type="text" name="area"/><br/>
-               detailed_address:
-               <input type="text" name="detailedAddress"/><br/>
-               user_id:
-               <input type="text" name="userId">
-               <br/>
-               <input type="submit" value="提交">
-           </form>
+        </form>
+
     </div>
 </body>
 </html>

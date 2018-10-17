@@ -2,7 +2,7 @@ package com.team6.service.OrderInfo;
 
 import com.team6.dao.OrderDetailsMapper;
 import com.team6.dao.OrderInfoMapper;
-import com.team6.dto.order.UserOrderData;
+import com.team6.dao.ShoppingCarMapper;
 import com.team6.entity.OrderDetails;
 import com.team6.entity.OrderInfo;
 import com.team6.service.Goods.GoodsService;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -27,9 +28,12 @@ public class OrderInfoServiceImpl implements OrderInfoService{
     @Autowired
     private OrderDetailsMapper orderDetailsMapper;
     @Autowired
+    private ShoppingCarMapper shoppingCarMapper;
+    @Autowired
     private LoginService loginService;
     @Autowired
     private GoodsService goodsService;
+
     @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
     public Object insertOrderInfo(int[] goodsId,int [] counts,int[] sellerId,
                                          Integer userId,int addressId) {
@@ -64,8 +68,11 @@ public class OrderInfoServiceImpl implements OrderInfoService{
                 orderDetails.setOrderId(orderInfo.getId());
                 //商品的id
                 orderDetails.setGoodsId(goodsId[SellerIdAndLocation.get(id).get(j)]);
+                //删除购物车的商品信息
+                result=shoppingCarMapper.delUserGoodsById(goodsId[SellerIdAndLocation.get(id).get(j)],userId);
                 //对应的数量
                 orderDetails.setCount(counts[SellerIdAndLocation.get(id).get(j)]);
+                //新增订单商品详情
                 result=orderDetailsMapper.insert(orderDetails);
             }
         }
@@ -118,9 +125,12 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         for(Map<String,Object> map:list){
             Integer orderId=map.get("id").hashCode();
             //获取每个订单的详细信息
-            List<UserOrderData> glist=orderDetailsMapper.queryOrderDate(orderId);
-            for(UserOrderData data:glist){
-                totalPrice+=(data.getPrice()*data.getCount());
+            List<Map<String,Object>> glist=orderDetailsMapper.queryOrderDate(orderId);
+            for(Map<String,Object> data:glist){
+                BigDecimal BDprice= (BigDecimal)data.get("price");
+                Float price=BDprice.floatValue();
+                Integer count= (Integer) data.get("coun");
+                totalPrice+=price*count;
             }
             map.put("totalPrice",totalPrice);
             map.put("goods",glist);
@@ -179,25 +189,29 @@ public class OrderInfoServiceImpl implements OrderInfoService{
      */
     private Map<Integer, ArrayList<Integer>> getSellerIdAndLocation(int [] sellerId){
         Map<Integer,ArrayList<Integer>> SellerIdAndLocation=new LinkedHashMap<Integer, ArrayList<Integer>>();
-        for(int i=0;i<sellerId.length-1;i++){
-            if(sellerId[i]!=-1) //设置我一个数组中不可能出现的值
-            {
-                //记录该卖家id
-                int id=sellerId[i];
-                //创建list，用于存放该卖家id在数组中出现的位置下标
-                ArrayList<Integer> list=new ArrayList<Integer>();
-                list.add(i);//记录该数字第一次出现的位置
-                for(int j=i+1;j<sellerId.length;j++){
-                    //遍历数组，查找与seller[i]相同的值并记录下标位置
-                    if(sellerId[i]==sellerId[j])
-                    {
-                        list.add(j);//记录下标位置
-                        sellerId[j]=-1;//同上，设置一个不可能出现的值，要与前面设置的保持一致
+        //创建list，用于存放该卖家id在数组中出现的位置下标
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if(sellerId.length>1) {
+            for (int i = 0; i < sellerId.length - 1; i++) {
+                if (sellerId[i] != -1) //设置一个数组中不可能出现的值
+                {
+                    //记录该卖家id
+                    int id = sellerId[i];
+                    list.add(i);//记录该数字第一次出现的位置
+                    for (int j = i + 1; j < sellerId.length; j++) {
+                        //遍历数组，查找与seller[i]相同的值并记录下标位置
+                        if (sellerId[i] == sellerId[j]) {
+                            list.add(j);//记录下标位置
+                            sellerId[j] = -1;//同上，设置一个不可能出现的值，要与前面设置的保持一致
+                        }
                     }
+                    //通过key-value将卖家id和出现的位置put进Map
+                    SellerIdAndLocation.put(id, list);
                 }
-                //通过key-value将卖家id和出现的位置put进Map
-                SellerIdAndLocation.put(id,list);
             }
+        }else{
+            list.add(0);
+            SellerIdAndLocation.put(sellerId[0],list);
         }
         return SellerIdAndLocation;
     }
