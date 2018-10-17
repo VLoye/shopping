@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/regiest" method="post">
+<form queue="/regiest" method="post">
     <input name="name" type="text">
     <input name="password" type="password">
     <input name="salt" type="text">

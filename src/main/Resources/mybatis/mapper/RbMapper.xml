@@ -5,25 +5,25 @@
 
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="imgUrl" property="imgUrl" jdbcType="VARCHAR" />
         <result column="shop_id" property="shop_id" jdbcType="INTEGER" />
     </resultMap>
 
     <!--查找所有轮播图信息-->
     <select id="queryAllInfo" resultType="java.util.Map">
-        select id as rbid ,name as rbname ,img_url as rburl, shop_id as shopid
+        select id as rbid ,name as rbname ,imgUrl as rburl, shop_id as shopid
         from rb;
     </select>
 
     <!--根据轮播图的id查找信息-->
     <select id="queryById" resultType="java.util.Map">
-        select id as rbid ,name as rbname ,img_url as rburl, shop_id as shopid
+        select id as rbid ,name as rbname ,imgUrl as rburl, shop_id as shopid
         from rb where id = #{id};
     </select>
 
     <!--根据轮播图的shopid查找信息-->
     <select id="queryByShopId" resultType="java.util.Map">
-         select id as rbid ,name as rbname ,img_url as rburl, shop_id as shopid
+         select id as rbid ,name as rbname ,imgUrl as rburl, shop_id as shopid
         from rb where shop_id = #{shopid};
     </select>
 

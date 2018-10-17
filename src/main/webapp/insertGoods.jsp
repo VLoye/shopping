@@ -12,7 +12,7 @@
 </head>
 <body>
     <div style="margin: 0 auto; margin-top:50px">
-       <%-- <form action="/goods/add" method="post" enctype="multipart/form-data">
+       <%-- <form queue="/goods/add" method="post" enctype="multipart/form-data">
             地址id:
             <input type="text" name="id"/><br/>
             地址名称：
@@ -32,7 +32,7 @@
             <br/>
             <input type="submit" value="提交">
         </form>--%>
-           <form action="/address/saveorupdateaddress" method="post" >
+           <form queue="/address/saveorupdateaddress" method="post" >
                地址id:
                <input type="text" name="id"/><br/>
                收货人：

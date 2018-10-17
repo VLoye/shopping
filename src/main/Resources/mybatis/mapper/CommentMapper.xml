@@ -211,8 +211,8 @@
 
     select c.entity_id as goodsId, c.content as content,c.description_score as descriptionScore,
            c.service_score as serviceScore, c.logistics_score as logisticsScore,
-           b.name as brandName,b.img_url as brandImg,b.id as brandId,
-           g.id as goodsId,g.img_url as goodsImg, g.name as goodsName,
+           b.name as brandName,b.imgUrl as brandImg,b.id as brandId,
+           g.id as goodsId,g.imgUrl as goodsImg, g.name as goodsName,
            g.seller_id as sellerId,g.price as price, u.name as sellerName,
            gt.name as typeName,gt.id as typeId,gt.super_id as typeSId
     from goods g , comment c ,brand b ,user u,goods_type gt
@@ -226,8 +226,8 @@
   <select id="queryNoCommentByUserId" resultType="java.util.Map">
   select c.entity_id as goodsId, c.content as content,c.description_score as descriptionScore,
            c.service_score as serviceScore, c.logistics_score as logisticsScore,
-           b.name as brandName,b.img_url as brandImg,b.id as brandId,
-           g.id as goodsId,g.img_url as goodsImg, g.name as goodsName,
+           b.name as brandName,b.imgUrl as brandImg,b.id as brandId,
+           g.id as goodsId,g.imgUrl as goodsImg, g.name as goodsName,
            g.seller_id as sellerId,g.price as price, u.name as sellerName,
            gt.name as typeName,gt.id as typeId,gt.super_id as typeSId
     from goods g , comment c ,brand b ,user u,goods_type gt

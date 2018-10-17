@@ -147,7 +147,7 @@
             <div id="step-1" class="step step-complete">
                 <div class="step-title">
                     <strong id="consigneeTitleDiv">收货人信息</strong>
-                    <span class="step-action"><a href="javascript:;" id="editReciever">[修改]</a></span>
+                    <span class="step-queue"><a href="javascript:;" id="editReciever">[修改]</a></span>
                 </div>
                 <div class="step-content">
                     <div id="consignee" class="sbox-wrap">
@@ -177,7 +177,7 @@
                                                 {{/else}}
                                                 <span id = "linkman-{{data.addressid}}">{{data.linkman}}</span id = "region-{{data.addressid}}">&nbsp;<span id = "region-{{data.addressid}}">{{data.province}} {{data.city}} {{data.area}}</span>&nbsp;<span id = "detailedaddress-{{data.addressid}}">{{data.detailedaddress}} </span>&nbsp;<span id = "tel-{{data.addressid}}">{{data.tel}}</span>&nbsp;
                                             </label>
-                                            <span class="item-action">
+                                            <span class="item-queue">
 		                                    			<a href="javascript:;" onclick="showEditArea('{{data.addressid}}')">编辑</a> &nbsp;
 		                                    			<a href="javascript:;" onclick="deleteAddress('{{data.addressid}}')">删除</a>&nbsp;
 		                                    		</span>
