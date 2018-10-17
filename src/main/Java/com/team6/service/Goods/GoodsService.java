@@ -40,4 +40,9 @@ public interface GoodsService {
      * 根据商品id查询到商品详情页所需要的信息
      */
     public Map<String,Object> queryProductInfo( int id);
+
+    /**
+     * 根据shopid查询商品
+     */
+    public Object queryShopGoodsByShopId(int ShopId);
 }

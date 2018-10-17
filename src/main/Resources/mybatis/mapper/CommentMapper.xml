@@ -236,4 +236,31 @@
     and gt.id = g.type_id
     and c.content is  null ;
   </select>
+
+  <!--查询卖家商品所有评论-->
+  <select id="queryShopCommentByShopId" resultType="java.util.Map">
+
+    select
+          c.id as commentId,
+          c.content as commentContent,
+          c.user_id as userId,
+          c.entity_id as entityId,
+          c.entity_type as entityType,
+          c.description_score as descriptionScore,
+          c.service_score  as serviceScore,
+          c.logistics_score as logistics_score,
+
+          g.id as goodsId,
+          g.name as goodsName,
+          g.img_url as imgUrl,
+          g.price as goodsPrice
+
+    from comment c , shop s ,goods g
+   where
+          s.id=#{shopId} and
+          g.seller_id = s.seller_id and
+          g.id = c.entity_id ;
+
+  </select>
+
 </mapper>

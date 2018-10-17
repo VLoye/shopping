@@ -24,8 +24,11 @@ public class ShopServiceImp implements ShopService {
     public Object getShopData(int shopId, HttpServletRequest request) {
         //取得用户信息
        Map user=loginService.getCurrentUserInfo(request);
-        if(user==null) user.put("isLogin",false);
-        else user.put("isLogin",true);
+        if(user!=null) {
+            user.put("isLogin",true);
+
+        }
+
 
         //取得轮播图
         Object rbList = rbService.queryByShopId(shopId);
