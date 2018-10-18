@@ -29,7 +29,7 @@
 
 <script type="text/javascript">
 	$(function () {
-        PsFormat();
+        refreshData();
     });
     function GetQueryString(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -55,7 +55,7 @@
 
 
 	var PsFormat = function () {
-		var key = GetQueryString("key");
+		//var key = GetQueryString("key");
 
         document.getElementById("keycontent").innerHTML = key;
         $.ajax({
@@ -66,9 +66,9 @@
             success: function(data){
                 console.log(key);
                 console.log(data);
-                $("#loginstatus").append(template("logstatus",{data:data.user}));
-				$("#goodscontent").append(template("goodsFormat",{list:data.glist}));
-				$("#jpcontent").append(template("jpFormat",{list:data.jplist}));
+                $("#loginstatus").html(template("logstatus",{data:data.user}));
+				$("#goodscontent").html(template("goodsFormat",{list:data.glist}));
+				$("#jpcontent").html(template("jpFormat",{list:data.jplist}));
             },
             error: function(data){
                 //parent.layer.msg(res.title);
@@ -77,10 +77,9 @@
         });
     }
     var CartAdd = function (goodsid) {
-
-        $.post('/shopCar/add/'+goodsid, { goodsid: goodsid, count: 1 }, function (result) {
+        $.post('/shopCar/add', { goodsId: goodsid, count: 1 }, function (result) {
             //loading.close();
-            if (result.success) {
+            if (result.msg=="SUCCESS") {
                	alert("添加成功");
             }
             else {
@@ -88,9 +87,29 @@
             }
         });
     }
+    var followAdd = function (goodsid) {
+        var url = '/follow/'+goodsid+'/1';
+        $.ajax({
+            url: url,
+            type: "post",
+            dataType: "json",
+            success: function(data){
+               if(data.success == true)
+                   alert("关注成功");
+               else
+                   alert("已关注，无需添加");
+            },
+            error: function(data){
+                //parent.layer.msg(res.title);
+                //alert(res.title);
+            }
+        });
+    }
     var refreshData = function () {
         var nkey = document.getElementById("key");
         var key = nkey.value;
+        key = GetQueryString("key");
+        document.getElementById("keycontent").innerHTML = key;
 
 		var bstrs = $("#bidstr").val();
 		var tstrs = $("#tidstr").val();
@@ -224,30 +243,6 @@
 	<i class="h-fl h-vline">|</i>
 	<a class="h-fl" href="/register">注册</a>
 	{{/if}}
-	<a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
-	<dl class="h-fr h-down ml0 ltb1">
-		<dt>
-			<a href="/scrz/" target="_blank">商城入驻</a>
-			<i class="h-icon"></i>
-		</dt>
-		<dd>
-			<a href="/Article/mallintr" target="_blank">商城介绍</a>
-			<a href="/scrz/" target="_blank">商城入驻</a>
-		</dd>
-	</dl>
-	<dl class="h-fr h-down h-sd mr0">
-		<dt>
-			<a href="#2">收藏夹</a>
-			<i class="h-icon"></i>
-		</dt>
-		<dd>
-			<a href="/ProductConcern/Index">关注的商品</a>
-			<a href="/ShopConcern/Index">关注的店铺</a>
-		</dd>
-	</dl>
-	<a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
-	<i class="h-fr h-vline">|</i>
-	<a class="h-fr" href="/index" target="_blank">汽配人首页</a>
 </script>
 
 <div class="pw-top">
@@ -263,8 +258,8 @@
 <!--shortcut end-->
 <div class="w">
 	<div id="logo-2014">
-		<a href="http://127.0.0.1:8020/shopping/html/index.html">
-			<img src="../img/logo1.jpg" alt="qipeiren" height="52" />
+		<a href="/index">
+			<img src="static/img/logo1.jpg" alt="qipeiren" height="52" />
 		</a>
 	</div>
 	<div id="search-2014" >
@@ -290,7 +285,7 @@
 	<div id="hotwords"></div>
 	<span class="clr"></span>
 </div><!--nav start-->
-<div id="nav-2014">
+<div id="nav-2014" style="width: 1400px;margin-left: 100px;">
 	<div class="w">
 		<div class="w-spacer"></div>
 		<div id="categorys-2014" class="dorpdown"  data-type="default">
@@ -324,7 +319,7 @@
 		<span class="clr"></span>
 	</div>
 </div>
-	<div id="J_crumbsBar" class="crumbs-bar">
+	<div id="J_crumbsBar" class="crumbs-bar" style="width: 1400px;margin-left: 100px;">
 		<div class="crumbs-nav">
 			<div class="crumbs-nav-main clearfix">
 				<div class="crumbs-nav-item">
@@ -338,7 +333,7 @@
 		</div>
 	</div>
 
-	<div id="J_container" class="container">
+	<div id="J_container" class="container" style="width: 1400px;margin-left: 100px;">
 		<div id="J_selector" class="selector">
 			<div class="J_selectorLine s-brand">
 				<div id="blist" class="sl-wrap">
@@ -391,7 +386,7 @@
 		<input type="hidden" id="tidstr" value=""/>
 		<input type="hidden" id="tnamestr" value=""/>
 
-		<div id="J_main" class="g-main2">
+		<div id="J_main" class="g-main2" style="width: 1400px;margin-left: 100px;">
 			<div class="m-list">
 				<div class="ml-wrap">
 					<div id="J_filter" class="filter">
@@ -439,22 +434,22 @@
 
 					<div class="gl-i-wrap">
 						<div class="p-img">
-							<a target="_blank" title="{{data.brandName}} {{data.goodsName}}" href="" onclick="">
+							<a target="/goods/{{data.gId}}" title="{{data.brandName}} {{data.goodsName}}" href="/goods/{{data.gId}}" onclick="">
 								<img width="220" height="220" class="err-product" data-img="1" src="{{data.imgUrl}}" />
 							</a>						<div data-lease="" data-catid="6294" data-venid="78166" data-presale=""></div>
 						</div>
 						<div class="p-price">
 							<strong class="J_1195464225" data-done="1"><em>￥</em><i>{{data.price}}</i></strong>					</div>
 						<div class="p-name p-name-type-2">
-							<a target="_blank" title="" href="" onclick="">
+							<a target="/goods/{{data.gId}}" title="" href="/goods/{{data.gId}}" onclick="">
 								<em>{{data.brandName}} {{data.goodsName}}全国联保+15天退换货</em>
 								<i class="promo-words" id="J_AD_1195464225"></i>
 							</a>
 						</div>
 						<div class="p-operate">
 							<!--<a class="p-o-btn contrast J_contrast" data-sku="{{data.gid}}" href="javascript:;" onclick=""><i></i>对比</a>-->
-							<a class="p-o-btn focus J_focus" data-sku="{{data.gId}}" href="/follow/{{data.gId}}/1"><i></i>关注</a>
-							<a class="p-o-btn addcart" href="" target="_blank" onclick="CartAdd('"+ {{data.gId}} +"')" data-limit="0"><i></i>加入购物车</a>
+							<a class="p-o-btn focus J_focus" data-sku="{{data.gId}}" onclick="followAdd({{data.gId}})"><i></i>关注</a>
+							<a class="p-o-btn addcart" href="" onclick="CartAdd({{data.gId}})" data-limit="0"><i></i>加入购物车</a>
 						</div>
 
 					</div>
