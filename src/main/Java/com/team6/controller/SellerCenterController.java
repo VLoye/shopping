@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -59,10 +60,20 @@ public class SellerCenterController {
         return null;
     }
 
-    //修改密码
-    public Object changePassword(){
+    @RequestMapping(value = "goodsm")
+    public Object sellerManageGoods(){
 
-        return null;
+        return "Personality/Seller/GoodsManage";
+    }
+
+    //修改密码
+    @ResponseBody
+    @RequestMapping(value = "table",method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
+    public Object table(Model model){
+        //传入shopId
+        List list = (List)goodsService.queryShopGoodsByShopId(2);
+        model.addAttribute("data",list);
+        return JSONUtil.toJSON(model);
     }
 
     //返回企业信息
