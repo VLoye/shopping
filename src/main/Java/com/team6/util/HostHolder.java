@@ -31,7 +31,7 @@ public class HostHolder {
 
     public int getCurrentUserId(){
         Map map = userInfos.get();
-        return (int)map.get("userId");
+        return (int)map.get("userid");
     }
 
 }
