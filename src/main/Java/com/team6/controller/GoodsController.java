@@ -65,19 +65,25 @@ public class GoodsController {
         model.put("data",map);
         return new ModelAndView("/ProductAndCart/Product",model);
     }
-/*    @RequestMapping(value="/del")
-    public String deleteById(@RequestParam int id,
-                              HttpServletRequest request){
-        Goods goods=goodsService.queryGoodsById(id);
-        //删除商品信息
-        GoodsEnum anEnum=goodsService.deleteGoodsById(id);
-        //删除图片信息
-        delImageFile(request,goods.getImgUrl());
-        if(anEnum.equals(GoodsEnum.DELETE_GOODS_SUCCESS))
-            return "success";
+    @RequestMapping(value="/del")
+    @ResponseBody
+    public String deleteById(
+            @RequestParam("ids[]") int ids[],
+            HttpServletRequest request){
+
+        GoodsEnum anEnum=null;
+        for(int id:ids){
+            Goods goods=goodsService.queryGoodsById(id);
+            //删除商品信息
+             anEnum = goodsService.deleteGoodsById(id);
+            //删除图片信息
+            delImageFile(request, goods.getImgUrl());
+        }
+        if(anEnum!=null&&anEnum.equals(GoodsEnum.DELETE_GOODS_SUCCESS))
+            return JSONUtil.toJSON("success");
          else
-          return "error";
-    }*/
+          return JSONUtil.toJSON("error");
+    }
     /*
     保存图片信息并返回文件保存的路径
      */
