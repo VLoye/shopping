@@ -34,21 +34,41 @@
     function GetQueryString(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
-		if(r!=null) return  unescape(r[2]); return null;
+		if(r!=null) return  decodeURIComponent(r[2]); return null;
     }
+    //
+    function changeURLArg(url,arg,arg_val){
+        var pattern=arg+'=([^&]*)';
+        var replaceText=arg+'='+arg_val;
+        if(url.match(pattern)){
+            var tmp='/('+ arg+'=)([^&]*)/gi';
+            tmp=url.replace(eval(tmp),replaceText);
+            return tmp;
+        }else{
+            if(url.match('[\?]')){
+                return url+'&'+replaceText;
+            }else{
+                return url+'?'+replaceText;
+            }
+        }
+    }
+
+
 	var PsFormat = function () {
 		var key = GetQueryString("key");
+
         document.getElementById("keycontent").innerHTML = key;
         $.ajax({
             url: '/searchData',
-            type: "post",
+            type: "get",
 			data:{key:key,brandid:'',typeid:''},
             dataType: "json",
             success: function(data){
+                console.log(key);
+                console.log(data);
                 $("#loginstatus").append(template("logstatus",{data:data.user}));
 				$("#goodscontent").append(template("goodsFormat",{list:data.glist}));
 				$("#jpcontent").append(template("jpFormat",{list:data.jplist}));
-
             },
             error: function(data){
                 //parent.layer.msg(res.title);
@@ -71,30 +91,20 @@
     var refreshData = function () {
         var nkey = document.getElementById("key");
         var key = nkey.value;
-        var brandids = new Array();
-        var typeids = new Array();
 
-		var bstrs = $("#bidstr").val().split(",");
-		var tstrs = $("#tidstr").val().split(",");
+		var bstrs = $("#bidstr").val();
+		var tstrs = $("#tidstr").val();
 
-        for (var i = 0; i < bstrs.length; i++) {
-            brandids.push(bstrs[i]);
-
-        }
-
-        for (var j = 0; j < tstrs.length; j++) {
-            typeids.push(tstrs[j]);
-        }
+		console.log("bstrs:"+bstrs+",tstrs:"+tstrs);
 
         $.ajax({
             url: '/searchData',
-            type: "post",
-            data:{key:key,brandids:brandids,typeids:typeids},
+            type: "get",
+            data:{key:key,brandid:bstrs,typeid:tstrs},
             dataType: "json",
             success: function(data){
-                $("#goodscontent").append(template("goodsFormat",{list:data.glist}));
-                $("#jpcontent").append(template("jpFormat",{list:data.jplist}));
-
+                $("#goodscontent").html(template("goodsFormat",{list:data.glist}));
+                $("#jpcontent").html(template("jpFormat",{list:data.jplist}));
             },
             error: function(data){
                 //parent.layer.msg(res.title);
@@ -144,18 +154,15 @@
 
         if(($("#bidstr").val()=="")) {
 
-            $("#bidstr").val($("#bidstr").val()+brandid);
-            $("#bnamestr").val($("#bnamestr").val()+name);
+            $("#bidstr").val(brandid);
+            $("#bnamestr").val(name);
         }
         else{
 
-            if($("#bidstr").val().indexOf(brandid)>=0){
-
-            }else{
-                $("#bidstr").val($("#bidstr").val()+","+brandid);
+                $("#bidstr").val(brandid);
                 $("#bnamestr").val($("#bnamestr").val()+","+name);
             }
-        }
+
         var content1 = $("#selectedkey").html();
         if(content1 == null||content1.length == 0)
         {
@@ -170,6 +177,7 @@
         }
 
         refreshData();
+
     }
     var typekeydown = function(typeid,name) {
 
@@ -182,8 +190,8 @@
             if($("#tidstr").val().indexOf(typeid)>=0){
 
             }else{
-                $("#tidstr").val($("#tidstr").val()+","+typeid);
-                $("#tnamestr").val($("#tnamestr").val()+","+name);
+                $("#tidstr").val(typeid);
+                $("#tnamestr").val(name);
             }
         }
         var content2 = $("#selectedkey").html();
@@ -342,8 +350,8 @@
 							<ul class="J_valueList v-fixed">
 								<#list brand as data>
 								<li data-initial="Z" style="display:block;">
-									<a id="${data.brandid}" href="" rel="nofollow" onclick="brandkeydown('"+ ${data.brandid} +"')" title="${data.brandname}">
-										<i></i><img src="${data.imgUrl}" width="102" height="36">${data.brandname}					</a>
+									<a id="${data.id}" href="" rel="nofollow" onclick="brandkeydown('${data.id}')" title="${data.name}">
+										<i></i><img src="${data.imgUrl}" width="102" height="36">${data.name}					</a>
 								</li>
 								</#list>
 							</ul>
@@ -363,7 +371,7 @@
 							<ul class="J_valueList v-fixed">
 								<#list type as data>
 								<li>
-									<a title="${data.typename}" id="${data.typeid}" data-v="6294" href="" onclick="typekeydown('"+ ${data.typeid} +"')"><i></i>钢琴</a>
+									<a title="${data.name}" id="${data.id}" data-v="6294" href="" onclick="typekeydown('${data.id}')"><i></i>${data.name}</a>
 								</li>
 								</#list>
 							</ul>
@@ -377,6 +385,7 @@
 			</div>
 		</div>
 
+		<input type="hidden" id="keyword" value=""/>
 		<input type="hidden" id="bidstr" value=""/>
 		<input type="hidden" id="bnamestr" value=""/>
 		<input type="hidden" id="tidstr" value=""/>
@@ -426,26 +435,26 @@
 
 			<script type="text/html" id="goodsFormat">
 				{{each list data}}
-				<li data-sku="{{data.gid}}" class="gl-item">
+				<li data-sku="{{data.gId}}" class="gl-item">
 
 					<div class="gl-i-wrap">
 						<div class="p-img">
-							<a target="_blank" title="{{data.gbrand}} {{data.gname}}" href="" onclick="">
-								<img width="220" height="220" class="err-product" data-img="1" source-data-lazy-img="{{data.gimg}}" />
+							<a target="_blank" title="{{data.brandName}} {{data.goodsName}}" href="" onclick="">
+								<img width="220" height="220" class="err-product" data-img="1" src="{{data.imgUrl}}" />
 							</a>						<div data-lease="" data-catid="6294" data-venid="78166" data-presale=""></div>
 						</div>
 						<div class="p-price">
-							<strong class="J_1195464225" data-done="1"><em>￥</em><i>{{data.gprice}}</i></strong>					</div>
+							<strong class="J_1195464225" data-done="1"><em>￥</em><i>{{data.price}}</i></strong>					</div>
 						<div class="p-name p-name-type-2">
 							<a target="_blank" title="" href="" onclick="">
-								<em>{{data.gbrand}} {{data.gname}}全国联保+15天退换货</em>
+								<em>{{data.brandName}} {{data.goodsName}}全国联保+15天退换货</em>
 								<i class="promo-words" id="J_AD_1195464225"></i>
 							</a>
 						</div>
 						<div class="p-operate">
 							<!--<a class="p-o-btn contrast J_contrast" data-sku="{{data.gid}}" href="javascript:;" onclick=""><i></i>对比</a>-->
-							<a class="p-o-btn focus J_focus" data-sku="{{data.gid}}" href="/follow/{{data.goodsid}}/1"><i></i>关注</a>
-							<a class="p-o-btn addcart" href="" target="_blank" onclick="CartAdd('"+ {{data.goodsid}} +"')" data-limit="0"><i></i>加入购物车</a>
+							<a class="p-o-btn focus J_focus" data-sku="{{data.gId}}" href="/follow/{{data.gId}}/1"><i></i>关注</a>
+							<a class="p-o-btn addcart" href="" target="_blank" onclick="CartAdd('"+ {{data.gId}} +"')" data-limit="0"><i></i>加入购物车</a>
 						</div>
 
 					</div>
@@ -456,15 +465,15 @@
 
 			<script type="text/html" id="jpFormat">
 				{{each list data}}
-					<li onclick="/goods/{{data.jpid}}">
+					<li onclick="/goods/{{data.gId}}">
 						<div class="p-img">
 						<a target="_blank" href="">
-						<img width="160" height="160" data-img="1" src="{{data.jpimg}}" class="err-product">
+						<img width="160" height="160" data-img="1" src="{{data.imgUrl}}" class="err-product">
 						<img src="" class="J_adv_tuiguang_exposal" style="display:none;">
 						</a>
 						</div>
 						<div class="p-price">
-						<strong><em>¥</em><i>{{data.jpprice}}</i></strong>
+						<strong><em>¥</em><i>{{data.price}}</i></strong>
 						</div>
 						<div class="p-name">
 						<a target="_blank" href="">

@@ -2,7 +2,11 @@ package com.team6.service;/**
  * Created by VLoye on 2018/10/17.
  */
 
+import com.team6.dao.BrandMapper;
+import com.team6.dao.GoodsTypeMapper;
 import com.team6.dto.SolrGoods;
+import com.team6.entity.Brand;
+import com.team6.entity.GoodsType;
 import com.team6.util.HostHolder;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,11 @@ public class SearchService {
     @Autowired
     HostHolder hostHolder;
 
+    @Autowired
+    BrandMapper brandMapper;
+    @Autowired
+    GoodsTypeMapper goodsTypeMapper;
+
     public Map searchData(String key,Map conditions){
         HashMap<String,Object> map = new HashMap<String,Object>();
         List<SolrGoods> glist =  solrAdapter.SolrQueryByGoodsName("g_name",key,10,conditions,null,null);
@@ -34,6 +43,15 @@ public class SearchService {
         map.put("glist",glist);
         map.put("jplist",jplist);
         return map;
+    }
+
+
+    public List<Brand> queryAllBrand(){
+        return brandMapper.queryAll();
+    }
+
+    public List<GoodsType> queryAllType() {
+        return goodsTypeMapper.queryAll();
     }
 
 }

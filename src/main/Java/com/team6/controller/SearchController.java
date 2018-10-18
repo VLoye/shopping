@@ -7,12 +7,11 @@ import com.team6.service.SearchService;
 import com.team6.util.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,5 +43,16 @@ public class SearchController {
         }
         Map result = searchService.searchData(key,conditions);
         return result;
+    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.GET )
+    public ModelAndView search(@RequestParam(value = "key",required = true)String key){
+        List brands = searchService.queryAllBrand();
+        List types = searchService.queryAllType();
+        Map<String,Object> map = new HashMap<>();
+        map.put("brand",brands);
+        map.put("type",types);
+        map.put("key",key);
+        return new ModelAndView("/ProductAndCart/ProductSearch",map);
     }
 }
