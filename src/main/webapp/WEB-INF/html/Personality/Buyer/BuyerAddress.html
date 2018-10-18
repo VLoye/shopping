@@ -24,7 +24,7 @@
     <script src="../../static/js/CommonJS.js" type="text/javascript"></script>
     <script src="../../static/js/hayui.js" type="text/javascript"></script>
     <script src="../../static/template/admin/js/sysUtils.js" type="text/javascript"></script>
-    <Rscript src="../../static/template/admin/js/template-web.js" type="text/javascript"></Rscript>
+    <script src="../../static/template/admin/js/template-web.js" type="text/javascript"></script>
     <style>
         #edit-cont *{box-sizing:content-box;}
         .hide-none{display:none;}
@@ -40,17 +40,36 @@
 
     <script type="text/javascript">
         $(function () {
+
             AddressFormat();
         });
         var AddressFormat = function(){
+
             $.ajax({
+                url: "/address/useraddress",
+                type: "post",
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+
+                    $("#order_box").html(template("addressFormat",{list:data.address}));
+                },
+                error: function(data){
+
+                }
+            });
+         /*   $.ajax({
                 url: '/address/useraddress',
                 type: "post",
                 dataType: "json",
                 success: function(data){
-                    $("#order_box").append(template("addressFormat",{list:data}));
+                    console.log(data);
+                    $("#order_box").html(template("dataAddress",{list:data.address}));
+                },
+                error: function(){
+
                 }
-            });
+            });*/
         };
     </script>
 
@@ -61,52 +80,7 @@
         <h3 class="title_txt cur">收货地址管理</h3>
     </div>
 
-    <script type="text/html" id="addressFormat">
-        {{each list data}}
-        <div id="6670" class="sm easebuy-m">
-            <div class="smt">
-                <h3>{{data.linkman}}</h3>
-                <div class="extra">
-                    <a class="btn-9 id_edit" onclick="editad('"+ {{data.id}} +"')" href="javascript:;" data="6670">编辑</a>
-                    <a class="btn-9 del" onclick="deleltead('"+ {{data.id}} +"')" href="javascript:;" data-tag="6670">删除</a>
-                </div>
-            </div>
-            <div class="smc">
-                <div class="items new-items">
-                    <div class="item-lcol">
-                        <div class="item">
-                            <span class="label">收货人：</span>
-                            <div class="fl" id="linkman-{{data.id}}">{{data.linkman}}</div>
-                            <span class="clr"></span>
-                        </div>
-                        <div class="item">
-                            <span class="label">所在地区：</span>
-                            <div class="fl" data="1529,1564,1570" id="fullregion-{{data.id}}">{{data.province}} {{data.city}} {{data.area}}</div>
-                            <span class="clr"></span>
-                        </div>
-                        <div class="item">
-                            <span class="label">地址：</span>
-                            <div class="fl" id="detailedaddress-{{data.id}}">{{data.detailedaddress}}</div>
-                            <span class="clr"></span>
-                        </div>
-                        <div class="item">
-                            <span class="label">手机号码：</span>
-                            <div class="fl" id="tel-{{data.id}}">{{data.tel}}</div>
-                            <span class="clr"></span>
-                        </div>
-                    </div>
-                    <div class="item-rcol">
-                        <div class="extra">
-                            <a class="btn-5 update-eshop e-btn" data="6670" style="display:none;">升级为轻松购</a>
 
-                        </div>
-                    </div>
-                    <div class="clr"></div>
-                </div>
-            </div>
-        </div>
-        {{/each}}
-    </script>
 
     <!-- 按钮触发模态框 -->
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#edit-cont">
@@ -115,7 +89,53 @@
     你已创建0个收货地址，还可以创建20个
 
     <div class="mc pd10" id="order_box">
+        <script type="text/html" id="addressFormat">
 
+            {{each list data}}
+            <div id="6670" class="sm easebuy-m">
+                <div class="smt">
+                    <h3>{{data.linkman}}</h3>
+                    <div class="extra">
+                        <a class="btn-9 id_edit" onclick="editad('{{data.addressid}}')" href="javascript:;" data="6670">编辑</a>
+                        <a class="btn-9 del" onclick="deletead('{{data.addressid}}')" href="javascript:;" data-tag="6670">删除</a>
+                    </div>
+                </div>
+                <div class="smc">
+                    <div class="items new-items">
+                        <div class="item-lcol">
+                            <div class="item">
+                                <span class="label">收货人：</span>
+                                <div class="fl" id="linkman-{{data.addressid}}">{{data.linkman}}</div>
+                                <span class="clr"></span>
+                            </div>
+                            <div class="item">
+                                <span class="label">所在地区：</span>
+                                <div class="fl" data="1529,1564,1570" id="fullregion-{{data.addressid}}">{{data.province}} {{data.city}} {{data.area}}</div>
+                                <span class="clr"></span>
+                            </div>
+                            <div class="item">
+                                <span class="label">地址：</span>
+                                <div class="fl" id="detailedaddress-{{data.addressid}}">{{data.detailed_address}}</div>
+                                <span class="clr"></span>
+                            </div>
+                            <div class="item">
+                                <span class="label">手机号码：</span>
+                                <div class="fl" id="tel-{{data.addressid}}">{{data.tel}}</div>
+                                <span class="clr"></span>
+                            </div>
+                        </div>
+                        <div class="item-rcol">
+                            <div class="extra">
+                                <a class="btn-5 update-eshop e-btn" data="6670" style="display:none;">升级为轻松购</a>
+
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </script>
     </div>
 </div>
 
@@ -206,17 +226,74 @@
 
 </div>
 <script type="text/javascript">
-    var deletead = function(id){
+ /*   function showEditArea(id) {
+        if(id != 0){
+            var detailedaddress = document.getElementById("detailedaddress-"+id).innerText;
+            var shipTo = document.getElementById("linkman-"+id).innerText;
+            var fullregion = document.getElementById("region-"+id).innerText;
+            var phone = document.getElementById("tel-"+id).innerText;
+            var adid = id;
+            if (fullregion) {
+                var arr = fullregion.split(' ');
+            }
+            var fullRegionName = fullregion == null ? '<i></i><em></em><s></s>' : '<i id = "editprovince">' + arr[0] + ' </i><em id = "editcity">' + arr[1] + ' </em><s id = "editarea">' + arr[2] + '</s>';
+            $('input[name="shipTo"]').val(shipTo);
+            $('input[type="text"][name="address"]').val(detailedaddress);
+            $('input[name="phone"]').val(phone);
+            $('span[name="regionFullName"]').html('');
+            $('span[name="regionFullName"]').html(fullRegionName);
+            $('#adid').val(adid);
+
+            $('#addressEditArea').show();
+            $('#s_province').val("省份");
+            $('#s_province').trigger('change');
+            $('#s_city').val("地级市");
+            $('#s_city').trigger('change');
+
+            if (arr.length == 3) {
+                $('#s_county').val("市、县级市");
+                $('#s_county').trigger('change');
+            }
+        }
+        else{
+            $('#s_province').val("省份");
+            $('#s_city').val("地级市");
+            $('#s_county').val("市、县级市");
+            $('input[name="shipTo"]').val('');
+            $('input[type="text"][name="address"]').val('');
+            $('input[name="phone"]').val('');
+            $('span[name="regionFullName"]').html('');
+            $('#addressEditArea').show();
+        }
+    }*/
+  /*  function deleteAddress(id) {
         $.dialog.confirm('您确定要删除该收货地址吗？', function () {
             var loading = showLoading();
             $.post('/address/deladdress', { id: id }, function (result) {
                 loading.close();
                 if (result.success) {
-
+                    var current = $('div[name="li-' + id + '"]');
+                    if ($('input[type="radio"][name="address"]:checked').val() == id) {
+                        $('input[type="radio"][name="address"]').first().click();
+                        $('#selectedAddress').html('');
+                        $('#shippingAddressId').val('');
+                    }
+                    current.remove();
                 }
                 else
                     $.dialog.errorTips(result.msg);
             });
+        });
+    }*/
+    var deletead = function(id){
+        window.confirm('您确定要删除该收货地址吗？', function () {
+            var loading = showLoading();
+            $.post('/address/deladdress',{ id: id }, function (result) {
+                loading.close();
+                if(result.success)
+                    AddressFormat();
+                else
+                    $.dialog.errorTips(result.msg);
         });
     }
     var editad = function(id){
@@ -236,7 +313,7 @@
         $('#s_county').trigger('change');
         $('#consigneeAddress').val(detailedaddress);
         $('#consigneeMobile').val(tel);
-
+        $('#edit-cont').modal("show");
     }
     var isSelectAddr = function () {
 

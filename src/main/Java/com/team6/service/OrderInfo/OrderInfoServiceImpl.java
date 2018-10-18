@@ -164,6 +164,12 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         }
     }
 
+    /**
+     * 根据订单查询订单信息 返回map
+     * @param orderId
+     * @param request
+     * @return
+     */
     @Override
     public Object queryOrderByOrderid(Integer orderId, HttpServletRequest request) {
         Map<String,Object> returnMap=new HashMap<>();
@@ -173,7 +179,20 @@ public class OrderInfoServiceImpl implements OrderInfoService{
             returnMap.put("msg",LoginEnum.LOGIN_OFF);
             return returnMap;
         }
-        return null;
+        //获取订单的基本信息
+        returnMap=orderInfoMapper.queryByPrimaryKey(orderId);
+        //获取订单的详细信息，计算出总价格
+        List<Map<String,Object>> glist=orderDetailsMapper.queryOrderDate(orderId);
+        //订单总价,初始化为运费10元
+        long totalPrice=10;
+        for(Map<String,Object> data:glist){
+            BigDecimal BDprice= (BigDecimal)data.get("price");
+            Float price=BDprice.floatValue();
+            Integer count= (Integer) data.get("coun");
+            totalPrice+=price*count;
+        }
+        returnMap.put("totalPrice",totalPrice);
+        return returnMap;
     }
 
 
@@ -189,14 +208,14 @@ public class OrderInfoServiceImpl implements OrderInfoService{
      */
     private Map<Integer, ArrayList<Integer>> getSellerIdAndLocation(int [] sellerId){
         Map<Integer,ArrayList<Integer>> SellerIdAndLocation=new LinkedHashMap<Integer, ArrayList<Integer>>();
-        //创建list，用于存放该卖家id在数组中出现的位置下标
-        ArrayList<Integer> list = new ArrayList<Integer>();
         if(sellerId.length>1) {
-            for (int i = 0; i < sellerId.length - 1; i++) {
+            for (int i = 0; i < sellerId.length; i++) {
                 if (sellerId[i] != -1) //设置一个数组中不可能出现的值
                 {
                     //记录该卖家id
                     int id = sellerId[i];
+                    //创建list，用于存放该卖家id在数组中出现的位置下标
+                    ArrayList<Integer> list = new ArrayList<Integer>();
                     list.add(i);//记录该数字第一次出现的位置
                     for (int j = i + 1; j < sellerId.length; j++) {
                         //遍历数组，查找与seller[i]相同的值并记录下标位置
@@ -210,6 +229,8 @@ public class OrderInfoServiceImpl implements OrderInfoService{
                 }
             }
         }else{
+            //创建list，用于存放该卖家id在数组中出现的位置下标
+            ArrayList<Integer> list = new ArrayList<Integer>();
             list.add(0);
             SellerIdAndLocation.put(sellerId[0],list);
         }

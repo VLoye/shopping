@@ -236,25 +236,11 @@
                 oInput.value = "";   // 先将oInput值清空，否则选择图片与上次相同时change事件不会触发
                 oInput.click();
             }
-
-
-            /*oSubmit.onclick=function(){
-                if(!dataArr.length){
-                    return alert('请先选择文件');
-                }
-                send();
-            }*/
         }
-        /*
-         用ajax发送fd参数时要告诉jQuery不要去处理发送的数据，
-         不要去设置Content-Type请求头才可以发送成功，否则会报“Illegal invocation”的错误，
-         也就是非法调用，所以要加上“processData: false,contentType: false,”
-         * */
 
 
         function ReSizePic(ThisPic) {
             var RePicWidth = 200; //这里修改为您想显示的宽度值
-
             var TrueWidth = ThisPic.width; //图片实际宽度
             var TrueHeight = ThisPic.height; //图片实际高度
 
@@ -298,7 +284,7 @@
                             <span id="choosetype">
                             	<!--乘用车配件 > 转向系统 > 转向管柱总成-->
 							</span>
-                                    <a class="hayui-link hayui-link-normal hayui-link-mini hayui-ml20 hayui-mr5" hay-event="add" href="/work/proaddcls?infotype=1&id=0&ac=">重新分类</a>
+                                    <a class="hayui-link hayui-link-normal hayui-link-mini hayui-ml20 hayui-mr5" hay-event="add" href="SellerSendMessageChild">重新分类</a>
                                     <label class="hayui-word-aux">返回重新分类会造成已填写的信息丢失，请慎重操作！</label>
                                 </div>
                             </div>
