@@ -100,4 +100,11 @@ public interface GoodsMapper {
      */
     public Map<String,Object> queryProductInfo(@Param("id") int id);
 
+    /**
+     * 根据shopId查询商店的商品信息
+     * @param shopId
+     * @return
+     */
+    public List queryShopGoodsByShopId(@Param("shopId") int shopId);
+
 }
