@@ -237,7 +237,7 @@
         </foreach>
     </select>
 
-    <select id="queryShopGoodsByShopId" parameterType="java.util.Map">
+    <select id="queryShopGoodsByShopId" resultType="java.util.Map">
 
         select
               g.id as goodsId,
