@@ -84,4 +84,10 @@ public interface CommentMapper {
      */
    List<Map> queryNoCommentByUserId(@Param("userId") int userId);
 
+    /**
+     * 查询商家商品的评论
+     * @param shopId
+     * @return
+     */
+   List queryShopCommentByShopId(@Param("shopId") int shopId);
 }

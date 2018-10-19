@@ -11,7 +11,7 @@
     <title>测试2</title>
 </head>
 <body>
-<form id="login_form" action="" method="post">
+<form id="login_form" queue="" method="post">
     <br />用户帐号： <input type="text" name="name" id="username" value=""/>
     <br />登录密码： <input type="password" name="password" id="password"/><br/>
     <input type="text" name="vcode">  <img id="vcode"  src="/vcode" onclick="changecode()">

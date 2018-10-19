@@ -3,12 +3,10 @@ package com.team6.controller;
 import com.team6.entity.Goods;
 import com.team6.service.Goods.GoodsService;
 import com.team6.util.enums.GoodsEnum;
+import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,26 +26,33 @@ public class GoodsController {
      *
      * 保存商品详细信息和图片信息
      * @param imageFile
-     * @param goods
+
      * @param request
      * @return
      */
+    @ResponseBody
     @RequestMapping(value="/add",method = RequestMethod.POST)
-    public String insertGoods(@RequestParam MultipartFile imageFile,
-                              Goods goods,
+    public String insertGoods(@RequestParam("fileName") MultipartFile imageFile[],
+                              /*Goods goods,*/
                               HttpServletRequest request){
         System.out.println("hello world");
+
+        Goods goods = new Goods();
         if(imageFile!=null){
-            String imgUrl=saveImageFile(imageFile,request);
+            String imgUrl="";
+            for(int k=0;k<imageFile.length;k++) {
+                 imgUrl += saveImageFile(imageFile[k], request)+",";
+            }
+
             goods.setImgUrl(imgUrl);
         }
         Date date=new Date();
         goods.setUploadTime(date);
         GoodsEnum anEnum=goodsService.insertGoods(goods);
         if(anEnum.equals(GoodsEnum.INSERT_GOODS_SUCCESS)){
-            return "InsertSuccess";
+            return JSONUtil.toJSON("success");
         }else{
-            return "error";
+            return JSONUtil.toJSON("error");
         }
     }
     /*
@@ -60,19 +65,25 @@ public class GoodsController {
         model.put("data",map);
         return new ModelAndView("/ProductAndCart/Product",model);
     }
-/*    @RequestMapping(value="/del")
-    public String deleteById(@RequestParam int id,
-                              HttpServletRequest request){
-        Goods goods=goodsService.queryGoodsById(id);
-        //删除商品信息
-        GoodsEnum anEnum=goodsService.deleteGoodsById(id);
-        //删除图片信息
-        delImageFile(request,goods.getImgUrl());
-        if(anEnum.equals(GoodsEnum.DELETE_GOODS_SUCCESS))
-            return "success";
+    @RequestMapping(value="/del")
+    @ResponseBody
+    public String deleteById(
+            @RequestParam("ids[]") int ids[],
+            HttpServletRequest request){
+
+        GoodsEnum anEnum=null;
+        for(int id:ids){
+            Goods goods=goodsService.queryGoodsById(id);
+            //删除商品信息
+             anEnum = goodsService.deleteGoodsById(id);
+            //删除图片信息
+            delImageFile(request, goods.getImgUrl());
+        }
+        if(anEnum!=null&&anEnum.equals(GoodsEnum.DELETE_GOODS_SUCCESS))
+            return JSONUtil.toJSON("success");
          else
-          return "error";
-    }*/
+          return JSONUtil.toJSON("error");
+    }
     /*
     保存图片信息并返回文件保存的路径
      */
@@ -98,6 +109,7 @@ public class GoodsController {
             }
         }
         //使用MultipartFile的transferTo方法保存文件
+
         try {
             imageFile.transferTo(targetFile);
         }catch (IllegalStateException e){

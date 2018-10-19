@@ -237,5 +237,28 @@
         </foreach>
     </select>
 
+    <select id="queryShopGoodsByShopId" resultType="java.util.Map">
+
+        select
+              g.id as goodsId,
+              g.img_url as imgUrl,
+              g.intro as goodsIntro,
+              g.name as goodsName,
+              g.seller_id as sellerId,
+              g.stock as goodsStock,
+              g.type_id as goodsTypeId,
+              g.upload_time as goodsUploadTime,
+              g.price as goodsPrice,
+              g.brand_id as brandId,
+
+              b.name as brandName
+
+        from  goods g , shop s ,brand b
+        where g.seller_id = s.seller_id and
+                s.id = #{shopId}  and
+                b.id=g.brand_id;
+
+    </select>
+
 
 </mapper>

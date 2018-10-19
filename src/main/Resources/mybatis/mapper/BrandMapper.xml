@@ -58,7 +58,7 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="imgUrl != null" >
+      <if test="img_url != null" >
         img_url,
       </if>
     </trim>
@@ -69,7 +69,7 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="imgUrl != null" >
+      <if test="img_url != null" >
         #{imgUrl,jdbcType=VARCHAR},
       </if>
     </trim>
@@ -84,7 +84,7 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="imgUrl != null" >
+      <if test="img_url != null" >
         img_url = #{imgUrl,jdbcType=VARCHAR},
       </if>
     </set>
@@ -100,4 +100,11 @@
       img_url = #{imgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAll" resultType="com.team6.entity.Brand" >
+    SELECT
+    <include refid="Base_Column_List" />
+    from brand
+  </select>
+
 </mapper>

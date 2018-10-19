@@ -79,4 +79,10 @@ public class CommentServiceImp implements CommentService {
 
         return list;
     }
+
+    @Override
+    public List shopComment(int shopId) {
+
+        return null;
+    }
 }
