@@ -460,9 +460,9 @@
 
 			<script type="text/html" id="jpFormat">
 				{{each list data}}
-					<li onclick="/goods/{{data.gId}}">
+					<li href="/goods/{{data.gId}}">
 						<div class="p-img">
-						<a target="_blank" href="">
+						<a target="_blank" href="/goods/{{data.gId}}">
 						<img width="160" height="160" data-img="1" src="{{data.imgUrl}}" class="err-product">
 						<img src="" class="J_adv_tuiguang_exposal" style="display:none;">
 						</a>
@@ -471,7 +471,7 @@
 						<strong><em>¥</em><i>{{data.price}}</i></strong>
 						</div>
 						<div class="p-name">
-						<a target="_blank" href="">
+						<a target="_blank" href="/goods/{{data.gId}}">
 						<em>{{data.jpprice}}<br/>全国联保+15天退换货</em>
 					</a>
 					</div>
