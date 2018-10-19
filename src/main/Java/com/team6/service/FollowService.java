@@ -44,10 +44,10 @@ public class FollowService {
         HashMap<String ,Object> map = new HashMap<String ,Object>();
         map.put("success",false);
         Map userMap = hostHolder.getCurrentUserInfo();
-        String keyFollower = JedisKeyUtil.getFollower((Integer) userMap.get("userId"),entityType);
+        String keyFollower = JedisKeyUtil.getFollower((Integer) userMap.get("userid"),entityType);
         String keyFollowee = JedisKeyUtil.getFollower(entityId,entityType);
         long statuser = jedisAdapter.sadd(keyFollower,String.valueOf(entityId));
-        long statusee = jedisAdapter.sadd(keyFollowee,(String) userMap.get("userId"));
+        long statusee = jedisAdapter.sadd(keyFollowee,String.valueOf(userMap.get("userid")));
         if(statuser == 0 && statusee ==0){
             map.put("msg","已关注");
             return map;

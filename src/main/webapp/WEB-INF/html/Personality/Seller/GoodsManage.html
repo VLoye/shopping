@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<link href="../../static/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<link href="../../static/bootstrap-table/dist/bootstrap-table.css" rel="stylesheet" />
+
+<body>
+
+<table id="table1"> </table>
+
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../../static/bootstrap-table/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../../static/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../../static/bootstrap-table/dist/bootstrap-table-locale-all.js"></script>
+<script type="text/javascript">
+
+
+     $('#table1').bootstrapTable({
+        url: "/seller/table",                      //请求后台的URL（*）
+        method: 'POST',                      //请求方式（*）
+        //toolbar: '#toolbar',              //工具按钮用哪个容器
+        striped: true,                      //是否显示行间隔色
+        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,                   //是否显示分页（*）
+        sortable: true,                     //是否启用排序
+       /* sortOrder: "asc", */                  //排序方式
+        /*sidePagination: "server",*/           //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        search: true,                      //是否显示表格搜索
+         strictSearch: false,
+        showColumns: true,                  //是否显示所有的列（选择显示的列）
+        showRefresh: true,                  //是否显示刷新按钮
+        minimumCountColumns: 2,             //最少允许的列数
+        clickToSelect: true,                //是否启用点击选中行
+        //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        /*uniqueId: "ID",*/                     //每一行的唯一标识，一般为主键列
+        showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
+        cardView: false,                    //是否显示详细视图
+        detailView: false,                  //是否显示父子表
+        //得到查询的参数
+        queryParams : function (params) {
+            console.log(params)
+            //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
+            var temp = {
+                rows: params.limit,                         //页面大小
+                page: (params.offset / params.limit) + 1,   //页码
+                sort: params.sort,      //排序列名
+                sortOrder: params.order //排位命令（desc，asc）
+            };
+            return temp;
+        },
+        columns: [{
+            checkbox: true,
+            visible: true                  //是否显示复选框
+        }, /*{
+            field: 'brandId',
+            title: 'brandId',
+            sortable: true
+        },*/ {
+            field: 'brandName',
+            title: 'brandName',
+            sortable: true
+        }/*, {
+            field: 'goodsId',
+            title: 'goodsId',
+            sortable: true,
+        }*/,  {
+            field: 'goodsIntro',
+            title: 'goodsIntro',
+            sortable: true
+        }, {
+            field: 'goodsName',
+            title: 'goodsName',
+            sortable: true
+        },  {
+            field: 'goodsPrice',
+            title: 'goodsPrice'
+        }, {
+            field: 'goodsStock',
+            title: 'goodsStock'
+        }, {
+            field: 'goodsTypeId',
+            title: 'goodsTypeId'
+        }, {
+            field: 'goodsUploadTime',
+            title: 'goodsUploadTime'
+        }, {
+            field: 'sellerId',
+            title: 'sellerId'
+        },{
+            field:'goodsId',
+            title: '操作',
+            width: 120,
+            align: 'center',
+            valign: 'middle',
+            formatter:actionFormatter,
+        }, ],
+        onLoadSuccess: function (data) {
+            console.log(data);
+        },
+        onLoadError: function (data) {
+            console.log(data);
+            alert();
+        },
+        onDblClickRow: function (row, $element) {
+            var id = row.ID;
+            EditViewById(id, 'view');
+        },
+    });
+     function actionFormatter(value, row, index) {
+
+         var id = value;
+         var result = "";
+        /* result += "<a href='javascript:;' class='btn btn-xs green' onclick=\"EditViewById('" + id + "', view='view')\" title='查看'><span class='glyphicon glyphicon-search'></span></a>";*/
+         result += "<a href='javascript:;' class='btn btn-xs blue' onclick=\"EditViewById('" + id + "')\" title='编辑'><span class='glyphicon glyphicon-pencil'></span></a>";
+         result += "<a href='javascript:;' class='btn btn-xs red' onclick=\"DeleteById(" + id + ")\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
+
+         return result;
+     }
+
+
+
+     //实现删除数据的方法 （多行删除）
+     function Delete() {
+         var ids = "";//得到用户选择的数据的ID
+         var rows = $('#table1').bootstrapTable('getSelections');
+         for (var i = 0; i < rows.length; i++) {
+             ids += rows[i].goodsId + ',';
+         }
+         ids = ids.substring(0, ids.length - 1);
+         console.log(ids);
+         //DeleteByIds(ids);
+     }
+
+     function DeleteById(id){
+         var ids = new Array();
+         ids.push(id);
+         console.log(ids);
+         $('#table1').bootstrapTable('remove', {field: 'goodsId', values:ids});
+         deleteSql(ids);
+     }
+     //去删除数据库信息
+     function deleteSql(ids) {
+         console.log(ids);
+         $.ajax({
+             url: "/goods/del",
+             type: "post",
+             dataType: "json",
+             data:{ids:ids},
+             success: function (data) {
+
+             },
+             error: function (data) {
+                 alert("删除出错")
+             }
+         });
+     }
+
+
+
+    var $table;
+    //初始化bootstrap-table的内容
+    function InitMainTable () {
+
+        $('#table1').bootstrapTable({
+            url: 'data1.json',
+            columns: [{
+                field: 'id',
+                title: 'Item ID'
+            }, {
+                field: 'name',
+                title: 'Item Name'
+            }, {
+                field: 'price',
+                title: 'Item Price'
+            }, ]
+        });
+
+
+        //记录页面bootstrap-table全局变量$table，方便应用
+     /*   var queryUrl = '/TestUser/FindWithPager?rnd=' + Math.random()
+        $table = $('#table').bootstrapTable({
+            url: "/seller/table",                      //请求后台的URL（*）
+            method: 'POST',                      //请求方式（*）
+            //toolbar: '#toolbar',              //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: true,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+            pageSize: rows,                     //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            search: false,                      //是否显示表格搜索
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列（选择显示的列）
+            showRefresh: true,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: true,                //是否启用点击选中行
+            //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                  //是否显示父子表
+            //得到查询的参数
+            queryParams : function (params) {
+                //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
+                var temp = {
+                    rows: params.limit,                         //页面大小
+                    page: (params.offset / params.limit) + 1,   //页码
+                    sort: params.sort,      //排序列名
+                    sortOrder: params.order //排位命令（desc，asc）
+                };
+                return temp;
+            },
+            columns: [{
+                checkbox: true,
+                visible: true                  //是否显示复选框
+            }, {
+                field: 'Name',
+                title: '姓名',
+                sortable: true
+            }, {
+                field: 'Mobile',
+                title: '手机',
+                sortable: true
+            }, {
+                field: 'Email',
+                title: '邮箱',
+                sortable: true,
+                formatter: emailFormatter
+            }, {
+                field: 'Homepage',
+                title: '主页',
+                formatter: linkFormatter
+            }, {
+                field: 'Hobby',
+                title: '兴趣爱好'
+            }, {
+                field: 'Gender',
+                title: '性别',
+                sortable: true
+            }, {
+                field: 'Age',
+                title: '年龄'
+            }, {
+                field: 'BirthDate',
+                title: '出生日期',
+                formatter: dateFormatter
+            }, {
+                field: 'Height',
+                title: '身高'
+            }, {
+                field: 'Note',
+                title: '备注'
+            }, {
+                field:'ID',
+                title: '操作',
+                width: 120,
+                align: 'center',
+                valign: 'middle',
+                formatter: actionFormatter
+            }, ],
+            onLoadSuccess: function () {
+            },
+            onLoadError: function () {
+                alert();
+                showTips("数据加载失败！");
+            },
+            onDblClickRow: function (row, $element) {
+                var id = row.ID;
+                EditViewById(id, 'view');
+            },
+        });*/
+    };
+</script>
+</html>

@@ -29,16 +29,23 @@ public interface CommentService {
     public int reply(Map map);
 
     /**
-     * 已评价商品
+     * 已评价商品（用户）
      * @return
      */
     public List<Map> okComment(int userId);
 
     /**
-     * 未评价的商品
+     * 未评价的商品（用户）
      * @return
      */
     public List<Map> noComment(int userId);
+
+    /**
+     * 商家评论数据
+     * @param shopId
+     * @return
+     */
+    public List shopComment(int shopId);
 
 
 }
