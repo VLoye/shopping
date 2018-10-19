@@ -53,7 +53,7 @@ public class AlipayUntil {
         //请求
         String result=null;
         try{
-             result = alipayClient.pageExecute(alipayRequest).getBody();
+            result = alipayClient.pageExecute(alipayRequest).getBody();
         }catch (Exception e){
             logger.error(e.getMessage());
             e.printStackTrace();
