@@ -89,4 +89,16 @@ public class GoodsServiceImpl implements GoodsService {
         return map;
     }
 
+    @Override
+    public Object queryShopGoodsByShopId(int shopId) {
+
+        List<Map> list =  goodsMapper.queryShopGoodsByShopId(shopId);
+        for(Map map:list){
+            //只取一个图片连接用于展示
+            String img = ((String)map.get("imgUrl")).split(",")[0];
+            map.put("imgUrl",img);
+        }
+
+        return list;
+    }
 }

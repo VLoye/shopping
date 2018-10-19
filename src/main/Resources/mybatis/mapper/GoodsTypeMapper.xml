@@ -100,4 +100,11 @@
       super_id = #{superId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAll" resultType="com.team6.entity.GoodsType">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from goods_type
+    where super_id != 0
+  </select>
 </mapper>

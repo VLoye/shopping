@@ -20,7 +20,7 @@
 
 	<div style="margin: 0 auto;margin-top: 100px; ">
 	
-		<form action="/doLogin" method="post">
+		<form queue="/doLogin" method="post">
 		用户名：<input type="text" name="user"><br/>
 		验证码：	<input type="text" name="vcode">
 			<input id="vcode" type="image" src="/vcode" onclick="changecode()">

@@ -3,12 +3,16 @@ package com.team6.controller;/**
  */
 
 
+import com.team6.service.rabbitMQ.SolrProducer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 /**
  * @author VLoye
@@ -21,6 +25,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "book")
 @Api(value = "book",tags = "/book",description = "book接口")
 public class BookController {
+
+    @Autowired
+    SolrProducer solrProducer;
 
     private Logger logger= LoggerFactory.getLogger(BookController.class);
 
@@ -46,5 +53,27 @@ public class BookController {
         logger.info(name);
         logger.info("index-------");
         return "main";
+    }
+
+    @RequestMapping(value = "solrTest",method = RequestMethod.GET)
+    public String solrTest(){
+        Thread thread = new Thread(new Runnable() {
+            int i=0;
+            @Override
+            public void run() {
+                while(i<50) {
+                    try {
+                        HashMap map = new HashMap();
+                        map.put("name", "object" + ++i);
+                        logger.info("添加消息"+i);
+                        solrProducer.sendDateToQueue("solr", map);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
+        return null;
     }
 }

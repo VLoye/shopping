@@ -466,7 +466,10 @@ function bindToSettlement(isB2B) {
 
         console.log(ids);
         console.log(counts);
-        window.location.href = "/shopCar/detailData?ids="+ids+"&counts="+counts;
+        if(ids === undefined || ids.length == 0)
+            $.dialog.errorTips("请选择商品");
+        else
+            window.location.href = "/shopCar/detailData?ids="+ids+"&counts="+counts;
 
 
     }

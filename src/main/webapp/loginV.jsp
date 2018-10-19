@@ -23,7 +23,7 @@
 
 	<div style="margin: 0 auto;margin-top: 100px; ">
 	
-		<form action="" method="get">
+		<form queue="" method="get">
 		用户名：<input type="text" name="user"><br/>
 		验证码：	<input type="text" name="vcode">
 			<img id="vcode"  src="/vcode" onclick="changecode()">

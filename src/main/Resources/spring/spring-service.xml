@@ -11,6 +11,7 @@
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
+    <import resource="classpath:/rabbitMQ.xml"/>
     <!--<context:property-placeholder location="log4j.properties"/>-->
 
     <!-- 扫描service包下所有使用注解的类型 -->
