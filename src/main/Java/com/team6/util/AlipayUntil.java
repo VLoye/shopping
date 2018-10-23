@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AlipayUntil {
     private static Logger logger = LoggerFactory.getLogger(AlipayUntil.class);
-    public static String pay(HttpServletRequest request){
+    public static String pay(HttpServletRequest request,Integer orderId){
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(
                 AlipayConfig.gatewayUrl,
@@ -24,8 +24,8 @@ public class AlipayUntil {
 
         //设置请求参数
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-        alipayRequest.setReturnUrl(AlipayConfig.return_url);
-        alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+        alipayRequest.setReturnUrl(AlipayConfig.return_url+"/"+orderId);
+        alipayRequest.setNotifyUrl(AlipayConfig.notify_url+"/"+orderId);
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = request.getParameter("orderNum");
         //付款金额，必填
@@ -53,7 +53,7 @@ public class AlipayUntil {
         //请求
         String result=null;
         try{
-             result = alipayClient.pageExecute(alipayRequest).getBody();
+            result = alipayClient.pageExecute(alipayRequest).getBody();
         }catch (Exception e){
             logger.error(e.getMessage());
             e.printStackTrace();
