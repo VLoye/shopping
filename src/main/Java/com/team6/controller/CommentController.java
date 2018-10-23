@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import sun.security.provider.MD2;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,15 +23,16 @@ public class CommentController {
     CommentService commentService;
     @Autowired
     LoginService loginService;
-    @RequestMapping(value = "/commnets/{goodsId}",method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+    @RequestMapping(value = "/commnets",method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
     @ResponseBody
-    public Object getCommentList(@PathVariable("goodsId" ) int goodsId,
+    public Object getCommentList(@RequestParam("goodsId") int goodsId,
                                 @RequestParam("currNum") int currNum,
                                 HttpServletRequest request,
                                 Model model){
-
+        System.out.println(goodsId+" "+currNum);
         List list = commentService.queryByGoodId(goodsId,currNum);
         int pageNum = commentService.queryPageNumByGoodId(goodsId);
+        System.out.println(pageNum);
         model.addAttribute("data",list);
         model.addAttribute("pageNum",pageNum);
         return JSONUtil.toJSON(model);
@@ -39,8 +41,23 @@ public class CommentController {
     @RequestMapping(value = "/comment/add/{goodsId}",method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
     @ResponseBody
     public Object addComment(HttpServletRequest request,
-                             @RequestBody Map<String,String> map,
+                             //@RequestBody Map<String,String> map,
+                             @RequestParam("entryid") int entryid,
+                             @RequestParam("entrytype") int entrytype,
+                             @RequestParam("content") String content,
+                             @RequestParam("descriptionscore") int descriptionscore,
+                             @RequestParam("servicescore") int servicescore,
+                             @RequestParam("logisticsscore") int logisticsscore,
+                             @RequestParam("userid") int userid,
                              Model model){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("entryid",entryid);
+        map.put("entrytype",entrytype);
+        map.put("content",content);
+        map.put("descriptionscore",descriptionscore);
+        map.put("servicescore",servicescore);
+        map.put("logisticsscore",logisticsscore);
+        map.put("userid",userid);
         boolean result = commentService.addComment(map);
         model.addAttribute("msg",result);
         return JSONUtil.toJSON(model);

@@ -15,10 +15,10 @@ public class CommentServiceImp implements CommentService {
     @Autowired
     CommentMapper commentMapper;
     @Override
-    public List<Map<String,Object>> queryByGoodId(int id,int currNum) {
+    public List<Map<String,Object>> queryByGoodId(int goodsId,int currNum) {
         //搜索到10条评论
         int num = (currNum-1)*10;
-        List<Map<String,Object>> list = commentMapper.queryCommentByGoodsId(id,num);
+        List<Map<String,Object>> list = commentMapper.queryCommentByGoodsId(goodsId,num);
         for(Map map:list){
             int commentId = (int)map.get("id");
             Map commentMap = commentMapper.quertReplyById(commentId);
@@ -30,11 +30,12 @@ public class CommentServiceImp implements CommentService {
 
 
     @Override
-    public int queryPageNumByGoodId(int id) {
-        int count = commentMapper.queryCommentCountByGoodsId(id);
+    public int queryPageNumByGoodId(int goodsId) {
+        int count = commentMapper.queryCommentCountByGoodsId(goodsId);
         int pageNum = 1;
         if(count%10==0) pageNum=count/10;
         else pageNum = count/10+1;
+        System.out.println(pageNum);
         return pageNum;
     }
 
@@ -48,12 +49,14 @@ public class CommentServiceImp implements CommentService {
         int servicescore = (int) map.get("servicescore");
         int logisticsscore = (int) map.get("logisticsscore");
         String content = (String) map.get("content");
+        int userid= (int) map.get("userid");
         comment.setEntityId(entryid);
         comment.setEntityType(entrytype);
         comment.setLogisticsScore(logisticsscore);
         comment.setServiceScore(servicescore);
         comment.setDescriptionScore(descriptionscore);
         comment.setContent(content);
+        comment.setUserId(userid);
         count = commentMapper.insert(comment);
         if(count>0) return true;
         return false;

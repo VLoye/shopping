@@ -190,7 +190,7 @@
   <!--查询商品的10条评论-->
   <select id="queryCommentByGoodsId" resultType="java.util.Map">
     select c.id as id ,c.content as content,c.entity_type as entype,g.name as enname,c.description_score as decriptionscore,
-     c.service_score as service_score,c.logistics_score as logistics_score
+     c.service_score as service_score,c.logistics_score as logistics_score,c.user_id as userid
      from goods g , comment c
      where c.entity_id=#{goodsId} and g.id=c.entity_id limit #{num},10;
   </select>
@@ -198,11 +198,11 @@
   <!--根据回复id查询-->
   <select id="quertReplyById" resultType="java.util.Map">
     select id as id ,content as content ,entity_type as entype,description_score as decriptionscore,
-    service_score as service_score,logistics_score as logistics_score
+    service_score as service_score,logistics_score as logistics_score,user_id as userid
     from comment where entity_id = #{id};
 </select>
 
-  <select id="queryCommentCountByGoodsId" >
+  <select id="queryCommentCountByGoodsId" resultType="int">
     select count(*) from comment where entity_id=#{goodsId};
   </select>
 

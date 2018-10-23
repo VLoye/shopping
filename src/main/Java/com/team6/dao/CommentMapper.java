@@ -63,10 +63,10 @@ public interface CommentMapper {
      */
     int updateByPrimaryKey(Comment record);
 
-   List<Map<String,Object>> queryCommentByGoodsId(@Param("goodsId") int id,@Param("num")int num);
+   List<Map<String,Object>> queryCommentByGoodsId(@Param("goodsId") int goodsId,@Param("num")int num);
 
    //查询评论总数
-   int queryCommentCountByGoodsId(@Param("entityId") int id);
+   int queryCommentCountByGoodsId(@Param("goodsId") int goodsId);
 
    Map<String ,Object> quertReplyById(@Param("id") int id);
 
