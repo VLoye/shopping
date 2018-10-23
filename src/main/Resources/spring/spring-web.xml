@@ -51,7 +51,6 @@
         <property name="order" value="1"/>
         <property name="prefix" value="/WEB-INF/html/" />
         <property name="suffix" value=".html" />
-
     </bean>
 
     <bean  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

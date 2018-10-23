@@ -9,9 +9,7 @@ $(function () {
 
 function bindSubmit() {
 	$('#submit').on('click',function (){
-	    alert("提交订单");
 		var addressid = $(':radio[name="address"]:checked').val();
-		alert("收货地址"+addressid);
 		if(!addressid)
 		{
 			$.dialog.tips('请选择或新建收货地址');
@@ -41,7 +39,6 @@ function bindSubmit() {
                 },
                 dataType : "json",
 	            success: function(result) {
-                    alert(result.msg);
 	                if (result.msg=="SUCCESS") {
 	                    window.location.href = "SubmitSuccess.html";
 	                }
@@ -532,7 +529,7 @@ function bindAddressRadioClick() {
         $('#addressEditArea').hide();
     });
 }
-function deleteAddress(id) {
+/*function deleteAddress(id) {
     $.dialog.confirm('您确定要删除该收货地址吗？', function () {
         var loading = showLoading();
         $.post('/address/deladdress', { id: id }, function (result) {
@@ -550,7 +547,7 @@ function deleteAddress(id) {
                 $.dialog.errorTips(result.msg);
         });
     });
-}
+}*/
 
 
 function showEditArea(id) {

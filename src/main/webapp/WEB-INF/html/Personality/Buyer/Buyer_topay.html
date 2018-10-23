@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付订单</title>
+</head>
+<body onload="toPay()">
+
+    <input type="hidden" id="orderNum" name="orderNum" value="${orderInfo.id}">
+    <input type="hidden" id="money" name="money" value="${orderInfo.totalPrice}">
+    <input type="hidden" id="orderName" name="orderName" value="${orderInfo.start_time}">
+
+    <div id="div">
+    </div>
+<script src="../../static/js/jquery-1.7.1.min.js"></script>
+<script>
+   function toPay() {
+         var orderNum = $("#orderNum").val();
+         var money = $("#money").val();
+         var orderName = $("#orderName").val();
+         var intro = "下单时间："+$("#intro").val();
+        $.ajax({
+        url: "/pay/payPage/"+orderNum,
+        type: "post",
+        dataType: "text",
+        data:{orderNum:orderNum,money:money,orderName:orderName,intro:intro},
+        success: function(res){
+            console.log(res);
+            $("#div").html(res);
+
+        },
+        error: function(res){
+            alert("请求失败");
+            console.log(res);
+        }
+        });
+    }
+</script>
+</body>
+
+</html>

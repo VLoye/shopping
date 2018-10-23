@@ -53,6 +53,15 @@ public class OrderInfoController {
         return orderInfoService.OrderPay(orderId,request);
     }
 
-
+    /**
+     * 查询物流信息
+     */
+    @RequestMapping(value="/order/LogisticsData/{num}")
+    public ModelAndView LogisticsData(@PathVariable("num") String num){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("Personality/Buyer/QueryLogisticsData");
+        mv.addObject("num",num);
+        return mv;
+    }
 
 }

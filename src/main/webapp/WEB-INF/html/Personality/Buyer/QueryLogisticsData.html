@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style href="../../static/css/KDNWidget.css" ref="stylesheet"></style>
+    <script src="../../static/js/KDNWidget.js"></script>
+    <meta charset="UTF-8">
+    <title>查询物流信息</title>
+</head>
+<body>
+
+<div id="KDNWidget" style="margin-left:50px;"></div>
+
+<input type="hidden" id="num" value="${num}"/>
+<button onClick="javascript :history.back(-1);" style="margin-left:50px;">返回</button>
+</body>
+
+<script>
+    window.onload = function () {
+        var num=document.getElementById("num").value;
+        KDNWidget.run({
+            serviceType: "B",
+            expCode:"ZTO",
+            expNo:num,
+            showType:"normal",
+            container: "KDNWidget"
+        })
+    }
+</script>
+</html>
