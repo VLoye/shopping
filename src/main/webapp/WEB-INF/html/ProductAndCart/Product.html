@@ -21,12 +21,17 @@
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">-->
 
     <link href="../../static/css/admin.css" rel="stylesheet" type="text/css">
- <!--   <link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="../../static/css/amazeui.css" rel="stylesheet" type="text/css">-->
     <link href="../../static/css/personal.css" rel="stylesheet" type="text/css">
     <link href="../../static/css/orstyle.css" rel="stylesheet" type="text/css">
 
     <script src="../../static/js/amazeui.js"></script>
+
     <script src="../../static/js/jquery-1.7.1.min.js"></script>
+    <!--<script src="../../static/js/jquery-3.3.1.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+    <!--<link href="../../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
 
     <style type="text/css">
         .header, .nav-bar {
@@ -147,7 +152,7 @@
     <script src="../../static/js/Region.js"></script>
     <script src="../../static/js/jquery.himallDistrict.js"></script>
     <script src="../../static/js/jquery.fly.js"></script>
-    <script src="../../static/js/jQuery.temp.detail.logic.js"></script>
+    <!--<script src="../../static/js/jQuery.temp.detail.logic.js"></script>-->
     <script src="../../static/js/jQuery.small-paging.js"></script>
     <!--[if lte IE 10]>
     <script src="../../static/js/requestAnimationFrame.js"></script>
@@ -200,12 +205,11 @@
     <div class="h-w1200 ht-link">
 
         <div id = "loginstatus">
-
+            <input type = "hidden" id = "userid" value = "${user.userid}"/>
             <#if user.username>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
             <a class="h-fl" href="/buyer" id="username" target="_blank">${user.username}</a>
             <i class="h-fl h-vline">|</i>
-            <input type = "hidden" id = "userid" value = "${user.userid}"/>
             <a class="h-fl" href="/logout">[退出]</a>
             <#else>
             <span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
@@ -217,7 +221,7 @@
         </div>
 
 
-    <a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
+    <!--<a class="h-fr" href="/Article/" target="_blank">帮助中心</a>
     <dl class="h-fr h-down ml0 ltb1">
         <dt>
             <a href="/scrz/" target="_blank">商城入驻</a>
@@ -237,8 +241,8 @@
             <a href="/ProductConcern/Index">关注的商品</a>
             <a href="/ShopConcern/Index">关注的店铺</a>
         </dd>
-    </dl>
-    <a class="h-fr" target="_blank" href="/shopCar">购物车<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em></a>
+    </dl>-->
+    <a class="h-fr" target="_blank" href="/shopCar">购物车<!--<em class="h-cF60">【<span id="shopping-amount-self">0</span>】</em>--></a>
     <i class="h-fr h-vline">|</i>
     <a class="h-fr" href="/index" target="_blank">汽配人首页</a>
 </div>
@@ -248,13 +252,13 @@
     <div class="h-w1200 hh-panel">
         <div class="hhp-logo">
             <a class="logo" href="http://www.qipeiren.com" target="_blank">
-                <img src="../img/logo1.jpg" height="56" alt="" />
+                <img src="../static/img/logo1.jpg" height="56" alt="" />
             </a>
             <a class="logo-1" href="http://mall.qipeiren.com" target="_blank">
-                <img src="../img/logo3.png" height="37" alt="" />
+                <img src="../static/img/logo3.png" height="37" alt="" />
             </a>
             <a class="logo-2" href="http://mall.qipeiren.com" target="_blank">
-                <img src="../img/logo4.png" height="22" alt="" />
+                <img src="../static/img/logo4.png" height="22" alt="" />
             </a>
         </div>
         <div class="hhp-search">
@@ -1146,7 +1150,7 @@
         <#if data>
         <div id="product-intro">
             <div id="name">
-                <input type="hidden" id = "goodsid" value = "${goods.goodsid}" />
+                <input type="hidden" id = "goodsId" value = "${data.goodsId}" />
                 <h1>${data.brand} ${data.goodsName}</h1>
             </div>
             <div class="cl">
@@ -1158,7 +1162,7 @@
                         <div class="t">
                             <div class="dt">价&nbsp;&nbsp;格：</div>
                             <div class="dt01">
-                                <strong class="p-price" id="jd-price"  style = "color: #f60;font-size: 20px;font-weight: 700;font-family: 'microsoft yahei';margin-right: 30px;">￥${data.goodsPrice}</strong>
+                                <strong class="p-price" id="jd-price"  style = "color: #f60;font-size: 20px;font-weight: 700;font-family: 'microsoft yahei';margin-right: 30px;">￥${data.goodsPrice}.00</strong>
                             </div>
                         </div>
                     </li>
@@ -1230,9 +1234,9 @@
                             <img border="0" style="display:inline-block;" src="http://wpa.qq.com/pa?p=2:294366459:52" style="vertical-align: middle;" />
                         </a>
                     </dd></dl>
-                    <dl id="pop-address"><dt>公司名称：</dt><dd>十堰林华工贸有限公司</dd></dl>
-                    <dl id="pop-address"><dt>所 在 地：</dt><dd id="regionAddressId">湖北省 十堰市 茅箭区</dd></dl>
-                    <dl id="hotline"><dt>联系电话：</dt><dd>0719-8368508</dd></dl>
+                    <dl id="pop-address"><dt>公司名称：</dt><dd>${data.shopCompany}</dd></dl>
+                    <dl id="pop-address"><dt>所 在 地：</dt><dd id="regionAddressId">${data.shopAddress}</dd></dl>
+                    <dl id="hotline"><dt>联系电话：</dt><dd>${data.shopTel}</dd></dl>
                     <div id="enter-shop">
 
                         <a target="_blank" href="/shop/home/${data.shopId}">进入店铺</a>
@@ -1396,33 +1400,35 @@
 </script>
 
 <div class="w">
+    <#if data>
     <div class="right">
         <div id="tabs" class="m m2">
             <div class="float-nav-wrap">
                 <div class="mt">
                     <ul class="tab">
                         <li><a href="#tabs-1" class="toggle-link">商品介绍</a></li>
-                        <li><a href="#tabs-2" class="toggle-link">交易记录</a></li>
-                        <li><a href="#tabs-3" class="toggle-link">商品评价</a></li>
+                        <!--<li><a href="#tabs-2" class="toggle-link">交易记录</a></li>-->
+                        <li><a href="#tabs-3" class="toggle-link" onclick="CommentData()">商品评价</a></li>
                         <li><a href="#tabs-4" class="toggle-link">商品咨询</a></li>
                     </ul>
                 </div>
             </div>
             <div id="tabs-1">
+
                 <div class="mc" id="product-detail-1">
                     <ul class="detail-list" id="detail-list">
-                        <li title="">商品名称：法士特中八档8JS105变速箱用取力器总成QCD45</li>
-                        <li>商品图号：QCD45</li>
-                        <li>品牌：法士特FAST</li>
-
-
+                        <li title="">商品名称：${data.goodsName}</li>
+                        <li>品牌：${data.brand}</li>
+                        <li>公司名称:${data.shopCompany}</li>
+                        <li>店铺地址:${data.shopAddress}</li>
+                        <li>店铺名称:${data.shopName}</li>
                     </ul>
 
                     <table class="mdt-box">
                         <tbody>
                         <tr>
                             <td class="mb-l">
-                                <div id="product-html" style="position:relative"></div>
+                                <!--<div id="product-html" style="position:relative"></div>
 
                                 <div style='margin: 0px auto; width: 750px; overflow: hidden;'>
                                     <div style='overflow: hidden;'>
@@ -1435,8 +1441,7 @@
                                         </div>
                                         <br/>
                                     </div>
-                                    <
-                                    div style='overflow: hidden;'>
+                                    <div style='overflow: hidden;'>
                                     <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
                                         <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
                                               isjstit='true'>公司介绍</span>
@@ -1482,7 +1487,7 @@
                                     <p><span style='font-size: 18px;'>
                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/></span></p>
                                     <br/>
-                                </div>
+                                </div>-->
                                 <div style='overflow: hidden;'>
                                     <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
                                         <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
@@ -1490,17 +1495,22 @@
                                         <span style='font-family: Arial; font-size: 14px; font-weight: 500; margin-left: 2px; vertical-align: middle;'>Product display</span>
                                     </div>
                                     <p style='margin: 10px 0px; text-align: center;'>
+                                        <#assign a = data.imgUrl>
+                                        <#list a as m>
+                                            <img src='${m}'/><br/>
+                                        </#list>
+                                        <!--<img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
-                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>
-                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/></p>
+                                        <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png'/><br/>-->
+                                    </p>
                                     <p style='margin: 10px 0px;'><br/></p>
                                     <p style='margin: 10px 0px;'><br/></p>
                                 </div>
-                                <div style='overflow: hidden;'>
+                                <!--<div style='overflow: hidden;'>
                                     <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
                                         <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
                                               isjstit='true'>包装展示</span>
@@ -1509,7 +1519,7 @@
                                     <div style='margin: 10px 0px; text-align: center;'>
                                         <img src='http://mall.qipeiren.com/Storage/Shop/3/Products/10/1.png' style='float: left;'/>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div style='overflow: hidden;'>
                                     <div style='background: url(&quot;http://img.qipeiren.com/site/template/pro/t6_1.png&quot;) no-repeat center; height: 33px; text-align: left; color: rgb(255, 255, 255); line-height: 30px; margin-top: 10px;'>
                                         <span style='font-family: Microsoft YaHei; font-size: 18px; font-weight: 500; margin-left: 40px; vertical-align: middle;'
@@ -1525,7 +1535,7 @@
 
                                 </t>
                             </td>
-                            <td class="mb-r">
+                            <!--<td class="mb-r">
                                 <div class="mbr-cont">
                                     <div class="mbr-onlinecus">
                                         <p class="mbro-tit">在线咨询：</p>
@@ -1543,25 +1553,94 @@
                                     </div>
                                     <p class="mbrc-top"><i></i></p>
                                 </div>
-                            </td>
+                            </td>-->
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div id="tabs-2">
+            <!--<div id="tabs-2">
                 <div id="jysizediv" class="m m2">
                     <div class="mt">
                         <ul class="tab">
                             <li class="curr"><a href="javascript:;">成交记录</a></li>
                         </ul><div class="consult-pub"></div>
                     </div>
-                    <!--consult-search end-->
+
                     <div id="jysizediv-0" class="mc tabcon" data-widget="tab-content">
 
                     </div>
                 </div>
-            </div>
+            </div>-->
+            <script type="text/javascript">
+                var num = 0;
+                var CommentData = function (id) {
+                    //num = id;
+                    //CommentList();
+                    var goodsid = $("#goodsId").val();
+                    num = goodsid;
+                    CommentList();
+                }
+
+                var CommentList = function () {
+                    $.post('/commnets/', { goodsId:num , currNum:1 }, function (result) {
+                        console.log(result);
+                        $("#commentList").html(template("CommentFormat", {list: result.data}));
+                    });
+                }
+                var  addComment = function () {
+                    var commentForm = document.getElementById("commentForm");
+                    var userid = $("#userid").val();
+                    if(userid == null){
+                        alert("请登录后再评论");
+                    }else {
+                        var goodsId = document.getElementById("goodsId").value;
+                        var myurl = '/comment/add/' + goodsId;
+                        var entryid = $("#entryid").val();
+                        var entrytype = $("#entrytype").val();
+                        var description_score = $("#description_score").val();
+                        var service_score = $("#service_score").val();
+                        var logistics_score = $("#logistics_score").val();
+                        var content = $("#content").val();
+                        /*var map = {};
+                    map["goodsId"]=goodsId;
+                    map["entryid"]=entryid;
+                    map["entrytype"]=entrytype;
+                    map["descriptionscore"]=description_score;
+                    map["servicescore"]=service_score;
+                    map["logisticsscore"]=logistics_score;
+                    map["content"]=content;*/
+                        //alert(myurl+" "+entryid+" "+entrytype+" "+description_score+" "+service_score+" "+logistics_score+" "+content);
+                        $.ajax({
+                            url: myurl,
+                            type: "post",
+                            data: {
+                                entryid: entryid,
+                                entrytype: entrytype,
+                                descriptionscore: description_score,
+                                servicescore: service_score,
+                                logisticsscore: logistics_score,
+                                content: content,
+                                userid:userid
+                            },
+                            dataType: 'json',
+                            //data:map,
+                            success: function (data) {
+                                if(data.msg == true) {
+                                    alert("评论成功！");
+                                    var myModal = document.getElementById("myModal");
+                                    myModal.style.display = "none";
+                                    CommentList();
+                                }
+                            },
+                            error: function (data) {
+                                //parent.layer.msg(res.title);
+                                //alert(res.title);
+                            }
+                        });
+                    }
+                }
+            </script>
             <div id="tabs-3">
                 <div id="comment" class="m m1">
                     <div class="mt">
@@ -1570,26 +1649,26 @@
                     <div class="mc">
                         <div id="i-comment">
                             <div class="rate">
-                                <strong>100%</strong> <br />
+                                <strong>80%</strong> <br />
                                 <span>好评度</span>
                             </div>
                             <div class="percent">
                                 <dl>
-                                    <dt>好评<span>(100%)</span></dt>
+                                    <dt>好评<span>(80%)</span></dt>
                                     <dd>
-                                        <div style="width: 100px;"></div>
+                                        <div style="width: 80px;"></div>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>中评<span>(0%)</span></dt>
+                                    <dt>中评<span>(15%)</span></dt>
                                     <dd class="d1">
-                                        <div style="width: 0%;"> </div>
+                                        <div style="width: 15px;"> </div>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>差评<span>(0%)</span></dt>
+                                    <dt>差评<span>(10%)</span></dt>
                                     <dd class="d1">
-                                        <div style="width: 0%;"> </div>
+                                        <div style="width: 5px;"> </div>
                                     </dd>
                                 </dl>
                             </div>
@@ -1598,13 +1677,114 @@
                 </div>
                 <!--comment end-->
 
+                <script type="text/html" id="CommentFormat">
+                    <tr>
+                        <th style="width:250px;">用户</th>
+                        <th style="width:625px;margin-left:-200px;">评价内容</th>
+                        <th style="width:100px;margin-left:-200px;">操作</th>
+                    </tr>
+                    {{each list data}}
+                    <tr class="col" style="width:975px;height:100px;border:1px solid #F2F2F2;margin-left: 20px;">
+                        <td style="width:250px;">
+                            <br/><span>用户id：{{data.userid}}</span><br/>
+                        </td>
+                        <td style="width:625px;margin-left:-200px;">
+                            <span style="">描述评分：{{data.decriptionscore}}.0分 &nbsp; 服务评分：{{data.service_score}}.0分 &nbsp; 物流评分：{{data.logistics_score}}.0分</span>
+                            <textarea readonly style="width: 600px;height:60px;border-style:none;">{{data.content}}</textarea>
+                        </td>
+                        <td style="width:100px;margin-left:-200px;">
+                            <a onclick="commentBack({{data.userid}})" class="">回复</a>
+                        </td>
+                    </tr>
+                        {{set item = data.reply}}
+                        {{if item != null}}
+                            <tr class="col" style="width:875px;height:100px;border:1px solid #00F7DE;margin-left: 20px;">
+                                <td style="width:250px;">
+                                    <br/><span>用户id：{{item.userid}}回复{{data.userid}}</span>
+                                </td>
+                                <td style="width:625px;margin-left:-200px;">
+                                    <br/>
+                                    <textarea readonly style="width: 600px;height:60px;border-style:none;">{{item.content}}</textarea>
+                                </td>
+                            </tr>
+                        {{/if}}
+                    {{/each}}
+                </script>
+
                 <div id="comments-list" class="m">
                     <div class="mt">
                         <ul class="tab" id="id_comment_btn">
                             <li class="curr"><a href="javascript:;">全部评价<em id="totalComment"></em></a></li>
-                            <li class="tab-last"></li>
+                            <li class="tab-last" style="margin-left: -25px;margin-top:20px;">
+                                <table id="commentList">
+                                <!--<tr class="col" style="width:975px;height:100px;border:1px solid #F2F2F2;margin-left: 20px;">
+                                    <td style="width:250px;">
+                                        <br/><span>用户id：10011</span><br/>
+                                    </td>
+                                    <td style="width:725px;margin-left:-200px;">
+                                        <span style="">描述评分：4.0分 &nbsp; 服务评分：5.0分 &nbsp; 物流评分：4.0分</span>
+                                        <textarea readonly style="width: 600px;height:60px;border-style:none;">比发我和偶发那婀娜如黄瓜文件柜</textarea>
+                                    </td>
+                                </tr>-->
+                                </table>
+                            </li>
                         </ul>
+
                     </div>
+                </div>
+                <br>
+                <#if data>
+                <button id="triggerBtn" onclick="commenttoGoods(${data.goodsId})" style="width:70px;height:40px;margin-left: 800px;">
+                    发表评论
+                </button>
+                </#if>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>发布商品评论</h2>
+                            <span id="closeBtn" class="close">×</span>
+                        </div>
+                        <div class="modal-body" style="height: 220px;">
+                            <#if data>
+                            <form id="commentForm" method="post">
+                                <input type="hidden" id="entryid" name="entryid" value="${data.goodsId}"/>
+                                <input type="hidden" id="entrytype" name="entrytype" value=""/>
+                                <textarea id="content" name="content" style="width:1050px;height:120px;"></textarea>
+                                <div id="entrygood" style="display: block;">
+                                <span>描述评分：</span>
+                                <select id="description_score" name="descriptionscore">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">1分</option>
+                                    <option value="2">2分</option>
+                                    <option value="3">3分</option>
+                                    <option value="4">4分</option>
+                                    <option value="5">5分</option>
+                                </select>&nbsp;
+                                <span>服务评分：</span>
+                                <select id="service_score" name="servicescore">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">1分</option>
+                                    <option value="2">2分</option>
+                                    <option value="3">3分</option>
+                                    <option value="4">4分</option>
+                                    <option value="5">5分</option>
+                                </select>&nbsp;
+                                <span>物流评分：</span>
+                                <select id="logistics_score" name="logisticsscore">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">1分</option>
+                                    <option value="2">2分</option>
+                                    <option value="3">3分</option>
+                                    <option value="4">4分</option>
+                                    <option value="5">5分</option>
+                                </select>
+                                </div><br>
+                                <input type="button" value="提交" onclick="addComment()" style="margin-left: 900px;width:100px;height:40px;"/>
+                            </form>
+                            </#if>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div id="tabs-4">
@@ -1625,6 +1805,8 @@
             </div>
         </div>
     </div>
+    </#if>
+
     <!--right end-->
     <div class="left">
         <div id="sp-search" class="m m2">
@@ -1721,6 +1903,130 @@
         </a>
     </dd>
 </dl>
+
+<script type="text/javascript">
+    var commentBack = function (userid) {
+        var myModal = document.getElementById("myModal");
+        $("#description_score").val(-1);
+        $("#service_score").val(-1);
+        $("#logistics_score").val(-1);
+        $("#entryid").val(userid);
+        $("#entrytype").val(2);
+        $("#content").val("");
+        var entrygood = document.getElementById("entrygood");
+        entrygood.style.display = "none";
+        myModal.style.display = "block";
+    }
+    var commenttoGoods = function (goodsid) {
+        var myModal = document.getElementById("myModal");
+        $("#description_score").val(-1);
+        $("#service_score").val(-1);
+        $("#logistics_score").val(-1);
+        $("#entryid").val(goodsid);
+        $("#entrytype").val(1);
+        $("#content").val("");
+        var entrygood = document.getElementById("entrygood");
+        entrygood.style.display = "block";
+        myModal.style.display = "block";
+    }
+</script>
+
+<script type="text/javascript">
+    (function() {
+        /*建立模态框对象*/
+        var modalBox = {};
+        /*获取模态框*/
+        modalBox.modal = document.getElementById("myModal");
+        /*获得trigger按钮*/
+        modalBox.triggerBtn = document.getElementById("triggerBtn");
+        /*获得关闭按钮*/
+        modalBox.closeBtn = document.getElementById("closeBtn");
+
+        modalBox.commentBack = document.getElementsByName("commentBack");
+        /*模态框显示*/
+        modalBox.show = function() {
+            console.log(this.modal);
+            this.modal.style.display = "block";
+        }
+        /*模态框关闭*/
+        modalBox.close = function() {
+            this.modal.style.display = "none";
+        }
+        /*当用户点击模态框内容之外的区域，模态框也会关闭*/
+        modalBox.outsideClick = function() {
+            var modal = this.modal;
+            window.onclick = function(event) {
+                if(event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+        /*模态框初始化*/
+        modalBox.init = function() {
+            var that = this;
+            /*this.triggerBtn.onclick = function() {
+                that.show();
+            }*/
+            this.closeBtn.onclick = function() {
+                that.close();
+            }
+            this.outsideClick();
+        }
+        modalBox.init();
+    })();
+</script>
+
+<style>
+    /*模态框*/
+    .modal {
+        display: none; /* 默认隐藏 */
+        position: fixed; /* 根据浏览器定位 */
+        z-index: 1; /* 放在顶部 */
+        left: 0;
+        top: 0;
+        width: 100%; /* 全宽 */
+        height: 100%; /* 全高 */
+        overflow: auto; /* 允许滚动 */
+        background-color: rgba(0,0,0,0.4); /* 背景色 */
+    }
+    /*模态框内容*/
+    .modal-content {
+        display: flex; /*采用flexbox布局*/
+        flex-direction: column; /*垂直排列*/
+        position: relative;
+        background-color: #fefefe;
+        margin: 15% auto; /*距顶部15% 水平居中*/
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        animation: topDown 0.4s; /*自定义动画，从模态框内容上到下出现*/
+        border-radius:20px;
+    }
+    @keyframes topDown {
+        from {top: -300px; opacity: 0}
+        to {top: 0; opacity: 1}
+    }
+    /*模态框头部*/
+    .modal-header {
+        display: flex; /*采用flexbox布局*/
+        flex-direction: row; /*水平布局*/
+        align-items: center; /*内容垂直居中*/
+        justify-content: space-between;
+    }
+    /*关闭X 样式*/
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 
 <div id="addCollocation" class="cl porducts-group-box"></div>
 <script type="text/javascript">
