@@ -1408,7 +1408,7 @@
                     <ul class="tab">
                         <li><a href="#tabs-1" class="toggle-link">商品介绍</a></li>
                         <!--<li><a href="#tabs-2" class="toggle-link">交易记录</a></li>-->
-                        <li><a href="#tabs-3" class="toggle-link" onclick="CommentData()">商品评价</a></li>
+                        <li><a href="#tabs-3" class="toggle-link" onclick="CommentData(1)">商品评价</a></li>
                         <li><a href="#tabs-4" class="toggle-link">商品咨询</a></li>
                     </ul>
                 </div>
@@ -1574,18 +1574,19 @@
             </div>-->
             <script type="text/javascript">
                 var num = 0;
-                var CommentData = function (id) {
+                var CommentData = function (currNum) {
                     //num = id;
                     //CommentList();
                     var goodsid = $("#goodsId").val();
                     num = goodsid;
-                    CommentList();
+                    CommentList(currNum);
                 }
 
-                var CommentList = function () {
-                    $.post('/commnets/', { goodsId:num , currNum:1 }, function (result) {
+                var CommentList = function (currNum) {
+                    $.post('/commnets/', { goodsId:num , currNum:currNum }, function (result) {
                         console.log(result);
                         $("#commentList").html(template("CommentFormat", {list: result.data}));
+                        $("#pageChooseList").html(template("pageChooser",{data: result.pageNum}));
                     });
                 }
                 var  addComment = function () {
@@ -1738,6 +1739,22 @@
                     发表评论
                 </button>
                 </#if>
+
+                <div style="margin-left: 450px;" id="pageChooseList">
+                </div>
+
+                <script type="text/html" id="pageChooser">
+
+                        <a onclick="CommentData(1)">第一页</a>
+                        <%if (data){%>
+                        <%for (var i=1;i<=data;i++) {%>
+                        <a onclick="CommentData(i)"><%=i%></a>
+                        <%}%>
+                        <%}%>
+                        <a onclick="CommentData(data)">最后一页</a>
+
+                </script>
+
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <div class="modal-header">
