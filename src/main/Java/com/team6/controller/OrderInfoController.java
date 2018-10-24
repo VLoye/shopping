@@ -18,6 +18,14 @@ public class OrderInfoController {
     @Autowired
     LoginService loginService;
 
+    @RequestMapping(value = "/order/success/{oId}")
+    public Object toSubmitSuccess(@PathVariable("oId")int oId){
+        ModelAndView mv=new ModelAndView();
+        mv.setViewName("ProductAndCart/SubmitSuccess");
+        mv.addObject("oId",oId);
+        return mv;
+    }
+
     /**
      * 插入订单信息
      * @param request

@@ -78,6 +78,7 @@ public class OrderInfoServiceImpl implements OrderInfoService{
         }
         if(result>0) {//添加订单成功
             resultMap.put("msg", UCRDEnum.UCRD_SUCCESS.getInfo());
+            resultMap.put("oid",orderInfo.getId());
             return resultMap;
         }else{
             resultMap.put("msg",UCRDEnum.UCRD_ERROR.getInfo());
