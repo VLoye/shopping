@@ -40,7 +40,8 @@ function bindSubmit() {
                 dataType : "json",
 	            success: function(result) {
 	                if (result.msg=="SUCCESS") {
-	                    window.location.href = "SubmitSuccess.html";
+	                    window.location.href = "/order/success/"+result.oid;
+
 	                }
 	                else {
 	                    loading.close();
