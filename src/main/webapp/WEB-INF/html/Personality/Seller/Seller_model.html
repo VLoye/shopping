@@ -48,10 +48,10 @@
 		<div class="pw-w1200 pwt-link">
 			<div id = "loginstatus">
 				<span class="h-fl mr10">您好， 欢迎光临汽配人网！</span>
-				<a class="h-fl" href="/seller" id="username" target="_blank">${user.username}</a>
+				<a class="h-fl" href="/seller/center" id="username" target="_blank">${user.username}</a>
 				<i class="h-fl h-vline">|</i>
 				<input type = "hidden" id = "userid" value = "${user.userid}"/>
-				<a class="h-fl" href="">[退出]</a>
+				<a class="h-fl" href="/logout">[退出]</a>
 			</div>
 		</div>
 		</div>
@@ -67,23 +67,23 @@
             <dl class="hayui-nav-child">
                 <dd ><a href="/seller/addGoods" target="myFrame">发布信息</a></dd>
                 <dd ><a href="/seller/goodsm?sellerId=10002" target="myFrame">商品管理</a></dd>
-                <dd ><a href="SellerGoodTypeManage.html" target="myFrame">产品品类管理</a></dd>
+                <!--<dd ><a href="SellerGoodTypeManage.html" target="myFrame">产品品类管理</a></dd>-->
             </dl>
         </li>
-        <li class="hayui-nav-item hayui-nav-itemed">
+        <!--<li class="hayui-nav-item hayui-nav-itemed">
             <a href="javascript:void(0);">交易管理<span class="hayui-nav-more"></span></a>
             <dl class="hayui-nav-child">
-                <dd ><a href="SellerSelledGoods.html" target="myFrame">已卖出的货品</a></dd>
-                <dd ><a href="SellerCommentManage.html" target="myFrame">评价管理</a></dd>
+                <dd ><a href="/seller/goods" target="myFrame">已卖出的货品</a></dd>
+                <dd ><a href="/seller/comment" target="myFrame">评价管理</a></dd>
             </dl>
-        </li>
-        <li class="hayui-nav-item ">
+        </li>-->
+        <!--<li class="hayui-nav-item ">
             <a href="javascript:void(0);">用户管理<span class="hayui-nav-more"></span></a>
             <dl class="hayui-nav-child">
-                <dd ><a href="SellerChangePassword.html" target="myFrame">修改密码</a></dd>
+                <dd ><a href="" target="myFrame">修改密码</a></dd>
              
             </dl>
-        </li>
+        </li>-->
     </ul>
 </div>
 
@@ -91,7 +91,7 @@
             	<div class="content_right">
         			<div class="order-sys-right-content">
         				
-            	<iframe src = "SellerSendMessage.html" id = "iframeID" name="myFrame" style = "width: 1000px;height: 900px" frameborder="no">
+            	<iframe src = "/seller/goodsm?sellerId=10002" id = "iframeID" name="myFrame" style = "width: 1000px;height: 900px" frameborder="no">
             	</iframe>
             	
             		</div>
